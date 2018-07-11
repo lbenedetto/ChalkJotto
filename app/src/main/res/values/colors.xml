@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<color name="colorPrimary">#27774f</color>
+	<color name="colorPrimaryDark">#1c4c34</color>
+	<color name="colorAccent">#F5F5F5</color>
+	<color name="colorPrimaryDarkGrey">#252529</color>
+	<color name="white">#F5F5F5</color>
+	<color name="lightGrey">#878787</color>
+	<color name="colorLetterNo">#F44336</color>
+	<color name="colorLetterNoTint">#FFDBDB</color>
+	<color name="colorLetterYes">#4CAF50</color>
+	<color name="colorLetterYesTint">#DBFFDC</color>
+	<color name="colorLetterMaybe">#FF9800</color>
+	<color name="colorLetterMaybeTint">#ffeedb</color>
+</resources>

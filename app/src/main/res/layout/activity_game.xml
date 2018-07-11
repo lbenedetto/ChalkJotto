@@ -1,0 +1,612 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="@drawable/chalkboard"
+	tools:context=".GameActivity">
+
+	<android.support.constraint.ConstraintLayout
+		android:id="@+id/layoutTableLabels"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="@color/colorPrimaryDark"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toTopOf="parent">
+
+		<TextView
+			android:id="@+id/textViewTimer"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginEnd="8dp"
+			android:text="00:00"
+			android:textColor="@color/white"
+			android:textSize="18sp"
+			app:layout_constraintBottom_toBottomOf="@+id/buttonPause"
+			app:layout_constraintEnd_toStartOf="@+id/buttonPause"
+			app:layout_constraintTop_toTopOf="@+id/buttonPause"
+			tools:ignore="HardcodedText" />
+
+		<TextView
+			android:id="@+id/textViewGuessCountLabel"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="8dp"
+			android:text="@string/guesses"
+			android:textColor="@color/white"
+			android:textSize="18sp"
+			app:layout_constraintBottom_toBottomOf="@+id/textViewTimer"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="@+id/textViewTimer" />
+
+		<TextView
+			android:id="@+id/textViewGuessCount"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="2dp"
+			android:text="0"
+			android:textColor="@color/white"
+			android:textSize="18sp"
+			app:layout_constraintStart_toEndOf="@+id/textViewGuessCountLabel"
+			app:layout_constraintTop_toTopOf="@+id/textViewGuessCountLabel"
+			tools:ignore="HardcodedText" />
+
+		<TextView
+			android:id="@+id/textView2"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="8dp"
+			android:layout_marginStart="8dp"
+			android:text="@string/guessed_word"
+			android:textColor="@color/white"
+			android:textSize="20sp"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@+id/textViewTimer"
+			app:layout_constraintVertical_bias="1.0" />
+
+		<TextView
+			android:id="@+id/textView"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="8dp"
+			android:layout_marginEnd="8dp"
+			android:layout_marginTop="8dp"
+			android:text="Matching Letters"
+			android:textColor="@color/white"
+			android:textSize="20sp"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintTop_toBottomOf="@+id/buttonPause"
+			tools:ignore="HardcodedText" />
+
+		<ImageView
+			android:id="@+id/buttonPause"
+			android:layout_width="36dp"
+			android:layout_height="36dp"
+			android:layout_marginEnd="8dp"
+			android:layout_marginTop="8dp"
+			android:contentDescription="Pause Button"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintTop_toTopOf="parent"
+			app:srcCompat="@drawable/pause" />
+
+	</android.support.constraint.ConstraintLayout>
+
+	<ScrollView
+		android:id="@+id/scrollView2"
+		android:layout_width="0dp"
+		android:layout_height="0dp"
+		android:layout_marginBottom="8dp"
+		app:layout_constraintBottom_toTopOf="@+id/layoutCorrectWord"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintHorizontal_bias="1.0"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toBottomOf="@+id/layoutTableLabels">
+
+		<LinearLayout
+			android:id="@+id/layoutGuessedWords"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical">
+
+		</LinearLayout>
+	</ScrollView>
+
+	<LinearLayout
+		android:id="@+id/layoutCorrectWord"
+		android:layout_width="0dp"
+		android:layout_height="50dp"
+		android:layout_marginBottom="8dp"
+		android:layout_marginEnd="8dp"
+		android:layout_marginStart="8dp"
+		android:gravity="center"
+		android:orientation="horizontal"
+		app:layout_constraintBottom_toTopOf="@+id/layoutKeyboard"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintHorizontal_bias="0.0"
+		app:layout_constraintStart_toStartOf="parent">
+
+	</LinearLayout>
+
+	<android.support.constraint.ConstraintLayout
+		android:id="@+id/layoutKeyboard"
+		android:layout_width="0dp"
+		android:layout_height="0dp"
+		android:layout_marginTop="4dp"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintDimensionRatio="60:23"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toTopOf="parent"
+		app:layout_constraintVertical_bias="1.0"
+		tools:ignore="UnusedAttribute,HardcodedText">
+
+		<android.support.constraint.Guideline
+			android:id="@+id/guidelineRow3"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:orientation="horizontal"
+			app:layout_constraintGuide_percent="0" />
+
+		<TextView
+			android:id="@+id/keyQ"
+			style="@style/KeyboardKey"
+			android:layout_width="0dp"
+			android:layout_height="0dp"
+			android:layout_marginBottom="2dp"
+			android:layout_marginEnd="4dp"
+			android:layout_marginTop="2dp"
+			android:text="Q"
+			app:layout_constraintBottom_toTopOf="@+id/guidelineRow2"
+			app:layout_constraintDimensionRatio="h,1:1"
+			app:layout_constraintEnd_toStartOf="@+id/keyW"
+			app:layout_constraintTop_toTopOf="@+id/guidelineRow3"
+			app:layout_constraintVertical_bias="0.0" />
+
+		<TextView
+			android:id="@+id/keyW"
+			style="@style/KeyboardKey"
+			android:layout_width="0dp"
+			android:layout_height="0dp"
+			android:layout_marginBottom="2dp"
+			android:layout_marginEnd="4dp"
+			android:layout_marginTop="2dp"
+			android:text="W"
+			app:layout_constraintBottom_toTopOf="@+id/guidelineRow2"
+			app:layout_constraintDimensionRatio="h,1:1"
+			app:layout_constraintEnd_toStartOf="@+id/keyE"
+			app:layout_constraintTop_toTopOf="@+id/guidelineRow3"
+			app:layout_constraintVertical_bias="0.0" />
+
+		<TextView
+			android:id="@+id/keyE"
+			style="@style/KeyboardKey"
+			android:layout_width="0dp"
+			android:layout_height="0dp"
+			android:layout_marginBottom="2dp"
+			android:layout_marginEnd="4dp"
+			android:layout_marginTop="2dp"
+			android:text="E"
+			app:layout_constraintBottom_toTopOf="@+id/guidelineRow2"
+			app:layout_constraintDimensionRatio="h,1:1"
+			app:layout_constraintEnd_toStartOf="@+id/keyR"
+			app:layout_constraintTop_toTopOf="@+id/guidelineRow3"
+			app:layout_constraintVertical_bias="0.0" />
+
+		<TextView
+			android:id="@+id/keyR"
+			style="@style/KeyboardKey"
+			android:layout_width="0dp"
+			android:layout_height="0dp"
+			android:layout_marginBottom="2dp"
+			android:layout_marginEnd="4dp"
+			android:layout_marginTop="2dp"
+			android:text="R"
+			app:layout_constraintBottom_toTopOf="@+id/guidelineRow2"
+			app:layout_constraintDimensionRatio="h,1:1"
+			app:layout_constraintEnd_toStartOf="@+id/keyT"
+			app:layout_constraintTop_toTopOf="@+id/guidelineRow3"
+			app:layout_constraintVertical_bias="0.0" />
+
+		<TextView
+			android:id="@+id/keyT"
+			style="@style/KeyboardKey"
+			android:layout_width="0dp"
+			android:layout_height="0dp"
+			android:layout_marginBottom="2dp"
+			android:layout_marginEnd="2dp"
+			android:layout_marginTop="2dp"
+			android:text="T"
+			app:layout_constraintBottom_toTopOf="@+id/guidelineRow2"
+			app:layout_constraintDimensionRatio="h,1:1"
+			app:layout_constraintEnd_toStartOf="@+id/guideline3"
+			app:layout_constraintTop_toTopOf="@+id/guidelineRow3"
+			app:layout_constraintVertical_bias="0.0" />
+
+		<TextView
+			android:id="@+id/keyY"
+			style="@style/KeyboardKey"
+			android:layout_width="0dp"
+			android:layout_height="0dp"
+			android:layout_marginBottom="2dp"
+			android:layout_marginStart="2dp"
+			android:layout_marginTop="2dp"
+			android:text="Y"
+			app:layout_constraintBottom_toTopOf="@+id/guidelineRow2"
+			app:layout_constraintDimensionRatio="h,1:1"
+			app:layout_constraintStart_toStartOf="@+id/guideline3"
+			app:layout_constraintTop_toTopOf="@+id/guidelineRow3"
+			app:layout_constraintVertical_bias="0.0" />
+
+		<TextView
+			android:id="@+id/keyU"
+			style="@style/KeyboardKey"
+			android:layout_width="0dp"
+			android:layout_height="0dp"
+			android:layout_marginBottom="2dp"
+			android:layout_marginStart="4dp"
+			android:layout_marginTop="2dp"
+			android:text="U"
+			app:layout_constraintBottom_toTopOf="@+id/guidelineRow2"
+			app:layout_constraintDimensionRatio="h,1:1"
+			app:layout_constraintStart_toEndOf="@+id/keyY"
+			app:layout_constraintTop_toTopOf="@+id/guidelineRow3"
+			app:layout_constraintVertical_bias="0.0" />
+
+		<TextView
+			android:id="@+id/keyI"
+			style="@style/KeyboardKey"
+			android:layout_width="0dp"
+			android:layout_height="0dp"
+			android:layout_marginBottom="2dp"
+			android:layout_marginStart="4dp"
+			android:layout_marginTop="2dp"
+			android:text="I"
+			app:layout_constraintBottom_toTopOf="@+id/guidelineRow2"
+			app:layout_constraintDimensionRatio="h,1:1"
+			app:layout_constraintStart_toEndOf="@+id/keyU"
+			app:layout_constraintTop_toTopOf="@+id/guidelineRow3"
+			app:layout_constraintVertical_bias="0.0" />
+
+		<TextView
+			android:id="@+id/keyO"
+			style="@style/KeyboardKey"
+			android:layout_width="0dp"
+			android:layout_height="0dp"
+			android:layout_marginBottom="2dp"
+			android:layout_marginStart="4dp"
+			android:layout_marginTop="2dp"
+			android:text="O"
+			app:layout_constraintBottom_toTopOf="@+id/guidelineRow2"
+			app:layout_constraintDimensionRatio="h,1:1"
+			app:layout_constraintStart_toEndOf="@+id/keyI"
+			app:layout_constraintTop_toTopOf="@+id/guidelineRow3"
+			app:layout_constraintVertical_bias="0.0" />
+
+		<TextView
+			android:id="@+id/keyP"
+			style="@style/KeyboardKey"
+			android:layout_width="0dp"
+			android:layout_height="0dp"
+			android:layout_marginBottom="2dp"
+			android:layout_marginStart="4dp"
+			android:layout_marginTop="2dp"
+			android:text="P"
+			app:layout_constraintBottom_toTopOf="@+id/guidelineRow2"
+			app:layout_constraintDimensionRatio="h,1:1"
+			app:layout_constraintStart_toEndOf="@+id/keyO"
+			app:layout_constraintTop_toTopOf="@+id/guidelineRow3"
+			app:layout_constraintVertical_bias="0.0" />
+
+		<android.support.constraint.Guideline
+			android:id="@+id/guidelineRow2"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:orientation="horizontal"
+			app:layout_constraintGuide_percent="0.25028184" />
+
+		<TextView
+			android:id="@+id/keyA"
+			style="@style/KeyboardKey"
+			android:layout_width="0dp"
+			android:layout_height="0dp"
+			android:layout_marginBottom="2dp"
+			android:layout_marginEnd="4dp"
+			android:layout_marginTop="2dp"
+			android:text="A"
+			app:layout_constraintBottom_toTopOf="@+id/guidelineRow1"
+			app:layout_constraintDimensionRatio="1:1"
+			app:layout_constraintEnd_toStartOf="@+id/keyS"
+			app:layout_constraintTop_toTopOf="@+id/guidelineRow2"
+			app:layout_constraintVertical_bias="1.0" />
+
+		<TextView
+			android:id="@+id/keyS"
+			style="@style/KeyboardKey"
+			android:layout_width="0dp"
+			android:layout_height="0dp"
+			android:layout_marginBottom="2dp"
+			android:layout_marginEnd="4dp"
+			android:layout_marginTop="2dp"
+			android:text="S"
+			app:layout_constraintBottom_toTopOf="@+id/guidelineRow1"
+			app:layout_constraintDimensionRatio="1:1"
+			app:layout_constraintEnd_toStartOf="@+id/keyD"
+			app:layout_constraintTop_toTopOf="@+id/guidelineRow2"
+			app:layout_constraintVertical_bias="1.0" />
+
+		<TextView
+			android:id="@+id/keyD"
+			style="@style/KeyboardKey"
+			android:layout_width="0dp"
+			android:layout_height="0dp"
+			android:layout_marginBottom="2dp"
+			android:layout_marginEnd="4dp"
+			android:layout_marginTop="2dp"
+			android:text="D"
+			app:layout_constraintBottom_toTopOf="@+id/guidelineRow1"
+			app:layout_constraintDimensionRatio="1:1"
+			app:layout_constraintEnd_toStartOf="@+id/keyF"
+			app:layout_constraintTop_toTopOf="@+id/guidelineRow2"
+			app:layout_constraintVertical_bias="1.0" />
+
+		<TextView
+			android:id="@+id/keyF"
+			style="@style/KeyboardKey"
+			android:layout_width="0dp"
+			android:layout_height="0dp"
+			android:layout_marginBottom="2dp"
+			android:layout_marginEnd="4dp"
+			android:layout_marginTop="2dp"
+			android:text="F"
+			app:layout_constraintBottom_toTopOf="@+id/guidelineRow1"
+			app:layout_constraintDimensionRatio="1:1"
+			app:layout_constraintEnd_toStartOf="@+id/keyG"
+			app:layout_constraintTop_toTopOf="@+id/guidelineRow2"
+			app:layout_constraintVertical_bias="1.0" />
+
+		<TextView
+			android:id="@+id/keyG"
+			style="@style/KeyboardKey"
+			android:layout_width="0dp"
+			android:layout_height="0dp"
+			android:layout_marginBottom="2dp"
+			android:layout_marginEnd="4dp"
+			android:layout_marginStart="4dp"
+			android:layout_marginTop="2dp"
+			android:text="G"
+			app:layout_constraintBottom_toTopOf="@+id/guidelineRow1"
+			app:layout_constraintDimensionRatio="1:1"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="@+id/guidelineRow2"
+			app:layout_constraintVertical_bias="1.0" />
+
+		<TextView
+			android:id="@+id/keyH"
+			style="@style/KeyboardKey"
+			android:layout_width="0dp"
+			android:layout_height="0dp"
+			android:layout_marginBottom="2dp"
+			android:layout_marginStart="4dp"
+			android:layout_marginTop="2dp"
+			android:text="H"
+			app:layout_constraintBottom_toTopOf="@+id/guidelineRow1"
+			app:layout_constraintDimensionRatio="1:1"
+			app:layout_constraintStart_toEndOf="@+id/keyG"
+			app:layout_constraintTop_toTopOf="@+id/guidelineRow2"
+			app:layout_constraintVertical_bias="1.0" />
+
+		<TextView
+			android:id="@+id/keyJ"
+			style="@style/KeyboardKey"
+			android:layout_width="0dp"
+			android:layout_height="0dp"
+			android:layout_marginBottom="2dp"
+			android:layout_marginStart="4dp"
+			android:layout_marginTop="2dp"
+			android:text="J"
+			app:layout_constraintBottom_toTopOf="@+id/guidelineRow1"
+			app:layout_constraintDimensionRatio="1:1"
+			app:layout_constraintStart_toEndOf="@+id/keyH"
+			app:layout_constraintTop_toTopOf="@+id/guidelineRow2"
+			app:layout_constraintVertical_bias="1.0" />
+
+		<TextView
+			android:id="@+id/keyK"
+			style="@style/KeyboardKey"
+			android:layout_width="0dp"
+			android:layout_height="0dp"
+			android:layout_marginBottom="2dp"
+			android:layout_marginStart="4dp"
+			android:layout_marginTop="2dp"
+			android:text="K"
+			app:layout_constraintBottom_toTopOf="@+id/guidelineRow1"
+			app:layout_constraintDimensionRatio="1:1"
+			app:layout_constraintStart_toEndOf="@+id/keyJ"
+			app:layout_constraintTop_toTopOf="@+id/guidelineRow2"
+			app:layout_constraintVertical_bias="1.0" />
+
+		<TextView
+			android:id="@+id/keyL"
+			style="@style/KeyboardKey"
+			android:layout_width="0dp"
+			android:layout_height="0dp"
+			android:layout_marginBottom="2dp"
+			android:layout_marginStart="4dp"
+			android:layout_marginTop="2dp"
+			android:text="L"
+			app:layout_constraintBottom_toTopOf="@+id/guidelineRow1"
+			app:layout_constraintDimensionRatio="1:1"
+			app:layout_constraintStart_toEndOf="@+id/keyK"
+			app:layout_constraintTop_toTopOf="@+id/guidelineRow2"
+			app:layout_constraintVertical_bias="1.0" />
+
+		<android.support.constraint.Guideline
+			android:id="@+id/guidelineRow1"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:orientation="horizontal"
+			app:layout_constraintGuide_percent="0.50" />
+
+		<TextView
+			android:id="@+id/keyZ"
+			style="@style/KeyboardKey"
+			android:layout_width="0dp"
+			android:layout_height="0dp"
+			android:layout_marginBottom="2dp"
+			android:layout_marginEnd="4dp"
+			android:layout_marginTop="2dp"
+			android:text="Z"
+			app:layout_constraintBottom_toBottomOf="@+id/guidelineRow0"
+			app:layout_constraintDimensionRatio="1:1"
+			app:layout_constraintEnd_toStartOf="@+id/keyX"
+			app:layout_constraintTop_toTopOf="@+id/guidelineRow1"
+			app:layout_constraintVertical_bias="1.0" />
+
+		<TextView
+			android:id="@+id/keyX"
+			style="@style/KeyboardKey"
+			android:layout_width="0dp"
+			android:layout_height="0dp"
+			android:layout_marginBottom="2dp"
+			android:layout_marginEnd="4dp"
+			android:layout_marginTop="2dp"
+			android:text="X"
+			app:layout_constraintBottom_toBottomOf="@+id/guidelineRow0"
+			app:layout_constraintDimensionRatio="1:1"
+			app:layout_constraintEnd_toStartOf="@+id/keyC"
+			app:layout_constraintTop_toTopOf="@+id/guidelineRow1"
+			app:layout_constraintVertical_bias="1.0" />
+
+		<TextView
+			android:id="@+id/keyC"
+			style="@style/KeyboardKey"
+			android:layout_width="0dp"
+			android:layout_height="0dp"
+			android:layout_marginBottom="2dp"
+			android:layout_marginEnd="4dp"
+			android:layout_marginTop="2dp"
+			android:text="C"
+			app:layout_constraintBottom_toBottomOf="@+id/guidelineRow0"
+			app:layout_constraintDimensionRatio="1:1"
+			app:layout_constraintEnd_toStartOf="@+id/keyV"
+			app:layout_constraintTop_toTopOf="@+id/guidelineRow1"
+			app:layout_constraintVertical_bias="1.0" />
+
+		<TextView
+			android:id="@+id/keyV"
+			style="@style/KeyboardKey"
+			android:layout_width="0dp"
+			android:layout_height="0dp"
+			android:layout_marginBottom="2dp"
+			android:layout_marginEnd="4dp"
+			android:layout_marginStart="4dp"
+			android:layout_marginTop="2dp"
+			android:text="V"
+			app:layout_constraintBottom_toBottomOf="@+id/guidelineRow0"
+			app:layout_constraintDimensionRatio="1:1"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="@+id/guidelineRow1" />
+
+		<TextView
+			android:id="@+id/keyB"
+			style="@style/KeyboardKey"
+			android:layout_width="0dp"
+			android:layout_height="0dp"
+			android:layout_marginBottom="2dp"
+			android:layout_marginStart="4dp"
+			android:layout_marginTop="2dp"
+			android:text="B"
+			app:layout_constraintBottom_toBottomOf="@+id/guidelineRow0"
+			app:layout_constraintDimensionRatio="1:1"
+			app:layout_constraintStart_toEndOf="@+id/keyV"
+			app:layout_constraintTop_toTopOf="@+id/guidelineRow1"
+			app:layout_constraintVertical_bias="1.0" />
+
+		<TextView
+			android:id="@+id/keyN"
+			style="@style/KeyboardKey"
+			android:layout_width="0dp"
+			android:layout_height="0dp"
+			android:layout_marginBottom="2dp"
+			android:layout_marginStart="4dp"
+			android:layout_marginTop="2dp"
+			android:text="N"
+			app:layout_constraintBottom_toBottomOf="@+id/guidelineRow0"
+			app:layout_constraintDimensionRatio="1:1"
+			app:layout_constraintStart_toEndOf="@+id/keyB"
+			app:layout_constraintTop_toTopOf="@+id/guidelineRow1"
+			app:layout_constraintVertical_bias="1.0" />
+
+		<TextView
+			android:id="@+id/keyM"
+			style="@style/KeyboardKey"
+			android:layout_width="0dp"
+			android:layout_height="0dp"
+			android:layout_marginBottom="2dp"
+			android:layout_marginStart="4dp"
+			android:layout_marginTop="2dp"
+			android:text="M"
+			app:layout_constraintBottom_toBottomOf="@+id/guidelineRow0"
+			app:layout_constraintDimensionRatio="1:1"
+			app:layout_constraintStart_toEndOf="@+id/keyN"
+			app:layout_constraintTop_toTopOf="@+id/guidelineRow1"
+			app:layout_constraintVertical_bias="1.0" />
+
+		<TextView
+			android:id="@+id/keyBackspace"
+			style="@style/KeyboardKey"
+			android:layout_width="0dp"
+			android:layout_height="0dp"
+			android:layout_marginBottom="2dp"
+			android:layout_marginEnd="4dp"
+			android:layout_marginStart="4dp"
+			android:layout_marginTop="2dp"
+			android:text="&lt;&lt;"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintDimensionRatio="1:1"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toEndOf="@+id/keyM"
+			app:layout_constraintTop_toTopOf="@+id/guidelineRow1"
+			app:layout_constraintVertical_bias="0.0" />
+
+		<TextView
+			android:id="@+id/keySubmit"
+			style="@style/KeyboardKey"
+			android:layout_width="0dp"
+			android:layout_height="0dp"
+			android:layout_marginBottom="2dp"
+			android:layout_marginEnd="4dp"
+			android:layout_marginStart="4dp"
+			android:layout_marginTop="2dp"
+			android:text="@string/submit"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintDimensionRatio="1:1"
+			app:layout_constraintEnd_toStartOf="@+id/keyZ"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="@+id/guidelineRow1"
+			app:layout_constraintVertical_bias="0.0" />
+
+		<android.support.constraint.Guideline
+			android:id="@+id/guidelineRow0"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:orientation="horizontal"
+			app:layout_constraintGuide_percent=".75" />
+
+		<android.support.constraint.Guideline
+			android:id="@+id/guideline3"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:orientation="vertical"
+			app:layout_constraintGuide_percent=".5" />
+
+	</android.support.constraint.ConstraintLayout>
+
+</android.support.constraint.ConstraintLayout>
