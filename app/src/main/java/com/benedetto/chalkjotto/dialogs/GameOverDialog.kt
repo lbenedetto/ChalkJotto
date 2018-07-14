@@ -3,9 +3,9 @@ package com.benedetto.chalkjotto.dialogs
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import com.benedetto.chalkjotto.GameActivity
+import com.benedetto.chalkjotto.R
 import com.benedetto.chalkjotto.definitions.secondsToTimeDisplay
 import com.benedetto.chalkjotto.definitions.tapSound
-import com.benedetto.chalkjotto.R
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.games.Games
 import kotlinx.android.synthetic.main.dialog_game_over.view.*
@@ -69,29 +69,30 @@ fun showGameOverDialog(activity: GameActivity, didWin: Boolean) {
 
 	if (didWin) {
 		val account = GoogleSignIn.getLastSignedInAccount(activity)
-		val achievementHash = when (activity.wordLength) {
-			5 -> when (activity.wordDifficulty) {
-				1 -> R.string.achievement_hard_5_letter
-				2 -> R.string.achievement_insane_5_letter
-				else -> R.string.achievement_normal_5_letter
-			}
-			6 -> when (activity.wordDifficulty) {
-				1 -> R.string.achievement_hard_6_letter
-				2 -> R.string.achievement_insane_6_letter
-				else -> R.string.achievement_normal_6_letter
-			}
-			7 -> when (activity.wordDifficulty) {
-				1 -> R.string.achievement_hard_7_letter
-				2 -> R.string.achievement_insane_7_letter
-				else -> R.string.achievement_normal_7_letter
-			}
-			else -> when (activity.wordDifficulty) {
-				1 -> R.string.achievement_hard_4_letter
-				2 -> R.string.achievement_insane_4_letter
-				else -> R.string.achievement_normal_4_letter
-			}
-		}
 		if (account != null) {
+			val achievementHash = when (activity.wordLength) {
+				5 -> when (activity.wordDifficulty) {
+					1 -> R.string.achievement_hard_5_letter
+					2 -> R.string.achievement_insane_5_letter
+					else -> R.string.achievement_normal_5_letter
+				}
+				6 -> when (activity.wordDifficulty) {
+					1 -> R.string.achievement_hard_6_letter
+					2 -> R.string.achievement_insane_6_letter
+					else -> R.string.achievement_normal_6_letter
+				}
+				7 -> when (activity.wordDifficulty) {
+					1 -> R.string.achievement_hard_7_letter
+					2 -> R.string.achievement_insane_7_letter
+					else -> R.string.achievement_normal_7_letter
+				}
+				else -> when (activity.wordDifficulty) {
+					1 -> R.string.achievement_hard_4_letter
+					2 -> R.string.achievement_insane_4_letter
+					else -> R.string.achievement_normal_4_letter
+				}
+			}
+			Games.getGamesClient(activity, account).setViewForPopups(activity.findViewById(android.R.id.content))
 			val client = Games.getAchievementsClient(activity, account)
 			client.unlock(activity.resources.getString(achievementHash))
 			if (didWin && activity.numGuesses == 1) client.unlock(activity.resources.getString(R.string.achievement_lottery_winner))

@@ -18,10 +18,10 @@ android {
 			useProguard true
 			proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 		}
-		debug {
-			minifyEnabled true
-			useProguard false
-		}
+//		debug {
+//			minifyEnabled true
+//			useProguard false
+//		}
 	}
 	compileOptions {
 		sourceCompatibility JavaVersion.VERSION_1_8

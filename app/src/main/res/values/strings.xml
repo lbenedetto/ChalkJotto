@@ -30,6 +30,7 @@
 	<string name="report_word">Report Word</string>
 	<string name="close">Close</string>
 	<string name="sign_in">Sign In</string>
+	<string name="sign_out">Sign Out</string>
 	<string name="show_tutorial">Show Tutorial</string>
 	<string name="vibration">Keyboard Vibration</string>
 	<string name="tutorial_hint">To make it easier to keep track of which letters you think are in the secret word, you can long press on a letter and set it\'s color.</string>

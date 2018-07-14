@@ -1,14 +1,16 @@
 package com.benedetto.chalkjotto.dialogs
 
-import android.app.Activity
 import android.widget.Switch
 import com.benedetto.chalkjotto.R
+import com.benedetto.chalkjotto.TitleActivity
 import com.benedetto.chalkjotto.definitions.DataManager
 import com.benedetto.chalkjotto.definitions.tapSound
+import com.google.android.gms.games.Games
 import kotlinx.android.synthetic.main.dialog_settings.view.*
+
 //https://developers.google.com/games/services/android/signin#providing_a_sign-in_button
 //https://developers.google.com/identity/branding-guidelines
-fun showSettingsDialog(activity: Activity) {
+fun showSettingsDialog(activity: TitleActivity) {
 	val popupWindow = PopupDialog(activity, R.layout.dialog_settings)
 
 	popupWindow.view.switchSound.isChecked = DataManager.soundEnabled
@@ -29,8 +31,16 @@ fun showSettingsDialog(activity: Activity) {
 	}
 
 	//TODO: Implement google games services
+	popupWindow.view.buttonSignIn.text = activity.getString(if (activity.gamesManager.isSignedIn()) R.string.sign_out else R.string.sign_in)
 	popupWindow.view.buttonSignIn.setOnClickListener {
 		tapSound()
+		if(activity.gamesManager.isSignedIn()){
+			activity.gamesManager.signOutSilently()
+			popupWindow.view.buttonSignIn.text = activity.getString(R.string.sign_in)
+		}else{
+			activity.gamesManager.signInSilently()
+			popupWindow.view.buttonSignIn.text = activity.getString(R.string.sign_out)
+		}
 	}
 
 	popupWindow.view.buttonClose.setOnClickListener {
