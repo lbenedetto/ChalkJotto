@@ -31,6 +31,11 @@ fun showPauseDialog(activity: GameActivity, keys: HashMap<String, Key>) {
 		showGameOverDialog(activity, false)
 	}
 
+	popupWindow.view.buttonShowTutorial.setOnClickListener {
+		tapSound()
+		showTutorialDialog(activity, false)
+	}
+
 	popupWindow.view.switchSound.isChecked = DataManager.soundEnabled
 	popupWindow.view.switchSound.setOnClickListener { switch ->
 		tapSound()

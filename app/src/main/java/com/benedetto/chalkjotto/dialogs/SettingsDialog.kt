@@ -25,11 +25,6 @@ fun showSettingsDialog(activity: TitleActivity) {
 		DataManager.vibrationEnabled = (switch as Switch).isChecked
 	}
 
-	popupWindow.view.buttonShowTutorial.setOnClickListener {
-		tapSound()
-		showTutorialDialog(activity, false)
-	}
-
 //	popupWindow.view.buttonSignIn.text = activity.getString(if (activity.gamesManager.isSignedIn()) R.string.sign_out else R.string.sign_in)
 //	popupWindow.view.buttonSignIn.setOnClickListener {
 //		tapSound()

@@ -94,22 +94,6 @@
 		app:layout_constraintEnd_toStartOf="@+id/guideline2"
 		app:layout_constraintTop_toBottomOf="@+id/switchSound" />
 
-	<Button
-		android:id="@+id/buttonShowTutorial"
-		style="@style/Widget.AppCompat.Button.Colored"
-		android:layout_width="0dp"
-		android:layout_height="wrap_content"
-		android:layout_marginEnd="8dp"
-		android:layout_marginStart="8dp"
-		android:layout_marginTop="8dp"
-		android:text="@string/show_tutorial"
-		android:theme="@style/ColoredButtonGrey"
-		app:layout_constraintEnd_toStartOf="@+id/guideline2"
-		app:layout_constraintHorizontal_bias="0.0"
-		app:layout_constraintHorizontal_chainStyle="spread_inside"
-		app:layout_constraintStart_toStartOf="@+id/guideline"
-		app:layout_constraintTop_toBottomOf="@+id/switchVibrate" />
-
 	<!--<Button-->
 		<!--android:id="@+id/buttonSignIn"-->
 		<!--style="@style/Widget.AppCompat.Button.Colored"-->
@@ -138,7 +122,7 @@
 		app:layout_constraintBottom_toBottomOf="parent"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintStart_toStartOf="parent"
-		app:layout_constraintTop_toBottomOf="@+id/buttonShowTutorial" />
+		app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
 	<TextView
 		android:id="@+id/textViewTitle"

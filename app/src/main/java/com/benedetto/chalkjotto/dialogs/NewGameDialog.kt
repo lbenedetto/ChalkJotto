@@ -53,4 +53,5 @@ fun showNewGameDialog(activity: TitleActivity) {
 	popupWindow.view.seekBarWordDifficulty.progress = DataManager.difficulty
 	popupWindow.view.seekBarWordLength.progress = DataManager.wordLength - MIN_WORD_LENGTH
 	popupWindow.show()
+	showTutorialDialog(activity, true)
 }

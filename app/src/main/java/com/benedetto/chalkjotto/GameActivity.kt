@@ -53,37 +53,44 @@ class GameActivity : AppCompatActivity() {
 		refillUserInputFieldWithTiles()
 		val wordFile = resources.openRawResource(
 				when (wordLength) {
-					4 ->
+					4 -> {
+						addValidWords(R.raw.bottom_four, R.raw.middle_four, R.raw.top_four)
 						when (wordDifficulty) {
 							2 -> R.raw.bottom_four
 							1 -> R.raw.middle_four
 							else -> R.raw.top_four
 						}
-					6 ->
+					}
+					6 -> {
+						addValidWords(R.raw.bottom_six, R.raw.middle_six, R.raw.top_six)
 						when (wordDifficulty) {
 							2 -> R.raw.bottom_six
 							1 -> R.raw.middle_six
 							else -> R.raw.top_six
 						}
-					7 ->
+					}
+					7 -> {
+						addValidWords(R.raw.bottom_seven, R.raw.middle_seven, R.raw.top_seven)
 						when (wordDifficulty) {
 							2 -> R.raw.bottom_seven
 							1 -> R.raw.middle_seven
 							else -> R.raw.top_seven
 						}
-					else ->
+					}
+					else -> {
+						addValidWords(R.raw.bottom_five, R.raw.middle_five, R.raw.top_five)
 						when (wordDifficulty) {
 							2 -> R.raw.bottom_five
 							1 -> R.raw.middle_five
 							else -> R.raw.top_five
 						}
+					}
 				}
 		)
+
 		val candidateWords = ArrayList<String>()
 		BufferedReader(InputStreamReader(wordFile)).forEachLine { line ->
-			val l = line.toUpperCase()
-			candidateWords.add(l)
-			validWords.add(l)
+			candidateWords.add(line.toUpperCase())
 		}
 		targetWord = candidateWords[(0 until candidateWords.size).random()].split("\t")[0].toUpperCase()
 
@@ -133,7 +140,7 @@ class GameActivity : AppCompatActivity() {
 
 		keySubmit.setOnClickListener {
 			if (enteredWord.length == wordLength) {
-				if (validWords.contains(enteredWord.toString())) {
+				if (validWords.contains(enteredWord.toString().toUpperCase())) {
 					numGuesses++
 					if (enteredWord.toString() == targetWord) {
 						refillUserInputFieldWithTiles()
@@ -174,13 +181,18 @@ class GameActivity : AppCompatActivity() {
 //		adView.loadAd(AdRequest.Builder().build())
 	}
 
+	private fun addValidWords(vararg ids: Int) {
+		ids.forEach { id ->
+			BufferedReader(InputStreamReader(resources.openRawResource(id))).forEachLine { line ->
+				validWords.add(line.split("\t")[0].toUpperCase())
+			}
+		}
+	}
+
+
 	override fun onAttachedToWindow() {
 		super.onAttachedToWindow()
-		if (DataManager.hasSeenTutoral) {
-			play()
-		} else {
-			showTutorialDialog(this, true)
-		}
+		play()
 	}
 
 	override fun onPause() {
