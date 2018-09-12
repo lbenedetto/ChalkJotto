@@ -110,19 +110,19 @@
 		app:layout_constraintStart_toStartOf="@+id/guideline"
 		app:layout_constraintTop_toBottomOf="@+id/switchVibrate" />
 
-	<Button
-		android:id="@+id/buttonSignIn"
-		style="@style/Widget.AppCompat.Button.Colored"
-		android:drawableStart="@drawable/games_controller_white"
-		android:layout_width="0dp"
-		android:layout_height="wrap_content"
-		android:layout_marginTop="8dp"
-		android:text="@string/sign_in"
-		android:theme="@style/ColoredButtonGrey"
-		app:layout_constraintEnd_toEndOf="@+id/buttonShowTutorial"
-		app:layout_constraintHorizontal_bias="0.0"
-		app:layout_constraintStart_toStartOf="@+id/buttonShowTutorial"
-		app:layout_constraintTop_toBottomOf="@+id/buttonShowTutorial" />
+	<!--<Button-->
+		<!--android:id="@+id/buttonSignIn"-->
+		<!--style="@style/Widget.AppCompat.Button.Colored"-->
+		<!--android:drawableStart="@drawable/games_controller_white"-->
+		<!--android:layout_width="0dp"-->
+		<!--android:layout_height="wrap_content"-->
+		<!--android:layout_marginTop="8dp"-->
+		<!--android:text="@string/sign_in"-->
+		<!--android:theme="@style/ColoredButtonGrey"-->
+		<!--app:layout_constraintEnd_toEndOf="@+id/buttonShowTutorial"-->
+		<!--app:layout_constraintHorizontal_bias="0.0"-->
+		<!--app:layout_constraintStart_toStartOf="@+id/buttonShowTutorial"-->
+		<!--app:layout_constraintTop_toBottomOf="@+id/buttonShowTutorial" />-->
 
 	<Button
 		android:id="@+id/buttonClose"
@@ -132,13 +132,13 @@
 		android:layout_marginBottom="12dp"
 		android:layout_marginEnd="8dp"
 		android:layout_marginStart="8dp"
-		android:layout_marginTop="32dp"
+		android:layout_marginTop="8dp"
 		android:text="@string/close"
 		android:theme="@style/ColoredButtonWhite"
 		app:layout_constraintBottom_toBottomOf="parent"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintStart_toStartOf="parent"
-		app:layout_constraintTop_toBottomOf="@+id/buttonSignIn" />
+		app:layout_constraintTop_toBottomOf="@+id/buttonShowTutorial" />
 
 	<TextView
 		android:id="@+id/textViewTitle"

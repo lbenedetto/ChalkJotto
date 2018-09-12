@@ -30,18 +30,17 @@ fun showSettingsDialog(activity: TitleActivity) {
 		showTutorialDialog(activity, false)
 	}
 
-	//TODO: Implement google games services
-	popupWindow.view.buttonSignIn.text = activity.getString(if (activity.gamesManager.isSignedIn()) R.string.sign_out else R.string.sign_in)
-	popupWindow.view.buttonSignIn.setOnClickListener {
-		tapSound()
-		if(activity.gamesManager.isSignedIn()){
-			activity.gamesManager.signOutSilently()
-			popupWindow.view.buttonSignIn.text = activity.getString(R.string.sign_in)
-		}else{
-			activity.gamesManager.signInSilently()
-			popupWindow.view.buttonSignIn.text = activity.getString(R.string.sign_out)
-		}
-	}
+//	popupWindow.view.buttonSignIn.text = activity.getString(if (activity.gamesManager.isSignedIn()) R.string.sign_out else R.string.sign_in)
+//	popupWindow.view.buttonSignIn.setOnClickListener {
+//		tapSound()
+//		if(activity.gamesManager.isSignedIn()){
+//			activity.gamesManager.signOutSilently()
+//			popupWindow.view.buttonSignIn.text = activity.getString(R.string.sign_in)
+//		}else{
+//			activity.gamesManager.signInSilently()
+//			popupWindow.view.buttonSignIn.text = activity.getString(R.string.sign_out)
+//		}
+//	}
 
 	popupWindow.view.buttonClose.setOnClickListener {
 		tapSound()

@@ -9,6 +9,9 @@ import android.support.v4.content.res.ResourcesCompat
 import android.support.v7.app.AppCompatActivity
 import android.view.Gravity
 import android.view.View
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
+import android.view.animation.TranslateAnimation
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.benedetto.chalkjotto.definitions.*
@@ -33,6 +36,7 @@ class GameActivity : AppCompatActivity() {
 	var wordLength = 5
 	private var enteredWord = StringBuilder()
 	lateinit var targetWord: String
+	private var validWords = HashSet<String>()
 	var isGameOver = false
 
 	@SuppressLint("InflateParams", "ClickableViewAccessibility")
@@ -77,7 +81,9 @@ class GameActivity : AppCompatActivity() {
 		)
 		val candidateWords = ArrayList<String>()
 		BufferedReader(InputStreamReader(wordFile)).forEachLine { line ->
-			candidateWords.add(line)
+			val l = line.toUpperCase()
+			candidateWords.add(l)
+			validWords.add(l)
 		}
 		targetWord = candidateWords[(0 until candidateWords.size).random()].split("\t")[0].toUpperCase()
 
@@ -88,7 +94,7 @@ class GameActivity : AppCompatActivity() {
 				vibrate()
 				if (enteredWord.length < wordLength) {
 					val letter = layoutCorrectWord.getChildAt(enteredWord.length) as TextView
-					letter.setOnLongClickListener {
+					letter.setOnLongClickListener { _ ->
 						showColorPickerDialog(this, key)
 						true
 					}
@@ -127,19 +133,24 @@ class GameActivity : AppCompatActivity() {
 
 		keySubmit.setOnClickListener {
 			if (enteredWord.length == wordLength) {
-				numGuesses++
-				if (enteredWord.toString() == targetWord) {
-					refillUserInputFieldWithTiles()
-					showGameOverDialog(this, true)
+				if (validWords.contains(enteredWord.toString())) {
+					numGuesses++
+					if (enteredWord.toString() == targetWord) {
+						refillUserInputFieldWithTiles()
+						showGameOverDialog(this, true)
+					} else {
+						val guessView = layoutInflater.inflate(R.layout.guess_item, null)
+						val guessedWord = guessView.findViewById<LinearLayout>(R.id.layoutGuessedWord)
+						guessView.findViewById<TextView>(R.id.textViewMatchCount).text = compareWord(enteredWord.toString()).toString()
+						moveWordToView(guessedWord)
+						layoutGuessedWords.addView(guessView, 0)
+						enteredWord = StringBuilder()
+						refillUserInputFieldWithTiles()
+						textViewGuessCount.text = numGuesses.toString()
+					}
 				} else {
-					val guessView = layoutInflater.inflate(R.layout.guess_item, null)
-					val guessedWord = guessView.findViewById<LinearLayout>(R.id.layoutGuessedWord)
-					guessView.findViewById<TextView>(R.id.textViewMatchCount).text = compareWord(enteredWord.toString()).toString()
-					moveWordToView(guessedWord)
-					layoutGuessedWords.addView(guessView, 0)
-					enteredWord = StringBuilder()
-					refillUserInputFieldWithTiles()
-					textViewGuessCount.text = numGuesses.toString()
+					layoutCorrectWord.clearAnimation()
+					layoutCorrectWord.startAnimation(AnimationUtils.loadAnimation(this, R.anim.shake))
 				}
 			}
 		}

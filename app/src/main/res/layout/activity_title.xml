@@ -9,10 +9,11 @@
 
 	<android.support.constraint.ConstraintLayout
 		android:layout_width="0dp"
-		android:layout_height="wrap_content"
-		android:layout_marginBottom="8dp"
+		android:layout_height="0dp"
+		android:layout_marginBottom="64dp"
 		android:layout_marginEnd="8dp"
 		android:layout_marginStart="8dp"
+		android:layout_marginTop="64dp"
 		app:layout_constraintBottom_toTopOf="@+id/imageView3"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintStart_toStartOf="parent"
@@ -29,13 +30,15 @@
 			android:id="@+id/buttonNewGame"
 			android:layout_width="0dp"
 			android:layout_height="0dp"
+			android:layout_marginBottom="8dp"
 			android:layout_marginEnd="8dp"
 			android:layout_marginStart="8dp"
-			android:layout_marginTop="64dp"
+			android:layout_marginTop="8dp"
 			android:background="@drawable/new_game"
 			android:contentDescription="@string/new_game"
 			android:scaleType="fitEnd"
 			android:textColor="@color/white"
+			app:layout_constraintBottom_toTopOf="@+id/buttonSettings"
 			app:layout_constraintDimensionRatio="h,3:1"
 			app:layout_constraintEnd_toStartOf="@+id/guidelin90"
 			app:layout_constraintStart_toStartOf="@+id/guideline10"
@@ -47,7 +50,6 @@
 			android:layout_height="wrap_content"
 			android:layout_marginEnd="64dp"
 			android:layout_marginStart="64dp"
-			android:layout_marginTop="8dp"
 			android:adjustViewBounds="true"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintHorizontal_bias="0.0"
@@ -67,14 +69,13 @@
 			android:layout_width="0dp"
 			android:layout_height="0dp"
 			android:layout_marginEnd="8dp"
-			android:layout_marginTop="16dp"
 			android:background="@drawable/settings"
 			android:contentDescription="@string/settings"
+			app:layout_constraintBottom_toBottomOf="parent"
 			app:layout_constraintDimensionRatio="1:1"
 			app:layout_constraintEnd_toStartOf="@+id/guidelin90"
 			app:layout_constraintHorizontal_bias="0.5"
-			app:layout_constraintStart_toEndOf="@+id/buttonAchievements"
-			app:layout_constraintTop_toBottomOf="@+id/buttonNewGame" />
+			app:layout_constraintStart_toEndOf="@+id/buttonAchievements" />
 
 		<Button
 			android:id="@+id/buttonAchievements"
@@ -82,27 +83,25 @@
 			android:layout_height="0dp"
 			android:layout_marginEnd="8dp"
 			android:layout_marginStart="8dp"
-			android:layout_marginTop="16dp"
 			android:background="@drawable/achievements"
+			app:layout_constraintBottom_toBottomOf="parent"
 			app:layout_constraintDimensionRatio="1:1"
 			app:layout_constraintEnd_toStartOf="@+id/buttonSettings"
 			app:layout_constraintHorizontal_bias="0.5"
-			app:layout_constraintStart_toEndOf="@+id/buttonLeaderboards"
-			app:layout_constraintTop_toBottomOf="@+id/buttonNewGame" />
+			app:layout_constraintStart_toEndOf="@+id/buttonLeaderboards" />
 
 		<Button
 			android:id="@+id/buttonLeaderboards"
 			android:layout_width="0dp"
 			android:layout_height="0dp"
 			android:layout_marginStart="8dp"
-			android:layout_marginTop="16dp"
 			android:background="@drawable/leaderboard"
+			app:layout_constraintBottom_toBottomOf="parent"
 			app:layout_constraintDimensionRatio="1:1"
 			app:layout_constraintEnd_toStartOf="@+id/buttonAchievements"
 			app:layout_constraintHorizontal_bias="0.5"
 			app:layout_constraintStart_toEndOf="@+id/guideline10"
-			app:layout_constraintStart_toStartOf="@+id/guideline10"
-			app:layout_constraintTop_toBottomOf="@+id/buttonNewGame" />
+			app:layout_constraintStart_toStartOf="@+id/guideline10" />
 	</android.support.constraint.ConstraintLayout>
 
 	<ImageView
