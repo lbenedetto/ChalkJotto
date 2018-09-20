@@ -11,7 +11,7 @@ import com.google.android.gms.games.Games
 import kotlinx.android.synthetic.main.dialog_game_over.view.*
 
 @SuppressLint("InflateParams")
-fun showGameOverDialog(activity: GameActivity, didWin: Boolean) {
+fun showGameOverDialog(activity: GameActivity, didWin: Boolean, odds: Int) {
 	activity.isGameOver = true
 	activity.pause()
 	val popupWindow = PopupDialog(activity, R.layout.dialog_game_over)
@@ -33,7 +33,7 @@ fun showGameOverDialog(activity: GameActivity, didWin: Boolean) {
 	popupWindow.view.textViewInfo.text =
 			if (didWin) {
 				if (activity.numGuesses == 1)
-					activity.getString(R.string.lucky_message, 10000)    //TODO: calculate the odds of this happening
+					activity.getString(R.string.lucky_message, odds)
 				else
 					activity.getString(R.string.info, activity.numGuesses, secondsToTimeDisplay(activity.numSeconds))
 			} else {

@@ -9,17 +9,13 @@ import android.support.v4.content.res.ResourcesCompat
 import android.support.v7.app.AppCompatActivity
 import android.view.Gravity
 import android.view.View
-import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import android.view.animation.TranslateAnimation
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.benedetto.chalkjotto.definitions.*
 import com.benedetto.chalkjotto.dialogs.showColorPickerDialog
 import com.benedetto.chalkjotto.dialogs.showGameOverDialog
 import com.benedetto.chalkjotto.dialogs.showPauseDialog
-import com.benedetto.chalkjotto.dialogs.showTutorialDialog
-import com.benedetto.chalkjotto.R
 //import com.google.android.gms.ads.AdRequest
 import kotlinx.android.synthetic.main.activity_game.*
 import java.io.BufferedReader
@@ -144,7 +140,7 @@ class GameActivity : AppCompatActivity() {
 					numGuesses++
 					if (enteredWord.toString() == targetWord) {
 						refillUserInputFieldWithTiles()
-						showGameOverDialog(this, true)
+						showGameOverDialog(this, true,  validWords.size)
 					} else {
 						val guessView = layoutInflater.inflate(R.layout.guess_item, null)
 						val guessedWord = guessView.findViewById<LinearLayout>(R.id.layoutGuessedWord)
