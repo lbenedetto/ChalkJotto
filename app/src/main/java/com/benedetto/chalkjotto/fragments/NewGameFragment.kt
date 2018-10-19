@@ -27,6 +27,7 @@ class NewGameFragment : Fragment() {
 		val mActivity = activity!! as TitleActivity
 
 		buttonContinue.setOnClickListener {
+			//TODO: Fancy transition animation
 			tapSound()
 			val intent = Intent(activity, GameActivity::class.java)
 			val bundle = Bundle()
@@ -64,7 +65,5 @@ class NewGameFragment : Fragment() {
 
 		seekBarWordDifficulty.progress = DataManager.difficulty
 		seekBarWordLength.progress = DataManager.wordLength - MIN_WORD_LENGTH
-
 	}
-
 }

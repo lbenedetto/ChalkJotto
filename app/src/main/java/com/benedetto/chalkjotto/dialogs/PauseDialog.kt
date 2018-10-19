@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.dialog_pause.view.*
 @SuppressLint("InflateParams")
 fun showPauseDialog(activity: GameActivity, keys: HashMap<String, Key>) {
 	val popupWindow = PopupDialog(activity, R.layout.dialog_pause)
-
+	//TODO: This should be its own screen because it'll look better, and prevent the player from cheating
 	popupWindow.view.buttonResume.setOnClickListener {
 		tapSound()
 		popupWindow.dismiss()

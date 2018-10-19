@@ -10,10 +10,10 @@
 	<androidx.constraintlayout.widget.ConstraintLayout
 		android:layout_width="0dp"
 		android:layout_height="0dp"
-		app:layout_constraintBottom_toBottomOf="@+id/scrollView3"
-		app:layout_constraintEnd_toEndOf="@+id/scrollView3"
-		app:layout_constraintStart_toStartOf="@+id/scrollView3"
-		app:layout_constraintTop_toTopOf="@+id/scrollView3">
+		app:layout_constraintBottom_toBottomOf="@+id/tutorialFragmentContainer"
+		app:layout_constraintEnd_toEndOf="@+id/tutorialFragmentContainer"
+		app:layout_constraintStart_toStartOf="@+id/tutorialFragmentContainer"
+		app:layout_constraintTop_toTopOf="@+id/tutorialFragmentContainer">
 
 		<ImageView
 			android:id="@+id/imageViewBackground"
@@ -27,7 +27,8 @@
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintStart_toStartOf="parent"
 			app:layout_constraintTop_toTopOf="parent"
-			app:srcCompat="@drawable/green_chalkboard" />
+			app:srcCompat="@drawable/green_chalkboard"
+			tools:ignore="ContentDescription" />
 
 		<View
 			android:id="@+id/viewBorder"
@@ -41,7 +42,7 @@
 	</androidx.constraintlayout.widget.ConstraintLayout>
 
 	<fragment
-		android:id="@+id/scrollView3"
+		android:id="@+id/tutorialFragmentContainer"
 		android:name="com.benedetto.chalkjotto.fragments.TutorialFragment"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
@@ -50,6 +51,6 @@
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintStart_toStartOf="parent"
 		app:layout_constraintTop_toTopOf="parent"
-		tools:layout="@layout/fragment_tutorial"></fragment>
+		tools:layout="@layout/fragment_tutorial" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
