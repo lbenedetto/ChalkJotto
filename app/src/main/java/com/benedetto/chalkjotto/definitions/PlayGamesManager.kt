@@ -76,5 +76,6 @@ class PlayGamesManager(val activity: Activity) {
 		DataManager.autoSignIn = true
 		Games.getGamesClient(activity, account).setViewForPopups(activity.findViewById(android.R.id.content))
 		afterSignInTasks.forEach { afterSignInTask -> afterSignInTask() }
+		afterSignInTasks.clear()
 	}
 }

@@ -140,7 +140,7 @@ class GameActivity : AppCompatActivity() {
 					numGuesses++
 					if (enteredWord.toString() == targetWord) {
 						refillUserInputFieldWithTiles()
-						showGameOverDialog(this, true,  validWords.size)
+						showGameOverDialog(this, true)
 					} else {
 						val guessView = layoutInflater.inflate(R.layout.guess_item, null)
 						val guessedWord = guessView.findViewById<LinearLayout>(R.id.layoutGuessedWord)
@@ -185,6 +185,9 @@ class GameActivity : AppCompatActivity() {
 		}
 	}
 
+	fun getOdds() : Int {
+		return validWords.size
+	}
 
 	override fun onAttachedToWindow() {
 		super.onAttachedToWindow()

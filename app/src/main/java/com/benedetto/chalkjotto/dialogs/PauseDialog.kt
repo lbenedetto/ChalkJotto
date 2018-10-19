@@ -22,7 +22,7 @@ fun showPauseDialog(activity: GameActivity, keys: HashMap<String, Key>) {
 
 	popupWindow.view.buttonReset.setOnClickListener {
 		tapSound()
-		keys.forEach { _, key -> key.updateState(KeyState.BLANK) }
+		keys.forEach { (_, key) -> key.updateState(KeyState.BLANK) }
 	}
 
 	popupWindow.view.buttonGiveUp.setOnClickListener {

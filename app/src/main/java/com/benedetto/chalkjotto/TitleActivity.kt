@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.activity_title.*
 //https://www.deviantart.com/mattiamc/art/ChalkBoard-Texture-MC2015-506107812
 //https://developers.google.com/games/services/common/concepts/savedgames
 class TitleActivity : AppCompatActivity() {
-	lateinit var gamesManager: PlayGamesManager
+	private lateinit var gamesManager: PlayGamesManager
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)

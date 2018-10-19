@@ -42,7 +42,7 @@ fun showColorPickerDialog(activity: Activity, key: Key) {
 	}
 
 	dialog.setContentView(view)
-	val window = dialog.window
+	val window = dialog.window!!
 	window.setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT)
 	window.setBackgroundDrawableResource(android.R.color.transparent)
 	window.setGravity(Gravity.CENTER or Gravity.BOTTOM)
