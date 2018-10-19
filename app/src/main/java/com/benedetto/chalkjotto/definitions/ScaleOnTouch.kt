@@ -4,7 +4,7 @@ import android.graphics.Rect
 import android.view.MotionEvent
 import android.view.View
 
-object ScaleOnTouch: View.OnTouchListener {
+object ScaleOnTouch : View.OnTouchListener {
 	private var rect: Rect? = null
 
 	override fun onTouch(v: View?, event: MotionEvent?): Boolean {

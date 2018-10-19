@@ -96,4 +96,4 @@ fun getKeyHashMap(activity: Activity): HashMap<String, Key> {
 	return keys
 }
 
-fun ClosedRange<Int>.random() = Random().nextInt((endInclusive + 1) - start) +  start
+fun ClosedRange<Int>.random() = Random().nextInt((endInclusive + 1) - start) + start

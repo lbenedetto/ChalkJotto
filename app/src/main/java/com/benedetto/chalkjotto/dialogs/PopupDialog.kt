@@ -11,11 +11,11 @@ class PopupDialog(private val activity: Activity, layout: Int) {
 	var view = activity.layoutInflater.inflate(layout, null)!!
 	var popup = PopupWindow(
 			view,
-			activity.window.decorView .width - dpToPx(64),
+			activity.window.decorView.width - dpToPx(64),
 			LinearLayout.LayoutParams.WRAP_CONTENT
 	)
 
-	fun setOnDismissListener(listener: () -> Unit){
+	fun setOnDismissListener(listener: () -> Unit) {
 		popup.setOnDismissListener(listener)
 	}
 
@@ -25,7 +25,7 @@ class PopupDialog(private val activity: Activity, layout: Int) {
 		popup.showAtLocation(activity.findViewById(android.R.id.content), Gravity.CENTER, 0, 0)
 	}
 
-	fun dismiss(){
+	fun dismiss() {
 		popup.dismiss()
 	}
 

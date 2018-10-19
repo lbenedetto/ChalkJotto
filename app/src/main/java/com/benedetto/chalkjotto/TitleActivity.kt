@@ -1,20 +1,25 @@
 package com.benedetto.chalkjotto
 
-import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.view.WindowManager
-import com.benedetto.chalkjotto.definitions.*
-import com.benedetto.chalkjotto.dialogs.showNewGameDialog
-import com.benedetto.chalkjotto.dialogs.showSettingsDialog
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.games.Games
-import kotlinx.android.synthetic.main.activity_title.*
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import com.benedetto.chalkjotto.definitions.DataManager
+import com.benedetto.chalkjotto.definitions.Sound
+import com.benedetto.chalkjotto.fragments.NewGameFragment
+import com.benedetto.chalkjotto.fragments.SettingsFragment
+import com.benedetto.chalkjotto.fragments.TitleFragment
+import com.benedetto.chalkjotto.fragments.TutorialFragment
 
 //https://www.deviantart.com/mattiamc/art/ChalkBoard-Texture-MC2015-506107812
 //https://developers.google.com/games/services/common/concepts/savedgames
+public const val NewGameTag = "NewGame"
+public const val SettingsTag = "Settings"
+public const val TutorialTag = "Tutorial"
+public const val TitleTag = "Title"
+
 class TitleActivity : AppCompatActivity() {
-	private lateinit var gamesManager: PlayGamesManager
+	private lateinit var fragment: Fragment
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
@@ -22,48 +27,39 @@ class TitleActivity : AppCompatActivity() {
 		DataManager.init(this)
 		Sound.init(this)
 		window.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
-		gamesManager = PlayGamesManager(this)
 
-		buttonNewGame.setOnClickListener { _ ->
-			if (!gamesManager.isSignedIn() && DataManager.autoSignIn) {
-				gamesManager.signInSilently()
-			}
-			showNewGameDialog(this)
+		if (savedInstanceState != null) {
+			return
 		}
 
-		buttonSettings.setOnClickListener { _ ->
-			showSettingsDialog(this)
-		}
-
-		buttonAchievements.setOnClickListener { _ ->
-			gamesManager.doIfInitialized {
-				Games.getAchievementsClient(this, GoogleSignIn.getLastSignedInAccount(this)!!)
-						.achievementsIntent
-						.addOnSuccessListener { intent -> startActivityForResult(intent, 157) }
-			}
-		}
-
-		buttonLeaderboards.setOnClickListener {
-			gamesManager.doIfInitialized {
-				Games.getLeaderboardsClient(this, GoogleSignIn.getLastSignedInAccount(this)!!)
-						.allLeaderboardsIntent
-						.addOnSuccessListener { intent -> startActivityForResult(intent, 158) }
-			}
-		}
-
-		buttonNewGame.setOnTouchListener(ScaleOnTouch + PenClickOnTouch)
-		buttonSettings.setOnTouchListener(ScaleOnTouch + PenClickOnTouch)
-		buttonAchievements.setOnTouchListener(ScaleOnTouch + PenClickOnTouch)
-		buttonLeaderboards.setOnTouchListener(ScaleOnTouch + PenClickOnTouch)
+		goToFragment(TitleTag)
 	}
 
-	override fun onResume() {
-		super.onResume()
-		if (DataManager.autoSignIn) gamesManager.signInSilently()
+	fun goToFragment(tag: String, entranceAnimation: Int, exitAnimation: Int) {
+		supportFragmentManager.beginTransaction()
+				.setCustomAnimations(entranceAnimation, exitAnimation)
+				.replace(R.id.fragment_container, getFragmentInstance(tag), tag)
+				.addToBackStack(tag)
+				.commit()
 	}
 
-	override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-		super.onActivityResult(requestCode, resultCode, data)
-		gamesManager.onActivityResult(requestCode, resultCode, data)
+	fun goToFragment(tag: String) {
+		supportFragmentManager.beginTransaction()
+				.replace(R.id.fragment_container, getFragmentInstance(tag), tag)
+				.addToBackStack(tag)
+				.commit()
+	}
+
+	private fun getFragmentInstance(tag: String): Fragment {
+		var fragment = supportFragmentManager.findFragmentByTag(tag)
+		if (fragment == null) {
+			fragment = when (tag) {
+				NewGameTag -> NewGameFragment()
+				SettingsTag -> SettingsFragment()
+				TutorialTag -> TutorialFragment()
+				else -> TitleFragment()
+			}
+		}
+		return fragment
 	}
 }

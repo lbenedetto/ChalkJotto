@@ -1,22 +1,22 @@
 package com.benedetto.chalkjotto
 
+//import com.google.android.gms.ads.AdRequest
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.os.Handler
-import android.support.constraint.ConstraintLayout
-import android.support.v4.content.ContextCompat
-import android.support.v4.content.res.ResourcesCompat
-import android.support.v7.app.AppCompatActivity
 import android.view.Gravity
 import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import com.benedetto.chalkjotto.definitions.*
 import com.benedetto.chalkjotto.dialogs.showColorPickerDialog
 import com.benedetto.chalkjotto.dialogs.showGameOverDialog
 import com.benedetto.chalkjotto.dialogs.showPauseDialog
-//import com.google.android.gms.ads.AdRequest
 import kotlinx.android.synthetic.main.activity_game.*
 import java.io.BufferedReader
 import java.io.InputStreamReader
@@ -185,7 +185,7 @@ class GameActivity : AppCompatActivity() {
 		}
 	}
 
-	fun getOdds() : Int {
+	fun getOdds(): Int {
 		return validWords.size
 	}
 

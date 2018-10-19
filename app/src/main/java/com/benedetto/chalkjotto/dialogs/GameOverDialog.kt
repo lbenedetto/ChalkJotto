@@ -2,8 +2,10 @@ package com.benedetto.chalkjotto.dialogs
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
+import android.content.Intent
 import com.benedetto.chalkjotto.GameActivity
 import com.benedetto.chalkjotto.R
+import com.benedetto.chalkjotto.TitleActivity
 import com.benedetto.chalkjotto.definitions.secondsToTimeDisplay
 import com.benedetto.chalkjotto.definitions.tapSound
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -45,6 +47,7 @@ fun showGameOverDialog(activity: GameActivity, didWin: Boolean) {
 
 	popupWindow.view.buttonContinue.setOnClickListener {
 		tapSound()
+		activity.startActivity(Intent(activity, TitleActivity::class.java))
 		popupWindow.dismiss()
 		activity.finish()
 	}

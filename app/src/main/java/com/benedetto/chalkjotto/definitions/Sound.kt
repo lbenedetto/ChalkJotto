@@ -12,7 +12,7 @@ object Sound {
 	lateinit var Tap: MediaPlayer
 	lateinit var Vibrate: Vibrator
 
-	fun init(context: Context){
+	fun init(context: Context) {
 		PenClick = MediaPlayer.create(context, R.raw.pen_click)
 		PenClickUp = MediaPlayer.create(context, R.raw.pen_click_up)
 		PenClickDown = MediaPlayer.create(context, R.raw.pen_click_down)

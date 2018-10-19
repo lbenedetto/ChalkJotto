@@ -4,7 +4,7 @@ import android.graphics.Rect
 import android.view.MotionEvent
 import android.view.View
 
-object PenClickOnTouch: View.OnTouchListener {
+object PenClickOnTouch : View.OnTouchListener {
 	private var rect: Rect? = null
 	private var isOutSide = false
 
@@ -18,7 +18,7 @@ object PenClickOnTouch: View.OnTouchListener {
 				rect = Rect(v.left, v.top, v.right, v.bottom)
 			}
 			MotionEvent.ACTION_MOVE -> {
-				if(!isOutSide) {
+				if (!isOutSide) {
 					if (!(rect != null && rect!!.contains(v.left + event.x.toInt(), v.top + event.y.toInt()))) {
 						isOutSide = true
 						penClickUpSound()
@@ -28,7 +28,7 @@ object PenClickOnTouch: View.OnTouchListener {
 				}
 			}
 			MotionEvent.ACTION_UP -> {
-				if(!isOutSide) penClickUpSound()
+				if (!isOutSide) penClickUpSound()
 			}
 		}
 		return false
