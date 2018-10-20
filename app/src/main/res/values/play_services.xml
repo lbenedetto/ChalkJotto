@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
 Google Play game services IDs.
 Save this file as res/values/games-ids.xml in your project.
 -->
@@ -34,12 +33,52 @@ Save this file as res/values/games-ids.xml in your project.
 	<string name="achievement_insane_7_letter" translatable="false">CgkIq-OQheoeEAIQDA</string>
 	<!-- achievement Lottery Winner -->
 	<string name="achievement_lottery_winner" translatable="false">CgkIq-OQheoeEAIQDQ</string>
-	<!-- leaderboard Average Guesses -->
-	<string name="leaderboard_average_guesses" translatable="false">CgkIq-OQheoeEAIQDg</string>
-	<!-- leaderboard Average Time -->
-	<string name="leaderboard_average_time" translatable="false">CgkIq-OQheoeEAIQDw</string>
-	<!-- leaderboard Fastest Time -->
-	<string name="leaderboard_fastest_time" translatable="false">CgkIq-OQheoeEAIQEA</string>
-	<!-- leaderboard Fewest Guesses -->
-	<string name="leaderboard_fewest_guesses" translatable="false">CgkIq-OQheoeEAIQEQ</string>
+	<!-- leaderboard Normal 4 Letter Fastest Time -->
+	<string name="leaderboard_normal_4_letter_fastest_time" translatable="false">CgkIq-OQheoeEAIQFg</string>
+	<!-- leaderboard Normal 5 Letter Fastest Time -->
+	<string name="leaderboard_normal_5_letter_fastest_time" translatable="false">CgkIq-OQheoeEAIQFw</string>
+	<!-- leaderboard Normal 6 Letter Fastest Time -->
+	<string name="leaderboard_normal_6_letter_fastest_time" translatable="false">CgkIq-OQheoeEAIQGA</string>
+	<!-- leaderboard Normal 7 Letter Fastest Time -->
+	<string name="leaderboard_normal_7_letter_fastest_time" translatable="false">CgkIq-OQheoeEAIQGQ</string>
+	<!-- leaderboard Hard 4 Letter Fastest Time -->
+	<string name="leaderboard_hard_4_letter_fastest_time" translatable="false">CgkIq-OQheoeEAIQGg</string>
+	<!-- leaderboard Hard 5 Letter Fastest Time -->
+	<string name="leaderboard_hard_5_letter_fastest_time" translatable="false">CgkIq-OQheoeEAIQGw</string>
+	<!-- leaderboard Hard 6 Letter Fastest Time -->
+	<string name="leaderboard_hard_6_letter_fastest_time" translatable="false">CgkIq-OQheoeEAIQHA</string>
+	<!-- leaderboard Hard 7 Letter Fastest Time -->
+	<string name="leaderboard_hard_7_letter_fastest_time" translatable="false">CgkIq-OQheoeEAIQHQ</string>
+	<!-- leaderboard Insane 4 Letter Fastest Time -->
+	<string name="leaderboard_insane_4_letter_fastest_time" translatable="false">CgkIq-OQheoeEAIQHg</string>
+	<!-- leaderboard Insane 5 Letter Fastest Time -->
+	<string name="leaderboard_insane_5_letter_fastest_time" translatable="false">CgkIq-OQheoeEAIQHw</string>
+	<!-- leaderboard Insane 6 Letter Fastest Time -->
+	<string name="leaderboard_insane_6_letter_fastest_time" translatable="false">CgkIq-OQheoeEAIQIA</string>
+	<!-- leaderboard Insane 7 Letter Fastest Time -->
+	<string name="leaderboard_insane_7_letter_fastest_time" translatable="false">CgkIq-OQheoeEAIQIQ</string>
+	<!-- leaderboard Normal 4 Letter Fewest Guesses -->
+	<string name="leaderboard_normal_4_letter_fewest_guesses" translatable="false">CgkIq-OQheoeEAIQIg</string>
+	<!-- leaderboard Normal 5 Letter Fewest Guesses -->
+	<string name="leaderboard_normal_5_letter_fewest_guesses" translatable="false">CgkIq-OQheoeEAIQIw</string>
+	<!-- leaderboard Normal 6 Letter Fewest Guesses -->
+	<string name="leaderboard_normal_6_letter_fewest_guesses" translatable="false">CgkIq-OQheoeEAIQJA</string>
+	<!-- leaderboard Normal 7 Letter Fewest Guesses -->
+	<string name="leaderboard_normal_7_letter_fewest_guesses" translatable="false">CgkIq-OQheoeEAIQJQ</string>
+	<!-- leaderboard Hard 4 Letter Fewest Guesses -->
+	<string name="leaderboard_hard_4_letter_fewest_guesses" translatable="false">CgkIq-OQheoeEAIQJg</string>
+	<!-- leaderboard Hard 5 Letter Fewest Guesses -->
+	<string name="leaderboard_hard_5_letter_fewest_guesses" translatable="false">CgkIq-OQheoeEAIQJw</string>
+	<!-- leaderboard Hard 6 Letter Fewest Guesses -->
+	<string name="leaderboard_hard_6_letter_fewest_guesses" translatable="false">CgkIq-OQheoeEAIQKA</string>
+	<!-- leaderboard Hard 7 Letter Fewest Guesses -->
+	<string name="leaderboard_hard_7_letter_fewest_guesses" translatable="false">CgkIq-OQheoeEAIQKQ</string>
+	<!-- leaderboard Insane 4 Letter Fewest Guesses -->
+	<string name="leaderboard_insane_4_letter_fewest_guesses" translatable="false">CgkIq-OQheoeEAIQKg</string>
+	<!-- leaderboard Insane 5 Letter Fewest Guesses -->
+	<string name="leaderboard_insane_5_letter_fewest_guesses" translatable="false">CgkIq-OQheoeEAIQKw</string>
+	<!-- leaderboard Insane 6 Letter Fewest Guesses -->
+	<string name="leaderboard_insane_6_letter_fewest_guesses" translatable="false">CgkIq-OQheoeEAIQLA</string>
+	<!-- leaderboard Insane 7 Letter Fewest Guesses -->
+	<string name="leaderboard_insane_7_letter_fewest_guesses" translatable="false">CgkIq-OQheoeEAIQLQ</string>
 </resources>

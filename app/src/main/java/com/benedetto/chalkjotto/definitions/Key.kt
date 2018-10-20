@@ -21,7 +21,7 @@ data class Key(val letter: String, val view: TextView, var state: KeyState, val 
 		listeners.remove(textView)
 	}
 
-	fun notifyListeners() {
+	private fun notifyListeners() {
 		listeners.forEach { listener ->
 			listener.setBackgroundResource(state.background)
 		}

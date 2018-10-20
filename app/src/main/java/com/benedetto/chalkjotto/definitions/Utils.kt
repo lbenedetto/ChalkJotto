@@ -55,7 +55,7 @@ fun isSdkAtLeastLollipop(): Boolean {
 	return Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP
 }
 
-fun secondsToTimeDisplay(numSeconds: Int): String {
+fun secondsToTimeDisplay(numSeconds: Long): String {
 	return String.format("%02d:%02d", (numSeconds % 3600) / 60, numSeconds % 60)
 }
 

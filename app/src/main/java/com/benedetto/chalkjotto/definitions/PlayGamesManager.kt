@@ -10,7 +10,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.games.Games
 
 class PlayGamesManager(val activity: Activity) {
-	val afterSignInTasks = ArrayList<() -> Unit>()
+	private val afterSignInTasks = ArrayList<() -> Unit>()
 
 	fun doIfInitialized(doAfterSignIn: () -> Unit) {
 		if (isSignedIn()) {

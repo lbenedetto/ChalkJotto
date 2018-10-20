@@ -12,6 +12,7 @@
 		android:id="@+id/layoutTableLabels"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
+		android:elevation="9dp"
 		android:background="@color/colorPrimaryDark"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintStart_toStartOf="parent"
@@ -89,10 +90,10 @@
 			android:layout_height="36dp"
 			android:layout_marginEnd="8dp"
 			android:layout_marginTop="8dp"
-			android:contentDescription="Pause Button"
+			android:contentDescription="@string/pause_button"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintTop_toTopOf="parent"
-			app:srcCompat="@drawable/pause" />
+			app:srcCompat="@android:drawable/ic_media_pause" />
 
 	</androidx.constraintlayout.widget.ConstraintLayout>
 

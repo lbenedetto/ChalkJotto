@@ -43,4 +43,5 @@
 	<string name="achievements">Achievements</string>
 	<string name="leaderboards">Leaderboards</string>
 	<string name="back">Back</string>
+	<string name="pause_button">Pause Button</string>
 </resources>

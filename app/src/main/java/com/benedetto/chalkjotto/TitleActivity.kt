@@ -13,13 +13,12 @@ import com.benedetto.chalkjotto.fragments.TutorialFragment
 
 //https://www.deviantart.com/mattiamc/art/ChalkBoard-Texture-MC2015-506107812
 //https://developers.google.com/games/services/common/concepts/savedgames
-public const val NewGameTag = "NewGame"
-public const val SettingsTag = "Settings"
-public const val TutorialTag = "Tutorial"
-public const val TitleTag = "Title"
+const val NewGameTag = "NewGame"
+const val SettingsTag = "Settings"
+const val TutorialTag = "Tutorial"
+const val TitleTag = "Title"
 
 class TitleActivity : AppCompatActivity() {
-	private lateinit var fragment: Fragment
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)

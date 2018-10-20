@@ -23,8 +23,8 @@ import java.io.InputStreamReader
 
 class GameActivity : AppCompatActivity() {
 	private lateinit var keys: HashMap<String, Key>
-	var numSeconds = 0
-	var numGuesses = 0
+	var numSeconds = 0.toLong()
+	var numGuesses = 0.toLong()
 	private lateinit var mTimer: Runnable
 	private var mHandler = Handler()
 	private var mIsRunning = false
@@ -90,7 +90,7 @@ class GameActivity : AppCompatActivity() {
 		}
 		targetWord = candidateWords[(0 until candidateWords.size).random()].split("\t")[0].toUpperCase()
 
-		keys.forEach { _, key ->
+		keys.forEach { (_, key) ->
 			key.view.setOnTouchListener(ScaleOnTouch)
 			key.view.setOnClickListener {
 				tapSound()
@@ -260,7 +260,7 @@ class GameActivity : AppCompatActivity() {
 	@SuppressLint("InflateParams")
 	fun pause() {
 		if (mIsRunning) {
-			buttonPause.setImageResource(R.drawable.play)
+			buttonPause.setImageResource(android.R.drawable.ic_media_play)
 			mIsRunning = false
 			mHandler.removeCallbacks(mTimer)
 			if (!isGameOver) showPauseDialog(this, keys)
@@ -269,7 +269,7 @@ class GameActivity : AppCompatActivity() {
 
 	fun play() {
 		if (!mIsRunning && !isGameOver) {
-			buttonPause.setImageResource(R.drawable.pause)
+			buttonPause.setImageResource(android.R.drawable.ic_media_pause)
 			mIsRunning = true
 			mHandler.postDelayed(mTimer, 1000)
 		}
