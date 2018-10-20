@@ -81,7 +81,7 @@ fun showGameOverDialog(activity: GameActivity, didWin: Boolean) {
 			val ids = GameIds.of(activity.wordDifficulty).of(activity.wordLength)
 
 			achievementsClient.unlock(activity.getString(ids.achievement))
-			leaderboardsClient.submitScore(activity.getString(ids.timeLeaderboard), activity.numSeconds)
+			leaderboardsClient.submitScore(activity.getString(ids.timeLeaderboard), activity.numSeconds * 1000)
 			leaderboardsClient.submitScore(activity.getString(ids.guessesLeaderboard), activity.numGuesses)
 			if (didWin && activity.numGuesses == 1L)
 				achievementsClient.unlock(activity.resources.getString(R.string.achievement_lottery_winner))
