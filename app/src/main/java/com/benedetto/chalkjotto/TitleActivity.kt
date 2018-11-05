@@ -22,6 +22,7 @@ class TitleActivity : AppCompatActivity() {
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
+		setTheme(R.style.AppTheme)
 		setContentView(R.layout.activity_title)
 		DataManager.init(this)
 		Sound.init(this)
@@ -34,16 +35,9 @@ class TitleActivity : AppCompatActivity() {
 		goToFragment(TitleTag)
 	}
 
-	fun goToFragment(tag: String, entranceAnimation: Int, exitAnimation: Int) {
-		supportFragmentManager.beginTransaction()
-				.setCustomAnimations(entranceAnimation, exitAnimation)
-				.replace(R.id.fragment_container, getFragmentInstance(tag), tag)
-				.addToBackStack(tag)
-				.commit()
-	}
-
 	fun goToFragment(tag: String) {
 		supportFragmentManager.beginTransaction()
+				.setCustomAnimations(R.anim.fade_in, R.anim.fade_out, R.anim.fade_in, R.anim.fade_out)
 				.replace(R.id.fragment_container, getFragmentInstance(tag), tag)
 				.addToBackStack(tag)
 				.commit()

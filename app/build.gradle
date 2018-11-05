@@ -33,17 +33,11 @@ android {
 dependencies {
 	implementation fileTree(include: ['*.jar'], dir: 'libs')
 	implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-	implementation 'androidx.appcompat:appcompat:1.0.0'
+	implementation 'androidx.appcompat:appcompat:1.0.1'
 	implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha2'
 	implementation 'com.google.android.gms:play-services-auth:16.0.1'
 	implementation 'com.google.android.gms:play-services-games:16.0.0'
 	implementation 'androidx.multidex:multidex:2.0.0'
-
-	//Make gradle shut up
-	implementation 'androidx.media:media:1.0.0'
-	implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-
-	implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0-alpha1'
 }
 
 apply plugin: 'com.google.gms.google-services'
