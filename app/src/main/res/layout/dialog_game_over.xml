@@ -3,6 +3,7 @@
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
+	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_gravity="center"
 	android:layout_margin="32dp"
 	android:maxWidth="400dp">
@@ -52,13 +53,16 @@
 		android:orientation="vertical"
 		app:layout_constraintGuide_percent=".5" />
 
-	<Button
+	<TextView
 		android:id="@+id/buttonContinue"
-		style="@style/Widget.AppCompat.Button.Colored"
-		android:layout_width="0dp"
-		android:layout_height="wrap_content"
+		android:layout_width="175dp"
+		android:layout_height="50dp"
+		android:layout_marginTop="8dp"
 		android:layout_marginBottom="12dp"
-		android:text="Continue"
+		android:background="@drawable/button_white"
+		android:gravity="center"
+		android:text="@string/continueToGame"
+		android:textSize="19sp"
 		android:theme="@style/ColoredButtonWhite"
 		app:layout_constraintBottom_toBottomOf="parent"
 		app:layout_constraintEnd_toEndOf="@+id/buttonReport"
@@ -72,7 +76,7 @@
 		android:layout_marginEnd="8dp"
 		android:layout_marginStart="8dp"
 		android:layout_marginTop="8dp"
-		android:text="You Win"
+		tools:text="You Win"
 		android:textColor="@color/white"
 		android:textSize="28sp"
 		app:layout_constraintEnd_toEndOf="parent"
@@ -101,23 +105,25 @@
 		android:layout_marginEnd="8dp"
 		android:layout_marginStart="8dp"
 		android:layout_marginTop="8dp"
-		android:text="12 guesses in 01:20"
+		tools:text="12 guesses in 01:20"
 		android:textAlignment="center"
 		android:textSize="18sp"
 		app:layout_constraintEnd_toStartOf="@+id/guideline2"
 		app:layout_constraintStart_toStartOf="@+id/guideline"
 		app:layout_constraintTop_toBottomOf="@+id/layoutCorrectWord" />
 
-	<Button
+	<TextView
 		android:id="@+id/buttonReport"
-		style="@style/Widget.AppCompat.Button.Colored"
-		android:layout_width="0dp"
-		android:layout_height="wrap_content"
+		android:layout_width="175dp"
+		android:layout_height="50dp"
 		android:layout_marginEnd="8dp"
 		android:layout_marginStart="8dp"
 		android:layout_marginTop="8dp"
 		android:text="@string/report_word"
-		android:theme="@style/ColoredButtonGrey"
+		android:background="@drawable/button_white"
+		android:backgroundTint="@color/colorLetterMaybe"
+		android:gravity="center"
+		android:textSize="19sp"
 		app:layout_constraintEnd_toEndOf="@+id/textViewInfo"
 		app:layout_constraintStart_toStartOf="@+id/textViewInfo"
 		app:layout_constraintTop_toBottomOf="@+id/textViewInfo" />

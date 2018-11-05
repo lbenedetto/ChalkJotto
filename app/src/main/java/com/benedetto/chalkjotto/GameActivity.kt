@@ -38,6 +38,7 @@ class GameActivity : AppCompatActivity() {
 	@SuppressLint("InflateParams", "ClickableViewAccessibility")
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
+		setTheme(R.style.AppTheme)
 		setContentView(R.layout.activity_game)
 		keys = getKeyHashMap(this)
 		val bundle = intent.extras
