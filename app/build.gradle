@@ -6,7 +6,7 @@ android {
 	compileSdkVersion 28
 	defaultConfig {
 		applicationId "com.benedetto.chalkjotto"
-		minSdkVersion 19
+		minSdkVersion 21
 		targetSdkVersion 28
 		versionCode 1
 		versionName "1.0"
@@ -33,7 +33,7 @@ android {
 dependencies {
 	implementation fileTree(include: ['*.jar'], dir: 'libs')
 	implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-	implementation 'androidx.appcompat:appcompat:1.0.1'
+	implementation 'androidx.appcompat:appcompat:1.0.2'
 	implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha2'
 	implementation 'com.google.android.gms:play-services-auth:16.0.1'
 	implementation 'com.google.android.gms:play-services-games:16.0.0'

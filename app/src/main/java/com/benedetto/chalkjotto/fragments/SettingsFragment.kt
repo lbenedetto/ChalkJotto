@@ -13,23 +13,23 @@ import kotlinx.android.synthetic.main.fragment_settings.*
 
 
 class SettingsFragment : Fragment() {
-	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-		return inflater.inflate(R.layout.fragment_settings, container, false)
-	}
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater.inflate(R.layout.fragment_settings, container, false)
+    }
 
-	override fun onActivityCreated(savedInstanceState: Bundle?) {
-		super.onActivityCreated(savedInstanceState)
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
 
-		switchSound.isChecked = DataManager.soundEnabled
-		switchSound.setOnClickListener { switch ->
-			tapSound()
-			DataManager.soundEnabled = (switch as Switch).isChecked
-		}
+        switchSound.isChecked = DataManager.soundEnabled
+        switchSound.setOnClickListener { switch ->
+            tapSound()
+            DataManager.soundEnabled = (switch as Switch).isChecked
+        }
 
-		switchVibrate.isChecked = DataManager.soundEnabled
-		switchVibrate.setOnClickListener { switch ->
-			tapSound()
-			DataManager.vibrationEnabled = (switch as Switch).isChecked
-		}
-	}
+        switchVibrate.isChecked = DataManager.soundEnabled
+        switchVibrate.setOnClickListener { switch ->
+            tapSound()
+            DataManager.vibrationEnabled = (switch as Switch).isChecked
+        }
+    }
 }
