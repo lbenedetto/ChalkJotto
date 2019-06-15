@@ -5,18 +5,14 @@
 	<string name="insane">Insane</string>
 	<string name="guessed_word">Guessed Words</string>
 	<string name="submit">Go</string>
-	<string name="time">Time:</string>
 	<string name="guesses">Guesses:</string>
 	<string name="reset_colors">Reset Colors</string>
 	<string name="give_up">Give Up</string>
 	<string name="resume">Resume</string>
 	<string name="new_game">New Game</string>
-	<string name="settings">Settings</string>
-	<string name="game_settings">Game Settings</string>
 	<string name="word_length">Word Length</string>
 	<string name="word_difficulty">Word Difficulty</string>
 	<string name="continueToGame">Continue</string>
-	<string name="app_logo">App Logo</string>
 	<string name="sound">Sound</string>
 	<string name="game_paused">Game Paused</string>
 	<string name="lucky">Pure Luck</string>
@@ -26,10 +22,6 @@
 	<string name="gave_up">You gave up after %1$d guesses in %2$s</string>
 	<string name="lucky_message">You guessed the secret word on your first try. There\'s only a 1 in %1$d chance of that happening</string>
 	<string name="gave_up_without_trying">But you probably don\'t care since you didn\'t even try</string>
-	<string name="report_word">Report Word</string>
-	<string name="close">Close</string>
-	<string name="sign_in">Sign In</string>
-	<string name="sign_out">Sign Out</string>
 	<string name="show_tutorial">Show Tutorial</string>
 	<string name="vibration">Keyboard Vibration</string>
 	<string name="tutorial_hint">To make it easier to keep track of which letters you think are in the secret word, you can long press on a letter and set it\'s color.</string>
@@ -39,6 +31,5 @@
 	<string name="objective">Objective</string>
 	<string name="example">Example</string>
 	<string name="tutorial">Tutorial</string>
-	<string name="back">Back</string>
 	<string name="pause_button">Pause Button</string>
 </resources>

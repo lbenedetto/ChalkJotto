@@ -7,9 +7,6 @@
 	<color name="white">#F5F5F5</color>
 	<color name="lightGrey">#878787</color>
 	<color name="colorLetterNo">#F44336</color>
-	<color name="colorLetterNoTint">#FFDBDB</color>
 	<color name="colorLetterYes">#4CAF50</color>
-	<color name="colorLetterYesTint">#DBFFDC</color>
 	<color name="colorLetterMaybe">#FF9800</color>
-	<color name="colorLetterMaybeTint">#ffeedb</color>
 </resources>
