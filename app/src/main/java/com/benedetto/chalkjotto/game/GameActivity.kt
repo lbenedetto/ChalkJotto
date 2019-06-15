@@ -77,9 +77,9 @@ class GameActivity : AppCompatActivity() {
         }
     }
 
-    fun deleteEnteredCharAtIx(ix: Int, keys: HashMap<String, Key>) {
+    fun deleteEnteredCharAtIx(ix: Int, keys: HashMap<Char, Key>) {
         val tile = layoutCorrectWord.getChildAt(ix) as TextView
-        keys[tile.text]!!.removeListener(tile)
+        keys[tile.text[0]]!!.removeListener(tile)
         tile.text = ""
         tile.setBackgroundResource(KeyState.BLANK.background)
         tile.setOnLongClickListener(null)
@@ -110,35 +110,35 @@ class GameActivity : AppCompatActivity() {
         gamePresenter.pause()
     }
 
-    private fun getKeyHashMap(view: View): HashMap<String, Key> {
-        val keys = HashMap<String, Key>()
+    private fun getKeyHashMap(view: View): HashMap<Char, Key> {
+        val keys = HashMap<Char, Key>()
 
-        keys["A"] = Key("A", view.keyA)
-        keys["B"] = Key("B", view.keyB)
-        keys["C"] = Key("C", view.keyC)
-        keys["D"] = Key("D", view.keyD)
-        keys["E"] = Key("E", view.keyE)
-        keys["F"] = Key("F", view.keyF)
-        keys["G"] = Key("G", view.keyG)
-        keys["H"] = Key("H", view.keyH)
-        keys["I"] = Key("I", view.keyI)
-        keys["J"] = Key("J", view.keyJ)
-        keys["K"] = Key("K", view.keyK)
-        keys["L"] = Key("L", view.keyL)
-        keys["M"] = Key("M", view.keyM)
-        keys["N"] = Key("N", view.keyN)
-        keys["O"] = Key("O", view.keyO)
-        keys["P"] = Key("P", view.keyP)
-        keys["Q"] = Key("Q", view.keyQ)
-        keys["R"] = Key("R", view.keyR)
-        keys["S"] = Key("S", view.keyS)
-        keys["T"] = Key("T", view.keyT)
-        keys["U"] = Key("U", view.keyU)
-        keys["V"] = Key("V", view.keyV)
-        keys["W"] = Key("W", view.keyW)
-        keys["X"] = Key("X", view.keyX)
-        keys["Y"] = Key("Y", view.keyY)
-        keys["Z"] = Key("Z", view.keyZ)
+        keys['A'] = Key("A", view.keyA)
+        keys['B'] = Key("B", view.keyB)
+        keys['C'] = Key("C", view.keyC)
+        keys['D'] = Key("D", view.keyD)
+        keys['E'] = Key("E", view.keyE)
+        keys['F'] = Key("F", view.keyF)
+        keys['G'] = Key("G", view.keyG)
+        keys['H'] = Key("H", view.keyH)
+        keys['I'] = Key("I", view.keyI)
+        keys['J'] = Key("J", view.keyJ)
+        keys['K'] = Key("K", view.keyK)
+        keys['L'] = Key("L", view.keyL)
+        keys['M'] = Key("M", view.keyM)
+        keys['N'] = Key("N", view.keyN)
+        keys['O'] = Key("O", view.keyO)
+        keys['P'] = Key("P", view.keyP)
+        keys['Q'] = Key("Q", view.keyQ)
+        keys['R'] = Key("R", view.keyR)
+        keys['S'] = Key("S", view.keyS)
+        keys['T'] = Key("T", view.keyT)
+        keys['U'] = Key("U", view.keyU)
+        keys['V'] = Key("V", view.keyV)
+        keys['W'] = Key("W", view.keyW)
+        keys['X'] = Key("X", view.keyX)
+        keys['Y'] = Key("Y", view.keyY)
+        keys['Z'] = Key("Z", view.keyZ)
         return keys
     }
 

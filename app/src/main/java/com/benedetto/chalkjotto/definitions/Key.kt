@@ -10,7 +10,11 @@ enum class KeyState(val color: Int, val background: Int) {
     NO(R.color.colorLetterNo, R.drawable.key_red)
 }
 
-data class Key(val letter: String, val view: TextView, var state: KeyState, val listeners: ArrayList<TextView>) {
+data class Key(
+        val letter: String,
+        val view: TextView,
+        var state: KeyState,
+        val listeners: ArrayList<TextView>) {
     constructor(letters: String, view: TextView) : this(letters, view, KeyState.BLANK, ArrayList())
 
     fun addListener(textView: TextView) {

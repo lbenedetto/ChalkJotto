@@ -10,7 +10,11 @@ import java.util.HashMap
 import kotlin.collections.ArrayList
 import kotlin.collections.HashSet
 
-class GameModel(var keys: HashMap<String, Key>, var resources: Resources, var wordDifficulty: Int, var wordLength: Int) {
+class GameModel(
+        var keys: HashMap<Char, Key>,
+        private var resources: Resources,
+        wordDifficulty: Int,
+        wordLength: Int) {
     var targetWord: String
     var validWords = HashSet<String>()
     var enteredWord = StringBuilder()

@@ -65,7 +65,13 @@ class GamePresenter(private val model: GameModel, val view: GameActivity) {
                     exitToTitle(didWin = true)
                 } else {
                     val guessHolder = view.layoutInflater.inflate(R.layout.guess_item, null)
-                    guessHolder.textViewMatchCount.text = model.getNumberOfMatchingLetters(model.enteredWord.toString()).toString()
+                    val matching = model.getNumberOfMatchingLetters(model.enteredWord.toString())
+                    guessHolder.textViewMatchCount.text = matching.toString()
+                    if(matching == 0) {
+                        model.enteredWord.forEach {
+                            model.keys[it]?.updateState(KeyState.NO)
+                        }
+                    }
                     view.moveWordToView(guessHolder.layoutGuessedWord)
                     view.addGuessItem(guessHolder)
                     view.refillUserInputFieldWithTiles()
