@@ -1,38 +1,34 @@
 package com.benedetto.chalkjotto.game
 
+import android.content.Intent
 import android.os.Bundle
-import android.view.Gravity
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat
-import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
+import com.benedetto.chalkjotto.PauseActivity.Companion.GIVE_UP
+import com.benedetto.chalkjotto.PauseActivity.Companion.RESET
+import com.benedetto.chalkjotto.PauseActivity.Companion.RESUME
 import com.benedetto.chalkjotto.R
 import com.benedetto.chalkjotto.definitions.*
-import kotlinx.android.synthetic.main.fragment_game.*
-import kotlinx.android.synthetic.main.fragment_game.view.*
+import kotlinx.android.synthetic.main.activity_game.*
+import kotlinx.android.synthetic.main.activity_game.view.*
 import java.util.*
 
 
-class GameFragment : Fragment() {
+class GameActivity : AppCompatActivity() {
     private lateinit var gamePresenter: GamePresenter
+    private lateinit var gameModel: GameModel
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return GameView(inflater.context)
-    }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setTheme(R.style.AppTheme)
+        setContentView(R.layout.activity_game)
+        val wordDifficulty = DataManager.difficulty
+        val wordLength = DataManager.wordLength
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
-        val wordDifficulty = arguments!!.getInt("difficulty")
-        val wordLength = arguments!!.getInt("length")
-
-        val gameModel = GameModel(getKeyHashMap(view!!), resources, wordDifficulty, wordLength)
-        val gamePresenter = GamePresenter(gameModel, this)
+        gameModel = GameModel(getKeyHashMap(layoutKeyboard!!), resources, wordDifficulty, wordLength)
+        gamePresenter = GamePresenter(gameModel, this)
 
         buttonPause.setOnClickListener { gamePresenter.pauseClicked() }
         keySubmit.setOnClickListener { gamePresenter.submitButtonPressed() }
@@ -49,26 +45,24 @@ class GameFragment : Fragment() {
         gamePresenter.play()
     }
 
-    private fun newBlankTile(): TextView {
-        val tile = TextView(context!!)
-        tile.setTextColor(ContextCompat.getColor(context!!, android.R.color.white))
-        tile.typeface = ResourcesCompat.getFont(context!!, R.font.architects_daughter)
-        tile.textSize = 34f
-        tile.setBackgroundResource(KeyState.BLANK.background)
-        val size = dpToPx(40)
-        tile.gravity = Gravity.CENTER
-        val params = ConstraintLayout.LayoutParams(size, size)
-        params.setMargins(2, 2, 2, 2)
-        tile.layoutParams = params
-        tile.elevation = dpToPx(2).toFloat()
+    override fun onBackPressed() {}
 
-        return tile
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        when (resultCode) {
+            RESUME -> gamePresenter.play()
+            RESET -> {
+                gameModel.keys.forEach { (_, key) -> key.updateState(KeyState.BLANK) }
+                gamePresenter.play()
+            }
+            GIVE_UP -> gamePresenter.exitToTitle(false)
+        }
     }
 
     fun refillUserInputFieldWithTiles() {
         layoutCorrectWord.removeAllViews()
         for (i in 0 until DataManager.wordLength) {
-            val tile = newBlankTile()
+            val tile = newBlankTile(this)
             layoutCorrectWord.addView(tile)
             animatePopIn(tile)
         }
@@ -92,7 +86,7 @@ class GameFragment : Fragment() {
     }
 
     fun addGuessItem(view: View) {
-        view.layoutGuessedWords.addView(view, 0)
+        layoutGuessedWords.addView(view, 0)
     }
 
     fun setNumberOfGuesses(guesses: Long) {
@@ -146,11 +140,6 @@ class GameFragment : Fragment() {
         keys["Y"] = Key("Y", view.keyY)
         keys["Z"] = Key("Z", view.keyZ)
         return keys
-    }
-
-    fun setInsets(navBarSize: Int, statusBarSize: Int) {
-        (clRootInset.layoutParams as ViewGroup.MarginLayoutParams).bottomMargin = navBarSize
-        (buttonPause.layoutParams as ViewGroup.MarginLayoutParams).topMargin = statusBarSize
     }
 
 }

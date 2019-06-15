@@ -1,5 +1,4 @@
 <resources>
-	<string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
 	<string name="app_name">Chalk Jotto</string>
 	<string name="normal">Normal</string>
 	<string name="hard">Hard</string>
@@ -40,8 +39,6 @@
 	<string name="objective">Objective</string>
 	<string name="example">Example</string>
 	<string name="tutorial">Tutorial</string>
-	<string name="achievements">Achievements</string>
-	<string name="leaderboards">Leaderboards</string>
 	<string name="back">Back</string>
 	<string name="pause_button">Pause Button</string>
 </resources>

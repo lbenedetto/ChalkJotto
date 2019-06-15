@@ -1,19 +1,20 @@
 package com.benedetto.chalkjotto.game
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Handler
 import android.view.animation.AnimationUtils
 import android.widget.TextView
+import com.benedetto.chalkjotto.PauseActivity
 import com.benedetto.chalkjotto.R
 import com.benedetto.chalkjotto.definitions.*
+import com.benedetto.chalkjotto.dialogs.GameOverDialog
 import com.benedetto.chalkjotto.dialogs.showColorPickerDialog
-import com.benedetto.chalkjotto.dialogs.showGameOverDialog
-import com.benedetto.chalkjotto.dialogs.showPauseDialog
-import kotlinx.android.synthetic.main.fragment_game.*
+import kotlinx.android.synthetic.main.activity_game.*
 import kotlinx.android.synthetic.main.guess_item.view.*
 
 @SuppressLint("InflateParams", "ClickableViewAccessibility")
-class GamePresenter(private val model: GameModel, val view: GameFragment) {
+class GamePresenter(private val model: GameModel, val view: GameActivity) {
     private var mTimer: Runnable
     private var mHandler = Handler()
     private var mIsRunning = false
@@ -36,7 +37,7 @@ class GamePresenter(private val model: GameModel, val view: GameFragment) {
                 if (model.enteredWord.length < DataManager.wordLength) {
                     val letter = view.layoutCorrectWord.getChildAt(model.enteredWord.length) as TextView
                     letter.setOnLongClickListener {
-                        showColorPickerDialog(view.context!!, key)
+                        showColorPickerDialog(view, key)
                         true
                     }
                     letter.text = key.letter
@@ -47,7 +48,7 @@ class GamePresenter(private val model: GameModel, val view: GameFragment) {
             }
 
             key.view.setOnLongClickListener {
-                showColorPickerDialog(view.context!!, key)
+                showColorPickerDialog(view, key)
                 true
             }
         }
@@ -59,7 +60,9 @@ class GamePresenter(private val model: GameModel, val view: GameFragment) {
                 model.numGuesses++
                 if (model.enteredWord.toString() == model.targetWord) {
                     view.refillUserInputFieldWithTiles()
-//					showGameOverDialog(view, true)
+                    model.isGameOver = true
+                    pause()
+                    exitToTitle(didWin = true)
                 } else {
                     val guessHolder = view.layoutInflater.inflate(R.layout.guess_item, null)
                     guessHolder.textViewMatchCount.text = model.getNumberOfMatchingLetters(model.enteredWord.toString()).toString()
@@ -71,10 +74,25 @@ class GamePresenter(private val model: GameModel, val view: GameFragment) {
                 }
             } else {
                 view.layoutCorrectWord.clearAnimation()
-                view.layoutCorrectWord.startAnimation(AnimationUtils.loadAnimation(view.context, R.anim.shake))
+                view.layoutCorrectWord.startAnimation(AnimationUtils.loadAnimation(view, R.anim.shake))
             }
         }
     }
+
+    fun exitToTitle(didWin: Boolean) {
+        GameOverDialog(
+                activity = view,
+                didWin = didWin,
+                targetWord = model.targetWord,
+                numGuesses = model.numGuesses,
+                oddsOfLuckyWin = model.validWords.size,
+                timeUsed = model.numSeconds,
+                onCloseAction = {
+                    view.finish()
+                }
+        ).show()
+    }
+
 
     fun backspaceClicked() {
         tapSound()
@@ -105,7 +123,9 @@ class GamePresenter(private val model: GameModel, val view: GameFragment) {
             view.setPaused()
             mIsRunning = false
             mHandler.removeCallbacks(mTimer)
-//			if (!model.isGameOver) showPauseDialog(view.activity, model.keys)
+            if (!model.isGameOver) {
+                view.startActivityForResult(Intent(view, PauseActivity::class.java), 1)
+            }
         }
     }
 

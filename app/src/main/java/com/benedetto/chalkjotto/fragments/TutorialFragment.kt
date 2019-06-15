@@ -1,15 +1,16 @@
 package com.benedetto.chalkjotto.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.benedetto.chalkjotto.NewGameTag
-import com.benedetto.chalkjotto.R
 import com.benedetto.chalkjotto.MainActivity
+import com.benedetto.chalkjotto.R
 import com.benedetto.chalkjotto.definitions.DataManager
 import com.benedetto.chalkjotto.definitions.tapSound
+import com.benedetto.chalkjotto.game.GameActivity
 import kotlinx.android.synthetic.main.fragment_tutorial.*
 
 
@@ -25,7 +26,7 @@ class TutorialFragment : Fragment() {
             buttonContinue.setOnClickListener {
                 tapSound()
                 DataManager.hasSeenTutoral = true
-                (activity as MainActivity).goToFragment(NewGameTag)
+                startActivityForResult(Intent(context, GameActivity::class.java), 1)
             }
         }
     }

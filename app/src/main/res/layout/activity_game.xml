@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:background="@drawable/chalkboard"
+    android:background="@drawable/chalkboard"
     tools:context=".MainActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -567,23 +567,6 @@
                 app:layout_constraintVertical_bias="1.0" />
 
             <TextView
-                android:id="@+id/keyBackspace"
-                style="@style/KeyboardKey"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="2dp"
-                android:layout_marginEnd="4dp"
-                android:layout_marginBottom="2dp"
-                android:text="&lt;&lt;"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintDimensionRatio="1:1"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/keyM"
-                app:layout_constraintTop_toTopOf="@+id/guidelineRow1"
-                app:layout_constraintVertical_bias="0.0" />
-
-            <TextView
                 android:id="@+id/keySubmit"
                 style="@style/KeyboardKey"
                 android:layout_width="0dp"
@@ -593,6 +576,23 @@
                 android:layout_marginEnd="4dp"
                 android:layout_marginBottom="2dp"
                 android:text="@string/submit"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/keyM"
+                app:layout_constraintTop_toTopOf="@+id/guidelineRow1"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/keyBackspace"
+                style="@style/KeyboardKey"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginBottom="2dp"
+                android:text="&lt;&lt;"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toStartOf="@+id/keyZ"
