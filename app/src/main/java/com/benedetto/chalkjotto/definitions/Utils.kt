@@ -1,15 +1,18 @@
 package com.benedetto.chalkjotto.definitions
 
-import android.app.Activity
-import android.app.PendingIntent.getActivity
+import android.content.Context
 import android.content.res.Resources
 import android.os.Build
 import android.os.VibrationEffect
+import android.view.Gravity
 import android.view.View
 import android.view.animation.AnimationUtils
+import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import com.benedetto.chalkjotto.R
 import java.util.*
-import android.content.res.TypedArray
 
 
 operator fun View.OnTouchListener.plus(other: View.OnTouchListener): View.OnTouchListener {
@@ -40,24 +43,6 @@ fun tapSound() {
     }
 }
 
-fun getStatusBarHeight(resources: Resources): Int {
-    var statusBarHeight = 0
-    val resourceId = resources.getIdentifier("status_bar_height", "dimen", "android")
-    if (resourceId > 0) {
-        statusBarHeight = resources.getDimensionPixelSize(resourceId)
-    }
-    return statusBarHeight
-}
-
-fun navigationBarHeight(resources: Resources): Int {
-    var navigationBarHeight = 0
-    val resourceId = resources.getIdentifier("navigation_bar_height", "dimen", "android")
-    if (resourceId > 0) {
-        navigationBarHeight = resources.getDimensionPixelSize(resourceId)
-    }
-    return navigationBarHeight
-}
-
 fun vibrate() {
     if (DataManager.vibrationEnabled) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -80,6 +65,22 @@ fun animatePopIn(view: View) {
     val zoomIn = AnimationUtils.loadAnimation(view.context, R.anim.zoom_into_place)
     view.clearAnimation()
     view.startAnimation(zoomIn)
+}
+
+fun newBlankTile(context: Context): TextView {
+    val tile = TextView(context)
+    tile.setTextColor(ContextCompat.getColor(context, android.R.color.white))
+    tile.typeface = ResourcesCompat.getFont(context, R.font.architects_daughter)
+    tile.textSize = 34f
+    tile.setBackgroundResource(KeyState.BLANK.background)
+    val size = dpToPx(40)
+    tile.gravity = Gravity.CENTER
+    val params = ConstraintLayout.LayoutParams(size, size)
+    params.setMargins(2, 2, 2, 2)
+    tile.layoutParams = params
+    tile.elevation = dpToPx(2).toFloat()
+
+    return tile
 }
 
 fun ClosedRange<Int>.random() = Random().nextInt((endInclusive + 1) - start) + start

@@ -6,7 +6,6 @@
 		<item name="colorPrimaryDark">@color/colorPrimaryDark</item>
 		<item name="colorAccent">@color/colorAccent</item>
 		<item name="android:fontFamily">@font/architects_daughter</item>
-		<item name="android:windowTranslucentNavigation">true</item>
 	</style>
 
 	<style name="KeyboardKey">
@@ -21,12 +20,6 @@
 		<item name="android:textColor">@color/colorPrimary</item>
 		<item name="android:textSize">18sp</item>
 		<item name="colorAccent">@color/white</item>
-	</style>
-
-	<style name="ColoredButtonGrey" parent="ThemeOverlay.AppCompat">
-		<item name="android:textColor">@color/white</item>
-		<item name="android:textSize">18sp</item>
-		<item name="colorAccent">@color/lightGrey</item>
 	</style>
 
 	<style name="AppTheme.Launcher">

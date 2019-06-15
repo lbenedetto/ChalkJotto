@@ -3,7 +3,10 @@ package com.benedetto.chalkjotto.dialogs
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
-import android.view.*
+import android.view.Gravity
+import android.view.LayoutInflater
+import android.view.Window
+import android.view.WindowManager
 import com.benedetto.chalkjotto.R
 import com.benedetto.chalkjotto.definitions.Key
 import com.benedetto.chalkjotto.definitions.KeyState
@@ -14,7 +17,6 @@ import kotlinx.android.synthetic.main.keystate_menu.view.*
 @SuppressLint("InflateParams")
 fun showColorPickerDialog(context: Context, key: Key) {
     val dialog = Dialog(context)
-    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
     val view = (context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater).inflate(R.layout.keystate_menu, null, false)
     view.keyWhite.setOnClickListener {
         tapSound()

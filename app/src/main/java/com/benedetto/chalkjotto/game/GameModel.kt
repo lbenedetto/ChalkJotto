@@ -1,20 +1,20 @@
 package com.benedetto.chalkjotto.game
 
 import android.content.res.Resources
-import android.view.View
 import com.benedetto.chalkjotto.R
 import com.benedetto.chalkjotto.definitions.Key
 import com.benedetto.chalkjotto.definitions.random
-import kotlinx.android.synthetic.main.fragment_game.view.*
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.util.HashMap
 import kotlin.collections.ArrayList
 import kotlin.collections.HashSet
-import kotlin.collections.forEach
-import kotlin.collections.set
 
-class GameModel(var keys: HashMap<String, Key>, var resources: Resources, wordDifficulty: Int, wordLength: Int) {
+class GameModel(
+        var keys: HashMap<Char, Key>,
+        private var resources: Resources,
+        wordDifficulty: Int,
+        wordLength: Int) {
     var targetWord: String
     var validWords = HashSet<String>()
     var enteredWord = StringBuilder()
