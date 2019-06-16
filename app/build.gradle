@@ -6,13 +6,13 @@ android {
 	signingConfigs {
 		release {
 			//Define these in USER_HOME/.gradle/gradle.properties
-			keyAlias RELEASE_KEY_ALIAS
-			keyPassword RELEASE_KEY_PASSWORD
-			storeFile file(RELEASE_STORE_FILE)
-			storePassword RELEASE_STORE_PASSWORD
+			keyAlias JOTTO_RELEASE_KEY_ALIAS
+			keyPassword JOTTO_RELEASE_KEY_PASSWORD
+			storeFile file(JOTTO_RELEASE_STORE_FILE)
+			storePassword JOTTO_RELEASE_STORE_PASSWORD
 		}
 		debug {
-			storeFile file(DEBUG_STORE_FILE)
+			storeFile file(JOTTO_DEBUG_STORE_FILE)
 		}
 	}
 
