@@ -46,9 +46,9 @@ fun tapSound() {
 fun vibrate() {
     if (DataManager.vibrationEnabled) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            Sound.Vibrate.vibrate(VibrationEffect.createOneShot(25, VibrationEffect.DEFAULT_AMPLITUDE))
+            Sound.Vibrator.vibrate(VibrationEffect.createOneShot(25, VibrationEffect.DEFAULT_AMPLITUDE))
         } else {
-            Sound.Vibrate.vibrate(25)
+            Sound.Vibrator.vibrate(25)
         }
     }
 }

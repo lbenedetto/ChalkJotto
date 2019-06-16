@@ -10,7 +10,7 @@ object Sound {
     lateinit var PenClickUp: MediaPlayer
     lateinit var PenClickDown: MediaPlayer
     lateinit var Tap: MediaPlayer
-    lateinit var Vibrate: Vibrator
+    lateinit var Vibrator: Vibrator
 
     fun init(context: Context) {
         PenClick = MediaPlayer.create(context, R.raw.pen_click)
@@ -18,6 +18,6 @@ object Sound {
         PenClickDown = MediaPlayer.create(context, R.raw.pen_click_down)
         Tap = MediaPlayer.create(context, R.raw.tap)
         Tap.setVolume(.5f, .5f)
-        Vibrate = (context.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator)
+        Vibrator = (context.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator)
     }
 }

@@ -3,14 +3,26 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
+	signingConfigs {
+		release {
+			//Define these in USER_HOME/.gradle/gradle.properties
+			keyAlias RELEASE_KEY_ALIAS
+			keyPassword RELEASE_KEY_PASSWORD
+			storeFile file(RELEASE_STORE_FILE)
+			storePassword RELEASE_STORE_PASSWORD
+		}
+		debug {
+			storeFile file(DEBUG_STORE_FILE)
+		}
+	}
+
 	compileSdkVersion 28
 	defaultConfig {
 		applicationId "com.benedetto.chalkjotto"
 		minSdkVersion 21
 		targetSdkVersion 28
 		versionCode 1
-		versionName "1.0"
-		multiDexEnabled true
+		versionName "19.6.0"
 	}
 	buildTypes {
 		release {
@@ -30,5 +42,4 @@ dependencies {
 	implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 	implementation 'androidx.appcompat:appcompat:1.0.2'
 	implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta1'
-	implementation 'androidx.multidex:multidex:2.0.1'
 }

@@ -80,13 +80,13 @@ class GameModel(
 
     fun getNumberOfMatchingLetters(guess: String): Int {
         var matchCount = 0
-        var wordCopy = targetWord
-        guess.toCharArray().forEach { letter ->
-            if (wordCopy.contains(letter)) {
-                matchCount++
-                wordCopy = wordCopy.replace(letter.toString(), "")
-            }
-        }
+        guess.toCharArray()
+                .distinct()
+                .forEach { letter ->
+                    if (targetWord.contains(letter)) {
+                        matchCount++
+                    }
+                }
         return matchCount
     }
 

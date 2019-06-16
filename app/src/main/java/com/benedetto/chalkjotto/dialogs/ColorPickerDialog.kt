@@ -18,6 +18,12 @@ import kotlinx.android.synthetic.main.keystate_menu.view.*
 fun showColorPickerDialog(context: Context, key: Key) {
     val dialog = Dialog(context)
     val view = (context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater).inflate(R.layout.keystate_menu, null, false)
+
+    view.keyWhite.text = key.letter
+    view.keyGreen.text = key.letter
+    view.keyRed.text = key.letter
+    view.keyYellow.text = key.letter
+
     view.keyWhite.setOnClickListener {
         tapSound()
         key.updateState(KeyState.BLANK)
