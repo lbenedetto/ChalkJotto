@@ -86,7 +86,10 @@ class GameActivity : AppCompatActivity() {
     }
 
     fun addGuessItem(view: View) {
-        layoutGuessedWords.addView(view, 0)
+        layoutGuessedWords.addView(view)
+        svGuessedWords.post {
+            svGuessedWords.fullScroll(View.FOCUS_DOWN)
+        }
     }
 
     fun setNumberOfGuesses(guesses: Long) {

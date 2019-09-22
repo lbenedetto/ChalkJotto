@@ -16,18 +16,18 @@ android {
 		}
 	}
 
-	compileSdkVersion 28
+	compileSdkVersion 29
 	defaultConfig {
 		applicationId "com.benedetto.chalkjotto"
 		minSdkVersion 21
-		targetSdkVersion 28
-		versionCode 1
-		versionName "19.6.0"
+		targetSdkVersion 29
+		versionCode 2
+		versionName "19.9.0"
+		signingConfig signingConfigs.release
 	}
 	buildTypes {
 		release {
 			minifyEnabled true
-			useProguard true
 			proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 		}
 	}
@@ -40,6 +40,6 @@ android {
 dependencies {
 	implementation fileTree(include: ['*.jar'], dir: 'libs')
 	implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-	implementation 'androidx.appcompat:appcompat:1.0.2'
+	implementation 'androidx.appcompat:appcompat:1.1.0'
 	implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta1'
 }
