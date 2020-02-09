@@ -36,9 +36,8 @@ class GamePresenter(private val model: GameModel, val view: GameActivity) {
                 vibrate()
                 if (model.enteredWord.length < DataManager.wordLength) {
                     val letter = view.layoutCorrectWord.getChildAt(model.enteredWord.length) as TextView
-                    letter.setOnLongClickListener {
+                    letter.setOnClickListener {
                         showColorPickerDialog(view, key)
-                        true
                     }
                     letter.text = key.letter
                     letter.setBackgroundResource(key.state.background)
@@ -145,7 +144,7 @@ class GamePresenter(private val model: GameModel, val view: GameActivity) {
 
     fun backspaceLongClicked() {
         penClickSound()
-        for (ix in 0 until model.enteredWord.length) {
+        for (ix in model.enteredWord.indices) {
             view.deleteEnteredCharAtIx(ix, model.keys)
         }
         model.enteredWord = StringBuilder()

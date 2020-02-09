@@ -1,5 +1,9 @@
 <resources>
 	<string name="app_name">Chalk Jotto</string>
+	<string name="fastest_time">Fastest time</string>
+	<string name="fastest_time_improved">* You beat your previous best of %1$s</string>
+	<string name="fewest_guesses">Fewest guesses</string>
+	<string name="fewest_guesses_improved">* You beat your previous best of %1$d guesses</string>
 	<string name="normal">Normal</string>
 	<string name="hard">Hard</string>
 	<string name="insane">Insane</string>

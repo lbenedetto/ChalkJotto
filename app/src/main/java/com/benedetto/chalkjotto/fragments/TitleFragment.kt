@@ -46,6 +46,7 @@ class TitleFragment : Fragment() {
                     2 -> mActivity.getString(R.string.insane)
                     else -> mActivity.getString(R.string.normal)
                 }
+                updateReadouts()
             }
 
             override fun onStopTrackingTouch(seekBar: SeekBar?) {}
@@ -57,6 +58,7 @@ class TitleFragment : Fragment() {
                 val len = progress + MIN_WORD_LENGTH
                 DataManager.wordLength = len
                 textViewWordLength.text = String.format("%d", len)
+                updateReadouts()
             }
 
             override fun onStopTrackingTouch(seekBar: SeekBar?) {}
@@ -65,6 +67,15 @@ class TitleFragment : Fragment() {
 
         seekBarWordDifficulty.progress = DataManager.difficulty
         seekBarWordLength.progress = DataManager.wordLength - MIN_WORD_LENGTH
+    }
 
+    override fun onResume() {
+        super.onResume()
+        updateReadouts()
+    }
+
+    private fun updateReadouts() {
+        textViewFewestGuesses.text = DataManager.fewestGuesses?.toString() ?: "?"
+        textViewFastestTime.text = DataManager.fastestTimeSeconds?.let { time -> secondsToTimeDisplay(time) } ?: "?"
     }
 }

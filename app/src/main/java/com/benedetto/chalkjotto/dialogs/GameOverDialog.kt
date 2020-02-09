@@ -2,6 +2,7 @@ package com.benedetto.chalkjotto.dialogs
 
 import android.app.Activity
 import com.benedetto.chalkjotto.R
+import com.benedetto.chalkjotto.definitions.DataManager
 import com.benedetto.chalkjotto.definitions.newBlankTile
 import com.benedetto.chalkjotto.definitions.secondsToTimeDisplay
 import com.benedetto.chalkjotto.definitions.tapSound
@@ -25,6 +26,25 @@ class GameOverDialog(
             val tile = newBlankTile(activity)
             tile.text = character.toString()
             correctWordLayout.addView(tile)
+        }
+
+        // Keeping track of best scores
+        if (didWin) {
+            val previousFewestGuesses = DataManager.fewestGuesses
+            if (previousFewestGuesses == null || previousFewestGuesses > numGuesses) {
+                if (previousFewestGuesses != null) {
+                    popupWindow.view.textViewInfo2.text = activity.getString(R.string.fewest_guesses_improved, previousFewestGuesses)
+                }
+                DataManager.fewestGuesses = numGuesses
+            }
+
+            val previousFastestTime = DataManager.fastestTimeSeconds
+            if (previousFastestTime == null || previousFastestTime > timeUsed) {
+                if (previousFastestTime != null) {
+                    popupWindow.view.textViewInfo3.text = activity.getString(R.string.fastest_time_improved, secondsToTimeDisplay(previousFastestTime))
+                }
+                DataManager.fastestTimeSeconds = timeUsed
+            }
         }
 
         popupWindow.view.textViewTitle.text = activity.getString(

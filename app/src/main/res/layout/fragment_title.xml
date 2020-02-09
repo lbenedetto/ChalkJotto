@@ -3,40 +3,83 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:ignore="SpUsage">
+
+    <TextView
+        android:id="@+id/textViewFewestGuessesLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:text="@string/fewest_guesses"
+        android:textColor="@color/white"
+        android:textSize="18dp"
+        app:layout_constraintStart_toStartOf="@+id/ivLogo"
+        app:layout_constraintTop_toBottomOf="@+id/ivLogo" />
+
+    <TextView
+        android:id="@+id/textViewFewestGuesses"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:text="\?"
+        android:textColor="@color/white"
+        android:textSize="18dp"
+        app:layout_constraintEnd_toEndOf="@+id/ivLogo"
+        app:layout_constraintTop_toBottomOf="@+id/ivLogo"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/textViewFastestTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="\?"
+        android:textColor="@color/white"
+        android:textSize="18dp"
+        app:layout_constraintEnd_toEndOf="@+id/ivLogo"
+        app:layout_constraintTop_toBottomOf="@+id/textViewFewestGuesses"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/textViewFastestTimeLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/fastest_time"
+        android:textColor="@color/white"
+        android:textSize="18dp"
+        app:layout_constraintStart_toStartOf="@+id/ivLogo"
+        app:layout_constraintTop_toBottomOf="@+id/textViewFewestGuessesLabel" />
 
     <TextView
         android:id="@+id/buttonNewGame"
         android:layout_width="175dp"
         android:layout_height="70dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="32dp"
         android:background="@drawable/new_game"
         android:contentDescription="@string/new_game"
         android:gravity="center"
         android:scaleType="fitEnd"
         android:text="@string/new_game"
         android:textColor="@color/white"
-        android:textSize="28sp"
+        android:textSize="28dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/seekBarWordLength" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textViewWordLengthLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
         android:text="@string/word_length"
         android:textColor="@color/white"
-        android:textSize="18sp"
+        android:textSize="18dp"
         app:layout_constraintBottom_toTopOf="@+id/seekBarWordLength"
-        app:layout_constraintStart_toStartOf="@+id/ivLogo"
-        app:layout_constraintTop_toBottomOf="@+id/seekBarWordDifficulty" />
+        app:layout_constraintStart_toStartOf="@+id/ivLogo" />
 
     <TextView
         android:id="@+id/textViewWordDifficulty"
@@ -46,7 +89,7 @@
         android:layout_marginEnd="8dp"
         android:text="@string/normal"
         android:textColor="@color/white"
-        android:textSize="18sp"
+        android:textSize="18dp"
         app:layout_constraintBottom_toBottomOf="@+id/seekBarWordDifficulty"
         app:layout_constraintEnd_toEndOf="@+id/ivLogo"
         app:layout_constraintStart_toEndOf="@+id/seekBarWordDifficulty"
@@ -59,28 +102,27 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="64dp"
+        android:layout_marginBottom="16dp"
         android:max="2"
         android:progress="0"
         app:layout_constraintBottom_toTopOf="@+id/textViewWordLengthLabel"
         app:layout_constraintEnd_toEndOf="@+id/ivLogo"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/textViewWordDifficultyLabel"
-        app:layout_constraintTop_toBottomOf="@+id/textViewWordDifficultyLabel" />
+        app:layout_constraintStart_toStartOf="@+id/textViewWordDifficultyLabel" />
 
     <TextView
         android:id="@+id/textViewWordDifficultyLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
         android:text="@string/word_difficulty"
         android:textColor="@color/white"
-        android:textSize="18sp"
-        app:layout_constraintVertical_chainStyle="packed"
+        android:textSize="18dp"
         app:layout_constraintBottom_toTopOf="@+id/seekBarWordDifficulty"
         app:layout_constraintStart_toStartOf="@+id/ivLogo"
-        app:layout_constraintTop_toBottomOf="@+id/ivLogo" />
+        app:layout_constraintVertical_chainStyle="packed" />
 
     <SeekBar
         android:id="@+id/seekBarWordLength"
@@ -88,15 +130,14 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="64dp"
+        android:layout_marginBottom="32dp"
         android:max="3"
         android:progress="1"
         app:layout_constraintBottom_toTopOf="@+id/buttonNewGame"
         app:layout_constraintEnd_toEndOf="@+id/ivLogo"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/textViewWordLengthLabel"
-        app:layout_constraintTop_toBottomOf="@+id/textViewWordLengthLabel" />
+        app:layout_constraintStart_toStartOf="@+id/textViewWordLengthLabel" />
 
     <TextView
         android:id="@+id/textViewWordLength"
@@ -105,7 +146,7 @@
         android:layout_marginStart="16dp"
         android:text="5"
         android:textColor="@color/white"
-        android:textSize="18sp"
+        android:textSize="18dp"
         app:layout_constraintBottom_toBottomOf="@+id/seekBarWordLength"
         app:layout_constraintStart_toEndOf="@+id/seekBarWordLength"
         app:layout_constraintTop_toTopOf="@+id/seekBarWordLength"

@@ -10,6 +10,8 @@ object DataManager {
     private const val HAS_SEEN_TUTORIAL = "hasSeenTutorial"
     private const val VIBRATION_ENABLED = "vibrationEnabled"
     private const val SOUND_ENABLED = "soundEnabled"
+    private const val FEWEST_GUESSES = "fewestGuesses"
+    private const val FASTEST_TIME = "fastestTime"
 
     fun init(context: Context) {
         prefs = context.getSharedPreferences("UserData", Context.MODE_PRIVATE)
@@ -35,11 +37,28 @@ object DataManager {
         get() = get(SOUND_ENABLED, true) as Boolean
         set(value) = put(SOUND_ENABLED, value)
 
-    private fun put(key: String, value: Any) {
+    var fewestGuesses: Long?
+        get() {
+            val value = get("${FEWEST_GUESSES}_${difficulty}_$wordLength", -1L) as Long
+            if (value == -1L) return null
+            return value
+        }
+        set(value) = put("${FEWEST_GUESSES}_${difficulty}_$wordLength", value ?: -1L)
+
+    var fastestTimeSeconds: Long?
+        get() {
+            val value = get("${FASTEST_TIME}_${difficulty}_$wordLength", -1L) as Long
+            if (value == -1L) return null
+            return value
+        }
+        set(value) = put("${FASTEST_TIME}_${difficulty}_$wordLength", value ?: -1L)
+
+    private fun put(key: String, value: Any?) {
         val editor = prefs.edit()
         when (value) {
             is Boolean -> editor.putBoolean(key, value)
             is Int -> editor.putInt(key, value)
+            is Long -> editor.putLong(key, value)
         }
         editor.apply()
     }
@@ -48,6 +67,7 @@ object DataManager {
         return when (default) {
             is Boolean -> prefs.getBoolean(key, default)
             is Int -> prefs.getInt(key, default)
+            is Long -> prefs.getLong(key, default)
             else -> default
         }
     }

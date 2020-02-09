@@ -5,7 +5,6 @@ import android.app.Dialog
 import android.content.Context
 import android.view.Gravity
 import android.view.LayoutInflater
-import android.view.Window
 import android.view.WindowManager
 import com.benedetto.chalkjotto.R
 import com.benedetto.chalkjotto.definitions.Key

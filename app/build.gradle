@@ -21,8 +21,8 @@ android {
 		applicationId "com.benedetto.chalkjotto"
 		minSdkVersion 21
 		targetSdkVersion 29
-		versionCode 2
-		versionName "19.9.0"
+		versionCode 3
+		versionName "20.2.0"
 		signingConfig signingConfigs.release
 	}
 	buildTypes {
@@ -41,5 +41,6 @@ dependencies {
 	implementation fileTree(include: ['*.jar'], dir: 'libs')
 	implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 	implementation 'androidx.appcompat:appcompat:1.1.0'
-	implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta1'
+	implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta4'
+	implementation 'androidx.coordinatorlayout:coordinatorlayout:1.1.0'
 }

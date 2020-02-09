@@ -15,6 +15,8 @@ const val TitleTag = "Title"
 
 class MainActivity : AppCompatActivity() {
 
+    private var activeFragmentTag: String = TitleTag
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setTheme(R.style.AppTheme)
@@ -31,6 +33,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun goToFragment(tag: String) {
+        activeFragmentTag = tag
         goToFragment(getFragmentInstance(tag))
     }
 
@@ -57,5 +60,10 @@ class MainActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         goToFragment(TitleTag)
+    }
+
+    override fun onBackPressed() {
+        if (activeFragmentTag != TitleTag)
+            super.onBackPressed()
     }
 }
