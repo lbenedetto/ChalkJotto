@@ -10,6 +10,7 @@ object DataManager {
     private const val HAS_SEEN_TUTORIAL = "hasSeenTutorial"
     private const val VIBRATION_ENABLED = "vibrationEnabled"
     private const val SOUND_ENABLED = "soundEnabled"
+    private const val ASSISTANCE_ENABLED = "assistanceEnabled"
     private const val FEWEST_GUESSES = "fewestGuesses"
     private const val FASTEST_TIME = "fastestTime"
 
@@ -36,6 +37,10 @@ object DataManager {
     var soundEnabled: Boolean
         get() = get(SOUND_ENABLED, true) as Boolean
         set(value) = put(SOUND_ENABLED, value)
+
+    var assistance: Boolean
+        get() = get(ASSISTANCE_ENABLED, true) as Boolean
+        set(value) = put(ASSISTANCE_ENABLED, value)
 
     var fewestGuesses: Long?
         get() {

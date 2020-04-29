@@ -66,8 +66,10 @@ class GamePresenter(private val model: GameModel, val view: GameActivity) {
                     val guessHolder = view.layoutInflater.inflate(R.layout.guess_item, null)
                     val matching = model.getNumberOfMatchingLetters(model.enteredWord.toString())
                     guessHolder.textViewMatchCount.text = matching.toString()
-                    deduceRedTiles(matching)
-                    deduceGreenTiles(matching)
+                    if (DataManager.assistance) {
+                        deduceRedTiles(matching)
+                        deduceGreenTiles(matching)
+                    }
                     view.moveWordToView(guessHolder.layoutGuessedWord)
                     view.addGuessItem(guessHolder)
                     view.refillUserInputFieldWithTiles()
@@ -81,16 +83,16 @@ class GamePresenter(private val model: GameModel, val view: GameActivity) {
         }
     }
 
-    private fun deduceRedTiles(matching: Int) {
-        var n = matching
+    private fun deduceRedTiles(matchingTiles: Int) {
+        var greenTiles = 0
         model.enteredWord.toString().toCharArray()
                 .distinct()
                 .forEach {
                     if (model.keys[it]?.state == KeyState.YES) {
-                        n--
+                        greenTiles++
                     }
                 }
-        if (n == 0) {
+        if (greenTiles == matchingTiles) {
             model.enteredWord
                     .forEach {
                         if (model.keys[it]?.state == KeyState.BLANK)
@@ -99,16 +101,16 @@ class GamePresenter(private val model: GameModel, val view: GameActivity) {
         }
     }
 
-    private fun deduceGreenTiles(matching: Int) {
-        var n = 0
+    private fun deduceGreenTiles(matchingTiles: Int) {
+        var nonRedTiles = 0
         model.enteredWord.toString().toCharArray()
                 .distinct()
                 .forEach {
                     if (model.keys[it]?.state != KeyState.NO) {
-                        n++
+                        nonRedTiles++
                     }
                 }
-        if (n == matching) {
+        if (nonRedTiles == matchingTiles) {
             model.enteredWord
                     .forEach {
                         if (model.keys[it]?.state != KeyState.NO)

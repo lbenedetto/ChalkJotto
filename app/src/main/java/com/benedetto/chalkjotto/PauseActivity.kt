@@ -54,6 +54,12 @@ class PauseActivity : AppCompatActivity() {
             tapSound()
             DataManager.vibrationEnabled = (switch as Switch).isChecked
         }
+
+        switchAssistance.isChecked = DataManager.assistance
+        switchAssistance.setOnClickListener { switch ->
+            tapSound()
+            DataManager.assistance = (switch as Switch).isChecked
+        }
     }
 
     fun exit(exitCode: Int) {

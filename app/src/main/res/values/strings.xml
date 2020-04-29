@@ -28,6 +28,7 @@
 	<string name="gave_up_without_trying">But you probably don\'t care since you didn\'t even try</string>
 	<string name="show_tutorial">Show Tutorial</string>
 	<string name="vibration">Keyboard Vibration</string>
+	<string name="assistance">Automatic Basic Deduction</string>
 	<string name="tutorial_hint">To make it easier to keep track of which letters you think are in the secret word, you can long press on a letter and set it\'s color.</string>
 	<string name="tutorial_objective">Guess the secret word. With every guess, you will be told how many letters your guess shares with the secret word.</string>
 	<string name="tutorial_example">If the secret word is \"GUESS\" and you guess \"SEATS\" you\'ll be told that there are 2 matching letters, since both words have an E and an S. Duplicate letters do not count twice.</string>
