@@ -1,6 +1,8 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.firebase.crashlytics'
 
 android {
 	signingConfigs {
@@ -21,8 +23,8 @@ android {
 		applicationId "com.benedetto.chalkjotto"
 		minSdkVersion 21
 		targetSdkVersion 29
-		versionCode 4
-		versionName "20.4.0"
+		versionCode 5
+		versionName "20.5.0"
 		signingConfig signingConfigs.release
 	}
 	buildTypes {
@@ -41,6 +43,7 @@ dependencies {
 	implementation fileTree(include: ['*.jar'], dir: 'libs')
 	implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 	implementation 'androidx.appcompat:appcompat:1.1.0'
-	implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta4'
+	implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta6'
 	implementation 'androidx.coordinatorlayout:coordinatorlayout:1.1.0'
+	implementation 'com.google.firebase:firebase-crashlytics:17.0.0'
 }

@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Handler
 import android.view.animation.AnimationUtils
 import android.widget.TextView
+import android.widget.Toast
 import com.benedetto.chalkjotto.PauseActivity
 import com.benedetto.chalkjotto.R
 import com.benedetto.chalkjotto.definitions.*
@@ -63,9 +64,19 @@ class GamePresenter(private val model: GameModel, val view: GameActivity) {
                     pause()
                     exitToTitle(didWin = true)
                 } else {
+                    val guess = model.enteredWord.toString()
                     val guessHolder = view.layoutInflater.inflate(R.layout.guess_item, null)
-                    val matching = model.getNumberOfMatchingLetters(model.enteredWord.toString())
-                    guessHolder.textViewMatchCount.text = matching.toString()
+                    val matching = model.getNumberOfMatchingLetters(guess)
+                    val isAnagram = matching == DataManager.wordLength || model.isAnagram(guess)
+                    guessHolder.textViewMatchCount.text = when (isAnagram) {
+                        true -> "A"
+                        false -> matching.toString()
+                    }
+                    if (isAnagram) {
+                        guessHolder.textViewMatchCount.setOnClickListener {
+                            Toast.makeText(view.baseContext, "You have guessed an anagram of the secret word", Toast.LENGTH_SHORT).show()
+                        }
+                    }
                     if (DataManager.assistance) {
                         deduceRedTiles(matching)
                         deduceGreenTiles(matching)

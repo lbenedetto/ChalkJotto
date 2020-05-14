@@ -90,6 +90,14 @@ class GameModel(
         return matchCount
     }
 
+    fun isAnagram(guess: String): Boolean {
+        val targetSorted = targetWord.toCharArray()
+        targetSorted.sort()
+        val guessSorted = guess.toCharArray()
+        guessSorted.sort()
+        return targetSorted.contentEquals(guessSorted)
+    }
+
     fun getOdds(): Int {
         return validWords.size
     }
