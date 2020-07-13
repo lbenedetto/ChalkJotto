@@ -24,6 +24,7 @@ class GameActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setTheme(R.style.AppTheme)
         setContentView(R.layout.activity_game)
+        DataManager.init(this)
         val wordDifficulty = DataManager.difficulty
         val wordLength = DataManager.wordLength
 
