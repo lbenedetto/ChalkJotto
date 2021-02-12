@@ -19,6 +19,7 @@ class GamePresenter(private val model: GameModel, val view: GameActivity) {
     private var mTimer: Runnable
     private var mHandler = Handler()
     private var mIsRunning = false
+    private var showPauseScreenOnResume = false
 
     init {
         mTimer = object : Runnable {
@@ -168,16 +169,34 @@ class GamePresenter(private val model: GameModel, val view: GameActivity) {
     }
 
 
-    @SuppressLint("InflateParams")
-    fun pause() {
+    private fun pause(showPauseScreen: Boolean = true) {
         if (mIsRunning) {
             view.setPaused()
             mIsRunning = false
             mHandler.removeCallbacks(mTimer)
-            if (!model.isGameOver) {
-                view.startActivityForResult(Intent(view, PauseActivity::class.java), 1)
+            if (!model.isGameOver && showPauseScreen) {
+                if (showPauseScreen) {
+                    showPauseScreen()
+                } else {
+                    showPauseScreenOnResume = true
+                }
             }
         }
+    }
+
+    fun onPause() {
+        pause(showPauseScreen = false)
+    }
+
+    fun onResume() {
+        if (showPauseScreenOnResume) {
+            showPauseScreen()
+            showPauseScreenOnResume = false
+        }
+    }
+
+    private fun showPauseScreen() {
+        view.startActivityForResult(Intent(view, PauseActivity::class.java), 1)
     }
 
     fun play() {

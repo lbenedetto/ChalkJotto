@@ -61,9 +61,12 @@ class GameModel(
         )
         val candidateWords = ArrayList<String>()
         BufferedReader(InputStreamReader(wordFile)).forEachLine { line ->
-            candidateWords.add(line.toUpperCase())
+            val word = line.split("\t")[0].toUpperCase()
+            if (word.toCharArray().distinct().size == wordLength) {
+                candidateWords.add(word)
+            }
         }
-        targetWord = candidateWords[(0 until candidateWords.size).random()].split("\t")[0].toUpperCase()
+        targetWord = candidateWords.random()
     }
 
     private fun addValidWords(vararg ids: Int) {

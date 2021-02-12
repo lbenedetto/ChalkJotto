@@ -111,7 +111,12 @@ class GameActivity : AppCompatActivity() {
 
     override fun onPause() {
         super.onPause()
-        gamePresenter.pause()
+        gamePresenter.onPause()
+    }
+
+    override fun onPostResume() {
+        super.onPostResume()
+        gamePresenter.onResume()
     }
 
     private fun getKeyHashMap(view: View): HashMap<Char, Key> {

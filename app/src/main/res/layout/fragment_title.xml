@@ -6,51 +6,60 @@
     android:layout_height="match_parent"
     tools:ignore="SpUsage">
 
-    <TextView
-        android:id="@+id/textViewFewestGuessesLabel"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="@string/fewest_guesses"
-        android:textColor="@color/white"
-        android:textSize="18dp"
-        app:layout_constraintStart_toStartOf="@+id/ivLogo"
-        app:layout_constraintTop_toBottomOf="@+id/ivLogo" />
-
-    <TextView
-        android:id="@+id/textViewFewestGuesses"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="\?"
-        android:textColor="@color/white"
-        android:textSize="18dp"
+        android:maxWidth="400dp"
         app:layout_constraintEnd_toEndOf="@+id/ivLogo"
-        app:layout_constraintTop_toBottomOf="@+id/ivLogo"
-        tools:ignore="HardcodedText" />
-
-    <TextView
-        android:id="@+id/textViewFastestTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="\?"
-        android:textColor="@color/white"
-        android:textSize="18dp"
-        app:layout_constraintEnd_toEndOf="@+id/ivLogo"
-        app:layout_constraintTop_toBottomOf="@+id/textViewFewestGuesses"
-        tools:ignore="HardcodedText" />
-
-    <TextView
-        android:id="@+id/textViewFastestTimeLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/fastest_time"
-        android:textColor="@color/white"
-        android:textSize="18dp"
         app:layout_constraintStart_toStartOf="@+id/ivLogo"
-        app:layout_constraintTop_toBottomOf="@+id/textViewFewestGuessesLabel" />
+        app:layout_constraintTop_toBottomOf="@+id/ivLogo">
+
+        <TextView
+            android:id="@+id/textViewFewestGuessesLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="@string/fewest_guesses"
+            android:textColor="@color/white"
+            android:textSize="18dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textViewFewestGuesses"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="\?"
+            android:textColor="@color/white"
+            android:textSize="18dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/textViewFastestTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="\?"
+            android:textColor="@color/white"
+            android:textSize="18dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewFewestGuesses"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/textViewFastestTimeLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/fastest_time"
+            android:textColor="@color/white"
+            android:textSize="18dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewFewestGuessesLabel" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
         android:id="@+id/buttonNewGame"

@@ -76,7 +76,10 @@ fun newBlankTile(context: Context): TextView {
     val size = dpToPx(40)
     tile.gravity = Gravity.CENTER
     val params = ConstraintLayout.LayoutParams(size, size)
-    params.setMargins(2, 2, 2, 2)
+    params.topMargin = 2
+    params.bottomMargin = 2
+    params.leftMargin = 2
+    params.rightMargin = 2
     tile.layoutParams = params
     tile.elevation = dpToPx(2).toFloat()
 

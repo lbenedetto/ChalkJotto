@@ -2,10 +2,7 @@ package com.benedetto.chalkjotto.dialogs
 
 import android.app.Activity
 import com.benedetto.chalkjotto.R
-import com.benedetto.chalkjotto.definitions.DataManager
-import com.benedetto.chalkjotto.definitions.newBlankTile
-import com.benedetto.chalkjotto.definitions.secondsToTimeDisplay
-import com.benedetto.chalkjotto.definitions.tapSound
+import com.benedetto.chalkjotto.definitions.*
 import kotlinx.android.synthetic.main.dialog_game_over.view.*
 
 class GameOverDialog(
