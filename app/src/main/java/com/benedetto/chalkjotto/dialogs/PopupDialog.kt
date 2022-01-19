@@ -2,12 +2,12 @@ package com.benedetto.chalkjotto.dialogs
 
 import android.app.Activity
 import android.view.Gravity
+import android.view.View
 import android.widget.LinearLayout
 import android.widget.PopupWindow
 import com.benedetto.chalkjotto.definitions.dpToPx
 
-class PopupDialog(private val activity: Activity, layout: Int) {
-    var view = activity.layoutInflater.inflate(layout, null)!!
+class PopupDialog(private val activity: Activity, view: View) {
     var popup = PopupWindow(
             view,
             activity.window.decorView.width - dpToPx(64),

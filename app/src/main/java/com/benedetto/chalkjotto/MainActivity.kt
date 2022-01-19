@@ -1,9 +1,9 @@
 package com.benedetto.chalkjotto
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.benedetto.chalkjotto.databinding.ActivityMainBinding
 import com.benedetto.chalkjotto.definitions.DataManager
 import com.benedetto.chalkjotto.definitions.Sound
 import com.benedetto.chalkjotto.fragments.TitleFragment
@@ -16,11 +16,13 @@ const val TitleTag = "Title"
 class MainActivity : AppCompatActivity() {
 
     private var activeFragmentTag: String = TitleTag
+    lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setTheme(R.style.AppTheme)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         DataManager.init(this)
         Sound.init(this)
@@ -46,7 +48,7 @@ class MainActivity : AppCompatActivity() {
                 .commit()
     }
 
-    fun getFragmentInstance(tag: String): Fragment {
+    private fun getFragmentInstance(tag: String): Fragment {
         var fragment = supportFragmentManager.findFragmentByTag(tag)
         if (fragment == null) {
             fragment = when (tag) {
@@ -55,11 +57,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
         return fragment
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        goToFragment(TitleTag)
     }
 
     override fun onBackPressed() {

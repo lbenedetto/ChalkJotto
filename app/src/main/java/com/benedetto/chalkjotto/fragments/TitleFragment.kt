@@ -8,43 +8,36 @@ import android.view.ViewGroup
 import android.widget.SeekBar
 import androidx.fragment.app.Fragment
 import com.benedetto.chalkjotto.*
+import com.benedetto.chalkjotto.databinding.FragmentTitleBinding
 import com.benedetto.chalkjotto.definitions.*
 import com.benedetto.chalkjotto.game.GameActivity
-import kotlinx.android.synthetic.main.fragment_title.*
-import kotlinx.android.synthetic.main.fragment_title.seekBarWordDifficulty
-import kotlinx.android.synthetic.main.fragment_title.seekBarWordLength
-import kotlinx.android.synthetic.main.fragment_title.textViewWordDifficulty
-import kotlinx.android.synthetic.main.fragment_title.textViewWordLength
 
 private const val MIN_WORD_LENGTH = 4
 
 class TitleFragment : Fragment() {
+    private lateinit var binding: FragmentTitleBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_title, container, false)
-    }
+        binding = FragmentTitleBinding.inflate(layoutInflater, container, false)
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+        val activity = requireActivity() as MainActivity
 
-        val mActivity = activity!! as MainActivity
-
-        buttonNewGame.setOnClickListener {
+        binding.buttonNewGame.setOnClickListener {
             if (DataManager.hasSeenTutoral)
-                mActivity.startActivity(Intent(context, GameActivity::class.java))
+                activity.startActivity(Intent(context, GameActivity::class.java))
             else
-                mActivity.goToFragment(TutorialTag)
+                activity.goToFragment(TutorialTag)
         }
 
-        buttonNewGame.setOnTouchListener(ScaleOnTouch + PenClickOnTouch)
+        binding.buttonNewGame.setOnTouchListener(ScaleOnTouch + PenClickOnTouch)
 
-        seekBarWordDifficulty.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+        binding.seekBarWordDifficulty.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
                 DataManager.difficulty = progress
-                textViewWordDifficulty.text = when (progress) {
-                    1 -> mActivity.getString(R.string.hard)
-                    2 -> mActivity.getString(R.string.insane)
-                    else -> mActivity.getString(R.string.normal)
+                binding.textViewWordDifficulty.text = when (progress) {
+                    1 -> activity.getString(R.string.hard)
+                    2 -> activity.getString(R.string.insane)
+                    else -> activity.getString(R.string.normal)
                 }
                 updateReadouts()
             }
@@ -53,11 +46,11 @@ class TitleFragment : Fragment() {
             override fun onStartTrackingTouch(seekBar: SeekBar?) {}
         })
 
-        seekBarWordLength.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+        binding.seekBarWordLength.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
                 val len = progress + MIN_WORD_LENGTH
                 DataManager.wordLength = len
-                textViewWordLength.text = String.format("%d", len)
+                binding.textViewWordLength.text = String.format("%d", len)
                 updateReadouts()
             }
 
@@ -65,8 +58,10 @@ class TitleFragment : Fragment() {
             override fun onStartTrackingTouch(seekBar: SeekBar?) {}
         })
 
-        seekBarWordDifficulty.progress = DataManager.difficulty
-        seekBarWordLength.progress = DataManager.wordLength - MIN_WORD_LENGTH
+        binding.seekBarWordDifficulty.progress = DataManager.difficulty
+        binding.seekBarWordLength.progress = DataManager.wordLength - MIN_WORD_LENGTH
+
+        return binding.root
     }
 
     override fun onResume() {
@@ -75,7 +70,7 @@ class TitleFragment : Fragment() {
     }
 
     private fun updateReadouts() {
-        textViewFewestGuesses.text = DataManager.fewestGuesses?.toString() ?: "?"
-        textViewFastestTime.text = DataManager.fastestTimeSeconds?.let { time -> secondsToTimeDisplay(time) } ?: "?"
+       binding.textViewFewestGuesses.text = DataManager.fewestGuesses?.toString() ?: "?"
+       binding.textViewFastestTime.text = DataManager.fastestTimeSeconds?.let { time -> secondsToTimeDisplay(time) } ?: "?"
     }
 }

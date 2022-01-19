@@ -3,7 +3,6 @@ package com.benedetto.chalkjotto.game
 import android.content.res.Resources
 import com.benedetto.chalkjotto.R
 import com.benedetto.chalkjotto.definitions.Key
-import com.benedetto.chalkjotto.definitions.random
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.util.HashMap
@@ -61,7 +60,7 @@ class GameModel(
         )
         val candidateWords = ArrayList<String>()
         BufferedReader(InputStreamReader(wordFile)).forEachLine { line ->
-            val word = line.split("\t")[0].toUpperCase()
+            val word = line.split("\t")[0].uppercase()
             if (word.toCharArray().distinct().size == wordLength) {
                 candidateWords.add(word)
             }
@@ -72,7 +71,7 @@ class GameModel(
     private fun addValidWords(vararg ids: Int) {
         ids.forEach { id ->
             BufferedReader(InputStreamReader(resources.openRawResource(id))).forEachLine { line ->
-                validWords.add(line.split("\t")[0].toUpperCase())
+                validWords.add(line.split("\t")[0].uppercase())
             }
         }
     }

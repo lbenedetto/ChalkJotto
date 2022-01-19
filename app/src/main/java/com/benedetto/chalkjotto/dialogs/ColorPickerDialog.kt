@@ -6,45 +6,45 @@ import android.content.Context
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.WindowManager
-import com.benedetto.chalkjotto.R
+import com.benedetto.chalkjotto.databinding.KeystateMenuBinding
 import com.benedetto.chalkjotto.definitions.Key
 import com.benedetto.chalkjotto.definitions.KeyState
 import com.benedetto.chalkjotto.definitions.tapSound
-import kotlinx.android.synthetic.main.keystate_menu.view.*
 
 
 @SuppressLint("InflateParams")
 fun showColorPickerDialog(context: Context, key: Key) {
     val dialog = Dialog(context)
-    val view = (context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater).inflate(R.layout.keystate_menu, null, false)
+    val inflater = (context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater)
+    val binding = KeystateMenuBinding.inflate(inflater, null, false)
 
-    view.keyWhite.text = key.letter
-    view.keyGreen.text = key.letter
-    view.keyRed.text = key.letter
-    view.keyYellow.text = key.letter
+    binding.keyWhite.text = key.letter
+    binding.keyGreen.text = key.letter
+    binding.keyRed.text = key.letter
+    binding.keyYellow.text = key.letter
 
-    view.keyWhite.setOnClickListener {
+    binding.keyWhite.setOnClickListener {
         tapSound()
         key.updateState(KeyState.BLANK)
         dialog.dismiss()
     }
-    view.keyGreen.setOnClickListener {
+    binding.keyGreen.setOnClickListener {
         tapSound()
         key.updateState(KeyState.YES)
         dialog.dismiss()
     }
-    view.keyRed.setOnClickListener {
+    binding.keyRed.setOnClickListener {
         tapSound()
         key.updateState(KeyState.NO)
         dialog.dismiss()
     }
-    view.keyYellow.setOnClickListener {
+    binding.keyYellow.setOnClickListener {
         tapSound()
         key.updateState(KeyState.MAYBE)
         dialog.dismiss()
     }
 
-    dialog.setContentView(view)
+    dialog.setContentView(binding.root)
     val window = dialog.window!!
     window.setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT)
     window.setBackgroundDrawableResource(android.R.color.transparent)

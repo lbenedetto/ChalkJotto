@@ -1,13 +1,17 @@
 package com.benedetto.chalkjotto
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.WindowManager
 import android.widget.Switch
+import androidx.activity.result.contract.ActivityResultContract
 import androidx.appcompat.app.AppCompatActivity
+import com.benedetto.chalkjotto.databinding.ActivityPauseBinding
 import com.benedetto.chalkjotto.definitions.DataManager
 import com.benedetto.chalkjotto.definitions.tapSound
 import com.benedetto.chalkjotto.dialogs.showTutorialDialog
-import kotlinx.android.synthetic.main.activity_pause.*
+import com.benedetto.chalkjotto.game.GameActivity
 
 
 class PauseActivity : AppCompatActivity() {
@@ -17,46 +21,50 @@ class PauseActivity : AppCompatActivity() {
         const val GIVE_UP = 13
     }
 
+    lateinit var binding: ActivityPauseBinding
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setTheme(R.style.AppTheme)
-        setContentView(R.layout.activity_pause)
+        binding = ActivityPauseBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         window.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
 
-        buttonResume.setOnClickListener {
+        binding.buttonResume.setOnClickListener {
             tapSound()
             exit(RESUME)
         }
 
-        buttonReset.setOnClickListener {
+        binding.buttonReset.setOnClickListener {
             tapSound()
             exit(RESET)
         }
 
-        buttonGiveUp.setOnClickListener {
+        binding.buttonGiveUp.setOnClickListener {
             tapSound()
             exit(GIVE_UP)
         }
 
-        buttonShowTutorial.setOnClickListener {
+        binding.buttonShowTutorial.setOnClickListener {
             tapSound()
             showTutorialDialog(this, false)
         }
 
-        switchSound.isChecked = DataManager.soundEnabled
-        switchSound.setOnClickListener { switch ->
+        binding.switchSound.isChecked = DataManager.soundEnabled
+        binding.switchSound.setOnClickListener { switch ->
             tapSound()
             DataManager.soundEnabled = (switch as Switch).isChecked
         }
 
-        switchVibrate.isChecked = DataManager.vibrationEnabled
-        switchVibrate.setOnClickListener { switch ->
+        binding.switchVibrate.isChecked = DataManager.vibrationEnabled
+        binding.switchVibrate.setOnClickListener { switch ->
             tapSound()
             DataManager.vibrationEnabled = (switch as Switch).isChecked
         }
 
-        switchAssistance.isChecked = DataManager.assistance
-        switchAssistance.setOnClickListener { switch ->
+        binding.switchAssistance.isChecked = DataManager.assistance
+        binding.switchAssistance.setOnClickListener { switch ->
             tapSound()
             DataManager.assistance = (switch as Switch).isChecked
         }
@@ -69,5 +77,15 @@ class PauseActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         exit(RESUME)
+    }
+
+    class Contract : ActivityResultContract<Void?, Int>() {
+        override fun createIntent(context: Context, input: Void?): Intent {
+            return Intent(context, GameActivity::class.java)
+        }
+
+        override fun parseResult(resultCode: Int, intent: Intent?): Int {
+            return resultCode
+        }
     }
 }

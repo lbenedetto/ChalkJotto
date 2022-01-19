@@ -1,23 +1,22 @@
 package com.benedetto.chalkjotto.game
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.Handler
+import android.os.Looper
 import android.view.animation.AnimationUtils
 import android.widget.TextView
 import android.widget.Toast
 import com.benedetto.chalkjotto.PauseActivity
 import com.benedetto.chalkjotto.R
+import com.benedetto.chalkjotto.databinding.GuessItemBinding
 import com.benedetto.chalkjotto.definitions.*
 import com.benedetto.chalkjotto.dialogs.GameOverDialog
 import com.benedetto.chalkjotto.dialogs.showColorPickerDialog
-import kotlinx.android.synthetic.main.activity_game.*
-import kotlinx.android.synthetic.main.guess_item.view.*
 
 @SuppressLint("InflateParams", "ClickableViewAccessibility")
 class GamePresenter(private val model: GameModel, val view: GameActivity) {
     private var mTimer: Runnable
-    private var mHandler = Handler()
+    private var mHandler = Handler(Looper.getMainLooper())
     private var mIsRunning = false
     private var showPauseScreenOnResume = false
 
@@ -37,7 +36,7 @@ class GamePresenter(private val model: GameModel, val view: GameActivity) {
                 tapSound()
                 vibrate()
                 if (model.enteredWord.length < DataManager.wordLength) {
-                    val letter = view.layoutCorrectWord.getChildAt(model.enteredWord.length) as TextView
+                    val letter = view.binding.layoutCorrectWord.getChildAt(model.enteredWord.length) as TextView
                     letter.setOnClickListener {
                         showColorPickerDialog(view, key)
                     }
@@ -57,7 +56,7 @@ class GamePresenter(private val model: GameModel, val view: GameActivity) {
 
     fun submitButtonPressed() {
         if (model.enteredWord.length == DataManager.wordLength) {
-            if (model.validWords.contains(model.enteredWord.toString().toUpperCase())) {
+            if (model.validWords.contains(model.enteredWord.toString().uppercase())) {
                 model.numGuesses++
                 if (model.enteredWord.toString() == model.targetWord) {
                     view.refillUserInputFieldWithTiles()
@@ -66,9 +65,10 @@ class GamePresenter(private val model: GameModel, val view: GameActivity) {
                     exitToTitle(didWin = true)
                 } else {
                     val guess = model.enteredWord.toString()
-                    val guessHolder = view.layoutInflater.inflate(R.layout.guess_item, null)
+                    val guessHolder = GuessItemBinding.inflate(view.layoutInflater)
                     val matching = model.getNumberOfMatchingLetters(guess)
                     val isAnagram = matching == DataManager.wordLength || model.isAnagram(guess)
+
                     guessHolder.textViewMatchCount.text = when (isAnagram) {
                         true -> "A"
                         false -> matching.toString()
@@ -83,14 +83,14 @@ class GamePresenter(private val model: GameModel, val view: GameActivity) {
                         deduceGreenTiles(matching)
                     }
                     view.moveWordToView(guessHolder.layoutGuessedWord)
-                    view.addGuessItem(guessHolder)
+                    view.addGuessItem(guessHolder.root)
                     view.refillUserInputFieldWithTiles()
                     view.setNumberOfGuesses(model.numGuesses)
                     model.clearEnteredWord()
                 }
             } else {
-                view.layoutCorrectWord.clearAnimation()
-                view.layoutCorrectWord.startAnimation(AnimationUtils.loadAnimation(view, R.anim.shake))
+                view.binding.layoutCorrectWord.clearAnimation()
+                view.binding.layoutCorrectWord.startAnimation(AnimationUtils.loadAnimation(view, R.anim.shake))
             }
         }
     }
@@ -196,7 +196,16 @@ class GamePresenter(private val model: GameModel, val view: GameActivity) {
     }
 
     private fun showPauseScreen() {
-        view.startActivityForResult(Intent(view, PauseActivity::class.java), 1)
+        view.registerForActivityResult(PauseActivity.Contract()) { resultCode ->
+            when (resultCode) {
+                PauseActivity.RESUME -> play()
+                PauseActivity.RESET -> {
+                    model.keys.forEach { (_, key) -> key.updateState(KeyState.BLANK) }
+                    play()
+                }
+                PauseActivity.GIVE_UP -> exitToTitle(false)
+            }
+        }
     }
 
     fun play() {
