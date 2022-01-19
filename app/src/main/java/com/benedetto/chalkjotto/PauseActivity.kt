@@ -7,6 +7,7 @@ import android.view.WindowManager
 import android.widget.Switch
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SwitchCompat
 import com.benedetto.chalkjotto.databinding.ActivityPauseBinding
 import com.benedetto.chalkjotto.definitions.DataManager
 import com.benedetto.chalkjotto.definitions.tapSound
@@ -53,19 +54,19 @@ class PauseActivity : AppCompatActivity() {
         binding.switchSound.isChecked = DataManager.soundEnabled
         binding.switchSound.setOnClickListener { switch ->
             tapSound()
-            DataManager.soundEnabled = (switch as Switch).isChecked
+            DataManager.soundEnabled = (switch as SwitchCompat).isChecked
         }
 
         binding.switchVibrate.isChecked = DataManager.vibrationEnabled
         binding.switchVibrate.setOnClickListener { switch ->
             tapSound()
-            DataManager.vibrationEnabled = (switch as Switch).isChecked
+            DataManager.vibrationEnabled = (switch as SwitchCompat).isChecked
         }
 
         binding.switchAssistance.isChecked = DataManager.assistance
         binding.switchAssistance.setOnClickListener { switch ->
             tapSound()
-            DataManager.assistance = (switch as Switch).isChecked
+            DataManager.assistance = (switch as SwitchCompat).isChecked
         }
     }
 
