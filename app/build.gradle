@@ -26,8 +26,8 @@ android {
 		applicationId "com.benedetto.chalkjotto"
 		minSdkVersion 21
 		targetSdkVersion 31
-		versionCode 7
-		versionName "21.2.1"
+		versionCode 8
+		versionName "22.1.0"
 		signingConfig signingConfigs.release
 	}
 	buildTypes {
