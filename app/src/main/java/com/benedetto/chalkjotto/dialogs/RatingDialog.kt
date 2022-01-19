@@ -5,7 +5,7 @@ import com.benedetto.chalkjotto.R
 import com.benedetto.chalkjotto.databinding.DialogGameOverBinding
 import com.benedetto.chalkjotto.definitions.*
 
-class GameOverDialog(
+class RatingDialog(
         var activity: Activity,
         var didWin: Boolean,
         var targetWord: String,

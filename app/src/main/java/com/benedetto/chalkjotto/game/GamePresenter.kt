@@ -176,7 +176,7 @@ class GamePresenter(private val model: GameModel, val view: GameActivity) {
             mHandler.removeCallbacks(mTimer)
             if (!model.isGameOver && showPauseScreen) {
                 if (showPauseScreen) {
-                    showPauseScreen()
+                    pauseScreen.launch(null)
                 } else {
                     showPauseScreenOnResume = true
                 }
@@ -190,21 +190,19 @@ class GamePresenter(private val model: GameModel, val view: GameActivity) {
 
     fun onResume() {
         if (showPauseScreenOnResume) {
-            showPauseScreen()
+            pauseScreen.launch(null)
             showPauseScreenOnResume = false
         }
     }
 
-    private fun showPauseScreen() {
-        view.registerForActivityResult(PauseActivity.Contract()) { resultCode ->
-            when (resultCode) {
-                PauseActivity.RESUME -> play()
-                PauseActivity.RESET -> {
-                    model.keys.forEach { (_, key) -> key.updateState(KeyState.BLANK) }
-                    play()
-                }
-                PauseActivity.GIVE_UP -> exitToTitle(false)
+    private val pauseScreen = view.registerForActivityResult(PauseActivity.Contract()) { resultCode ->
+        when (resultCode) {
+            PauseActivity.RESUME -> play()
+            PauseActivity.RESET -> {
+                model.keys.forEach { (_, key) -> key.updateState(KeyState.BLANK) }
+                play()
             }
+            PauseActivity.GIVE_UP -> exitToTitle(false)
         }
     }
 

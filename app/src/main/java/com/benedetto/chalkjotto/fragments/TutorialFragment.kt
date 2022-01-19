@@ -18,14 +18,15 @@ class TutorialFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentTutorialBinding.inflate(layoutInflater, container, false)
 
+        val showTitleScreen = registerForActivityResult(GameActivity.Contract()) {
+            (activity as MainActivity).goToFragment(TitleTag)
+        }
+
         if (activity is MainActivity) {
             binding.buttonContinue.setOnClickListener {
                 tapSound()
                 DataManager.hasSeenTutoral = true
-
-                registerForActivityResult(GameActivity.Contract()) {
-                    (activity as MainActivity).goToFragment(TitleTag)
-                }
+                showTitleScreen.launch(null)
             }
         }
 

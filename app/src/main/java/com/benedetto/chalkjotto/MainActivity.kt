@@ -1,6 +1,7 @@
 package com.benedetto.chalkjotto
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.benedetto.chalkjotto.databinding.ActivityMainBinding
@@ -57,6 +58,14 @@ class MainActivity : AppCompatActivity() {
             }
         }
         return fragment
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (activeFragmentTag == TitleTag && !DataManager.hasSeenRatingPrompt && DataManager.wonGames == 5) {
+            DataManager.hasSeenRatingPrompt = true
+            Toast.makeText(this, "You seem to be enjoying the game :) Please consider leaving a rating <3", Toast.LENGTH_LONG).show()
+        }
     }
 
     override fun onBackPressed() {

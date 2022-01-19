@@ -11,7 +11,6 @@ import com.benedetto.chalkjotto.databinding.ActivityPauseBinding
 import com.benedetto.chalkjotto.definitions.DataManager
 import com.benedetto.chalkjotto.definitions.tapSound
 import com.benedetto.chalkjotto.dialogs.showTutorialDialog
-import com.benedetto.chalkjotto.game.GameActivity
 
 
 class PauseActivity : AppCompatActivity() {
@@ -81,7 +80,7 @@ class PauseActivity : AppCompatActivity() {
 
     class Contract : ActivityResultContract<Void?, Int>() {
         override fun createIntent(context: Context, input: Void?): Intent {
-            return Intent(context, GameActivity::class.java)
+            return Intent(context, PauseActivity::class.java)
         }
 
         override fun parseResult(resultCode: Int, intent: Intent?): Int {

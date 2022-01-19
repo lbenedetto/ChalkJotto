@@ -7,7 +7,9 @@ object DataManager {
     private lateinit var prefs: SharedPreferences
     private const val PREFERRED_WORD_LENGTH = "wordLength"
     private const val PREFERRED_DIFFICULTY = "difficulty"
+    private const val WON_GAMES = "wonGames"
     private const val HAS_SEEN_TUTORIAL = "hasSeenTutorial"
+    private const val HAS_SEEN_RATING_PROMPT = "hasSeenRatingPrompt"
     private const val VIBRATION_ENABLED = "vibrationEnabled"
     private const val SOUND_ENABLED = "soundEnabled"
     private const val ASSISTANCE_ENABLED = "assistanceEnabled"
@@ -49,6 +51,14 @@ object DataManager {
             return value
         }
         set(value) = put("${FEWEST_GUESSES}_${difficulty}_$wordLength", value ?: -1L)
+
+    var hasSeenRatingPrompt: Boolean
+        get() = get(HAS_SEEN_RATING_PROMPT, false) as Boolean
+        set(value) = put(HAS_SEEN_RATING_PROMPT, value)
+
+    var wonGames: Int
+        get() = get(WON_GAMES, 0) as Int
+        set(value) = put(WON_GAMES, value)
 
     var fastestTimeSeconds: Long?
         get() {
