@@ -19,30 +19,6 @@ operator fun View.OnTouchListener.plus(other: View.OnTouchListener): View.OnTouc
     return ConfigurableOnTouchListener().addBehavior(this).addBehavior(other)
 }
 
-fun penClickSound() {
-    if (DataManager.soundEnabled) {
-        Sound.PenClick.start()
-    }
-}
-
-fun penClickDownSound() {
-    if (DataManager.soundEnabled) {
-        Sound.PenClickDown.start()
-    }
-}
-
-fun penClickUpSound() {
-    if (DataManager.soundEnabled) {
-        Sound.PenClickUp.start()
-    }
-}
-
-fun tapSound() {
-    if (DataManager.soundEnabled) {
-        Sound.Tap.start()
-    }
-}
-
 fun vibrate() {
     if (DataManager.vibrationEnabled) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

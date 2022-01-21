@@ -4,17 +4,17 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.WindowManager
-import android.widget.Switch
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SwitchCompat
 import com.benedetto.chalkjotto.databinding.ActivityPauseBinding
 import com.benedetto.chalkjotto.definitions.DataManager
-import com.benedetto.chalkjotto.definitions.tapSound
+import com.benedetto.chalkjotto.definitions.Sound
+import com.benedetto.chalkjotto.definitions.Sound.tapSound
 import com.benedetto.chalkjotto.dialogs.showTutorialDialog
 
 
-class PauseActivity : AppCompatActivity() {
+class PauseActivity : JottoActivity() {
     companion object {
         const val RESUME = 11
         const val RESET = 12

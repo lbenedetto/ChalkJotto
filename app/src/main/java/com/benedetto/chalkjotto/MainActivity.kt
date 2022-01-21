@@ -14,7 +14,7 @@ import com.benedetto.chalkjotto.fragments.TutorialFragment
 const val TutorialTag = "Tutorial"
 const val TitleTag = "Title"
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : JottoActivity() {
 
     private var activeFragmentTag: String = TitleTag
     lateinit var binding: ActivityMainBinding
@@ -62,6 +62,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+        DataManager.init(this)
         if (activeFragmentTag == TitleTag && !DataManager.hasSeenRatingPrompt && DataManager.wonGames == 5) {
             DataManager.hasSeenRatingPrompt = true
             Toast.makeText(this, "You seem to be enjoying the game :) Please consider leaving a rating <3", Toast.LENGTH_LONG).show()

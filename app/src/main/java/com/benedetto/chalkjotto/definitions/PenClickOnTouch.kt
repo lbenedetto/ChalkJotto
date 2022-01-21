@@ -3,6 +3,8 @@ package com.benedetto.chalkjotto.definitions
 import android.graphics.Rect
 import android.view.MotionEvent
 import android.view.View
+import com.benedetto.chalkjotto.definitions.Sound.penClickDownSound
+import com.benedetto.chalkjotto.definitions.Sound.penClickUpSound
 
 object PenClickOnTouch : View.OnTouchListener {
     private var rect: Rect? = null

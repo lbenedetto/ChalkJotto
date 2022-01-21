@@ -4,6 +4,7 @@ import android.app.Activity
 import com.benedetto.chalkjotto.R
 import com.benedetto.chalkjotto.databinding.DialogGameOverBinding
 import com.benedetto.chalkjotto.definitions.*
+import com.benedetto.chalkjotto.definitions.Sound.tapSound
 
 class GameOverDialog(
         var activity: Activity,

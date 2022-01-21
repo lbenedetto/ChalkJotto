@@ -9,7 +9,7 @@ import android.view.WindowManager
 import com.benedetto.chalkjotto.databinding.KeystateMenuBinding
 import com.benedetto.chalkjotto.definitions.Key
 import com.benedetto.chalkjotto.definitions.KeyState
-import com.benedetto.chalkjotto.definitions.tapSound
+import com.benedetto.chalkjotto.definitions.Sound.tapSound
 
 
 @SuppressLint("InflateParams")

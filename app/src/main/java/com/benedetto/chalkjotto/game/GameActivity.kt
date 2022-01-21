@@ -8,13 +8,14 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.appcompat.app.AppCompatActivity
+import com.benedetto.chalkjotto.JottoActivity
 import com.benedetto.chalkjotto.R
 import com.benedetto.chalkjotto.databinding.ActivityGameBinding
 import com.benedetto.chalkjotto.definitions.*
 import java.util.*
 
 
-class GameActivity : AppCompatActivity() {
+class GameActivity : JottoActivity() {
     private lateinit var gamePresenter: GamePresenter
     private lateinit var gameModel: GameModel
     lateinit var binding: ActivityGameBinding
@@ -105,6 +106,7 @@ class GameActivity : AppCompatActivity() {
     override fun onPostResume() {
         super.onPostResume()
         gamePresenter.onResume()
+        Sound.init(this)
     }
 
     private fun getKeyHashMap(): HashMap<Char, Key> {

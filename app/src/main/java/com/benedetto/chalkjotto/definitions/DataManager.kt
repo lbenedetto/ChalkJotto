@@ -16,8 +16,14 @@ object DataManager {
     private const val FEWEST_GUESSES = "fewestGuesses"
     private const val FASTEST_TIME = "fastestTime"
 
+    var initialized = false
+
     fun init(context: Context) {
+        if(initialized) {
+            return
+        }
         prefs = context.getSharedPreferences("UserData", Context.MODE_PRIVATE)
+        initialized = true
     }
 
     var hasSeenTutoral: Boolean

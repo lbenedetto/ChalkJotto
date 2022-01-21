@@ -10,6 +10,8 @@ import com.benedetto.chalkjotto.PauseActivity
 import com.benedetto.chalkjotto.R
 import com.benedetto.chalkjotto.databinding.GuessItemBinding
 import com.benedetto.chalkjotto.definitions.*
+import com.benedetto.chalkjotto.definitions.Sound.penClickSound
+import com.benedetto.chalkjotto.definitions.Sound.tapSound
 import com.benedetto.chalkjotto.dialogs.GameOverDialog
 import com.benedetto.chalkjotto.dialogs.showColorPickerDialog
 

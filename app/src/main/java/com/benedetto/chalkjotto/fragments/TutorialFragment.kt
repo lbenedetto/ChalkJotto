@@ -9,7 +9,7 @@ import com.benedetto.chalkjotto.MainActivity
 import com.benedetto.chalkjotto.TitleTag
 import com.benedetto.chalkjotto.databinding.FragmentTutorialBinding
 import com.benedetto.chalkjotto.definitions.DataManager
-import com.benedetto.chalkjotto.definitions.tapSound
+import com.benedetto.chalkjotto.definitions.Sound.tapSound
 import com.benedetto.chalkjotto.game.GameActivity
 
 class TutorialFragment : Fragment() {
