@@ -27,20 +27,40 @@ class GamePresenter(private val model: GameModel, val view: GameActivity) {
             override fun run() {
                 model.numSeconds++
                 view.setTimer(model.numSeconds)
+                // Save game every 10 seconds to recover from crash
+                if (model.numSeconds % 10 == 0L) {
+                    DataManager.gameState = model.gameState
+                }
                 if (mIsRunning) mHandler.postDelayed(this, 1000)
             }
         }
         view.refillUserInputFieldWithTiles()
 
-        model.keys.forEach { (_, key) ->
+        model.gameState.guessedWords.forEach { word ->
+            displayGuessedWord(word, false)
+        }
+
+        model.keys.forEach { (character, key) ->
+            when {
+                model.gameState.redLetters.contains("$character") -> {
+                    key.updateState(KeyState.NO)
+                }
+                model.gameState.greenLetters.contains("$character") -> {
+                    key.updateState(KeyState.YES)
+                }
+                model.gameState.yellowLetters.contains("$character") -> {
+                    key.updateState(KeyState.MAYBE)
+                }
+            }
+
             key.view.setOnTouchListener(ScaleOnTouch)
             key.view.setOnClickListener {
                 tapSound()
                 vibrate()
                 if (model.enteredWord.length < DataManager.wordLength) {
-                    val letter = view.binding.layoutCorrectWord.getChildAt(model.enteredWord.length) as TextView
+                    val letter = view.binding.layoutInputGuessWord.getChildAt(model.enteredWord.length) as TextView
                     letter.setOnClickListener {
-                        showColorPickerDialog(view, key)
+                        showColorPickerDialog(view, key, model)
                     }
                     letter.text = key.letter
                     letter.setBackgroundResource(key.state.background)
@@ -50,100 +70,128 @@ class GamePresenter(private val model: GameModel, val view: GameActivity) {
             }
 
             key.view.setOnLongClickListener {
-                showColorPickerDialog(view, key)
+                showColorPickerDialog(view, key, model)
                 true
             }
         }
+
+        view.setNumberOfGuesses(model.numGuesses)
+        view.setTimer(model.numSeconds)
     }
 
     fun submitButtonPressed() {
         if (model.enteredWord.length == DataManager.wordLength) {
-            if (model.validWords.contains(model.enteredWord.toString().uppercase())) {
+            val guess = model.enteredWord.toString()
+            val isValid = model.validWords.contains(guess.uppercase())
+            if (isValid) {
                 model.numGuesses++
-                if (model.enteredWord.toString() == model.targetWord) {
+                if (guess == model.targetWord) {
                     view.refillUserInputFieldWithTiles()
                     model.isGameOver = true
                     pause()
                     exitToTitle(didWin = true)
                 } else {
-                    val guess = model.enteredWord.toString()
-                    val guessHolder = GuessItemBinding.inflate(view.layoutInflater)
-                    val matching = model.getNumberOfMatchingLetters(guess)
-                    val isAnagram = matching == DataManager.wordLength || model.isAnagram(guess)
+                    model.gameState.guessedWords.add(guess)
 
-                    guessHolder.textViewMatchCount.text = when (isAnagram) {
-                        true -> "A"
-                        false -> matching.toString()
-                    }
-                    if (isAnagram) {
-                        guessHolder.textViewMatchCount.setOnClickListener {
-                            Toast.makeText(view.baseContext, "You have guessed an anagram of the secret word", Toast.LENGTH_SHORT).show()
-                        }
-                    }
-                    if (DataManager.assistance) {
-                        deduceRedTiles(matching)
-                        deduceGreenTiles(matching)
-                    }
+                    val guessHolder = displayGuessedWord(guess, true)
+
                     view.moveWordToView(guessHolder.layoutGuessedWord)
-                    view.addGuessItem(guessHolder.root)
                     view.refillUserInputFieldWithTiles()
                     view.setNumberOfGuesses(model.numGuesses)
                     model.clearEnteredWord()
                 }
             } else {
-                view.binding.layoutCorrectWord.clearAnimation()
-                view.binding.layoutCorrectWord.startAnimation(AnimationUtils.loadAnimation(view, R.anim.shake))
+                view.binding.layoutInputGuessWord.clearAnimation()
+                view.binding.layoutInputGuessWord.startAnimation(AnimationUtils.loadAnimation(view, R.anim.shake))
             }
         }
+    }
+
+    private fun displayGuessedWord(guess: String, byPlayer: Boolean) : GuessItemBinding {
+        val guessHolder = GuessItemBinding.inflate(view.layoutInflater)
+        val matching = model.getNumberOfMatchingLetters(guess)
+        val isAnagram = matching == DataManager.wordLength || model.isAnagram(guess)
+
+        guessHolder.textViewMatchCount.text = when (isAnagram) {
+            true -> "A"
+            false -> matching.toString()
+        }
+
+        if (isAnagram) {
+            guessHolder.textViewMatchCount.setOnClickListener {
+                Toast.makeText(view.baseContext, "You have guessed an anagram of the secret word", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        if (byPlayer && DataManager.assistance) {
+            deduceRedTiles(matching)
+            deduceGreenTiles(matching)
+        }
+
+        if (!byPlayer) {
+            guess.forEach { character ->
+                val tile = newBlankTile(view)
+                tile.text = "$character"
+                val key = model.keys[character]!!
+                tile.setOnClickListener {
+                    showColorPickerDialog(view, key, model)
+                }
+                key.addListener(tile)
+                guessHolder.layoutGuessedWord.addView(tile)
+            }
+        }
+
+        view.addGuessItem(guessHolder.root)
+
+        return guessHolder
     }
 
     private fun deduceRedTiles(matchingTiles: Int) {
         var greenTiles = 0
         model.enteredWord.toString().toCharArray()
-                .distinct()
-                .forEach {
-                    if (model.keys[it]?.state == KeyState.YES) {
-                        greenTiles++
-                    }
+            .distinct()
+            .forEach {
+                if (model.keys[it]?.state == KeyState.YES) {
+                    greenTiles++
                 }
+            }
         if (greenTiles == matchingTiles) {
             model.enteredWord
-                    .forEach {
-                        if (model.keys[it]?.state == KeyState.BLANK)
-                            model.keys[it]?.updateState(KeyState.NO)
-                    }
+                .map { model.keys[it] }
+                .filterNotNull()
+                .filter { it.state == KeyState.BLANK }
+                .forEach { model.updateState(it, KeyState.NO) }
         }
     }
 
     private fun deduceGreenTiles(matchingTiles: Int) {
         var nonRedTiles = 0
         model.enteredWord.toString().toCharArray()
-                .distinct()
-                .forEach {
-                    if (model.keys[it]?.state != KeyState.NO) {
-                        nonRedTiles++
-                    }
+            .distinct()
+            .forEach {
+                if (model.keys[it]?.state != KeyState.NO) {
+                    nonRedTiles++
                 }
+            }
         if (nonRedTiles == matchingTiles) {
             model.enteredWord
-                    .forEach {
-                        if (model.keys[it]?.state != KeyState.NO)
-                            model.keys[it]?.updateState(KeyState.YES)
-                    }
+                .map { model.keys[it] }
+                .filterNotNull()
+                .filter { it.state != KeyState.NO }
+                .forEach { model.updateState(it, KeyState.YES) }
         }
     }
 
     fun exitToTitle(didWin: Boolean) {
+        model.gameState.didWin = didWin
+        model.isGameOver = true
         GameOverDialog(
-                activity = view,
-                didWin = didWin,
-                targetWord = model.targetWord,
-                numGuesses = model.numGuesses,
-                oddsOfLuckyWin = model.validWords.size,
-                timeUsed = model.numSeconds,
-                onCloseAction = {
-                    view.finish()
-                }
+            activity = view,
+            gameState = model.gameState,
+            oddsOfLuckyWin = model.validWords.size,
+            onCloseAction = {
+                view.finish()
+            }
         ).show()
     }
 
@@ -176,7 +224,7 @@ class GamePresenter(private val model: GameModel, val view: GameActivity) {
             view.setPaused()
             mIsRunning = false
             mHandler.removeCallbacks(mTimer)
-            if (!model.isGameOver && showPauseScreen) {
+            if (!model.isGameOver) {
                 if (showPauseScreen) {
                     pauseScreen.launch(null)
                 } else {
@@ -201,7 +249,7 @@ class GamePresenter(private val model: GameModel, val view: GameActivity) {
         when (resultCode) {
             PauseActivity.RESUME -> play()
             PauseActivity.RESET -> {
-                model.keys.forEach { (_, key) -> key.updateState(KeyState.BLANK) }
+                model.keys.forEach { (_, key) -> model.updateState(key, KeyState.BLANK) }
                 play()
             }
             PauseActivity.GIVE_UP -> exitToTitle(false)

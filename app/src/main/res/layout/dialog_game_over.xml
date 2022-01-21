@@ -74,7 +74,7 @@
             tools:text="You Win" />
 
         <LinearLayout
-            android:id="@+id/layoutCorrectWord"
+            android:id="@+id/layoutInputGuessWord"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginStart="16dp"
@@ -99,7 +99,7 @@
             android:textSize="18dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/layoutCorrectWord"
+            app:layout_constraintTop_toBottomOf="@+id/layoutInputGuessWord"
             tools:text="12 guesses in 01:20" />
 
         <TextView

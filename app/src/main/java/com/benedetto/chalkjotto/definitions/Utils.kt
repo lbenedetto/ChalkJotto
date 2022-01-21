@@ -1,6 +1,7 @@
 package com.benedetto.chalkjotto.definitions
 
 import android.content.Context
+import android.content.Intent
 import android.content.res.Resources
 import android.os.Build
 import android.os.VibrationEffect
@@ -11,7 +12,10 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
+import com.benedetto.chalkjotto.MainActivity
 import com.benedetto.chalkjotto.R
+import com.benedetto.chalkjotto.TutorialTag
+import com.benedetto.chalkjotto.game.GameActivity
 import java.util.*
 
 
@@ -62,4 +66,10 @@ fun newBlankTile(context: Context): TextView {
     return tile
 }
 
-fun ClosedRange<Int>.random() = Random().nextInt((endInclusive + 1) - start) + start
+fun startGame(activity: MainActivity) {
+    if (DataManager.hasSeenTutoral) {
+        activity.startActivity(Intent(activity, GameActivity::class.java))
+    } else {
+        activity.goToFragment(TutorialTag)
+    }
+}

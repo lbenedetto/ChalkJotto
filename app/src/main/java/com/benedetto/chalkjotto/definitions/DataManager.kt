@@ -2,6 +2,7 @@ package com.benedetto.chalkjotto.definitions
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.benedetto.chalkjotto.game.GameState
 
 object DataManager {
     private lateinit var prefs: SharedPreferences
@@ -15,6 +16,18 @@ object DataManager {
     private const val ASSISTANCE_ENABLED = "assistanceEnabled"
     private const val FEWEST_GUESSES = "fewestGuesses"
     private const val FASTEST_TIME = "fastestTime"
+    private const val GAME_STATE_GREEN_LETTERS = "gameState_greenLetters"
+    private const val GAME_STATE_YELLOW_LETTERS = "gameState_yellowLetters"
+    private const val GAME_STATE_RED_LETTERS = "gameState_redLetters"
+    private const val GAME_STATE_GUESSED_WORDS = "gameState_guessedWords"
+    private const val GAME_STATE_TARGET_WORD = "gameState_targetWord"
+    private const val GAME_STATE_WORD_DIFFICULTY = "gameState_wordDifficulty"
+    private const val GAME_STATE_WORD_LENGTH = "gameState_wordLength"
+    private const val GAME_STATE_NUM_SECONDS = "gameState_numSeconds"
+    private const val GAME_STATE_NUM_GUESSES = "gameState_numGuesses"
+    private const val GAME_STATE_IS_GAME_OVER = "gameState_isGameOver"
+    private const val GAME_STATE_DID_WIN = "gameState_didWin"
+    private const val GAME_STATE_ALLOW_NEW_GUESSES = "gameState_allowNewGuesses"
 
     var initialized = false
 
@@ -27,52 +40,107 @@ object DataManager {
     }
 
     var hasSeenTutoral: Boolean
-        get() = get("hasSeenTutorial", false) as Boolean
+        get() = prefs.getBoolean(HAS_SEEN_TUTORIAL, false)
         set(value) = put(HAS_SEEN_TUTORIAL, value)
 
     var wordLength: Int
-        get() = get(PREFERRED_WORD_LENGTH, 5) as Int
+        get() = prefs.getInt(PREFERRED_WORD_LENGTH, 5)
         set(value) = put(PREFERRED_WORD_LENGTH, value)
 
     var difficulty: Int
-        get() = get(PREFERRED_DIFFICULTY, 0) as Int
+        get() = prefs.getInt(PREFERRED_DIFFICULTY, 0)
         set(value) = put(PREFERRED_DIFFICULTY, value)
 
     var vibrationEnabled: Boolean
-        get() = get(VIBRATION_ENABLED, true) as Boolean
+        get() = prefs.getBoolean(VIBRATION_ENABLED, true)
         set(value) = put(VIBRATION_ENABLED, value)
 
     var soundEnabled: Boolean
-        get() = get(SOUND_ENABLED, true) as Boolean
+        get() = prefs.getBoolean(SOUND_ENABLED, true)
         set(value) = put(SOUND_ENABLED, value)
 
     var assistance: Boolean
-        get() = get(ASSISTANCE_ENABLED, true) as Boolean
+        get() = prefs.getBoolean(ASSISTANCE_ENABLED, true)
         set(value) = put(ASSISTANCE_ENABLED, value)
 
     var fewestGuesses: Long?
         get() {
-            val value = get("${FEWEST_GUESSES}_${difficulty}_$wordLength", -1L) as Long
+            val value = prefs.getLong("${FEWEST_GUESSES}_${difficulty}_$wordLength", -1L)
             if (value == -1L) return null
             return value
         }
         set(value) = put("${FEWEST_GUESSES}_${difficulty}_$wordLength", value ?: -1L)
 
     var hasSeenRatingPrompt: Boolean
-        get() = get(HAS_SEEN_RATING_PROMPT, false) as Boolean
+        get() = prefs.getBoolean(HAS_SEEN_RATING_PROMPT, false)
         set(value) = put(HAS_SEEN_RATING_PROMPT, value)
 
     var wonGames: Int
-        get() = get(WON_GAMES, 0) as Int
+        get() = prefs.getInt(WON_GAMES, 0)
         set(value) = put(WON_GAMES, value)
 
     var fastestTimeSeconds: Long?
         get() {
-            val value = get("${FASTEST_TIME}_${difficulty}_$wordLength", -1L) as Long
+            val value = prefs.getLong("${FASTEST_TIME}_${difficulty}_$wordLength", -1L)
             if (value == -1L) return null
             return value
         }
         set(value) = put("${FASTEST_TIME}_${difficulty}_$wordLength", value ?: -1L)
+
+    var isGameInProgress: Boolean
+        get() {
+            return !prefs.getBoolean(GAME_STATE_IS_GAME_OVER, true)
+        }
+        set(value) = put(GAME_STATE_IS_GAME_OVER, !value)
+
+    var gameState: GameState?
+        get() {
+            val targetWord = prefs.getString(GAME_STATE_TARGET_WORD, null) ?: return null
+            val greenLetters = prefs.getStringSet(GAME_STATE_GREEN_LETTERS, HashSet()) as HashSet<String>
+            val yellowLetters = prefs.getStringSet(GAME_STATE_YELLOW_LETTERS, HashSet()) as HashSet<String>
+            val redLetters = prefs.getStringSet(GAME_STATE_RED_LETTERS, HashSet()) as HashSet<String>
+            val guessedWords = prefs.getStringSet(GAME_STATE_GUESSED_WORDS, HashSet()) as HashSet<String>
+            val wordDifficulty = prefs.getInt(GAME_STATE_WORD_DIFFICULTY, 0)
+            val wordLength = prefs.getInt(GAME_STATE_WORD_LENGTH, 5)
+            val numSeconds = prefs.getLong(GAME_STATE_NUM_SECONDS, 0)
+            val numGuesses = prefs.getLong(GAME_STATE_NUM_GUESSES, 0)
+            val isGameOver = prefs.getBoolean(GAME_STATE_IS_GAME_OVER, false)
+            val didWin = prefs.getBoolean(GAME_STATE_DID_WIN, false)
+            val allowNewGuesses = prefs.getBoolean(GAME_STATE_ALLOW_NEW_GUESSES, true)
+
+            return GameState(
+                greenLetters = greenLetters,
+                yellowLetters = yellowLetters,
+                redLetters = redLetters,
+                guessedWords = guessedWords,
+                targetWord = targetWord,
+                wordDifficulty = wordDifficulty,
+                wordLength = wordLength,
+                numSeconds = numSeconds,
+                numGuesses = numGuesses,
+                isGameOver = isGameOver,
+                didWin = didWin,
+                allowNewGuesses = allowNewGuesses
+            )
+        }
+        set(value) {
+            val editor = prefs.edit()
+            editor.putString(GAME_STATE_TARGET_WORD, value?.targetWord)
+            if (value != null) {
+                editor.putStringSet(GAME_STATE_GREEN_LETTERS, value.greenLetters)
+                editor.putStringSet(GAME_STATE_YELLOW_LETTERS, value.yellowLetters)
+                editor.putStringSet(GAME_STATE_RED_LETTERS, value.redLetters)
+                editor.putStringSet(GAME_STATE_GUESSED_WORDS, value.guessedWords)
+                editor.putInt(GAME_STATE_WORD_DIFFICULTY, value.wordDifficulty)
+                editor.putInt(GAME_STATE_WORD_LENGTH, value.wordLength)
+                editor.putLong(GAME_STATE_NUM_SECONDS, value.numSeconds)
+                editor.putLong(GAME_STATE_NUM_GUESSES, value.numGuesses)
+                editor.putBoolean(GAME_STATE_IS_GAME_OVER, value.isGameOver)
+                editor.putBoolean(GAME_STATE_DID_WIN, value.didWin)
+                editor.putBoolean(GAME_STATE_ALLOW_NEW_GUESSES, value.allowNewGuesses)
+            }
+            editor.apply()
+        }
 
     private fun put(key: String, value: Any?) {
         val editor = prefs.edit()
@@ -80,16 +148,8 @@ object DataManager {
             is Boolean -> editor.putBoolean(key, value)
             is Int -> editor.putInt(key, value)
             is Long -> editor.putLong(key, value)
+            is String -> editor.putString(key, value)
         }
         editor.apply()
-    }
-
-    private fun get(key: String, default: Any): Any {
-        return when (default) {
-            is Boolean -> prefs.getBoolean(key, default)
-            is Int -> prefs.getInt(key, default)
-            is Long -> prefs.getLong(key, default)
-            else -> default
-        }
     }
 }

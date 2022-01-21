@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import com.benedetto.chalkjotto.databinding.ActivityMainBinding
 import com.benedetto.chalkjotto.definitions.DataManager
 import com.benedetto.chalkjotto.definitions.Sound
+import com.benedetto.chalkjotto.definitions.startGame
 import com.benedetto.chalkjotto.fragments.TitleFragment
 import com.benedetto.chalkjotto.fragments.TutorialFragment
 
@@ -25,8 +26,9 @@ class MainActivity : JottoActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        DataManager.init(this)
-        Sound.init(this)
+        if (DataManager.isGameInProgress) {
+            startGame(this)
+        }
 
         if (savedInstanceState != null) {
             return
@@ -62,7 +64,6 @@ class MainActivity : JottoActivity() {
 
     override fun onResume() {
         super.onResume()
-        DataManager.init(this)
         if (activeFragmentTag == TitleTag && !DataManager.hasSeenRatingPrompt && DataManager.wonGames == 5) {
             DataManager.hasSeenRatingPrompt = true
             Toast.makeText(this, "You seem to be enjoying the game :) Please consider leaving a rating <3", Toast.LENGTH_LONG).show()

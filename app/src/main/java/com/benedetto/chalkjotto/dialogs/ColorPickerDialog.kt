@@ -10,10 +10,12 @@ import com.benedetto.chalkjotto.databinding.KeystateMenuBinding
 import com.benedetto.chalkjotto.definitions.Key
 import com.benedetto.chalkjotto.definitions.KeyState
 import com.benedetto.chalkjotto.definitions.Sound.tapSound
+import com.benedetto.chalkjotto.game.GameModel
+import com.benedetto.chalkjotto.game.GameState
 
 
 @SuppressLint("InflateParams")
-fun showColorPickerDialog(context: Context, key: Key) {
+fun showColorPickerDialog(context: Context, key: Key, model: GameModel) {
     val dialog = Dialog(context)
     val inflater = (context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater)
     val binding = KeystateMenuBinding.inflate(inflater, null, false)
@@ -25,22 +27,22 @@ fun showColorPickerDialog(context: Context, key: Key) {
 
     binding.keyWhite.setOnClickListener {
         tapSound()
-        key.updateState(KeyState.BLANK)
+        model.updateState(key, KeyState.BLANK)
         dialog.dismiss()
     }
     binding.keyGreen.setOnClickListener {
         tapSound()
-        key.updateState(KeyState.YES)
+        model.updateState(key, KeyState.YES)
         dialog.dismiss()
     }
     binding.keyRed.setOnClickListener {
         tapSound()
-        key.updateState(KeyState.NO)
+        model.updateState(key, KeyState.NO)
         dialog.dismiss()
     }
     binding.keyYellow.setOnClickListener {
         tapSound()
-        key.updateState(KeyState.MAYBE)
+        model.updateState(key, KeyState.MAYBE)
         dialog.dismiss()
     }
 

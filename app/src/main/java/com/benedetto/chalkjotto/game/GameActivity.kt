@@ -25,11 +25,14 @@ class GameActivity : JottoActivity() {
         setTheme(R.style.AppTheme)
         binding = ActivityGameBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        DataManager.init(this)
         val wordDifficulty = DataManager.difficulty
         val wordLength = DataManager.wordLength
 
-        gameModel = GameModel(getKeyHashMap(), resources, wordDifficulty, wordLength)
+        var gameState = DataManager.gameState
+        if (gameState == null || gameState.isGameOver) {
+            gameState = GameState.newGame(wordDifficulty, wordLength)
+        }
+        gameModel = GameModel(getKeyHashMap(), resources, gameState)
         gamePresenter = GamePresenter(gameModel, this)
 
         binding.buttonPause.setOnClickListener { gamePresenter.pauseClicked() }
@@ -50,25 +53,25 @@ class GameActivity : JottoActivity() {
     override fun onBackPressed() {}
 
     fun refillUserInputFieldWithTiles() {
-        binding.layoutCorrectWord.removeAllViews()
+        binding.layoutInputGuessWord.removeAllViews()
         for (i in 0 until DataManager.wordLength) {
             val tile = newBlankTile(this)
-            binding.layoutCorrectWord.addView(tile)
+            binding.layoutInputGuessWord.addView(tile)
             animatePopIn(tile)
         }
     }
 
     fun moveWordToView(to: LinearLayout) {
-        for (i in binding.layoutCorrectWord.childCount - 1 downTo 0) {
-            val letterView = binding.layoutCorrectWord.getChildAt(i) as TextView?
-            binding.layoutCorrectWord.removeView(letterView)
+        for (i in binding.layoutInputGuessWord.childCount - 1 downTo 0) {
+            val letterView = binding.layoutInputGuessWord.getChildAt(i) as TextView?
+            binding.layoutInputGuessWord.removeView(letterView)
             to.addView(letterView, 0)
             animatePopIn(letterView as View)
         }
     }
 
     fun deleteEnteredCharAtIx(ix: Int, keys: HashMap<Char, Key>) {
-        val tile = binding.layoutCorrectWord.getChildAt(ix) as TextView
+        val tile = binding.layoutInputGuessWord.getChildAt(ix) as TextView
         keys[tile.text[0]]!!.removeListener(tile)
         tile.text = ""
         tile.setBackgroundResource(KeyState.BLANK.background)
@@ -101,12 +104,12 @@ class GameActivity : JottoActivity() {
     override fun onPause() {
         super.onPause()
         gamePresenter.onPause()
+        DataManager.gameState = gameModel.gameState
     }
 
-    override fun onPostResume() {
-        super.onPostResume()
+    override fun onStart() {
+        super.onStart()
         gamePresenter.onResume()
-        Sound.init(this)
     }
 
     private fun getKeyHashMap(): HashMap<Char, Key> {

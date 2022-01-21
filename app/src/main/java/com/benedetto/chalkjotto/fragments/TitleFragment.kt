@@ -1,6 +1,5 @@
 package com.benedetto.chalkjotto.fragments
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +9,6 @@ import androidx.fragment.app.Fragment
 import com.benedetto.chalkjotto.*
 import com.benedetto.chalkjotto.databinding.FragmentTitleBinding
 import com.benedetto.chalkjotto.definitions.*
-import com.benedetto.chalkjotto.game.GameActivity
 
 private const val MIN_WORD_LENGTH = 4
 
@@ -22,12 +20,7 @@ class TitleFragment : Fragment() {
 
         val activity = requireActivity() as MainActivity
 
-        binding.buttonNewGame.setOnClickListener {
-            if (DataManager.hasSeenTutoral)
-                activity.startActivity(Intent(context, GameActivity::class.java))
-            else
-                activity.goToFragment(TutorialTag)
-        }
+        binding.buttonNewGame.setOnClickListener { startGame(activity) }
 
         binding.buttonNewGame.setOnTouchListener(ScaleOnTouch + PenClickOnTouch)
 
@@ -63,6 +56,8 @@ class TitleFragment : Fragment() {
 
         return binding.root
     }
+
+
 
     override fun onResume() {
         super.onResume()
