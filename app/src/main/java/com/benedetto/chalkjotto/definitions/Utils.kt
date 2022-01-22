@@ -9,6 +9,7 @@ import android.view.Gravity
 import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.TextView
+import androidx.activity.result.ActivityResultLauncher
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
@@ -21,16 +22,6 @@ import java.util.*
 
 operator fun View.OnTouchListener.plus(other: View.OnTouchListener): View.OnTouchListener {
     return ConfigurableOnTouchListener().addBehavior(this).addBehavior(other)
-}
-
-fun vibrate() {
-    if (DataManager.vibrationEnabled) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            Sound.Vibrator.vibrate(VibrationEffect.createOneShot(25, VibrationEffect.DEFAULT_AMPLITUDE))
-        } else {
-            Sound.Vibrator.vibrate(25)
-        }
-    }
 }
 
 fun dpToPx(dp: Int): Int {
@@ -64,12 +55,4 @@ fun newBlankTile(context: Context): TextView {
     tile.elevation = dpToPx(2).toFloat()
 
     return tile
-}
-
-fun startGame(activity: MainActivity) {
-    if (DataManager.hasSeenTutoral) {
-        activity.startActivity(Intent(activity, GameActivity::class.java))
-    } else {
-        activity.goToFragment(TutorialTag)
-    }
 }

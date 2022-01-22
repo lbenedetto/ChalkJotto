@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.benedetto.chalkjotto.MainActivity
-import com.benedetto.chalkjotto.TitleTag
 import com.benedetto.chalkjotto.databinding.FragmentTutorialBinding
 import com.benedetto.chalkjotto.definitions.DataManager
 import com.benedetto.chalkjotto.definitions.Sound.tapSound
@@ -18,15 +17,15 @@ class TutorialFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentTutorialBinding.inflate(layoutInflater, container, false)
 
-        val showTitleScreen = registerForActivityResult(GameActivity.Contract()) {
-            (activity as MainActivity).goToFragment(TitleTag)
+        val startGame = registerForActivityResult(GameActivity.Contract()) {
+            (activity as MainActivity).goToFragment(it)
         }
 
         if (activity is MainActivity) {
             binding.buttonContinue.setOnClickListener {
                 tapSound()
                 DataManager.hasSeenTutoral = true
-                showTitleScreen.launch(null)
+                startGame.launch(null)
             }
         }
 

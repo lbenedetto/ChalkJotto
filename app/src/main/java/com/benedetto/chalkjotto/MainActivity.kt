@@ -1,19 +1,22 @@
 package com.benedetto.chalkjotto
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.benedetto.chalkjotto.databinding.ActivityMainBinding
 import com.benedetto.chalkjotto.definitions.DataManager
-import com.benedetto.chalkjotto.definitions.Sound
-import com.benedetto.chalkjotto.definitions.startGame
+import com.benedetto.chalkjotto.fragments.AcceptChallengeFragment
+import com.benedetto.chalkjotto.fragments.ShareChallengeFragment
 import com.benedetto.chalkjotto.fragments.TitleFragment
 import com.benedetto.chalkjotto.fragments.TutorialFragment
+import com.benedetto.chalkjotto.game.GameActivity
 
 //https://www.deviantart.com/mattiamc/art/ChalkBoard-Texture-MC2015-506107812
 const val TutorialTag = "Tutorial"
 const val TitleTag = "Title"
+const val ShareChallengeTag = "ShareChallenge"
+const val AcceptChallengeTag = "AcceptChallenge"
 
 class MainActivity : JottoActivity() {
 
@@ -26,15 +29,27 @@ class MainActivity : JottoActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        if (DataManager.isGameInProgress) {
-            startGame(this)
-        }
 
-        if (savedInstanceState != null) {
-            return
+        val payload = intent.data?.getQueryParameter("payload")
+        when {
+            payload != null -> goToFragment(AcceptChallengeTag)
+            DataManager.isGameInProgress -> {
+                registerForActivityResult(GameActivity.Contract()) {
+                    goToFragment(it)
+                }.launch(null)
+            }
+            savedInstanceState != null -> return
+            else -> goToFragment(TitleTag)
         }
+    }
 
-        goToFragment(TitleTag)
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        val payload = intent?.data?.getQueryParameter("payload")
+        if (payload != null) {
+            setIntent(intent)
+            goToFragment(AcceptChallengeTag)
+        }
     }
 
     fun goToFragment(tag: String) {
@@ -56,6 +71,8 @@ class MainActivity : JottoActivity() {
         if (fragment == null) {
             fragment = when (tag) {
                 TutorialTag -> TutorialFragment()
+                ShareChallengeTag -> ShareChallengeFragment()
+                AcceptChallengeTag -> AcceptChallengeFragment()
                 else -> TitleFragment()
             }
         }

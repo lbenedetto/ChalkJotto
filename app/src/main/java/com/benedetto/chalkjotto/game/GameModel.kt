@@ -2,12 +2,11 @@ package com.benedetto.chalkjotto.game
 
 import android.content.res.Resources
 import com.benedetto.chalkjotto.R
-import com.benedetto.chalkjotto.definitions.DataManager
 import com.benedetto.chalkjotto.definitions.Key
 import com.benedetto.chalkjotto.definitions.KeyState
 import java.io.BufferedReader
 import java.io.InputStreamReader
-import java.util.HashMap
+import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashSet
 
@@ -107,12 +106,14 @@ class GameModel(
             KeyState.MAYBE -> gameState.yellowLetters.remove(key.letter)
             KeyState.YES -> gameState.greenLetters.remove(key.letter)
             KeyState.NO -> gameState.redLetters.remove(key.letter)
+            KeyState.BLANK -> {} // Do nothing
         }
 
         when(newState) {
             KeyState.MAYBE -> gameState.yellowLetters.add(key.letter)
             KeyState.YES -> gameState.greenLetters.add(key.letter)
             KeyState.NO -> gameState.redLetters.add(key.letter)
+            KeyState.BLANK -> {} // Do nothing
         }
 
         key.updateState(newState)

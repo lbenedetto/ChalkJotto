@@ -5,22 +5,41 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
+import androidx.activity.result.ActivityResultLauncher
 import androidx.fragment.app.Fragment
-import com.benedetto.chalkjotto.*
+import com.benedetto.chalkjotto.MainActivity
+import com.benedetto.chalkjotto.R
+import com.benedetto.chalkjotto.TutorialTag
 import com.benedetto.chalkjotto.databinding.FragmentTitleBinding
 import com.benedetto.chalkjotto.definitions.*
+import com.benedetto.chalkjotto.game.GameActivity
 
 private const val MIN_WORD_LENGTH = 4
 
 class TitleFragment : Fragment() {
     private lateinit var binding: FragmentTitleBinding
+    private lateinit var startGame: ActivityResultLauncher<Void?>
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        startGame = registerForActivityResult(GameActivity.Contract()) {
+            (requireActivity() as MainActivity).goToFragment(it)
+        }
+
+        super.onCreate(savedInstanceState)
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentTitleBinding.inflate(layoutInflater, container, false)
 
         val activity = requireActivity() as MainActivity
 
-        binding.buttonNewGame.setOnClickListener { startGame(activity) }
+        binding.buttonNewGame.setOnClickListener {
+            if (DataManager.hasSeenTutoral) {
+                startGame.launch(null)
+            } else {
+                activity.goToFragment(TutorialTag)
+            }
+        }
 
         binding.buttonNewGame.setOnTouchListener(ScaleOnTouch + PenClickOnTouch)
 

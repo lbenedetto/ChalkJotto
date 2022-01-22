@@ -1,8 +1,10 @@
 <resources>
 	<string name="app_name">Chalk Jotto</string>
+	<string name="time">Time</string>
 	<string name="fastest_time">Fastest time</string>
 	<string name="fastest_time_improved">* You beat your previous best of %1$s</string>
 	<string name="fewest_guesses">Fewest guesses</string>
+	<string name="guesses_no_colon">Guesses</string>
 	<string name="fewest_guesses_improved">* You beat your previous best of %1$d guesses</string>
 	<string name="normal">Normal</string>
 	<string name="hard">Hard</string>
@@ -17,6 +19,26 @@
 	<string name="word_length">Word Length</string>
 	<string name="word_difficulty">Word Difficulty</string>
 	<string name="continueToGame">Continue</string>
+	<string name="challenge_a_friend">Challenge a friend</string>
+	<string name="accept_challenge">Accept challenge</string>
+	<string name="accept_challenge_explanation">You\'ve been challenged to deduce a word:</string>
+	<string name="accept_challenge_explanation_won">Your challenger was able to solve it in:</string>
+	<string name="accept_challenge_explanation_lost">Your challenger gave up before they could solve it.</string>
+	<string name="accept_challenge_explanation_shared_guesses">Your challenger has chosen to share their guesses with you.</string>
+	<string name="accept_challenge_explanation_shared_deductions">Your challenger has chosen to share their deductions with you.</string>
+	<string name="accept_challenge_explanation_shared_guesses_and_deductions">Your challenger has chosen to share their guesses and deductions with you.</string>
+	<string name="accept_challenge_explanation_guesses_not_allowed">You must complete the challenge with only the guesses provided by your challenger.</string>
+	<string name="accept_challenge_explanation_overwrite">You have a game in progress. Accepting this challenge will delete that game.</string>
+	<string name="share_challenge">Share challenge</string>
+	<string name="share_challenge_explanation_won">Challenge a friend to deduce this word faster or more efficiently than you could</string>
+	<string name="share_challenge_explanation_lost">Challenge a friend to deduce the word you couldn\'t</string>
+	<string name="allow_new_guesses">Allow new guesses</string>
+	<string name="allow_new_guesses_explanation">Turn this off if you want to challenge them to deduce the word using only the exact same guesses as you</string>
+	<string name="share_your_guesses">Share your guesses</string>
+	<string name="share_your_guesses_explanation">Turn this on if you want them to see all the guesses you made</string>
+	<string name="share_your_deductions">Share your deductions</string>
+	<string name="share_your_deductions_explanation">Turn this on if you want them to see all the deductions (letter coloring) you\'ve made</string>
+	<string name="cancel">Cancel</string>
 	<string name="sound">Sound</string>
 	<string name="game_paused">Game Paused</string>
 	<string name="lucky">Pure Luck</string>

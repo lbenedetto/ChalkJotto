@@ -7,9 +7,9 @@ import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContract
-import androidx.appcompat.app.AppCompatActivity
 import com.benedetto.chalkjotto.JottoActivity
 import com.benedetto.chalkjotto.R
+import com.benedetto.chalkjotto.TitleTag
 import com.benedetto.chalkjotto.databinding.ActivityGameBinding
 import com.benedetto.chalkjotto.definitions.*
 import java.util.*
@@ -143,14 +143,16 @@ class GameActivity : JottoActivity() {
         return keys
     }
 
-    class Contract : ActivityResultContract<Void?, Void?>() {
+    class Contract : ActivityResultContract<Void?, String>() {
+        companion object {
+            const val DESTINATION = "destination"
+        }
         override fun createIntent(context: Context, input: Void?): Intent {
             return Intent(context, GameActivity::class.java)
         }
 
-        override fun parseResult(resultCode: Int, intent: Intent?): Void? {
-            return null
+        override fun parseResult(resultCode: Int, intent: Intent?): String {
+            return intent?.getStringExtra(DESTINATION) ?: TitleTag
         }
     }
-
 }

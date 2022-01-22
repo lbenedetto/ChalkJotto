@@ -56,7 +56,7 @@ class GamePresenter(private val model: GameModel, val view: GameActivity) {
             key.view.setOnTouchListener(ScaleOnTouch)
             key.view.setOnClickListener {
                 tapSound()
-                vibrate()
+                Sound.vibrate()
                 if (model.enteredWord.length < DataManager.wordLength) {
                     val letter = view.binding.layoutInputGuessWord.getChildAt(model.enteredWord.length) as TextView
                     letter.setOnClickListener {
@@ -85,20 +85,28 @@ class GamePresenter(private val model: GameModel, val view: GameActivity) {
             val isValid = model.validWords.contains(guess.uppercase())
             if (isValid) {
                 model.numGuesses++
-                if (guess == model.targetWord) {
-                    view.refillUserInputFieldWithTiles()
-                    model.isGameOver = true
-                    pause()
-                    exitToTitle(didWin = true)
-                } else {
-                    model.gameState.guessedWords.add(guess)
+                when {
+                    guess == model.targetWord -> {
+                        view.refillUserInputFieldWithTiles()
+                        model.isGameOver = true
+                        pause()
+                        exitToTitle(didWin = true)
+                    }
+                    model.gameState.allowNewGuesses -> {
+                        model.gameState.guessedWords.add(guess)
 
-                    val guessHolder = displayGuessedWord(guess, true)
+                        val guessHolder = displayGuessedWord(guess, true)
 
-                    view.moveWordToView(guessHolder.layoutGuessedWord)
-                    view.refillUserInputFieldWithTiles()
-                    view.setNumberOfGuesses(model.numGuesses)
-                    model.clearEnteredWord()
+                        view.moveWordToView(guessHolder.layoutGuessedWord)
+                        view.refillUserInputFieldWithTiles()
+                        view.setNumberOfGuesses(model.numGuesses)
+                        model.clearEnteredWord()
+                    }
+                    else -> {
+                        view.setNumberOfGuesses(model.numGuesses)
+                        view.binding.layoutInputGuessWord.clearAnimation()
+                        view.binding.layoutInputGuessWord.startAnimation(AnimationUtils.loadAnimation(view, R.anim.shake))
+                    }
                 }
             } else {
                 view.binding.layoutInputGuessWord.clearAnimation()
@@ -198,7 +206,7 @@ class GamePresenter(private val model: GameModel, val view: GameActivity) {
 
     fun backspaceClicked() {
         tapSound()
-        vibrate()
+        Sound.vibrate()
         if (model.enteredWord.isNotEmpty()) {
             val ix = model.enteredWord.length - 1
             view.deleteEnteredCharAtIx(ix, model.keys)
