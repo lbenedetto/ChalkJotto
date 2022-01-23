@@ -21,3 +21,23 @@
 #-renamesourcefileattribute SourceFile
 
 -dontobfuscate
+
+-keepattributes *Annotation*, InnerClasses
+-dontnote kotlinx.serialization.AnnotationsKt # core serialization annotations
+
+# kotlinx-serialization-json specific. Add this if you have java.lang.NoClassDefFoundError kotlinx.serialization.json.JsonObjectSerializer
+-keepclassmembers class kotlinx.serialization.json.** {
+    *** Companion;
+}
+-keepclasseswithmembers class kotlinx.serialization.json.** {
+    kotlinx.serialization.KSerializer serializer(...);
+}
+
+# Change here com.benedetto.chalkjotto
+-keep,includedescriptorclasses class com.benedetto.chalkjotto.**$$serializer { *; }
+-keepclassmembers class com.benedetto.chalkjotto.** {
+    *** Companion;
+}
+-keepclasseswithmembers class com.benedetto.chalkjotto.** {
+    kotlinx.serialization.KSerializer serializer(...);
+}

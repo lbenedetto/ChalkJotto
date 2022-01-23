@@ -23,7 +23,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayoutWordInfo"
-        android:layout_width="280dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
@@ -39,6 +39,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
+            android:textSize="18dp"
             android:text="@string/accept_challenge_explanation"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -94,7 +95,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayoutSolvedIn"
-        android:layout_width="280dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
         android:layout_marginEnd="64dp"
@@ -110,6 +111,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
+            android:textSize="18dp"
             android:text="@string/accept_challenge_explanation_won"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -208,6 +210,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
+        android:textSize="18dp"
         android:text="@string/accept_challenge_explanation_shared_guesses_and_deductions"
         app:layout_constraintBottom_toTopOf="@+id/tvExplanationGuessesNotAllowed"
         app:layout_constraintEnd_toEndOf="parent"
@@ -221,6 +224,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
+        android:textSize="18dp"
         android:text="@string/accept_challenge_explanation_overwrite"
         app:layout_constraintBottom_toTopOf="@+id/buttonCancel"
         app:layout_constraintEnd_toEndOf="parent"
@@ -234,6 +238,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
+        android:textSize="18dp"
         android:text="@string/accept_challenge_explanation_guesses_not_allowed"
         app:layout_constraintBottom_toTopOf="@+id/tvOverwriteExistingGame"
         app:layout_constraintEnd_toEndOf="parent"
