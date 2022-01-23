@@ -45,7 +45,7 @@ class AcceptChallengeFragment : Fragment() {
         if (gameState == null) {
             Toast.makeText(
                 activity,
-                "Failed to load challenge. Try updating your app, or submitting the URL to me in a bug report",
+                "Failed to load challenge. Try updating your app, or submitting the challenge URL to me in a bug report",
                 Toast.LENGTH_LONG
             ).show()
             if (DataManager.isGameInProgress) {

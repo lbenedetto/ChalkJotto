@@ -127,7 +127,9 @@ object DataManager {
                      greenLetters = greenLetters,
                      yellowLetters = yellowLetters,
                      redLetters = redLetters,
-                     guessedWords = guessedWords.split(",").toMutableList(),
+                     guessedWords = guessedWords.split(",")
+                         .filter { it.isNotBlank() }
+                         .toMutableList(),
                      targetWord = targetWord,
                      wordDifficulty = wordDifficulty,
                      wordLength = wordLength,

@@ -1,5 +1,7 @@
 package com.benedetto.chalkjotto.game
 
+import com.benedetto.chalkjotto.definitions.decrypt
+import com.benedetto.chalkjotto.definitions.encrypt
 import com.google.android.gms.common.util.Base64Utils
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import kotlinx.serialization.*
@@ -66,7 +68,9 @@ data class GameState(
         fun fromPayload(payload: String): GameState? {
             return try {
                 val json = Base64Utils.decodeUrlSafe(payload).decodeToString()
-                Json.decodeFromString(json)
+                val state: GameState = Json.decodeFromString(json)
+                state.targetWord = decrypt(state.targetWord!!)
+                return state
             } catch (e: Exception) {
                 FirebaseCrashlytics.getInstance().recordException(e)
                 null
@@ -75,6 +79,7 @@ data class GameState(
     }
 
     fun toPayload() : String {
+        targetWord = encrypt(targetWord!!)
         val jsonShareState = Json.encodeToString(this)
         return Base64Utils.encodeUrlSafe(jsonShareState.toByteArray())
     }

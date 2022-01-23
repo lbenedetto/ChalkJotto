@@ -1,23 +1,19 @@
 package com.benedetto.chalkjotto.definitions
 
 import android.content.Context
-import android.content.Intent
 import android.content.res.Resources
-import android.os.Build
-import android.os.VibrationEffect
 import android.view.Gravity
 import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.TextView
-import androidx.activity.result.ActivityResultLauncher
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
-import com.benedetto.chalkjotto.MainActivity
 import com.benedetto.chalkjotto.R
-import com.benedetto.chalkjotto.TutorialTag
-import com.benedetto.chalkjotto.game.GameActivity
-import java.util.*
+import com.google.android.gms.common.util.Base64Utils
+import javax.crypto.Cipher
+import javax.crypto.spec.IvParameterSpec
+import javax.crypto.spec.SecretKeySpec
 
 
 operator fun View.OnTouchListener.plus(other: View.OnTouchListener): View.OnTouchListener {
@@ -55,4 +51,22 @@ fun newBlankTile(context: Context): TextView {
     tile.elevation = dpToPx(2).toFloat()
 
     return tile
+}
+
+private const val SECRET_KEY = "aesEncryptionKey"
+private const val INIT_VECTOR = "encryptionIntVec"
+val IvParameterSpec = IvParameterSpec(INIT_VECTOR.toByteArray(charset("UTF-8")))
+val SecretKeySpec = SecretKeySpec(SECRET_KEY.toByteArray(charset("UTF-8")), "AES")
+val cipher: Cipher = Cipher.getInstance("AES/CBC/PKCS5PADDING")
+
+fun encrypt(value: String): String {
+    cipher.init(Cipher.ENCRYPT_MODE, SecretKeySpec, IvParameterSpec)
+    val encrypted: ByteArray = cipher.doFinal(value.toByteArray())
+    return Base64Utils.encode(encrypted)
+}
+
+fun decrypt(value: String): String {
+    cipher.init(Cipher.DECRYPT_MODE, SecretKeySpec, IvParameterSpec)
+    val original: ByteArray = cipher.doFinal(Base64Utils.decode(value))
+    return String(original)
 }
