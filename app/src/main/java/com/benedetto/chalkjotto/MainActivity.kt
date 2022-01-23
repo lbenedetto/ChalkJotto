@@ -6,10 +6,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.benedetto.chalkjotto.databinding.ActivityMainBinding
 import com.benedetto.chalkjotto.definitions.DataManager
-import com.benedetto.chalkjotto.fragments.AcceptChallengeFragment
-import com.benedetto.chalkjotto.fragments.ShareChallengeFragment
-import com.benedetto.chalkjotto.fragments.TitleFragment
-import com.benedetto.chalkjotto.fragments.TutorialFragment
+import com.benedetto.chalkjotto.fragments.*
 import com.benedetto.chalkjotto.game.GameActivity
 
 //https://www.deviantart.com/mattiamc/art/ChalkBoard-Texture-MC2015-506107812
@@ -17,6 +14,8 @@ const val TutorialTag = "Tutorial"
 const val TitleTag = "Title"
 const val ShareChallengeTag = "ShareChallenge"
 const val AcceptChallengeTag = "AcceptChallenge"
+const val AboutTag = "About"
+const val LearnTag = "Learn"
 
 class MainActivity : JottoActivity() {
 
@@ -35,7 +34,7 @@ class MainActivity : JottoActivity() {
             payload != null -> goToFragment(AcceptChallengeTag)
             DataManager.isGameInProgress -> {
                 registerForActivityResult(GameActivity.Contract()) {
-                    goToFragment(it)
+                    goToFragment(it.destination)
                 }.launch(null)
             }
             savedInstanceState != null -> return
@@ -73,6 +72,8 @@ class MainActivity : JottoActivity() {
                 TutorialTag -> TutorialFragment()
                 ShareChallengeTag -> ShareChallengeFragment()
                 AcceptChallengeTag -> AcceptChallengeFragment()
+                AboutTag -> AboutFragment()
+                LearnTag -> LearnFragment()
                 else -> TitleFragment()
             }
         }

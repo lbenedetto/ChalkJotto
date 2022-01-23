@@ -12,7 +12,7 @@ fun showTutorialDialog(activity: Activity, blockBackground: Boolean) {
 
     binding.buttonContinue.setOnClickListener {
         tapSound()
-        DataManager.hasSeenTutoral = true
+        DataManager.hasSeenTutorial = true
         popupWindow.popup.dismiss()
     }
     if (!blockBackground) binding.root.setBackgroundColor(getColor(activity, android.R.color.transparent))

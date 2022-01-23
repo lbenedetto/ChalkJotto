@@ -14,7 +14,7 @@ data class GameState(
     @SerialName("n")
     var redLetters: HashSet<String>,
     @SerialName("w")
-    var guessedWords: HashSet<String>,
+    var guessedWords: MutableList<String>,
     @SerialName("t")
     var targetWord: String?,
     @SerialName("d")
@@ -51,7 +51,7 @@ data class GameState(
                 greenLetters = HashSet(),
                 yellowLetters = HashSet(),
                 redLetters = HashSet(),
-                guessedWords = HashSet(),
+                guessedWords = ArrayList(),
                 targetWord = null,
                 wordDifficulty = wordDifficulty,
                 wordLength = wordLength,
@@ -91,7 +91,7 @@ data class GameState(
             greenLetters = if (shareDeductions) greenLetters else HashSet(),
             yellowLetters = if (shareDeductions) yellowLetters else HashSet(),
             redLetters = if (shareDeductions) redLetters else HashSet(),
-            guessedWords = if (shareGuesses) guessedWords else HashSet(),
+            guessedWords = if (shareGuesses) guessedWords else ArrayList(),
             targetWord = targetWord,
             wordDifficulty = wordDifficulty,
             wordLength = wordLength,

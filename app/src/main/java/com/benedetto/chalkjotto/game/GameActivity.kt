@@ -143,16 +143,25 @@ class GameActivity : JottoActivity() {
         return keys
     }
 
-    class Contract : ActivityResultContract<Void?, String>() {
+    class Contract : ActivityResultContract<Void?, GameResult>() {
         companion object {
             const val DESTINATION = "destination"
+            const val DID_WIN = "didWin"
         }
         override fun createIntent(context: Context, input: Void?): Intent {
             return Intent(context, GameActivity::class.java)
         }
 
-        override fun parseResult(resultCode: Int, intent: Intent?): String {
-            return intent?.getStringExtra(DESTINATION) ?: TitleTag
+        override fun parseResult(resultCode: Int, intent: Intent?): GameResult {
+            return GameResult(
+                intent?.getStringExtra(DESTINATION) ?: TitleTag,
+                intent?.getBooleanExtra(DID_WIN, false) ?: false
+            )
         }
     }
+
+    data class GameResult(
+        val destination: String,
+        val didWin: Boolean
+    )
 }

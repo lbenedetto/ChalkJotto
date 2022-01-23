@@ -11,6 +11,7 @@ import com.benedetto.chalkjotto.definitions.Sound.tapSound
 import com.benedetto.chalkjotto.definitions.newBlankTile
 import com.benedetto.chalkjotto.definitions.secondsToTimeDisplay
 import com.benedetto.chalkjotto.game.GameActivity.Contract.Companion.DESTINATION
+import com.benedetto.chalkjotto.game.GameActivity.Contract.Companion.DID_WIN
 import com.benedetto.chalkjotto.game.GameState
 
 class GameOverDialog(
@@ -86,6 +87,7 @@ class GameOverDialog(
             popupWindow.dismiss()
             val intent = Intent()
             intent.putExtra(DESTINATION, TitleTag)
+            intent.putExtra(DID_WIN, gameState.didWin)
             activity.setResult(Activity.RESULT_OK, intent)
             onCloseAction()
         }
@@ -96,6 +98,7 @@ class GameOverDialog(
             popupWindow.dismiss()
             val intent = Intent()
             intent.putExtra(DESTINATION, ShareChallengeTag)
+            intent.putExtra(DID_WIN, gameState.didWin)
             activity.setResult(Activity.RESULT_OK, intent)
             onCloseAction()
         }

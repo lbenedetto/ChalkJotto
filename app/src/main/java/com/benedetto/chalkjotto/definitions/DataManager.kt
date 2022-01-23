@@ -3,12 +3,14 @@ package com.benedetto.chalkjotto.definitions
 import android.content.Context
 import android.content.SharedPreferences
 import com.benedetto.chalkjotto.game.GameState
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 
 object DataManager {
     private lateinit var prefs: SharedPreferences
     private const val PREFERRED_WORD_LENGTH = "wordLength"
     private const val PREFERRED_DIFFICULTY = "difficulty"
     private const val WON_GAMES = "wonGames"
+    private const val ACTIVE_LESSON = "activeLesson"
     private const val HAS_SEEN_TUTORIAL = "hasSeenTutorial"
     private const val HAS_SEEN_RATING_PROMPT = "hasSeenRatingPrompt"
     private const val VIBRATION_ENABLED = "vibrationEnabled"
@@ -39,7 +41,7 @@ object DataManager {
         initialized = true
     }
 
-    var hasSeenTutoral: Boolean
+    var hasSeenTutorial: Boolean
         get() = prefs.getBoolean(HAS_SEEN_TUTORIAL, false)
         set(value) = put(HAS_SEEN_TUTORIAL, value)
 
@@ -79,6 +81,18 @@ object DataManager {
         get() = prefs.getInt(WON_GAMES, 0)
         set(value) = put(WON_GAMES, value)
 
+    var activeLesson: String?
+        get() = prefs.getString(ACTIVE_LESSON, null)
+        set(value) = put(ACTIVE_LESSON, value)
+
+    fun hasCompletedLesson(lesson: String) : Boolean {
+        return prefs.getBoolean("LESSON_$lesson", false)
+    }
+
+    fun setCompletedLesson(lesson: String) {
+        put("LESSON_$lesson", true)
+    }
+
     var fastestTimeSeconds: Long?
         get() {
             val value = prefs.getLong("${FASTEST_TIME}_${difficulty}_$wordLength", -1L)
@@ -95,33 +109,38 @@ object DataManager {
 
     var gameState: GameState?
         get() {
-            val targetWord = prefs.getString(GAME_STATE_TARGET_WORD, null) ?: return null
-            val greenLetters = prefs.getStringSet(GAME_STATE_GREEN_LETTERS, HashSet()) as HashSet<String>
-            val yellowLetters = prefs.getStringSet(GAME_STATE_YELLOW_LETTERS, HashSet()) as HashSet<String>
-            val redLetters = prefs.getStringSet(GAME_STATE_RED_LETTERS, HashSet()) as HashSet<String>
-            val guessedWords = prefs.getStringSet(GAME_STATE_GUESSED_WORDS, HashSet()) as HashSet<String>
-            val wordDifficulty = prefs.getInt(GAME_STATE_WORD_DIFFICULTY, 0)
-            val wordLength = prefs.getInt(GAME_STATE_WORD_LENGTH, 5)
-            val numSeconds = prefs.getLong(GAME_STATE_NUM_SECONDS, 0)
-            val numGuesses = prefs.getLong(GAME_STATE_NUM_GUESSES, 0)
-            val isGameOver = prefs.getBoolean(GAME_STATE_IS_GAME_OVER, false)
-            val didWin = prefs.getBoolean(GAME_STATE_DID_WIN, false)
-            val allowNewGuesses = prefs.getBoolean(GAME_STATE_ALLOW_NEW_GUESSES, true)
+             try {
+                 val targetWord = prefs.getString(GAME_STATE_TARGET_WORD, null) ?: return null
+                 val greenLetters = prefs.getStringSet(GAME_STATE_GREEN_LETTERS, HashSet()) as HashSet<String>
+                 val yellowLetters = prefs.getStringSet(GAME_STATE_YELLOW_LETTERS, HashSet()) as HashSet<String>
+                 val redLetters = prefs.getStringSet(GAME_STATE_RED_LETTERS, HashSet()) as HashSet<String>
+                 val guessedWords = prefs.getString(GAME_STATE_GUESSED_WORDS, "") ?: ""
+                 val wordDifficulty = prefs.getInt(GAME_STATE_WORD_DIFFICULTY, 0)
+                 val wordLength = prefs.getInt(GAME_STATE_WORD_LENGTH, 5)
+                 val numSeconds = prefs.getLong(GAME_STATE_NUM_SECONDS, 0)
+                 val numGuesses = prefs.getLong(GAME_STATE_NUM_GUESSES, 0)
+                 val isGameOver = prefs.getBoolean(GAME_STATE_IS_GAME_OVER, false)
+                 val didWin = prefs.getBoolean(GAME_STATE_DID_WIN, false)
+                 val allowNewGuesses = prefs.getBoolean(GAME_STATE_ALLOW_NEW_GUESSES, true)
 
-            return GameState(
-                greenLetters = greenLetters,
-                yellowLetters = yellowLetters,
-                redLetters = redLetters,
-                guessedWords = guessedWords,
-                targetWord = targetWord,
-                wordDifficulty = wordDifficulty,
-                wordLength = wordLength,
-                numSeconds = numSeconds,
-                numGuesses = numGuesses,
-                isGameOver = isGameOver,
-                didWin = didWin,
-                allowNewGuesses = allowNewGuesses
-            )
+                 return GameState(
+                     greenLetters = greenLetters,
+                     yellowLetters = yellowLetters,
+                     redLetters = redLetters,
+                     guessedWords = guessedWords.split(",").toMutableList(),
+                     targetWord = targetWord,
+                     wordDifficulty = wordDifficulty,
+                     wordLength = wordLength,
+                     numSeconds = numSeconds,
+                     numGuesses = numGuesses,
+                     isGameOver = isGameOver,
+                     didWin = didWin,
+                     allowNewGuesses = allowNewGuesses
+                 )
+             } catch (e: Exception) {
+                 FirebaseCrashlytics.getInstance().recordException(e)
+                 return null
+             }
         }
         set(value) {
             val editor = prefs.edit()
@@ -130,7 +149,7 @@ object DataManager {
                 editor.putStringSet(GAME_STATE_GREEN_LETTERS, value.greenLetters)
                 editor.putStringSet(GAME_STATE_YELLOW_LETTERS, value.yellowLetters)
                 editor.putStringSet(GAME_STATE_RED_LETTERS, value.redLetters)
-                editor.putStringSet(GAME_STATE_GUESSED_WORDS, value.guessedWords)
+                editor.putString(GAME_STATE_GUESSED_WORDS, value.guessedWords.joinToString(","))
                 editor.putInt(GAME_STATE_WORD_DIFFICULTY, value.wordDifficulty)
                 editor.putInt(GAME_STATE_WORD_LENGTH, value.wordLength)
                 editor.putLong(GAME_STATE_NUM_SECONDS, value.numSeconds)

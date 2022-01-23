@@ -18,13 +18,13 @@ class TutorialFragment : Fragment() {
         binding = FragmentTutorialBinding.inflate(layoutInflater, container, false)
 
         val startGame = registerForActivityResult(GameActivity.Contract()) {
-            (activity as MainActivity).goToFragment(it)
+            (activity as MainActivity).goToFragment(it.destination)
         }
 
         if (activity is MainActivity) {
             binding.buttonContinue.setOnClickListener {
                 tapSound()
-                DataManager.hasSeenTutoral = true
+                DataManager.hasSeenTutorial = true
                 startGame.launch(null)
             }
         }

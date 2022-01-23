@@ -7,9 +7,7 @@ import android.view.ViewGroup
 import android.widget.SeekBar
 import androidx.activity.result.ActivityResultLauncher
 import androidx.fragment.app.Fragment
-import com.benedetto.chalkjotto.MainActivity
-import com.benedetto.chalkjotto.R
-import com.benedetto.chalkjotto.TutorialTag
+import com.benedetto.chalkjotto.*
 import com.benedetto.chalkjotto.databinding.FragmentTitleBinding
 import com.benedetto.chalkjotto.definitions.*
 import com.benedetto.chalkjotto.game.GameActivity
@@ -22,7 +20,7 @@ class TitleFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         startGame = registerForActivityResult(GameActivity.Contract()) {
-            (requireActivity() as MainActivity).goToFragment(it)
+            (requireActivity() as MainActivity).goToFragment(it.destination)
         }
 
         super.onCreate(savedInstanceState)
@@ -34,14 +32,26 @@ class TitleFragment : Fragment() {
         val activity = requireActivity() as MainActivity
 
         binding.buttonNewGame.setOnClickListener {
-            if (DataManager.hasSeenTutoral) {
+            DataManager.activeLesson = null
+            if (DataManager.hasSeenTutorial) {
                 startGame.launch(null)
             } else {
                 activity.goToFragment(TutorialTag)
             }
         }
-
         binding.buttonNewGame.setOnTouchListener(ScaleOnTouch + PenClickOnTouch)
+
+        binding.buttonHelp.setOnClickListener {
+            Sound.tapSound()
+            activity.goToFragment(AboutTag)
+        }
+        binding.buttonHelp.setOnTouchListener(ScaleOnTouch)
+
+        binding.buttonLearn.setOnClickListener {
+            Sound.tapSound()
+            activity.goToFragment(LearnTag)
+        }
+        binding.buttonLearn.setOnTouchListener(ScaleOnTouch)
 
         binding.seekBarWordDifficulty.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {

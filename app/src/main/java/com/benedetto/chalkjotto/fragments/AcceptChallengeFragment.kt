@@ -21,8 +21,12 @@ class AcceptChallengeFragment : Fragment() {
     private lateinit var startGame: ActivityResultLauncher<Void?>
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        startGame = registerForActivityResult(GameActivity.Contract()) {
-            (requireActivity() as MainActivity).goToFragment(it)
+        startGame = registerForActivityResult(GameActivity.Contract()) { result ->
+            if (result.didWin) {
+                DataManager.activeLesson?.let { DataManager.setCompletedLesson(it) }
+            }
+            DataManager.activeLesson = null
+            (requireActivity() as MainActivity).goToFragment(result.destination)
         }
 
         super.onCreate(savedInstanceState)
@@ -33,7 +37,9 @@ class AcceptChallengeFragment : Fragment() {
 
         val activity = requireActivity() as MainActivity
 
-        val payload = activity.intent.data?.getQueryParameter("payload")!!
+
+        val payload = activity.intent.getStringExtra("payload")
+            ?: activity.intent.data?.getQueryParameter("payload")!!
         val gameState = GameState.fromPayload(payload)
 
         if (gameState == null) {
@@ -95,8 +101,11 @@ class AcceptChallengeFragment : Fragment() {
             binding.tvOverwriteExistingGame.visibility = View.GONE
         }
 
-        binding.buttonCancel.setOnClickListener { activity.goToFragment(TitleTag) }
-        binding.buttonCancel.setOnTouchListener(ScaleOnTouch + PenClickOnTouch)
+        binding.buttonCancel.setOnClickListener {
+            Sound.tapSound()
+            activity.goToFragment(TitleTag)
+        }
+        binding.buttonCancel.setOnTouchListener(ScaleOnTouch)
 
         binding.buttonAcceptChallenge.setOnClickListener {
             gameState.sanitize()

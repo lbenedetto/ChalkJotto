@@ -40,6 +40,7 @@
 	<string name="share_your_deductions_explanation">Turn this on if you want them to see all the deductions (letter coloring) you\'ve made</string>
 	<string name="cancel">Cancel</string>
 	<string name="done">Done</string>
+	<string name="play">Play</string>
 	<string name="sound">Sound</string>
 	<string name="game_paused">Game Paused</string>
 	<string name="lucky">Pure Luck</string>
@@ -60,4 +61,15 @@
 	<string name="example">Example</string>
 	<string name="tutorial">Tutorial</string>
 	<string name="pause_button">Pause Button</string>
+    <string name="view_legalese_version">View Legalese Version</string>
+	<string name="experiencing_an_issue">Experiencing an issue or have other feedback? Contact me:</string>
+	<string name="contact_email">chalkjotto@gmail.com</string>
+	<string name="app_version">App Version: %1$s</string>
+	<string name="privacy_policy">Privacy Policy</string>
+	<string name="privacy_policy_explanation">I wanted this app to be completely offline and collect no data. Unfortunately, collecting some amount of data is unavoidable. I added something made by Google called Firebase Crashlytics. When the app crashes, it collects some information about your phone (such as the manufacturer and model number) and submits it to Google along with some info for me about what exactly the app was trying to do when it crashed. Without this, it would be impossible for me to detect or fix any issues with the app.</string>
+	<string name="lesson_strong_start">Give yourself a strong start</string>
+	<string name="lesson_strong_start_explanation">Come up with a set of words to guess that cover almost all letters of the alphabet with minimal repeats. This will give you a strong base to begin making deductions from.\nThis example game shows 5 guesses that have covered 24 possible letters. Try selecting the most common letter(s) from each and using them to guess a word. This should quickly help you narrow down the correct letters.</string>
+	<string name="lesson_maximize_information">Make guesses that give maximal information</string>
+	<string name="lesson_maximize_information_explanation">In this example game, you will see that there are 4 letters that might be in the solution. You can break this down into 2 pairs. Choose one letter from each pair and guess a word with it. This will immediately narrow down which 2 of the 4 letters are correct.</string>
+
 </resources>
