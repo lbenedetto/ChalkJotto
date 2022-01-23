@@ -117,8 +117,8 @@ class ShareChallengeFragment : Fragment() {
         }
         binding.buttonShareChallenge.setOnTouchListener(ScaleOnTouch + PenClickOnTouch)
 
-        binding.buttonCancel.setOnClickListener { activity.goToFragment(TitleTag) }
-        binding.buttonCancel.setOnTouchListener(ScaleOnTouch + PenClickOnTouch)
+        binding.buttonDone.setOnClickListener { activity.goToFragment(TitleTag) }
+        binding.buttonDone.setOnTouchListener(ScaleOnTouch + PenClickOnTouch)
 
         return binding.root
     }

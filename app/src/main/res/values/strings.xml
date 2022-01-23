@@ -39,6 +39,7 @@
 	<string name="share_your_deductions">Share your deductions</string>
 	<string name="share_your_deductions_explanation">Turn this on if you want them to see all the deductions (letter coloring) you\'ve made</string>
 	<string name="cancel">Cancel</string>
+	<string name="done">Done</string>
 	<string name="sound">Sound</string>
 	<string name="game_paused">Game Paused</string>
 	<string name="lucky">Pure Luck</string>
