@@ -54,7 +54,7 @@ class GameActivity : JottoActivity() {
 
     fun refillUserInputFieldWithTiles() {
         binding.layoutInputGuessWord.removeAllViews()
-        for (i in 0 until DataManager.wordLength) {
+        for (i in 0 until gameModel.gameState.wordLength) {
             val tile = newBlankTile(this)
             binding.layoutInputGuessWord.addView(tile)
             animatePopIn(tile)

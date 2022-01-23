@@ -35,6 +35,8 @@ class AboutFragment : Fragment() {
                 .show()
         }
 
+        // TODO: Add link to source code
+
         binding.buttonViewPrivacyPolicy.setOnClickListener {
             Sound.tapSound()
             startActivity(Intent(Intent.ACTION_VIEW).apply {

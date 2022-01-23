@@ -23,6 +23,7 @@ class GamePresenter(private val model: GameModel, val view: GameActivity) {
     private var showPauseScreenOnResume = false
 
     init {
+        //TODO: Maybe switch to countdown/guess limit when completing a challenge
         mTimer = object : Runnable {
             override fun run() {
                 model.numSeconds++
@@ -57,7 +58,7 @@ class GamePresenter(private val model: GameModel, val view: GameActivity) {
             key.view.setOnClickListener {
                 tapSound()
                 Sound.vibrate()
-                if (model.enteredWord.length < DataManager.wordLength) {
+                if (model.enteredWord.length < model.gameState.wordLength) {
                     val letter = view.binding.layoutInputGuessWord.getChildAt(model.enteredWord.length) as TextView
                     letter.setOnClickListener {
                         showColorPickerDialog(view, key, model)
@@ -80,7 +81,7 @@ class GamePresenter(private val model: GameModel, val view: GameActivity) {
     }
 
     fun submitButtonPressed() {
-        if (model.enteredWord.length == DataManager.wordLength) {
+        if (model.enteredWord.length == model.gameState.wordLength) {
             val guess = model.enteredWord.toString()
             val isValid = model.validWords.contains(guess.uppercase())
             if (isValid) {
@@ -118,7 +119,7 @@ class GamePresenter(private val model: GameModel, val view: GameActivity) {
     private fun displayGuessedWord(guess: String, byPlayer: Boolean) : GuessItemBinding {
         val guessHolder = GuessItemBinding.inflate(view.layoutInflater)
         val matching = model.getNumberOfMatchingLetters(guess)
-        val isAnagram = matching == DataManager.wordLength || model.isAnagram(guess)
+        val isAnagram = matching == model.gameState.wordLength || model.isAnagram(guess)
 
         guessHolder.textViewMatchCount.text = when (isAnagram) {
             true -> "A"

@@ -31,6 +31,7 @@ class TitleFragment : Fragment() {
 
         val activity = requireActivity() as MainActivity
 
+        // TODO: Add a way to create challenge with a custom word
         binding.buttonNewGame.setOnClickListener {
             DataManager.activeLesson = null
             if (DataManager.hasSeenTutorial) {
