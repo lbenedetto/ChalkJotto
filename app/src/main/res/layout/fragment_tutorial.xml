@@ -29,14 +29,13 @@
     <TextView
         android:id="@+id/buttonContinue"
         android:layout_width="120dp"
-        android:layout_height="50dp"
+        android:layout_height="@dimen/button_height"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="32dp"
         android:background="@drawable/button_white"
         android:gravity="center"
         android:text="@string/continueToGame"
-        android:textSize="19dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

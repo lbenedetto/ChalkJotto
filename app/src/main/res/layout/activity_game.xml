@@ -26,7 +26,6 @@
             android:layout_marginEnd="8dp"
             android:text="00:00"
             android:textColor="@color/white"
-            android:textSize="18dp"
             app:layout_constraintBottom_toBottomOf="@+id/buttonPause"
             app:layout_constraintEnd_toStartOf="@+id/buttonPause"
             app:layout_constraintTop_toTopOf="@+id/buttonPause"
@@ -39,7 +38,6 @@
             android:layout_marginStart="8dp"
             android:text="@string/guesses"
             android:textColor="@color/white"
-            android:textSize="18dp"
             app:layout_constraintBottom_toBottomOf="@+id/textViewTimer"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/textViewTimer" />
@@ -51,7 +49,6 @@
             android:layout_marginStart="2dp"
             android:text="0"
             android:textColor="@color/white"
-            android:textSize="18dp"
             app:layout_constraintStart_toEndOf="@+id/textViewGuessCountLabel"
             app:layout_constraintTop_toTopOf="@+id/textViewGuessCountLabel"
             tools:ignore="HardcodedText" />
@@ -64,7 +61,6 @@
             android:layout_marginBottom="8dp"
             android:text="@string/guessed_word"
             android:textColor="@color/white"
-            android:textSize="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewTimer"
@@ -79,7 +75,6 @@
             android:layout_marginBottom="8dp"
             android:text="Matching Letters"
             android:textColor="@color/white"
-            android:textSize="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/buttonPause"
@@ -87,14 +82,14 @@
 
         <ImageView
             android:id="@+id/buttonPause"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:contentDescription="@string/pause_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@android:drawable/ic_media_pause" />
+            app:srcCompat="@drawable/ic_baseline_pause_24" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -103,7 +103,7 @@ data class GameState(
             numSeconds = 0,
             numGuesses = 0,
             isGameOver = false,
-            didWin = false,
+            didWin = didWin,
             allowNewGuesses = allowNewGuesses
         )
     }

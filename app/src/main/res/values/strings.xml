@@ -73,5 +73,6 @@
 	<string name="lesson_strong_start_explanation">Come up with a set of words to guess that cover almost all letters of the alphabet with minimal repeats. This will give you a strong base to begin making deductions from.\nThis example game shows 5 guesses that have covered 24 possible letters. Try selecting the most common letter(s) from each and using them to guess a word. This should quickly help you narrow down the correct letters.</string>
 	<string name="lesson_maximize_information">Make guesses that give maximal information</string>
 	<string name="lesson_maximize_information_explanation">In this example game, you will see that there are 4 letters that might be in the solution. You can break this down into 2 pairs. Choose one letter from each pair and guess a word with it. This will immediately narrow down which 2 of the 4 letters are correct.</string>
+    <string name="learn_to_play_better_by">Learn to play better by completing challenge lessons</string>
 
 </resources>

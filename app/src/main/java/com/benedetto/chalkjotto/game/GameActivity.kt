@@ -90,11 +90,11 @@ class GameActivity : JottoActivity() {
     }
 
     fun setPaused() {
-        binding.buttonPause.setImageResource(android.R.drawable.ic_media_play)
+        binding.buttonPause.setImageResource(R.drawable.ic_baseline_play_arrow_24)
     }
 
     fun setResumed() {
-        binding.buttonPause.setImageResource(android.R.drawable.ic_media_pause)
+        binding.buttonPause.setImageResource(R.drawable.ic_baseline_pause_24)
     }
 
     fun setTimer(numSeconds: Long) {

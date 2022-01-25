@@ -2,37 +2,23 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:ignore="SpUsage">
-
-    <ImageView
-        android:id="@+id/ivLogo"
-        android:layout_width="265dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="64dp"
-        android:adjustViewBounds="true"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayoutWordInfo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo_full" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayoutWordInfo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
         android:maxWidth="400dp"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayoutSolvedIn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivLogo">
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/tvExplanation"
@@ -40,16 +26,16 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:text="@string/accept_challenge_explanation"
-            android:textSize="18dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayoutWordInfoInterior"
-            android:layout_width="250dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="32dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -64,7 +50,6 @@
                 android:layout_marginTop="8dp"
                 android:text="@string/normal"
                 android:textColor="@color/white"
-                android:textSize="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="HardcodedText" />
@@ -76,7 +61,6 @@
                 android:layout_marginTop="8dp"
                 android:text="@string/word_difficulty"
                 android:textColor="@color/white"
-                android:textSize="16dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -87,7 +71,6 @@
                 android:layout_marginTop="16dp"
                 android:text="5"
                 android:textColor="@color/white"
-                android:textSize="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewWordDifficulty"
                 tools:ignore="HardcodedText" />
@@ -99,7 +82,6 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/word_length"
                 android:textColor="@color/white"
-                android:textSize="16dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewWordDifficultyLabel" />
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -110,8 +92,8 @@
         android:id="@+id/constraintLayoutSolvedIn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:maxWidth="400dp"
         app:layout_constraintBottom_toTopOf="@+id/tvExplanationShared"
         app:layout_constraintEnd_toEndOf="parent"
@@ -125,16 +107,16 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:text="@string/accept_challenge_explanation_won"
-            android:textSize="18dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayoutSolvedInInterior"
-            android:layout_width="250dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="32dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -149,7 +131,6 @@
                 android:layout_marginTop="8dp"
                 android:text="@string/guesses_no_colon"
                 android:textColor="@color/white"
-                android:textSize="18dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -160,7 +141,6 @@
                 android:layout_marginTop="8dp"
                 android:text="\?"
                 android:textColor="@color/white"
-                android:textSize="18dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="HardcodedText" />
@@ -172,7 +152,6 @@
                 android:layout_marginTop="16dp"
                 android:text="\?"
                 android:textColor="@color/white"
-                android:textSize="18dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewGuesses"
                 tools:ignore="HardcodedText" />
@@ -184,7 +163,6 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/time"
                 android:textColor="@color/white"
-                android:textSize="18dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewGuessesLabel" />
@@ -196,7 +174,7 @@
     <TextView
         android:id="@+id/buttonCancel"
         android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="@dimen/button_height"
         android:layout_marginStart="16dp"
         android:layout_marginTop="64dp"
         android:layout_marginEnd="8dp"
@@ -205,7 +183,6 @@
         android:gravity="center"
         android:maxWidth="250dp"
         android:text="@string/cancel"
-        android:textSize="19dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/buttonAcceptChallenge"
         app:layout_constraintHorizontal_bias="0.5"
@@ -215,7 +192,7 @@
     <TextView
         android:id="@+id/buttonAcceptChallenge"
         android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="@dimen/button_height"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
@@ -224,20 +201,17 @@
         android:gravity="center"
         android:maxWidth="250dp"
         android:text="@string/accept_challenge"
-        android:textSize="19dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/buttonCancel" />
 
-
     <TextView
         android:id="@+id/tvExplanationShared"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:textSize="18dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:text="@string/accept_challenge_explanation_shared_guesses_and_deductions"
         app:layout_constraintBottom_toTopOf="@+id/tvExplanationGuessesNotAllowed"
         app:layout_constraintEnd_toEndOf="parent"
@@ -249,11 +223,11 @@
         android:id="@+id/tvOverwriteExistingGame"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:textSize="18dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
         android:text="@string/accept_challenge_explanation_overwrite"
-        app:layout_constraintBottom_toTopOf="@+id/buttonCancel"
+        app:layout_constraintBottom_toTopOf="@+id/buttonAcceptChallenge"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -263,9 +237,8 @@
         android:id="@+id/tvExplanationGuessesNotAllowed"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:textSize="18dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:text="@string/accept_challenge_explanation_guesses_not_allowed"
         app:layout_constraintBottom_toTopOf="@+id/tvOverwriteExistingGame"
         app:layout_constraintEnd_toEndOf="parent"

@@ -34,15 +34,15 @@ fun animatePopIn(view: View) {
     view.startAnimation(zoomIn)
 }
 
-fun newBlankTile(context: Context): TextView {
+fun newBlankTile(context: Context, size: Int = 34, fontSize: Float = 28f): TextView {
     val tile = TextView(context)
     tile.setTextColor(ContextCompat.getColor(context, android.R.color.white))
     tile.typeface = ResourcesCompat.getFont(context, R.font.architects_daughter)
-    tile.textSize = 34f
+    tile.textSize = fontSize
     tile.setBackgroundResource(KeyState.BLANK.background)
-    val size = dpToPx(40)
+    val dpSize = dpToPx(size)
     tile.gravity = Gravity.CENTER
-    val params = ConstraintLayout.LayoutParams(size, size)
+    val params = ConstraintLayout.LayoutParams(dpSize, dpSize)
     params.topMargin = 2
     params.bottomMargin = 2
     params.leftMargin = 2

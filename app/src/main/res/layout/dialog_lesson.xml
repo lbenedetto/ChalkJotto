@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:layout_margin="32dp"
+    android:layout_margin="16dp"
     tools:ignore="SpUsage">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -66,14 +66,13 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
-                android:gravity="left"
-                android:text="@string/lesson_strong_start_explanation"
-                android:textSize="19dp" />
+                android:gravity="start"
+                android:text="@string/lesson_strong_start_explanation" />
 
             <TextView
                 android:id="@+id/buttonContinue"
                 android:layout_width="120dp"
-                android:layout_height="50dp"
+                android:layout_height="@dimen/button_height"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
@@ -81,8 +80,7 @@
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/button_white"
                 android:gravity="center"
-                android:text="@string/continueToGame"
-                android:textSize="19dp" />
+                android:text="@string/continueToGame" />
 
         </LinearLayout>
     </ScrollView>

@@ -49,16 +49,15 @@
 
             <TextView
                 android:id="@+id/buttonViewCode"
-                android:layout_width="220dp"
-                android:layout_height="50dp"
+                android:layout_width="190dp"
+                android:layout_height="@dimen/button_height"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/button_white"
                 android:backgroundTint="@color/colorLetterYes"
                 android:gravity="center"
                 android:layout_gravity="center"
-                android:text="@string/submit_bug_report"
-                android:textSize="19dp" />
+                android:text="@string/submit_bug_report"/>
 
             <TextView
                 android:id="@+id/textViewPrivacyPolicy"
@@ -81,8 +80,8 @@
 
             <TextView
                 android:id="@+id/buttonViewPrivacyPolicy"
-                android:layout_width="220dp"
-                android:layout_height="50dp"
+                android:layout_width="190dp"
+                android:layout_height="@dimen/button_height"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
@@ -91,8 +90,7 @@
                 android:backgroundTint="@color/colorLetterMaybe"
                 android:layout_gravity="center_horizontal"
                 android:gravity="center"
-                android:text="@string/view_legalese_version"
-                android:textSize="19dp" />
+                android:text="@string/view_legalese_version" />
         </LinearLayout>
     </ScrollView>
 
@@ -113,14 +111,13 @@
     <TextView
         android:id="@+id/buttonDone"
         android:layout_width="120dp"
-        android:layout_height="50dp"
+        android:layout_height="@dimen/button_height"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/button_white"
         android:gravity="center"
         android:text="@string/done"
-        android:textSize="19dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
