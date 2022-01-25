@@ -105,7 +105,6 @@ class ShareChallengeFragment : Fragment() {
                 binding.switchShareDeductions.isChecked,
                 binding.switchAllowNewGuesses.isChecked
             )
-            // TODO: create challenge page.
             val payload = shareState.toPayload()
             val url = "https://larsbenedetto.work/ChalkJotto/challenge.html?payload=$payload"
 

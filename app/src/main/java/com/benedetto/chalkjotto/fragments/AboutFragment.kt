@@ -25,7 +25,7 @@ class AboutFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentAboutBinding.inflate(layoutInflater, container, false)
 
-        binding.textViewContactMe.setOnClickListener {
+        binding.tvContactMe.setOnClickListener {
             val sendEmailTo = "chalkjotto@gmail.com"
 
             val clipboard = ContextCompat.getSystemService(requireContext(), ClipboardManager::class.java)
@@ -35,7 +35,13 @@ class AboutFragment : Fragment() {
                 .show()
         }
 
-        // TODO: Add link to source code
+        binding.buttonViewCode.setOnClickListener {
+            Sound.tapSound()
+            startActivity(Intent(Intent.ACTION_VIEW).apply {
+                data = Uri.parse("https://github.com/lbenedetto/ChalkJotto/issues")
+            })
+        }
+        binding.buttonViewCode.setOnTouchListener(ScaleOnTouch)
 
         binding.buttonViewPrivacyPolicy.setOnClickListener {
             Sound.tapSound()

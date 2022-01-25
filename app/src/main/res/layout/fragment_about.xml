@@ -30,13 +30,35 @@
                 android:text="@string/experiencing_an_issue" />
 
             <TextView
-                android:id="@+id/text_view_contact_me"
+                android:id="@+id/tvContactMe"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="32dp"
                 android:text="@string/contact_email" />
+
+            <TextView
+                android:id="@+id/tvViewSourceCode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
+                android:text="@string/github" />
+
+            <TextView
+                android:id="@+id/buttonViewCode"
+                android:layout_width="220dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/button_white"
+                android:backgroundTint="@color/colorLetterYes"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:text="@string/submit_bug_report"
+                android:textSize="19dp" />
 
             <TextView
                 android:id="@+id/textViewPrivacyPolicy"
@@ -63,6 +85,7 @@
                 android:layout_height="50dp"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
                 android:layout_marginEnd="32dp"
                 android:background="@drawable/button_white"
                 android:backgroundTint="@color/colorLetterMaybe"
@@ -95,7 +118,6 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/button_white"
-        android:backgroundTint="@color/colorLetterYes"
         android:gravity="center"
         android:text="@string/done"
         android:textSize="19dp"

@@ -38,6 +38,7 @@
 	<string name="share_your_guesses_explanation">Turn this on if you want them to see all the guesses you made</string>
 	<string name="share_your_deductions">Share your deductions</string>
 	<string name="share_your_deductions_explanation">Turn this on if you want them to see all the deductions (letter coloring) you\'ve made</string>
+	<string name="submit_bug_report">Submit Bug Report</string>
 	<string name="cancel">Cancel</string>
 	<string name="done">Done</string>
 	<string name="play">Play</string>
@@ -64,6 +65,7 @@
     <string name="view_legalese_version">View Legalese Version</string>
 	<string name="experiencing_an_issue">Experiencing an issue or have other feedback? Contact me:</string>
 	<string name="contact_email">chalkjotto@gmail.com</string>
+	<string name="github">You can submit a bug report or view the source code on GitHub</string>
 	<string name="app_version">App Version: %1$s</string>
 	<string name="privacy_policy">Privacy Policy</string>
 	<string name="privacy_policy_explanation">I wanted this app to be completely offline and collect no data. Unfortunately, collecting some amount of data is unavoidable. I added something made by Google called Firebase Crashlytics. When the app crashes, it collects some information about your phone (such as the manufacturer and model number) and submits it to Google along with some info for me about what exactly the app was trying to do when it crashed. Without this, it would be impossible for me to detect or fix any issues with the app.</string>
