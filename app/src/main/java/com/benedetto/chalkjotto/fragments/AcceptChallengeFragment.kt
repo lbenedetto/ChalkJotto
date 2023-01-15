@@ -76,6 +76,8 @@ class AcceptChallengeFragment : Fragment() {
         val sharingDeductions = gameState.yellowLetters.isNotEmpty()
             || gameState.redLetters.isNotEmpty()
             || gameState.greenLetters.isNotEmpty()
+            || gameState.blueLetters.isNotEmpty()
+            || gameState.pinkLetters.isNotEmpty()
 
         val sharingGuesses = gameState.guessedWords.size > 0
 

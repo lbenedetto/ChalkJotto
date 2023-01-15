@@ -36,6 +36,8 @@ class LearnFragment : Fragment() {
                 GameState(
                     greenLetters = HashSet(),
                     yellowLetters = HashSet(),
+                    blueLetters = HashSet(),
+                    pinkLetters = HashSet(),
                     redLetters = hashSetOf("P", "B", "S", "T", "G", "H", "Y", "L", "M", "O"),
                     guessedWords = listOf("VIXEN","FJORD","GLYPH","TOMBS","QUACK").toMutableList(),
                     targetWord = "RACED",
@@ -55,6 +57,8 @@ class LearnFragment : Fragment() {
                 GameState(
                     greenLetters = hashSetOf("M", "E", "S"),
                     yellowLetters = hashSetOf("D", "I", "N", "O"),
+                    blueLetters = HashSet(),
+                    pinkLetters = HashSet(),
                     redLetters = hashSetOf("G", "R", "A", "F", "T"),
                     guessedWords = listOf("GRAFT", "REAMS", "DINGO", "DRIFT").toMutableList(),
                     targetWord = "DOMES",

@@ -11,7 +11,6 @@ import com.benedetto.chalkjotto.definitions.Key
 import com.benedetto.chalkjotto.definitions.KeyState
 import com.benedetto.chalkjotto.definitions.Sound.tapSound
 import com.benedetto.chalkjotto.game.GameModel
-import com.benedetto.chalkjotto.game.GameState
 
 
 @SuppressLint("InflateParams")
@@ -24,6 +23,8 @@ fun showColorPickerDialog(context: Context, key: Key, model: GameModel) {
     binding.keyGreen.text = key.letter
     binding.keyRed.text = key.letter
     binding.keyYellow.text = key.letter
+    binding.keyBlue.text = key.letter
+    binding.keyPink.text = key.letter
 
     binding.keyWhite.setOnClickListener {
         tapSound()
@@ -43,6 +44,16 @@ fun showColorPickerDialog(context: Context, key: Key, model: GameModel) {
     binding.keyYellow.setOnClickListener {
         tapSound()
         model.updateState(key, KeyState.MAYBE)
+        dialog.dismiss()
+    }
+    binding.keyBlue.setOnClickListener {
+        tapSound()
+        model.updateState(key, KeyState.MAYBE_BLUE)
+        dialog.dismiss()
+    }
+    binding.keyPink.setOnClickListener {
+        tapSound()
+        model.updateState(key, KeyState.MAYBE_PINK)
         dialog.dismiss()
     }
 

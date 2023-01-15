@@ -52,6 +52,12 @@ class GamePresenter(private val model: GameModel, val view: GameActivity) {
                 model.gameState.yellowLetters.contains("$character") -> {
                     key.updateState(KeyState.MAYBE)
                 }
+                model.gameState.blueLetters.contains("$character") -> {
+                    key.updateState(KeyState.MAYBE_BLUE)
+                }
+                model.gameState.pinkLetters.contains("$character") -> {
+                    key.updateState(KeyState.MAYBE_PINK)
+                }
             }
 
             key.view.setOnTouchListener(ScaleOnTouch)

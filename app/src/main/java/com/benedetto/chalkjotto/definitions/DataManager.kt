@@ -20,6 +20,8 @@ object DataManager {
     private const val FASTEST_TIME = "fastestTime"
     private const val GAME_STATE_GREEN_LETTERS = "gameState_greenLetters"
     private const val GAME_STATE_YELLOW_LETTERS = "gameState_yellowLetters"
+    private const val GAME_STATE_BLUE_LETTERS = "gameState_blueLetters"
+    private const val GAME_STATE_PINK_LETTERS = "gameState_pinkLetters"
     private const val GAME_STATE_RED_LETTERS = "gameState_redLetters"
     private const val GAME_STATE_GUESSED_WORDS = "gameState_guessedWords"
     private const val GAME_STATE_TARGET_WORD = "gameState_targetWord"
@@ -113,6 +115,8 @@ object DataManager {
                  val targetWord = prefs.getString(GAME_STATE_TARGET_WORD, null) ?: return null
                  val greenLetters = prefs.getStringSet(GAME_STATE_GREEN_LETTERS, HashSet()) as HashSet<String>
                  val yellowLetters = prefs.getStringSet(GAME_STATE_YELLOW_LETTERS, HashSet()) as HashSet<String>
+                 val blueLetters = prefs.getStringSet(GAME_STATE_BLUE_LETTERS, HashSet()) as HashSet<String>
+                 val pinkLetters = prefs.getStringSet(GAME_STATE_PINK_LETTERS, HashSet()) as HashSet<String>
                  val redLetters = prefs.getStringSet(GAME_STATE_RED_LETTERS, HashSet()) as HashSet<String>
                  val guessedWords = prefs.getString(GAME_STATE_GUESSED_WORDS, "") ?: ""
                  val wordDifficulty = prefs.getInt(GAME_STATE_WORD_DIFFICULTY, 0)
@@ -126,6 +130,8 @@ object DataManager {
                  return GameState(
                      greenLetters = greenLetters,
                      yellowLetters = yellowLetters,
+                     blueLetters = blueLetters,
+                     pinkLetters = pinkLetters,
                      redLetters = redLetters,
                      guessedWords = guessedWords.split(",")
                          .filter { it.isNotBlank() }
@@ -150,6 +156,8 @@ object DataManager {
             if (value != null) {
                 editor.putStringSet(GAME_STATE_GREEN_LETTERS, value.greenLetters)
                 editor.putStringSet(GAME_STATE_YELLOW_LETTERS, value.yellowLetters)
+                editor.putStringSet(GAME_STATE_BLUE_LETTERS, value.blueLetters)
+                editor.putStringSet(GAME_STATE_PINK_LETTERS, value.pinkLetters)
                 editor.putStringSet(GAME_STATE_RED_LETTERS, value.redLetters)
                 editor.putString(GAME_STATE_GUESSED_WORDS, value.guessedWords.joinToString(","))
                 editor.putInt(GAME_STATE_WORD_DIFFICULTY, value.wordDifficulty)

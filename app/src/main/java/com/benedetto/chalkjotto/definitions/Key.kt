@@ -3,11 +3,13 @@ package com.benedetto.chalkjotto.definitions
 import android.widget.TextView
 import com.benedetto.chalkjotto.R
 
-enum class KeyState(val color: Int, val background: Int) {
-    BLANK(android.R.color.black, R.drawable.key_white),
-    MAYBE(R.color.colorLetterMaybe, R.drawable.key_yellow),
-    YES(R.color.colorLetterYes, R.drawable.key_green),
-    NO(R.color.colorLetterNo, R.drawable.key_red)
+enum class KeyState(val background: Int) {
+    BLANK(R.drawable.key_white),
+    MAYBE(R.drawable.key_yellow),
+    MAYBE_BLUE(R.drawable.key_blue),
+    MAYBE_PINK(R.drawable.key_pink),
+    YES(R.drawable.key_green),
+    NO(R.drawable.key_red)
 }
 
 data class Key(

@@ -6,9 +6,6 @@ import com.benedetto.chalkjotto.definitions.Key
 import com.benedetto.chalkjotto.definitions.KeyState
 import java.io.BufferedReader
 import java.io.InputStreamReader
-import java.util.*
-import kotlin.collections.ArrayList
-import kotlin.collections.HashSet
 
 class GameModel(
         var keys: HashMap<Char, Key>,
@@ -104,6 +101,8 @@ class GameModel(
     fun updateState(key: Key, newState: KeyState) {
         when(key.state) {
             KeyState.MAYBE -> gameState.yellowLetters.remove(key.letter)
+            KeyState.MAYBE_BLUE -> gameState.blueLetters.remove(key.letter)
+            KeyState.MAYBE_PINK -> gameState.pinkLetters.remove(key.letter)
             KeyState.YES -> gameState.greenLetters.remove(key.letter)
             KeyState.NO -> gameState.redLetters.remove(key.letter)
             KeyState.BLANK -> {} // Do nothing
@@ -111,6 +110,8 @@ class GameModel(
 
         when(newState) {
             KeyState.MAYBE -> gameState.yellowLetters.add(key.letter)
+            KeyState.MAYBE_BLUE -> gameState.blueLetters.add(key.letter)
+            KeyState.MAYBE_PINK -> gameState.pinkLetters.add(key.letter)
             KeyState.YES -> gameState.greenLetters.add(key.letter)
             KeyState.NO -> gameState.redLetters.add(key.letter)
             KeyState.BLANK -> {} // Do nothing

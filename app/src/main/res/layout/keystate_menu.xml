@@ -34,8 +34,8 @@
 
     <TextView
         android:id="@+id/keyWhite"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
         android:layout_marginTop="11dp"
         android:layout_marginEnd="11dp"
         android:layout_marginBottom="8dp"
@@ -51,8 +51,8 @@
 
     <TextView
         android:id="@+id/keyGreen"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
         android:layout_marginStart="11dp"
         android:layout_marginTop="11dp"
         android:layout_marginBottom="8dp"
@@ -69,26 +69,60 @@
 
     <TextView
         android:id="@+id/keyYellow"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="11dp"
-        android:layout_marginEnd="4dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/key_yellow"
         android:gravity="center"
         android:textSize="@dimen/huge_text"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/keyRed"
+        app:layout_constraintEnd_toStartOf="@+id/keyBlue"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/keyGreen"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="A" />
 
     <TextView
+        android:id="@+id/keyBlue"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="11dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/key_blue"
+        android:gravity="center"
+        android:textSize="@dimen/huge_text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/keyPink"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/keyYellow"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="A" />
+
+    <TextView
+        android:id="@+id/keyPink"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="11dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/key_pink"
+        android:gravity="center"
+        android:textSize="@dimen/huge_text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/keyRed"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/keyBlue"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="A" />
+
+    <TextView
         android:id="@+id/keyRed"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
         android:layout_marginStart="4dp"
         android:layout_marginTop="11dp"
         android:layout_marginEnd="8dp"
@@ -99,7 +133,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/keyWhite"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/keyYellow"
+        app:layout_constraintStart_toEndOf="@+id/keyPink"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="A" />
 
