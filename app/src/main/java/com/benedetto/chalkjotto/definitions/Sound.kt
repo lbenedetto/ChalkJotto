@@ -27,10 +27,11 @@ object Sound {
         tap = MediaPlayer.create(context, R.raw.tap)
         tap!!.setVolume(.5f, .5f)
         Vibrator = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            val vibratorManager  = context.getSystemService(Context.VIBRATOR_MANAGER_SERVICE) as VibratorManager
-            vibratorManager.defaultVibrator;
+            val vibratorManager = context.getSystemService(Context.VIBRATOR_MANAGER_SERVICE) as VibratorManager
+            vibratorManager.defaultVibrator
         } else {
-            (context.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator)
+            @Suppress("DEPRECATION")
+            context.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
         }
         initialized = true
     }
@@ -68,6 +69,7 @@ object Sound {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             Vibrator?.vibrate(VibrationEffect.createOneShot(25, VibrationEffect.DEFAULT_AMPLITUDE))
         } else {
+            @Suppress("DEPRECATION")
             Vibrator?.vibrate(25)
         }
 

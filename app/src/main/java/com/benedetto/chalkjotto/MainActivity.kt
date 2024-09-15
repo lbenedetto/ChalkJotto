@@ -3,7 +3,11 @@ package com.benedetto.chalkjotto
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
+import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.MutableLiveData
+import com.benedetto.chalkjotto.PauseActivity.Companion.RESUME
 import com.benedetto.chalkjotto.databinding.ActivityMainBinding
 import com.benedetto.chalkjotto.definitions.DataManager
 import com.benedetto.chalkjotto.fragments.*
@@ -19,7 +23,7 @@ const val LearnTag = "Learn"
 
 class MainActivity : JottoActivity() {
 
-    private var activeFragmentTag: String = TitleTag
+    private var activeFragmentTag = MutableLiveData(TitleTag)
     lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,6 +44,11 @@ class MainActivity : JottoActivity() {
             savedInstanceState != null -> return
             else -> goToFragment(TitleTag)
         }
+
+        val doNothingCallback = onBackPressedDispatcher.addCallback(this) {}
+        activeFragmentTag.observe(this) {
+            doNothingCallback.isEnabled = it == TitleTag
+        }
     }
 
     override fun onNewIntent(intent: Intent?) {
@@ -52,11 +61,11 @@ class MainActivity : JottoActivity() {
     }
 
     fun goToFragment(tag: String) {
-        activeFragmentTag = tag
+        activeFragmentTag.postValue(tag)
         goToFragment(getFragmentInstance(tag))
     }
 
-    fun goToFragment(fragment: Fragment) {
+    private fun goToFragment(fragment: Fragment) {
         setTheme(R.style.AppTheme)
         supportFragmentManager.beginTransaction()
                 .setCustomAnimations(R.anim.fade_in, R.anim.fade_out, R.anim.fade_in, R.anim.fade_out)
@@ -82,14 +91,9 @@ class MainActivity : JottoActivity() {
 
     override fun onResume() {
         super.onResume()
-        if (activeFragmentTag == TitleTag && !DataManager.hasSeenRatingPrompt && DataManager.wonGames == 5) {
+        if (activeFragmentTag.value == TitleTag && !DataManager.hasSeenRatingPrompt && DataManager.wonGames >= 5) {
             DataManager.hasSeenRatingPrompt = true
             Toast.makeText(this, "You seem to be enjoying the game :) Please consider leaving a rating <3", Toast.LENGTH_LONG).show()
         }
-    }
-
-    override fun onBackPressed() {
-        if (activeFragmentTag != TitleTag)
-            super.onBackPressed()
     }
 }

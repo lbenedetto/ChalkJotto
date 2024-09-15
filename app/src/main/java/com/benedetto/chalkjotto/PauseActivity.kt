@@ -4,12 +4,11 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.WindowManager
+import androidx.activity.addCallback
 import androidx.activity.result.contract.ActivityResultContract
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SwitchCompat
 import com.benedetto.chalkjotto.databinding.ActivityPauseBinding
 import com.benedetto.chalkjotto.definitions.DataManager
-import com.benedetto.chalkjotto.definitions.Sound
 import com.benedetto.chalkjotto.definitions.Sound.tapSound
 import com.benedetto.chalkjotto.dialogs.showTutorialDialog
 
@@ -22,7 +21,6 @@ class PauseActivity : JottoActivity() {
     }
 
     lateinit var binding: ActivityPauseBinding
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,15 +66,15 @@ class PauseActivity : JottoActivity() {
             tapSound()
             DataManager.assistance = (switch as SwitchCompat).isChecked
         }
+
+        onBackPressedDispatcher.addCallback(this) {
+            exit(RESUME)
+        }
     }
 
-    fun exit(exitCode: Int) {
+    private fun exit(exitCode: Int) {
         setResult(exitCode)
         finish()
-    }
-
-    override fun onBackPressed() {
-        exit(RESUME)
     }
 
     class Contract : ActivityResultContract<Void?, Int>() {

@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.window.OnBackInvokedDispatcher.PRIORITY_OVERLAY
+import androidx.activity.addCallback
 import androidx.activity.result.contract.ActivityResultContract
 import com.benedetto.chalkjotto.JottoActivity
 import com.benedetto.chalkjotto.R
@@ -48,9 +50,9 @@ class GameActivity : JottoActivity() {
         binding.buttonPause.setOnTouchListener(ScaleOnTouch + PenClickOnTouch)
 
         gamePresenter.play()
-    }
 
-    override fun onBackPressed() {}
+        onBackPressedDispatcher.addCallback(this) {}
+    }
 
     fun refillUserInputFieldWithTiles() {
         binding.layoutInputGuessWord.removeAllViews()
