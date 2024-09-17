@@ -39,7 +39,7 @@ fun newBlankTile(context: Context, size: Int = 34, fontSize: Float = 28f): TextV
     tile.setTextColor(ContextCompat.getColor(context, android.R.color.white))
     tile.typeface = ResourcesCompat.getFont(context, R.font.architects_daughter)
     tile.textSize = fontSize
-    tile.setBackgroundResource(KeyState.BLANK.background)
+    tile.setBackgroundResource(KeyState.BLANK.getBackgroundResource(context))
     val dpSize = dpToPx(size)
     tile.gravity = Gravity.CENTER
     val params = ConstraintLayout.LayoutParams(dpSize, dpSize)

@@ -6,6 +6,14 @@
 		<item name="colorPrimaryDark">@color/colorPrimaryDark</item>
 		<item name="colorAccent">@color/colorAccent</item>
 		<item name="android:fontFamily">@font/architects_daughter</item>
+		<item name="grayChalkboard">@drawable/chalkboard</item>
+		<item name="chalkButton">@drawable/button_white</item>
+		<item name="chalkKeyBlue">@drawable/key_blue</item>
+		<item name="chalkKeyGreen">@drawable/key_green</item>
+		<item name="chalkKeyPink">?attr/chalkKeyPink</item>
+		<item name="chalkKeyRed">@drawable/key_red</item>
+		<item name="chalkKeyWhite">@drawable/key_white</item>
+		<item name="chalkKeyYellow">@drawable/key_yellow</item>
 	</style>
 
 	<style name="KeyboardKey">
@@ -13,11 +21,22 @@
 		<item name="android:textSize">22sp</item>
 		<item name="android:textStyle">bold</item>
 		<item name="android:gravity">center</item>
-		<item name="android:background">@drawable/key_white</item>
+		<item name="android:background">?attr/chalkKeyWhite</item>
 	</style>
 
 	<style name="AppTheme.Launcher">
 		<item name="android:windowBackground">@drawable/launch_screen</item>
 		<item name="colorPrimaryDark">@android:color/transparent</item>
+	</style>
+
+	<style name="HighContrastTheme" parent="AppTheme">
+		<item name="grayChalkboard">@color/colorPrimaryDarkGrey</item>
+		<item name="chalkButton">@color/lightGrey</item>
+		<item name="chalkKeyBlue">@color/colorLetterBlue</item>
+		<item name="chalkKeyGreen">@color/colorLetterYes</item>
+		<item name="chalkKeyPink">@color/colorLetterPink</item>
+		<item name="chalkKeyRed">@color/colorLetterNo</item>
+		<item name="chalkKeyWhite">@color/lightGrey</item>
+		<item name="chalkKeyYellow">@color/colorLetterMaybe</item>
 	</style>
 </resources>

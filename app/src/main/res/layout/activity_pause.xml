@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
-    android:background="@drawable/chalkboard">
+    android:background="?attr/grayChalkboard">
 
     <TextView
         android:id="@+id/tvSoundToggleLabel"
@@ -35,6 +35,32 @@
         app:layout_constraintTop_toTopOf="@+id/tvSoundToggleLabel" />
 
     <TextView
+        android:id="@+id/tvHighContrastToggleLabel"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/high_contrast"
+        android:gravity="center_vertical"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/tvVibrationToggleLabel"
+        app:layout_constraintEnd_toStartOf="@+id/switchVibrate"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvSoundToggleLabel" />
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/switchHighContrast"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="64dp"
+        android:checked="true"
+        app:layout_constraintBottom_toBottomOf="@+id/tvHighContrastToggleLabel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvHighContrastToggleLabel" />
+
+    <TextView
         android:id="@+id/tvVibrationToggleLabel"
         android:layout_width="0dp"
         android:layout_height="48dp"
@@ -48,7 +74,7 @@
         app:layout_constraintEnd_toStartOf="@+id/switchVibrate"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvSoundToggleLabel" />
+        app:layout_constraintTop_toBottomOf="@+id/tvHighContrastToggleLabel" />
 
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/switchVibrate"
@@ -94,10 +120,11 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
-        android:background="@drawable/button_white"
+        android:background="?attr/chalkButton"
         android:backgroundTint="@color/colorLetterNo"
         android:gravity="center"
         android:text="@string/reset_colors"
+        android:textSize="@dimen/slightly_larger_text"
         app:layout_constraintBottom_toTopOf="@+id/buttonGiveUp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
@@ -111,10 +138,11 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:background="@drawable/button_white"
+        android:background="?attr/chalkButton"
         android:backgroundTint="@color/colorLetterMaybe"
         android:gravity="center"
         android:text="@string/give_up"
+        android:textSize="@dimen/slightly_larger_text"
         app:layout_constraintBottom_toTopOf="@+id/buttonShowTutorial"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -127,10 +155,11 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:background="@drawable/button_white"
+        android:background="?attr/chalkButton"
         android:backgroundTint="@color/colorLetterYes"
         android:gravity="center"
         android:text="@string/show_tutorial"
+        android:textSize="@dimen/slightly_larger_text"
         app:layout_constraintBottom_toTopOf="@+id/buttonResume"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
@@ -145,7 +174,7 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="16dp"
-        android:background="@drawable/button_white"
+        android:background="?attr/chalkButton"
         android:gravity="center"
         android:text="@string/resume"
         app:layout_constraintBottom_toBottomOf="parent"

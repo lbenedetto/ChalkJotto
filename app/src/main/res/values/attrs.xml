@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="grayChalkboard" format="reference" />
+    <attr name="chalkButton" format="reference" />
+    <attr name="chalkKeyBlue" format="reference" />
+    <attr name="chalkKeyGreen" format="reference" />
+    <attr name="chalkKeyPink" format="reference" />
+    <attr name="chalkKeyRed" format="reference" />
+    <attr name="chalkKeyWhite" format="reference" />
+    <attr name="chalkKeyYellow" format="reference" />
+</resources>

@@ -9,4 +9,6 @@
 	<color name="colorLetterNo">#F44336</color>
 	<color name="colorLetterYes">#4CAF50</color>
 	<color name="colorLetterMaybe">#FF9800</color>
+	<color name="colorLetterBlue">#69baf0</color>
+	<color name="colorLetterPink">#dc64f1</color>
 </resources>

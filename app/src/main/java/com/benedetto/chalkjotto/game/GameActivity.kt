@@ -24,7 +24,6 @@ class GameActivity : JottoActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setTheme(R.style.AppTheme)
         binding = ActivityGameBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val wordDifficulty = DataManager.difficulty
@@ -76,7 +75,7 @@ class GameActivity : JottoActivity() {
         val tile = binding.layoutInputGuessWord.getChildAt(ix) as TextView
         keys[tile.text[0]]!!.removeListener(tile)
         tile.text = ""
-        tile.setBackgroundResource(KeyState.BLANK.background)
+        tile.setBackgroundResource(KeyState.BLANK.getBackgroundResource(this))
         tile.setOnLongClickListener(null)
     }
 

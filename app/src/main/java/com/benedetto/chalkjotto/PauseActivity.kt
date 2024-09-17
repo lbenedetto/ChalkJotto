@@ -24,7 +24,6 @@ class PauseActivity : JottoActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setTheme(R.style.AppTheme)
         binding = ActivityPauseBinding.inflate(layoutInflater)
         setContentView(binding.root)
         window.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
@@ -53,6 +52,13 @@ class PauseActivity : JottoActivity() {
         binding.switchSound.setOnClickListener { switch ->
             tapSound()
             DataManager.soundEnabled = (switch as SwitchCompat).isChecked
+        }
+
+        binding.switchHighContrast.isChecked = DataManager.highContrastModeEnabled
+        binding.switchHighContrast.setOnClickListener { switch ->
+            tapSound()
+            themeUpdated(recreate = true)
+            DataManager.highContrastModeEnabled = (switch as SwitchCompat).isChecked
         }
 
         binding.switchVibrate.isChecked = DataManager.vibrationEnabled

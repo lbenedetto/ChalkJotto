@@ -28,7 +28,6 @@ class MainActivity : JottoActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setTheme(R.style.AppTheme)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -66,7 +65,6 @@ class MainActivity : JottoActivity() {
     }
 
     private fun goToFragment(fragment: Fragment) {
-        setTheme(R.style.AppTheme)
         supportFragmentManager.beginTransaction()
                 .setCustomAnimations(R.anim.fade_in, R.anim.fade_out, R.anim.fade_in, R.anim.fade_out)
                 .replace(R.id.fragmentContainer, fragment, fragment.tag)

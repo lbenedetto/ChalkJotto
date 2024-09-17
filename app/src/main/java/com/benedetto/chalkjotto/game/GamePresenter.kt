@@ -70,7 +70,7 @@ class GamePresenter(private val model: GameModel, val view: GameActivity) {
                         showColorPickerDialog(view, key, model)
                     }
                     letter.text = key.letter
-                    letter.setBackgroundResource(key.state.background)
+                    letter.setBackgroundResource(key.state.getBackgroundResource(view))
                     model.enteredWord.append(letter.text.toString())
                     key.addListener(letter)
                 }

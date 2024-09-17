@@ -74,5 +74,6 @@
 	<string name="lesson_maximize_information">Make guesses that give maximal information</string>
 	<string name="lesson_maximize_information_explanation">In this example game, you will see that there are 4 letters that might be in the solution. You can break this down into 2 pairs. Choose one letter from each pair and guess a word with it. This will immediately narrow down which 2 of the 4 letters are correct.</string>
     <string name="learn_to_play_better_by">Learn to play better by completing challenge lessons</string>
+    <string name="high_contrast">High Contrast</string>
 
 </resources>

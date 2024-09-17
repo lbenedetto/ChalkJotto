@@ -15,6 +15,7 @@ object DataManager {
     private const val HAS_SEEN_RATING_PROMPT = "hasSeenRatingPrompt"
     private const val VIBRATION_ENABLED = "vibrationEnabled"
     private const val SOUND_ENABLED = "soundEnabled"
+    private const val HIGH_CONTRAST_MODE_ENABLED = "highContrastModeEnabled"
     private const val ASSISTANCE_ENABLED = "assistanceEnabled"
     private const val FEWEST_GUESSES = "fewestGuesses"
     private const val FASTEST_TIME = "fastestTime"
@@ -62,6 +63,10 @@ object DataManager {
     var soundEnabled: Boolean
         get() = prefs.getBoolean(SOUND_ENABLED, true)
         set(value) = put(SOUND_ENABLED, value)
+
+    var highContrastModeEnabled: Boolean
+        get() = prefs.getBoolean(HIGH_CONTRAST_MODE_ENABLED, false)
+        set(value) = put(HIGH_CONTRAST_MODE_ENABLED, value)
 
     var assistance: Boolean
         get() = prefs.getBoolean(ASSISTANCE_ENABLED, true)

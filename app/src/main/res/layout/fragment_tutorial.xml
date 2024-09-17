@@ -33,7 +33,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="32dp"
-        android:background="@drawable/button_white"
+        android:background="?attr/chalkButton"
         android:gravity="center"
         android:text="@string/continueToGame"
         app:layout_constraintBottom_toBottomOf="parent"
