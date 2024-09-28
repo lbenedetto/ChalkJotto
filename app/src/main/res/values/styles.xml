@@ -10,7 +10,7 @@
 		<item name="chalkButton">@drawable/button_white</item>
 		<item name="chalkKeyBlue">@drawable/key_blue</item>
 		<item name="chalkKeyGreen">@drawable/key_green</item>
-		<item name="chalkKeyPink">?attr/chalkKeyPink</item>
+		<item name="chalkKeyPink">@drawable/key_pink</item>
 		<item name="chalkKeyRed">@drawable/key_red</item>
 		<item name="chalkKeyWhite">@drawable/key_white</item>
 		<item name="chalkKeyYellow">@drawable/key_yellow</item>
