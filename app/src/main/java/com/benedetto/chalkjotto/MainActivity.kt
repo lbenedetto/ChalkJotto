@@ -3,13 +3,12 @@ package com.benedetto.chalkjotto
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
-import androidx.activity.OnBackPressedCallback
 import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
-import com.benedetto.chalkjotto.PauseActivity.Companion.RESUME
 import com.benedetto.chalkjotto.databinding.ActivityMainBinding
 import com.benedetto.chalkjotto.definitions.DataManager
+import com.benedetto.chalkjotto.definitions.fitToWindowInsets
 import com.benedetto.chalkjotto.fragments.*
 import com.benedetto.chalkjotto.game.GameActivity
 
@@ -30,7 +29,7 @@ class MainActivity : JottoActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        binding.root.fitToWindowInsets()
 
         val payload = intent.data?.getQueryParameter("payload")
         when {

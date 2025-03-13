@@ -3,13 +3,13 @@ package com.benedetto.chalkjotto.fragments
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import com.benedetto.chalkjotto.BuildConfig
 import com.benedetto.chalkjotto.MainActivity
@@ -22,7 +22,7 @@ import com.benedetto.chalkjotto.definitions.Sound
 class AboutFragment : Fragment() {
     private lateinit var binding: FragmentAboutBinding
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentAboutBinding.inflate(layoutInflater, container, false)
 
         binding.tvContactMe.setOnClickListener {
@@ -38,7 +38,7 @@ class AboutFragment : Fragment() {
         binding.buttonViewCode.setOnClickListener {
             Sound.tapSound()
             startActivity(Intent(Intent.ACTION_VIEW).apply {
-                data = Uri.parse("https://github.com/lbenedetto/ChalkJotto/issues")
+                data = "https://github.com/lbenedetto/ChalkJotto/issues".toUri()
             })
         }
         binding.buttonViewCode.setOnTouchListener(ScaleOnTouch)
@@ -46,7 +46,7 @@ class AboutFragment : Fragment() {
         binding.buttonViewPrivacyPolicy.setOnClickListener {
             Sound.tapSound()
             startActivity(Intent(Intent.ACTION_VIEW).apply {
-                data = Uri.parse("https://larsbenedetto.work/ChalkJotto/PrivacyPolicy.html")
+                data = "https://larsbenedetto.work/ChalkJotto/PrivacyPolicy.html".toUri()
             })
         }
         binding.buttonViewPrivacyPolicy.setOnTouchListener(ScaleOnTouch)

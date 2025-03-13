@@ -2,19 +2,31 @@ package com.benedetto.chalkjotto.definitions
 
 import android.content.Context
 import android.content.res.Resources
+import android.graphics.Typeface
 import android.view.Gravity
 import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.TextView
+import androidx.annotation.FontRes
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import com.benedetto.chalkjotto.R
 import com.google.android.gms.common.util.Base64Utils
 import javax.crypto.Cipher
 import javax.crypto.spec.IvParameterSpec
 import javax.crypto.spec.SecretKeySpec
 
+fun View.fitToWindowInsets() {
+    ViewCompat.setOnApplyWindowInsetsListener(this) { view, windowInsets ->
+        val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
+        view.updatePadding(top = insets.top, bottom = insets.bottom)
+        WindowInsetsCompat.CONSUMED
+    }
+}
 
 operator fun View.OnTouchListener.plus(other: View.OnTouchListener): View.OnTouchListener {
     return ConfigurableOnTouchListener().addBehavior(this).addBehavior(other)
@@ -34,10 +46,18 @@ fun animatePopIn(view: View) {
     view.startAnimation(zoomIn)
 }
 
+fun getFont(context: Context, @FontRes fontId: Int) : Typeface? {
+    return try {
+        ResourcesCompat.getFont(context, fontId)
+    } catch (e: Exception) {
+        null
+    }
+}
+
 fun newBlankTile(context: Context, size: Int = 34, fontSize: Float = 28f): TextView {
     val tile = TextView(context)
     tile.setTextColor(ContextCompat.getColor(context, android.R.color.white))
-    tile.typeface = ResourcesCompat.getFont(context, R.font.architects_daughter)
+    getFont(context, R.font.architects_daughter).let { tile.typeface = it }
     tile.textSize = fontSize
     tile.setBackgroundResource(KeyState.BLANK.getBackgroundResource(context))
     val dpSize = dpToPx(size)

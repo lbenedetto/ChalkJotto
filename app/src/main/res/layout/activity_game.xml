@@ -18,7 +18,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-        <!--TODO: Use monospace font-->
         <TextView
             android:id="@+id/textViewTimer"
             android:layout_width="wrap_content"
@@ -26,6 +25,7 @@
             android:layout_marginEnd="8dp"
             android:text="00:00"
             android:textColor="@color/white"
+            android:fontFamily="monospace"
             app:layout_constraintBottom_toBottomOf="@+id/buttonPause"
             app:layout_constraintEnd_toStartOf="@+id/buttonPause"
             app:layout_constraintTop_toTopOf="@+id/buttonPause"

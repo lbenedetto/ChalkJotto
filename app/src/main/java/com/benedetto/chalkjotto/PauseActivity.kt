@@ -10,6 +10,7 @@ import androidx.appcompat.widget.SwitchCompat
 import com.benedetto.chalkjotto.databinding.ActivityPauseBinding
 import com.benedetto.chalkjotto.definitions.DataManager
 import com.benedetto.chalkjotto.definitions.Sound.tapSound
+import com.benedetto.chalkjotto.definitions.fitToWindowInsets
 import com.benedetto.chalkjotto.dialogs.showTutorialDialog
 
 
@@ -72,7 +73,7 @@ class PauseActivity : JottoActivity() {
             tapSound()
             DataManager.assistance = (switch as SwitchCompat).isChecked
         }
-
+        binding.root.fitToWindowInsets()
         onBackPressedDispatcher.addCallback(this) {
             exit(RESUME)
         }

@@ -6,9 +6,11 @@ import android.os.Bundle
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.window.OnBackInvokedDispatcher.PRIORITY_OVERLAY
 import androidx.activity.addCallback
 import androidx.activity.result.contract.ActivityResultContract
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import com.benedetto.chalkjotto.JottoActivity
 import com.benedetto.chalkjotto.R
 import com.benedetto.chalkjotto.TitleTag
@@ -47,7 +49,12 @@ class GameActivity : JottoActivity() {
         binding.keyBackspace.setOnTouchListener(ScaleOnTouch)
         binding.keySubmit.setOnTouchListener(ScaleOnTouch + PenClickOnTouch)
         binding.buttonPause.setOnTouchListener(ScaleOnTouch + PenClickOnTouch)
-
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { view, windowInsets ->
+            val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
+            binding.layoutTableLabels.updatePadding(top = insets.top)
+            view.updatePadding(bottom = insets.bottom)
+            WindowInsetsCompat.CONSUMED
+        }
         gamePresenter.play()
 
         onBackPressedDispatcher.addCallback(this) {}

@@ -31,7 +31,7 @@
                 <data android:scheme="http" />
                 <data android:scheme="https" />
                 <data android:host="larsbenedetto.work" />
-                <data android:path="/ChalkJotto/challenge.html" />
+                <data android:pathPrefix="/ChalkJotto/challenge.html" />
             </intent-filter>
         </activity>
         <activity

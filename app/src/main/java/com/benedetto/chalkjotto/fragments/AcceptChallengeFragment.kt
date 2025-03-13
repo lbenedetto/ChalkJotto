@@ -32,7 +32,7 @@ class AcceptChallengeFragment : Fragment() {
         super.onCreate(savedInstanceState)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentAcceptChallengeBinding.inflate(layoutInflater, container, false)
 
         val activity = requireActivity() as MainActivity
@@ -120,10 +120,5 @@ class AcceptChallengeFragment : Fragment() {
         binding.buttonAcceptChallenge.setOnTouchListener(ScaleOnTouch + PenClickOnTouch)
 
         return binding.root
-    }
-
-    fun toast(str: Int) {
-        Toast.makeText(activity, str, Toast.LENGTH_LONG)
-            .show()
     }
 }

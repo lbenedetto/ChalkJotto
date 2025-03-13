@@ -22,7 +22,7 @@ import com.benedetto.chalkjotto.game.GameState
 class LearnFragment : Fragment() {
     private lateinit var binding: FragmentLearnBinding
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentLearnBinding.inflate(layoutInflater, container, false)
 
         val activity = requireActivity() as MainActivity

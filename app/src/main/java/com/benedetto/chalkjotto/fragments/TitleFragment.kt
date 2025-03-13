@@ -6,11 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
 import androidx.activity.result.ActivityResultLauncher
+import androidx.appcompat.widget.SwitchCompat
 import androidx.fragment.app.Fragment
 import com.benedetto.chalkjotto.*
 import com.benedetto.chalkjotto.databinding.FragmentTitleBinding
 import com.benedetto.chalkjotto.definitions.*
+import com.benedetto.chalkjotto.definitions.Sound.tapSound
 import com.benedetto.chalkjotto.game.GameActivity
+import java.util.Locale
 
 private const val MIN_WORD_LENGTH = 4
 
@@ -26,7 +29,7 @@ class TitleFragment : Fragment() {
         super.onCreate(savedInstanceState)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentTitleBinding.inflate(layoutInflater, container, false)
 
         val activity = requireActivity() as MainActivity
@@ -43,13 +46,13 @@ class TitleFragment : Fragment() {
         binding.buttonNewGame.setOnTouchListener(ScaleOnTouch + PenClickOnTouch)
 
         binding.buttonHelp.setOnClickListener {
-            Sound.tapSound()
+            tapSound()
             activity.goToFragment(AboutTag)
         }
         binding.buttonHelp.setOnTouchListener(ScaleOnTouch)
 
         binding.buttonLearn.setOnClickListener {
-            Sound.tapSound()
+            tapSound()
             activity.goToFragment(LearnTag)
         }
         binding.buttonLearn.setOnTouchListener(ScaleOnTouch)
@@ -73,7 +76,7 @@ class TitleFragment : Fragment() {
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
                 val len = progress + MIN_WORD_LENGTH
                 DataManager.wordLength = len
-                binding.textViewWordLength.text = String.format("%d", len)
+                binding.textViewWordLength.text = String.format(Locale.getDefault(), "%d", len)
                 updateReadouts()
             }
 
@@ -83,6 +86,31 @@ class TitleFragment : Fragment() {
 
         binding.seekBarWordDifficulty.progress = DataManager.difficulty
         binding.seekBarWordLength.progress = DataManager.wordLength - MIN_WORD_LENGTH
+
+        binding.switchSound.isChecked = DataManager.soundEnabled
+        binding.switchSound.setOnClickListener { switch ->
+            tapSound()
+            DataManager.soundEnabled = (switch as SwitchCompat).isChecked
+        }
+
+        binding.switchHighContrast.isChecked = DataManager.highContrastModeEnabled
+        binding.switchHighContrast.setOnClickListener { switch ->
+            tapSound()
+            activity.themeUpdated(recreate = true)
+            DataManager.highContrastModeEnabled = (switch as SwitchCompat).isChecked
+        }
+
+        binding.switchVibrate.isChecked = DataManager.vibrationEnabled
+        binding.switchVibrate.setOnClickListener { switch ->
+            tapSound()
+            DataManager.vibrationEnabled = (switch as SwitchCompat).isChecked
+        }
+
+        binding.switchAssistance.isChecked = DataManager.assistance
+        binding.switchAssistance.setOnClickListener { switch ->
+            tapSound()
+            DataManager.assistance = (switch as SwitchCompat).isChecked
+        }
 
         return binding.root
     }

@@ -14,7 +14,7 @@ import com.benedetto.chalkjotto.game.GameActivity
 class TutorialFragment : Fragment() {
     private lateinit var binding: FragmentTutorialBinding
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentTutorialBinding.inflate(layoutInflater, container, false)
 
         val startGame = registerForActivityResult(GameActivity.Contract()) {
