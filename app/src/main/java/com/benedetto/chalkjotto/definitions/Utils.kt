@@ -46,18 +46,18 @@ fun animatePopIn(view: View) {
     view.startAnimation(zoomIn)
 }
 
-fun getFont(context: Context, @FontRes fontId: Int) : Typeface? {
+fun getFont(context: Context, @FontRes fontId: Int) : Typeface {
     return try {
-        ResourcesCompat.getFont(context, fontId)
+        ResourcesCompat.getFont(context, fontId) ?: Typeface.DEFAULT
     } catch (e: Exception) {
-        null
+        Typeface.DEFAULT
     }
 }
 
 fun newBlankTile(context: Context, size: Int = 34, fontSize: Float = 28f): TextView {
     val tile = TextView(context)
     tile.setTextColor(ContextCompat.getColor(context, android.R.color.white))
-    getFont(context, R.font.architects_daughter).let { tile.typeface = it }
+    tile.typeface = getFont(context, R.font.architects_daughter)
     tile.textSize = fontSize
     tile.setBackgroundResource(KeyState.BLANK.getBackgroundResource(context))
     val dpSize = dpToPx(size)
