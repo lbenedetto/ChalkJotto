@@ -79,7 +79,7 @@ class AcceptChallengeFragment : Fragment() {
             || gameState.blueLetters.isNotEmpty()
             || gameState.pinkLetters.isNotEmpty()
 
-        val sharingGuesses = gameState.guessedWords.size > 0
+        val sharingGuesses = gameState.guessedWords.isNotEmpty()
 
         if (sharingDeductions && sharingGuesses) {
             binding.tvExplanationShared.setText(R.string.accept_challenge_explanation_shared_guesses_and_deductions)

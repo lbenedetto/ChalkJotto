@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import com.benedetto.chalkjotto.game.GameState
 import com.google.firebase.crashlytics.FirebaseCrashlytics
+import androidx.core.content.edit
 
 object DataManager {
     private lateinit var prefs: SharedPreferences
@@ -155,35 +156,32 @@ object DataManager {
                  return null
              }
         }
-        set(value) {
-            val editor = prefs.edit()
-            editor.putString(GAME_STATE_TARGET_WORD, value?.targetWord)
+        set(value) = prefs.edit {
+            putString(GAME_STATE_TARGET_WORD, value?.targetWord)
             if (value != null) {
-                editor.putStringSet(GAME_STATE_GREEN_LETTERS, value.greenLetters)
-                editor.putStringSet(GAME_STATE_YELLOW_LETTERS, value.yellowLetters)
-                editor.putStringSet(GAME_STATE_BLUE_LETTERS, value.blueLetters)
-                editor.putStringSet(GAME_STATE_PINK_LETTERS, value.pinkLetters)
-                editor.putStringSet(GAME_STATE_RED_LETTERS, value.redLetters)
-                editor.putString(GAME_STATE_GUESSED_WORDS, value.guessedWords.joinToString(","))
-                editor.putInt(GAME_STATE_WORD_DIFFICULTY, value.wordDifficulty)
-                editor.putInt(GAME_STATE_WORD_LENGTH, value.wordLength)
-                editor.putLong(GAME_STATE_NUM_SECONDS, value.numSeconds)
-                editor.putLong(GAME_STATE_NUM_GUESSES, value.numGuesses)
-                editor.putBoolean(GAME_STATE_IS_GAME_OVER, value.isGameOver)
-                editor.putBoolean(GAME_STATE_DID_WIN, value.didWin)
-                editor.putBoolean(GAME_STATE_ALLOW_NEW_GUESSES, value.allowNewGuesses)
+                putStringSet(GAME_STATE_GREEN_LETTERS, value.greenLetters)
+                putStringSet(GAME_STATE_YELLOW_LETTERS, value.yellowLetters)
+                putStringSet(GAME_STATE_BLUE_LETTERS, value.blueLetters)
+                putStringSet(GAME_STATE_PINK_LETTERS, value.pinkLetters)
+                putStringSet(GAME_STATE_RED_LETTERS, value.redLetters)
+                putString(GAME_STATE_GUESSED_WORDS, value.guessedWords.joinToString(","))
+                putInt(GAME_STATE_WORD_DIFFICULTY, value.wordDifficulty)
+                putInt(GAME_STATE_WORD_LENGTH, value.wordLength)
+                putLong(GAME_STATE_NUM_SECONDS, value.numSeconds)
+                putLong(GAME_STATE_NUM_GUESSES, value.numGuesses)
+                putBoolean(GAME_STATE_IS_GAME_OVER, value.isGameOver)
+                putBoolean(GAME_STATE_DID_WIN, value.didWin)
+                putBoolean(GAME_STATE_ALLOW_NEW_GUESSES, value.allowNewGuesses)
             }
-            editor.apply()
         }
 
-    private fun put(key: String, value: Any?) {
-        val editor = prefs.edit()
+
+    private fun put(key: String, value: Any?) = prefs.edit {
         when (value) {
-            is Boolean -> editor.putBoolean(key, value)
-            is Int -> editor.putInt(key, value)
-            is Long -> editor.putLong(key, value)
-            is String -> editor.putString(key, value)
+            is Boolean -> putBoolean(key, value)
+            is Int -> putInt(key, value)
+            is Long -> putLong(key, value)
+            is String -> putString(key, value)
         }
-        editor.apply()
     }
 }
