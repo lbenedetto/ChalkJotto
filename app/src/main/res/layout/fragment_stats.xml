@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:ignore="SpUsage">
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="8dp">
+
+            <!-- Title -->
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/stats_title"
+                android:textColor="@color/white"
+                android:textSize="@dimen/large_text"
+                android:paddingBottom="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- Filter row: difficulty chips -->
+            <TextView
+                android:id="@+id/tvFilterDifficultyLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/filter_difficulty"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:paddingBottom="4dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvTitle" />
+
+            <TextView
+                android:id="@+id/chipDiffAll"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/button_height"
+                android:layout_marginEnd="4dp"
+                android:background="?attr/chalkButton"
+                android:gravity="center"
+                android:text="@string/all"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toStartOf="@id/chipDiffNormal"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvFilterDifficultyLabel" />
+
+            <TextView
+                android:id="@+id/chipDiffNormal"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/button_height"
+                android:layout_marginEnd="4dp"
+                android:background="?attr/chalkButton"
+                android:gravity="center"
+                android:text="@string/normal"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toStartOf="@id/chipDiffHard"
+                app:layout_constraintStart_toEndOf="@id/chipDiffAll"
+                app:layout_constraintTop_toBottomOf="@id/tvFilterDifficultyLabel" />
+
+            <TextView
+                android:id="@+id/chipDiffHard"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/button_height"
+                android:layout_marginEnd="4dp"
+                android:background="?attr/chalkButton"
+                android:gravity="center"
+                android:text="@string/hard"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toStartOf="@id/chipDiffInsane"
+                app:layout_constraintStart_toEndOf="@id/chipDiffNormal"
+                app:layout_constraintTop_toBottomOf="@id/tvFilterDifficultyLabel" />
+
+            <TextView
+                android:id="@+id/chipDiffInsane"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/button_height"
+                android:background="?attr/chalkButton"
+                android:gravity="center"
+                android:text="@string/insane"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/chipDiffHard"
+                app:layout_constraintTop_toBottomOf="@id/tvFilterDifficultyLabel" />
+
+            <!-- Filter row: word length chips -->
+            <TextView
+                android:id="@+id/tvFilterLengthLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/filter_word_length"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:paddingBottom="4dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/chipDiffAll" />
+
+            <TextView
+                android:id="@+id/chipLenAll"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/button_height"
+                android:layout_marginEnd="4dp"
+                android:background="?attr/chalkButton"
+                android:gravity="center"
+                android:text="@string/all"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toStartOf="@id/chipLen4"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvFilterLengthLabel" />
+
+            <TextView
+                android:id="@+id/chipLen4"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/button_height"
+                android:layout_marginEnd="4dp"
+                android:background="?attr/chalkButton"
+                android:gravity="center"
+                android:text="4"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toStartOf="@id/chipLen5"
+                app:layout_constraintStart_toEndOf="@id/chipLenAll"
+                app:layout_constraintTop_toBottomOf="@id/tvFilterLengthLabel"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/chipLen5"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/button_height"
+                android:layout_marginEnd="4dp"
+                android:background="?attr/chalkButton"
+                android:gravity="center"
+                android:text="5"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toStartOf="@id/chipLen6"
+                app:layout_constraintStart_toEndOf="@id/chipLen4"
+                app:layout_constraintTop_toBottomOf="@id/tvFilterLengthLabel"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/chipLen6"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/button_height"
+                android:layout_marginEnd="4dp"
+                android:background="?attr/chalkButton"
+                android:gravity="center"
+                android:text="6"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toStartOf="@id/chipLen7"
+                app:layout_constraintStart_toEndOf="@id/chipLen5"
+                app:layout_constraintTop_toBottomOf="@id/tvFilterLengthLabel"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/chipLen7"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/button_height"
+                android:background="?attr/chalkButton"
+                android:gravity="center"
+                android:text="7"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/chipLen6"
+                app:layout_constraintTop_toBottomOf="@id/tvFilterLengthLabel"
+                tools:ignore="HardcodedText" />
+
+            <!-- Summary stats -->
+            <TextView
+                android:id="@+id/tvTotalGames"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:text="0"
+                android:textColor="@color/white"
+                android:textSize="@dimen/large_text"
+                app:layout_constraintEnd_toStartOf="@id/tvWinRate"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/chipLenAll"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/tvWinRate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:text="0%"
+                android:textColor="@color/white"
+                android:textSize="@dimen/large_text"
+                app:layout_constraintEnd_toStartOf="@id/tvAvgGuesses"
+                app:layout_constraintStart_toEndOf="@id/tvTotalGames"
+                app:layout_constraintTop_toBottomOf="@id/chipLenAll"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/tvAvgGuesses"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:text="—"
+                android:textColor="@color/white"
+                android:textSize="@dimen/large_text"
+                app:layout_constraintEnd_toStartOf="@id/tvAvgTime"
+                app:layout_constraintStart_toEndOf="@id/tvWinRate"
+                app:layout_constraintTop_toBottomOf="@id/chipLenAll"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/tvAvgTime"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:text="—"
+                android:textColor="@color/white"
+                android:textSize="@dimen/large_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tvAvgGuesses"
+                app:layout_constraintTop_toBottomOf="@id/chipLenAll"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/tvLabelPlayed"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/stats_played"
+                android:textColor="@color/white"
+                android:textSize="11sp"
+                app:layout_constraintEnd_toStartOf="@id/tvLabelWinRate"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvTotalGames" />
+
+            <TextView
+                android:id="@+id/tvLabelWinRate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/stats_win_rate"
+                android:textColor="@color/white"
+                android:textSize="11sp"
+                app:layout_constraintEnd_toStartOf="@id/tvLabelAvgGuesses"
+                app:layout_constraintStart_toEndOf="@id/tvLabelPlayed"
+                app:layout_constraintTop_toBottomOf="@id/tvWinRate" />
+
+            <TextView
+                android:id="@+id/tvLabelAvgGuesses"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/stats_avg_guesses"
+                android:textColor="@color/white"
+                android:textSize="11sp"
+                app:layout_constraintEnd_toStartOf="@id/tvLabelAvgTime"
+                app:layout_constraintStart_toEndOf="@id/tvLabelWinRate"
+                app:layout_constraintTop_toBottomOf="@id/tvAvgGuesses" />
+
+            <TextView
+                android:id="@+id/tvLabelAvgTime"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/stats_avg_time"
+                android:textColor="@color/white"
+                android:textSize="11sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tvLabelAvgGuesses"
+                app:layout_constraintTop_toBottomOf="@id/tvAvgTime" />
+
+            <!-- Time trend line chart -->
+            <TextView
+                android:id="@+id/tvTimeTrendTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:paddingBottom="4dp"
+                android:text="@string/stats_time_trend"
+                android:textColor="@color/white"
+                android:textSize="@dimen/slightly_larger_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvLabelPlayed" />
+
+            <com.patrykandpatrick.vico.views.cartesian.CartesianChartView
+                android:id="@+id/lineChartTime"
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                android:layout_marginBottom="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvTimeTrendTitle" />
+
+            <!-- Guesses trend line chart -->
+            <TextView
+                android:id="@+id/tvGuessesChartTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingBottom="4dp"
+                android:text="@string/stats_guesses_chart_title"
+                android:textColor="@color/white"
+                android:textSize="@dimen/slightly_larger_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/lineChartTime" />
+
+            <com.patrykandpatrick.vico.views.cartesian.CartesianChartView
+                android:id="@+id/lineChartGuesses"
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                android:layout_marginBottom="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvGuessesChartTitle" />
+
+            <!-- Guesses distribution bar chart -->
+            <TextView
+                android:id="@+id/tvGuessesHistogramTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingBottom="4dp"
+                android:text="@string/stats_chart_histogram"
+                android:textColor="@color/white"
+                android:textSize="@dimen/slightly_larger_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/lineChartGuesses" />
+
+            <com.patrykandpatrick.vico.views.cartesian.CartesianChartView
+                android:id="@+id/barChartGuesses"
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                android:layout_marginBottom="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvGuessesHistogramTitle" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

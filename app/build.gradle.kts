@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.google.services)
     alias(libs.plugins.firebase.crashlytics)
+    alias(libs.plugins.kotlin.ksp)
 }
 
 android {
@@ -64,4 +65,11 @@ dependencies {
     // This was added as a workaround to fix a bug with kotlinx.serialization
     // Try removing it and seeing if GameState gets a bunch of false errors highlighted
     implementation(libs.androidx.annotation.experimental)
+
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    ksp(libs.androidx.room.compiler)
+    implementation(libs.vico.views)
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.androidx.fragment.ktx)
 }

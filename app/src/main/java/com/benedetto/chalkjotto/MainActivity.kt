@@ -19,6 +19,7 @@ const val ShareChallengeTag = "ShareChallenge"
 const val AcceptChallengeTag = "AcceptChallenge"
 const val AboutTag = "About"
 const val LearnTag = "Learn"
+const val StatsTag = "Stats"
 
 class MainActivity : JottoActivity() {
 
@@ -80,6 +81,7 @@ class MainActivity : JottoActivity() {
                 AcceptChallengeTag -> AcceptChallengeFragment()
                 AboutTag -> AboutFragment()
                 LearnTag -> LearnFragment()
+                StatsTag -> StatsFragment()
                 else -> TitleFragment()
             }
         }

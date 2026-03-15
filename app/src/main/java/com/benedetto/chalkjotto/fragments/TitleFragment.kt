@@ -8,7 +8,12 @@ import android.widget.SeekBar
 import androidx.activity.result.ActivityResultLauncher
 import androidx.appcompat.widget.SwitchCompat
 import androidx.fragment.app.Fragment
-import com.benedetto.chalkjotto.*
+import com.benedetto.chalkjotto.LearnTag
+import com.benedetto.chalkjotto.MainActivity
+import com.benedetto.chalkjotto.R
+import com.benedetto.chalkjotto.StatsTag
+import com.benedetto.chalkjotto.TutorialTag
+import com.benedetto.chalkjotto.AboutTag
 import com.benedetto.chalkjotto.databinding.FragmentTitleBinding
 import com.benedetto.chalkjotto.definitions.*
 import com.benedetto.chalkjotto.definitions.Sound.tapSound
@@ -50,6 +55,12 @@ class TitleFragment : Fragment() {
             activity.goToFragment(AboutTag)
         }
         binding.buttonHelp.setOnTouchListener(ScaleOnTouch)
+
+        binding.buttonStats.setOnClickListener {
+            tapSound()
+            activity.goToFragment(StatsTag)
+        }
+        binding.buttonStats.setOnTouchListener(ScaleOnTouch)
 
         binding.buttonLearn.setOnClickListener {
             tapSound()

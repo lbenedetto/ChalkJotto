@@ -12,6 +12,7 @@ import com.benedetto.chalkjotto.databinding.GuessItemBinding
 import com.benedetto.chalkjotto.definitions.*
 import com.benedetto.chalkjotto.definitions.Sound.penClickSound
 import com.benedetto.chalkjotto.definitions.Sound.tapSound
+import androidx.lifecycle.lifecycleScope
 import com.benedetto.chalkjotto.dialogs.GameOverDialog
 import com.benedetto.chalkjotto.dialogs.showColorPickerDialog
 
@@ -204,6 +205,7 @@ class GamePresenter(private val model: GameModel, val view: GameActivity) {
             activity = view,
             gameState = model.gameState,
             oddsOfLuckyWin = model.validWords.size,
+            scope = view.lifecycleScope,
             onCloseAction = {
                 view.finish()
             }

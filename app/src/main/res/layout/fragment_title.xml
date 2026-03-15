@@ -270,6 +270,20 @@
         tools:ignore="HardcodedText" />
 
     <ImageView
+        android:id="@+id/buttonStats"
+        android:layout_width="@dimen/button_height"
+        android:layout_height="@dimen/button_height"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="8dp"
+        android:background="?attr/chalkKeyWhite"
+        android:contentDescription="@string/stats_title"
+        android:gravity="center"
+        android:padding="6dp"
+        android:src="@drawable/bar_chart_4_bars_24px"
+        app:layout_constraintBottom_toTopOf="@+id/ivBottomBumper"
+        app:layout_constraintEnd_toStartOf="@+id/buttonLearn" />
+
+    <ImageView
         android:id="@+id/buttonLearn"
         android:layout_width="@dimen/button_height"
         android:layout_height="@dimen/button_height"

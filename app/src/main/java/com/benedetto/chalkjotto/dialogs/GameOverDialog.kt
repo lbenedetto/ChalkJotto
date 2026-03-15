@@ -6,18 +6,24 @@ import com.benedetto.chalkjotto.R
 import com.benedetto.chalkjotto.ShareChallengeTag
 import com.benedetto.chalkjotto.TitleTag
 import com.benedetto.chalkjotto.databinding.DialogGameOverBinding
+import com.benedetto.chalkjotto.definitions.AppDatabase
 import com.benedetto.chalkjotto.definitions.DataManager
+import com.benedetto.chalkjotto.definitions.GameRecord
 import com.benedetto.chalkjotto.definitions.Sound.tapSound
 import com.benedetto.chalkjotto.definitions.newBlankTile
 import com.benedetto.chalkjotto.definitions.secondsToTimeDisplay
 import com.benedetto.chalkjotto.game.GameActivity.Contract.Companion.DESTINATION
 import com.benedetto.chalkjotto.game.GameActivity.Contract.Companion.DID_WIN
 import com.benedetto.chalkjotto.game.GameState
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class GameOverDialog(
         var activity: Activity,
         var gameState: GameState,
         var oddsOfLuckyWin: Int,
+        var scope: CoroutineScope,
         var onCloseAction: () -> Unit
 ) {
 
@@ -30,6 +36,20 @@ class GameOverDialog(
             val tile = newBlankTile(activity, size = 30, fontSize = 26f)
             tile.text = character.toString()
             inputGuessWordLayout.addView(tile)
+        }
+
+        // Persist game record to database (wins and losses)
+        scope.launch(Dispatchers.IO) {
+            AppDatabase.getInstance(activity).gameRecordDao().insert(
+                GameRecord(
+                    timestamp = System.currentTimeMillis(),
+                    difficulty = gameState.wordDifficulty,
+                    wordLength = gameState.wordLength,
+                    numGuesses = gameState.numGuesses,
+                    numSeconds = gameState.numSeconds,
+                    didWin = gameState.didWin
+                )
+            )
         }
 
         // Keeping track of best scores
