@@ -4,17 +4,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ScrollView
 import android.widget.SeekBar
 import androidx.activity.result.ActivityResultLauncher
-import androidx.appcompat.widget.SwitchCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import com.benedetto.chalkjotto.AboutTag
 import com.benedetto.chalkjotto.LearnTag
 import com.benedetto.chalkjotto.MainActivity
 import com.benedetto.chalkjotto.R
+import com.benedetto.chalkjotto.SettingsTag
 import com.benedetto.chalkjotto.StatsTag
 import com.benedetto.chalkjotto.TutorialTag
-import com.benedetto.chalkjotto.AboutTag
 import com.benedetto.chalkjotto.databinding.FragmentTitleBinding
 import com.benedetto.chalkjotto.definitions.*
 import com.benedetto.chalkjotto.definitions.Sound.tapSound
@@ -107,30 +108,11 @@ class TitleFragment : Fragment() {
         binding.seekBarWordDifficulty.progress = DataManager.difficulty
         binding.seekBarWordLength.progress = DataManager.wordLength - MIN_WORD_LENGTH
 
-        binding.switchSound.isChecked = DataManager.soundEnabled
-        binding.switchSound.setOnClickListener { switch ->
+        binding.buttonSettings.setOnClickListener {
             tapSound()
-            DataManager.soundEnabled = (switch as SwitchCompat).isChecked
+            activity.goToFragment(SettingsTag)
         }
-
-        binding.switchHighContrast.isChecked = DataManager.highContrastModeEnabled
-        binding.switchHighContrast.setOnClickListener { switch ->
-            tapSound()
-            activity.themeUpdated(recreate = true)
-            DataManager.highContrastModeEnabled = (switch as SwitchCompat).isChecked
-        }
-
-        binding.switchVibrate.isChecked = DataManager.vibrationEnabled
-        binding.switchVibrate.setOnClickListener { switch ->
-            tapSound()
-            DataManager.vibrationEnabled = (switch as SwitchCompat).isChecked
-        }
-
-        binding.switchAssistance.isChecked = DataManager.assistance
-        binding.switchAssistance.setOnClickListener { switch ->
-            tapSound()
-            DataManager.assistance = (switch as SwitchCompat).isChecked
-        }
+        binding.buttonSettings.setOnTouchListener(ScaleOnTouch)
 
         return binding.root
     }

@@ -9,7 +9,7 @@
     <ImageView
         android:id="@+id/ivTopBumper"
         android:layout_width="0dp"
-        android:layout_height="84dp"
+        android:layout_height="80dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
@@ -30,230 +30,144 @@
         android:adjustViewBounds="true"
         android:contentDescription="@string/app_name"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ivTopBumper"
         app:srcCompat="@drawable/logo_full" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ImageView
+        android:id="@+id/divider1"
         android:layout_width="0dp"
+        android:layout_height="4dp"
+        android:layout_marginBottom="8dp"
+        android:contentDescription="@null"
+        android:scaleType="fitXY"
+        app:tint="@color/colorLetterNo"
+        app:layout_constraintBottom_toTopOf="@+id/textViewFewestGuessesLabel"
+        app:layout_constraintEnd_toEndOf="@+id/ivBottomBumper"
+        app:layout_constraintStart_toStartOf="@+id/ivBottomBumper"
+        app:srcCompat="@drawable/divider" />
+
+    <TextView
+        android:id="@+id/textViewFewestGuessesLabel"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/fewest_guesses"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/textViewFastestTimeLabel"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewFewestGuesses"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
-        android:maxWidth="400dp"
+        android:text="\?"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewFewestGuessesLabel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textViewFewestGuessesLabel"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/textViewFastestTimeLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/fastest_time"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/divider2"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewFastestTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:text="\?"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewFastestTimeLabel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textViewFastestTimeLabel"
+        tools:ignore="HardcodedText" />
+
+    <ImageView
+        android:id="@+id/divider2"
+        android:layout_width="0dp"
+        android:layout_height="4dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="12dp"
+        android:layout_marginEnd="32dp"
+        android:contentDescription="@null"
+        android:scaleType="fitXY"
+        app:tint="@color/colorLetterNo"
+        app:layout_constraintBottom_toTopOf="@+id/textViewWordDifficultyLabel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivLogo">
-
-        <TextView
-            android:id="@+id/textViewFewestGuessesLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/fewest_guesses"
-            android:textColor="@color/white"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/textViewFewestGuesses"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="\?"
-            android:textColor="@color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="HardcodedText" />
-
-        <TextView
-            android:id="@+id/textViewFastestTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="\?"
-            android:textColor="@color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewFewestGuesses"
-            tools:ignore="HardcodedText" />
-
-        <TextView
-            android:id="@+id/textViewFastestTimeLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@string/fastest_time"
-            android:textColor="@color/white"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewFewestGuessesLabel" />
-
-        <TextView
-            android:id="@+id/tvSoundToggleLabel"
-            android:layout_width="0dp"
-            android:layout_height="32dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
-            android:gravity="center_vertical|end"
-            android:text="@string/sound"
-            android:textColor="@color/white"
-            app:layout_constraintEnd_toStartOf="@+id/switchSound"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewFastestTimeLabel" />
-
-        <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/switchSound"
-            android:layout_width="0dp"
-            android:layout_height="32dp"
-            android:layout_marginEnd="8dp"
-            android:checked="true"
-            app:layout_constraintBottom_toBottomOf="@+id/tvSoundToggleLabel"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tvSoundToggleLabel" />
-
-        <TextView
-            android:id="@+id/tvHighContrastToggleLabel"
-            android:layout_width="0dp"
-            android:layout_height="32dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
-            android:gravity="center_vertical|end"
-            android:text="@string/high_contrast"
-            android:textColor="@color/white"
-            app:layout_constraintBottom_toTopOf="@+id/tvVibrationToggleLabel"
-            app:layout_constraintEnd_toStartOf="@+id/switchVibrate"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvSoundToggleLabel" />
-
-        <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/switchHighContrast"
-            android:layout_width="0dp"
-            android:layout_height="32dp"
-            android:layout_marginEnd="8dp"
-            android:checked="true"
-            app:layout_constraintBottom_toBottomOf="@+id/tvHighContrastToggleLabel"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tvHighContrastToggleLabel" />
-
-        <TextView
-            android:id="@+id/tvVibrationToggleLabel"
-            android:layout_width="0dp"
-            android:layout_height="32dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
-            android:gravity="center_vertical|end"
-            android:text="@string/vibration"
-            android:textColor="@color/white"
-            app:layout_constraintBottom_toTopOf="@+id/tvDeductionToggleLabel"
-            app:layout_constraintEnd_toStartOf="@+id/switchVibrate"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvHighContrastToggleLabel" />
-
-        <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/switchVibrate"
-            android:layout_width="0dp"
-            android:layout_height="32dp"
-            android:layout_marginEnd="8dp"
-            android:checked="true"
-            app:layout_constraintBottom_toBottomOf="@+id/tvVibrationToggleLabel"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tvVibrationToggleLabel" />
-
-
-        <TextView
-            android:id="@+id/tvDeductionToggleLabel"
-            android:layout_width="0dp"
-            android:layout_height="32dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:gravity="center_vertical|end"
-            android:text="@string/assistance"
-            android:textColor="@color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/switchVibrate"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvVibrationToggleLabel" />
-
-        <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/switchAssistance"
-            android:layout_width="0dp"
-            android:layout_height="32dp"
-            android:layout_marginEnd="8dp"
-            android:checked="true"
-            app:layout_constraintBottom_toBottomOf="@+id/tvDeductionToggleLabel"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tvDeductionToggleLabel" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        app:srcCompat="@drawable/divider" />
 
     <TextView
-        android:id="@+id/textViewWordLengthLabel"
+        android:id="@+id/textViewWordDifficultyLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:text="@string/word_length"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="4dp"
+        android:text="@string/word_difficulty"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/seekBarWordLength"
-        app:layout_constraintStart_toStartOf="@+id/seekBarWordLength" />
+        app:layout_constraintBottom_toTopOf="@+id/seekBarWordDifficulty"
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/textViewWordDifficulty"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
-        android:text="@string/normal"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="@+id/seekBarWordDifficulty"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/seekBarWordDifficulty" />
-
-
-    <SeekBar
+    <com.benedetto.chalkjotto.definitions.ChalkSeekBar
         android:id="@+id/seekBarWordDifficulty"
         style="@style/Widget.AppCompat.SeekBar.Discrete"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="12dp"
         android:max="2"
         android:progress="0"
         app:layout_constraintBottom_toTopOf="@+id/textViewWordLengthLabel"
-        app:layout_constraintEnd_toStartOf="@+id/textViewWordDifficulty"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textViewWordDifficultyLabel"
+        android:id="@+id/textViewWordDifficulty"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:text="@string/word_difficulty"
+        android:text="@string/normal"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/seekBarWordDifficulty"
-        app:layout_constraintStart_toStartOf="@+id/seekBarWordDifficulty"
-        app:layout_constraintVertical_chainStyle="packed" />
+        app:layout_constraintBottom_toBottomOf="@+id/textViewWordDifficultyLabel"
+        app:layout_constraintEnd_toEndOf="@+id/seekBarWordDifficulty"
+        app:layout_constraintTop_toTopOf="@+id/textViewWordDifficultyLabel" />
 
-    <SeekBar
+    <TextView
+        android:id="@+id/textViewWordLengthLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="4dp"
+        android:text="@string/word_length"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/seekBarWordLength"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.benedetto.chalkjotto.definitions.ChalkSeekBar
         android:id="@+id/seekBarWordLength"
         style="@style/Widget.AppCompat.SeekBar.Discrete"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="12dp"
         android:max="3"
         android:progress="1"
-        app:layout_constraintBottom_toTopOf="@+id/buttonNewGame"
-        app:layout_constraintEnd_toStartOf="@+id/textViewWordLength"
+        app:layout_constraintBottom_toTopOf="@+id/divider3"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -264,29 +178,65 @@
         android:layout_marginEnd="32dp"
         android:text="5"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="@+id/seekBarWordLength"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewWordLengthLabel"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/seekBarWordLength"
+        app:layout_constraintTop_toTopOf="@+id/textViewWordLengthLabel"
         tools:ignore="HardcodedText" />
 
     <ImageView
-        android:id="@+id/buttonStats"
+        android:id="@+id/divider3"
+        android:layout_width="0dp"
+        android:layout_height="4dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="12dp"
+        android:layout_marginEnd="32dp"
+        android:contentDescription="@null"
+        android:scaleType="fitXY"
+        app:tint="@color/colorLetterNo"
+        app:layout_constraintBottom_toTopOf="@+id/buttonNewGame"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/divider" />
+
+    <TextView
+        android:id="@+id/buttonNewGame"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="16dp"
+        android:paddingHorizontal="8dp"
+        android:background="@drawable/new_game"
+        android:contentDescription="@string/new_game"
+        android:gravity="center"
+        android:text="@string/new_game"
+        android:textColor="@color/white"
+        android:textSize="@dimen/large_text"
+        app:layout_constraintBottom_toTopOf="@+id/buttonHelp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/buttonHelp"
         android:layout_width="@dimen/button_height"
         android:layout_height="@dimen/button_height"
-        android:layout_marginEnd="4dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:background="?attr/chalkKeyWhite"
-        android:contentDescription="@string/stats_title"
+        android:contentDescription="@string/help"
         android:gravity="center"
         android:padding="6dp"
-        android:src="@drawable/bar_chart_4_bars_24px"
+        android:src="@drawable/ic_baseline_help_outline_24"
         app:layout_constraintBottom_toTopOf="@+id/ivBottomBumper"
-        app:layout_constraintEnd_toStartOf="@+id/buttonLearn" />
+        app:layout_constraintEnd_toStartOf="@+id/buttonLearn"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/buttonLearn"
         android:layout_width="@dimen/button_height"
         android:layout_height="@dimen/button_height"
+        android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:background="?attr/chalkKeyWhite"
@@ -295,53 +245,70 @@
         android:padding="6dp"
         android:src="@drawable/ic_baseline_school_24"
         app:layout_constraintBottom_toTopOf="@+id/ivBottomBumper"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toStartOf="@+id/buttonSettings"
+        app:layout_constraintStart_toEndOf="@+id/buttonHelp" />
 
     <ImageView
-        android:id="@+id/buttonHelp"
+        android:id="@+id/buttonSettings"
         android:layout_width="@dimen/button_height"
         android:layout_height="@dimen/button_height"
         android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:background="?attr/chalkKeyWhite"
-        android:contentDescription="@string/help"
+        android:contentDescription="@string/settings"
         android:gravity="center"
         android:padding="6dp"
-        android:src="@drawable/ic_baseline_help_outline_24"
+        android:src="@drawable/settings_24px"
         app:layout_constraintBottom_toTopOf="@+id/ivBottomBumper"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toStartOf="@+id/buttonStats"
+        app:layout_constraintStart_toEndOf="@+id/buttonLearn" />
 
-    <TextView
-        android:id="@+id/buttonNewGame"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
+    <ImageView
+        android:id="@+id/buttonStats"
+        android:layout_width="@dimen/button_height"
+        android:layout_height="@dimen/button_height"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:background="@drawable/new_game"
-        android:contentDescription="@string/new_game"
+        android:background="?attr/chalkKeyWhite"
+        android:contentDescription="@string/stats_title"
         android:gravity="center"
-        android:scaleType="fitEnd"
-        android:text="@string/new_game"
-        android:textColor="@color/white"
-        android:textSize="@dimen/large_text"
+        android:padding="6dp"
+        android:src="@drawable/bar_chart_4_bars_24px"
+        app:layout_constraintBottom_toTopOf="@+id/ivBottomBumper"
+        app:layout_constraintEnd_toStartOf="@+id/buttonAchievements"
+        app:layout_constraintStart_toEndOf="@+id/buttonSettings" />
+
+    <ImageView
+        android:id="@+id/buttonAchievements"
+        android:layout_width="@dimen/button_height"
+        android:layout_height="@dimen/button_height"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="?attr/chalkKeyWhite"
+        android:contentDescription="@string/achievements_title"
+        android:gravity="center"
+        android:padding="6dp"
+        android:src="@drawable/trophy_24px"
         app:layout_constraintBottom_toTopOf="@+id/ivBottomBumper"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/buttonStats" />
 
     <ImageView
         android:id="@+id/ivBottomBumper"
         android:layout_width="0dp"
-        android:layout_height="84dp"
+        android:layout_height="80dp"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="8dp"
         android:adjustViewBounds="true"
-        android:rotation="180"
         android:contentDescription="@null"
+        android:rotation="180"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/cap" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

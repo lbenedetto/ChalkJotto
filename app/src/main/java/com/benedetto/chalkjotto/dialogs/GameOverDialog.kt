@@ -61,7 +61,7 @@ class GameOverDialog(
                     }
                 }
             }
-            if (gameState.allowSettingRecords) {
+            if (gameState.allowSettingRecords && gameState.numGuesses > 0) {
                 dao.insert(
                     GameRecord(
                         timestamp = System.currentTimeMillis(),

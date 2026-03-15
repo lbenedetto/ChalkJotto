@@ -88,5 +88,7 @@
     <string name="stats_guesses_chart_title">Guesses Trend</string>
     <string name="stats_chart_histogram">Guesses Histogram</string>
     <string name="stats_no_data">No data yet</string>
+    <string name="achievements_title">Achievements</string>
+    <string name="settings">Settings</string>
 
 </resources>
