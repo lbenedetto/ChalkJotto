@@ -74,7 +74,8 @@ class StatsViewModel(application: Application) : AndroidViewModel(application) {
             val summary = dao.getSummary(d, l)
             val histogram = dao.getGuessHistogram(d, l)
             val trend = dao.getRecentRecords(d, l).reversed()
-            val winRatePct = if (summary.totalGames > 0) (summary.wins * 100) / summary.totalGames else 0
+            val winRatePct =
+                if (summary.totalGames > 0) (summary.wins * 100) / summary.totalGames else 0
             _uiState.value = StatsUiState(
                 totalGames = summary.totalGames,
                 winRatePct = winRatePct,

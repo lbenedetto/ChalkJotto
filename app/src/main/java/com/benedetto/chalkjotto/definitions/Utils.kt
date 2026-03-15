@@ -46,7 +46,7 @@ fun animatePopIn(view: View) {
     view.startAnimation(zoomIn)
 }
 
-fun getFont(context: Context, @FontRes fontId: Int) : Typeface {
+fun getFont(context: Context, @FontRes fontId: Int): Typeface {
     return try {
         ResourcesCompat.getFont(context, fontId) ?: Typeface.DEFAULT
     } catch (e: Exception) {

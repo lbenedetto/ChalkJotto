@@ -19,9 +19,14 @@ object PenClickOnTouch : View.OnTouchListener {
                 penClickDownSound()
                 rect = Rect(v.left, v.top, v.right, v.bottom)
             }
+
             MotionEvent.ACTION_MOVE -> {
                 if (!isOutSide) {
-                    if (!(rect != null && rect!!.contains(v.left + event.x.toInt(), v.top + event.y.toInt()))) {
+                    if (!(rect != null && rect!!.contains(
+                            v.left + event.x.toInt(),
+                            v.top + event.y.toInt()
+                        ))
+                    ) {
                         isOutSide = true
                         penClickUpSound()
                     } else {
@@ -29,6 +34,7 @@ object PenClickOnTouch : View.OnTouchListener {
                     }
                 }
             }
+
             MotionEvent.ACTION_UP -> {
                 if (!isOutSide) penClickUpSound()
             }

@@ -22,13 +22,18 @@ import com.benedetto.chalkjotto.definitions.Sound
 class AboutFragment : Fragment() {
     private lateinit var binding: FragmentAboutBinding
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         binding = FragmentAboutBinding.inflate(layoutInflater, container, false)
 
         binding.tvContactMe.setOnClickListener {
             val sendEmailTo = "chalkjotto@gmail.com"
 
-            val clipboard = ContextCompat.getSystemService(requireContext(), ClipboardManager::class.java)
+            val clipboard =
+                ContextCompat.getSystemService(requireContext(), ClipboardManager::class.java)
             clipboard?.setPrimaryClip(ClipData.newPlainText(sendEmailTo, sendEmailTo))
 
             Toast.makeText(requireContext(), "Copied $sendEmailTo", Toast.LENGTH_SHORT)

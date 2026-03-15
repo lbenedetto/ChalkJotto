@@ -40,6 +40,7 @@ class MainActivity : JottoActivity() {
                     goToFragment(it.destination)
                 }.launch(null)
             }
+
             savedInstanceState != null -> return
             else -> goToFragment(TitleTag)
         }
@@ -66,10 +67,10 @@ class MainActivity : JottoActivity() {
 
     private fun goToFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
-                .setCustomAnimations(R.anim.fade_in, R.anim.fade_out, R.anim.fade_in, R.anim.fade_out)
-                .replace(R.id.fragmentContainer, fragment, fragment.tag)
-                .addToBackStack(fragment.tag)
-                .commit()
+            .setCustomAnimations(R.anim.fade_in, R.anim.fade_out, R.anim.fade_in, R.anim.fade_out)
+            .replace(R.id.fragmentContainer, fragment, fragment.tag)
+            .addToBackStack(fragment.tag)
+            .commit()
     }
 
     private fun getFragmentInstance(tag: String): Fragment {
@@ -92,7 +93,11 @@ class MainActivity : JottoActivity() {
         super.onResume()
         if (activeFragmentTag.value == TitleTag && !DataManager.hasSeenRatingPrompt && DataManager.wonGames >= 5) {
             DataManager.hasSeenRatingPrompt = true
-            Toast.makeText(this, "You seem to be enjoying the game :) Please consider leaving a rating <3", Toast.LENGTH_LONG).show()
+            Toast.makeText(
+                this,
+                "You seem to be enjoying the game :) Please consider leaving a rating <3",
+                Toast.LENGTH_LONG
+            ).show()
         }
     }
 }

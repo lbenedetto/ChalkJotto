@@ -34,7 +34,11 @@ class TitleFragment : Fragment() {
         super.onCreate(savedInstanceState)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         binding = FragmentTitleBinding.inflate(layoutInflater, container, false)
 
         val activity = requireActivity() as MainActivity
@@ -68,7 +72,8 @@ class TitleFragment : Fragment() {
         }
         binding.buttonLearn.setOnTouchListener(ScaleOnTouch)
 
-        binding.seekBarWordDifficulty.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+        binding.seekBarWordDifficulty.setOnSeekBarChangeListener(object :
+            SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
                 DataManager.difficulty = progress
                 binding.textViewWordDifficulty.text = when (progress) {
@@ -83,7 +88,8 @@ class TitleFragment : Fragment() {
             override fun onStartTrackingTouch(seekBar: SeekBar?) {}
         })
 
-        binding.seekBarWordLength.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+        binding.seekBarWordLength.setOnSeekBarChangeListener(object :
+            SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
                 val len = progress + MIN_WORD_LENGTH
                 DataManager.wordLength = len
@@ -127,14 +133,14 @@ class TitleFragment : Fragment() {
     }
 
 
-
     override fun onResume() {
         super.onResume()
         updateReadouts()
     }
 
     private fun updateReadouts() {
-       binding.textViewFewestGuesses.text = DataManager.fewestGuesses?.toString() ?: "?"
-       binding.textViewFastestTime.text = DataManager.fastestTimeSeconds?.let { time -> secondsToTimeDisplay(time) } ?: "?"
+        binding.textViewFewestGuesses.text = DataManager.fewestGuesses?.toString() ?: "?"
+        binding.textViewFastestTime.text =
+            DataManager.fastestTimeSeconds?.let { time -> secondsToTimeDisplay(time) } ?: "?"
     }
 }

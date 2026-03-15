@@ -20,11 +20,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class GameOverDialog(
-        var activity: Activity,
-        var gameState: GameState,
-        var oddsOfLuckyWin: Int,
-        var scope: CoroutineScope,
-        var onCloseAction: () -> Unit
+    var activity: Activity,
+    var gameState: GameState,
+    var oddsOfLuckyWin: Int,
+    var scope: CoroutineScope,
+    var onCloseAction: () -> Unit
 ) {
 
     fun show() {
@@ -81,24 +81,32 @@ class GameOverDialog(
         }
 
         binding.textViewTitle.text = activity.getString(
-                if (gameState.didWin && gameState.numGuesses == 1L) {
-                    R.string.lucky
-                } else {
-                    if (gameState.didWin) R.string.win else R.string.lose
-                }
+            if (gameState.didWin && gameState.numGuesses == 1L) {
+                R.string.lucky
+            } else {
+                if (gameState.didWin) R.string.win else R.string.lose
+            }
         )
         binding.textViewInfo.text =
-                if (gameState.didWin) {
-                    if (gameState.numGuesses == 1L)
-                        activity.getString(R.string.lucky_message, oddsOfLuckyWin)
-                    else
-                        activity.getString(R.string.info, gameState.numGuesses, secondsToTimeDisplay(gameState.numSeconds))
-                } else {
-                    if (gameState.numGuesses == 0L)
-                        activity.getString(R.string.gave_up_without_trying)
-                    else
-                        activity.getString(R.string.gave_up, gameState.numGuesses, secondsToTimeDisplay(gameState.numSeconds))
-                }
+            if (gameState.didWin) {
+                if (gameState.numGuesses == 1L)
+                    activity.getString(R.string.lucky_message, oddsOfLuckyWin)
+                else
+                    activity.getString(
+                        R.string.info,
+                        gameState.numGuesses,
+                        secondsToTimeDisplay(gameState.numSeconds)
+                    )
+            } else {
+                if (gameState.numGuesses == 0L)
+                    activity.getString(R.string.gave_up_without_trying)
+                else
+                    activity.getString(
+                        R.string.gave_up,
+                        gameState.numGuesses,
+                        secondsToTimeDisplay(gameState.numSeconds)
+                    )
+            }
 
         var clicked = false
         binding.buttonContinue.setOnClickListener {

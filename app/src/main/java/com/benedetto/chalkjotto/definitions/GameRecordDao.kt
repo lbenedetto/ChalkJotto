@@ -21,7 +21,8 @@ interface GameRecordDao {
     @Insert
     suspend fun insert(record: GameRecord)
 
-    @Query("""
+    @Query(
+        """
         SELECT
             COUNT(*) AS totalGames,
             SUM(CASE WHEN didWin = 1 THEN 1 ELSE 0 END) AS wins,
@@ -30,10 +31,12 @@ interface GameRecordDao {
         FROM game_records
         WHERE (:difficulty IS NULL OR difficulty = :difficulty)
           AND (:wordLength IS NULL OR wordLength = :wordLength)
-    """)
+    """
+    )
     suspend fun getSummary(difficulty: Int?, wordLength: Int?): StatsSummary
 
-    @Query("""
+    @Query(
+        """
         SELECT numGuesses, COUNT(*) AS count
         FROM game_records
         WHERE didWin = 1
@@ -41,15 +44,18 @@ interface GameRecordDao {
           AND (:wordLength IS NULL OR wordLength = :wordLength)
         GROUP BY numGuesses
         ORDER BY numGuesses ASC
-    """)
+    """
+    )
     suspend fun getGuessHistogram(difficulty: Int?, wordLength: Int?): List<GuessHistogramEntry>
 
-    @Query("""
+    @Query(
+        """
         SELECT * FROM game_records
         WHERE (:difficulty IS NULL OR difficulty = :difficulty)
           AND (:wordLength IS NULL OR wordLength = :wordLength)
         ORDER BY timestamp DESC
         LIMIT 50
-    """)
+    """
+    )
     suspend fun getRecentRecords(difficulty: Int?, wordLength: Int?): List<GameRecord>
 }

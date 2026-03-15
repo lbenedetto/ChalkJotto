@@ -18,7 +18,11 @@ import com.benedetto.chalkjotto.definitions.*
 class ShareChallengeFragment : Fragment() {
     private lateinit var binding: FragmentShareChallengeBinding
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         binding = FragmentShareChallengeBinding.inflate(layoutInflater, container, false)
 
         val activity = requireActivity() as MainActivity

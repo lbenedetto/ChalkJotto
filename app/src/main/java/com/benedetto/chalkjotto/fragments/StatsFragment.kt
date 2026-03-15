@@ -44,9 +44,24 @@ private val winFlagsKey = ExtraStore.Key<List<Boolean>>()
 class StatsFragment : Fragment() {
 
     private val chartWhite by lazy { ContextCompat.getColor(requireContext(), R.color.white) }
-    private val chartWhiteFaint by lazy { ContextCompat.getColor(requireContext(), R.color.whiteFaint) }
-    private val colorWin by lazy { ContextCompat.getColor(requireContext(), R.color.colorLetterYes) }
-    private val colorLoss by lazy { ContextCompat.getColor(requireContext(), R.color.colorLetterNo) }
+    private val chartWhiteFaint by lazy {
+        ContextCompat.getColor(
+            requireContext(),
+            R.color.whiteFaint
+        )
+    }
+    private val colorWin by lazy {
+        ContextCompat.getColor(
+            requireContext(),
+            R.color.colorLetterYes
+        )
+    }
+    private val colorLoss by lazy {
+        ContextCompat.getColor(
+            requireContext(),
+            R.color.colorLetterNo
+        )
+    }
 
     private lateinit var binding: FragmentStatsBinding
     private val viewModel: StatsViewModel by viewModels()
@@ -55,7 +70,11 @@ class StatsFragment : Fragment() {
     private val guessesProducer = CartesianChartModelProducer()
     private val timeProducer = CartesianChartModelProducer()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         binding = FragmentStatsBinding.inflate(layoutInflater, container, false)
 
         setupFilterChips()
@@ -75,7 +94,8 @@ class StatsFragment : Fragment() {
                 binding.tvTotalGames.text = state.totalGames.toString()
                 binding.tvWinRate.text = "${state.winRatePct}%"
                 binding.tvAvgGuesses.text = state.avgGuesses?.let { "%.1f".format(it) } ?: "—"
-                binding.tvAvgTime.text = state.avgSeconds?.let { secondsToTimeDisplay(it.toLong()) } ?: "—"
+                binding.tvAvgTime.text =
+                    state.avgSeconds?.let { secondsToTimeDisplay(it.toLong()) } ?: "—"
                 updateHistogramChart(state.guessHistogram)
                 updateGuessesTrendChart(state.trendRecords, state.guessesTrend)
                 updateTimeTrendChart(state.trendRecords, state.timeTrend)
@@ -133,7 +153,10 @@ class StatsFragment : Fragment() {
 
     private fun axisLabel(): TextComponent {
         val typeface = ResourcesCompat.getFont(requireContext(), R.font.architects_daughter)
-        return TextComponent(color = chartWhite, typeface = typeface ?: android.graphics.Typeface.DEFAULT)
+        return TextComponent(
+            color = chartWhite,
+            typeface = typeface ?: android.graphics.Typeface.DEFAULT
+        )
     }
 
     // PointProvider that colors each point green (win) or red (loss) via ExtraStore
@@ -146,6 +169,7 @@ class StatsFragment : Fragment() {
             ShapeComponent(fill = Fill(colorLoss), shape = CorneredShape.rounded(allPercent = 100)),
             sizeDp = 10f,
         )
+
         override fun getPoint(
             entry: LineCartesianLayerModel.Entry,
             seriesIndex: Int,
@@ -154,12 +178,14 @@ class StatsFragment : Fragment() {
             val isWin = extraStore.getOrNull(winFlagsKey)?.getOrNull(entry.x.toInt()) ?: true
             return if (isWin) winPoint else lossPoint
         }
+
         override fun getLargestPoint(extraStore: ExtraStore) = winPoint
     }
 
     private fun setupCharts() {
         val xLabelFormatter = CartesianValueFormatter { context, x, _ ->
-            context.model.extraStore.getOrNull(xLabelsKey)?.getOrNull(x.toInt()) ?: x.toInt().toString()
+            context.model.extraStore.getOrNull(xLabelsKey)?.getOrNull(x.toInt()) ?: x.toInt()
+                .toString()
         }
         val timeLabelFormatter = CartesianValueFormatter { _, x, _ ->
             secondsToTimeDisplay(x.toLong())
@@ -168,7 +194,12 @@ class StatsFragment : Fragment() {
         val axisLine = LineComponent(fill = Fill(chartWhite), thicknessDp = 1.5f)
         val axisTick = LineComponent(fill = Fill(chartWhite), thicknessDp = 1.5f)
         val guideline = LineComponent(fill = Fill(chartWhiteFaint), thicknessDp = 1f)
-        val noScrollZoom = ZoomHandler(zoomEnabled = false, initialZoom = Zoom.Content, minZoom = Zoom.Content, maxZoom = Zoom.Content)
+        val noScrollZoom = ZoomHandler(
+            zoomEnabled = false,
+            initialZoom = Zoom.Content,
+            minZoom = Zoom.Content,
+            maxZoom = Zoom.Content
+        )
 
         binding.barChartGuesses.chart = CartesianChart(
             ColumnCartesianLayer(
@@ -203,7 +234,11 @@ class StatsFragment : Fragment() {
 
         val dataLine = LineCartesianLayer.Line(
             fill = LineCartesianLayer.LineFill.single(Fill(chartWhiteFaint)),
-            stroke = LineCartesianLayer.LineStroke.Dashed(thicknessDp = 1f, dashLengthDp = 8f, gapLengthDp = 4f),
+            stroke = LineCartesianLayer.LineStroke.Dashed(
+                thicknessDp = 1f,
+                dashLengthDp = 8f,
+                gapLengthDp = 4f
+            ),
             pointProvider = winLossPointProvider(),
         )
         val regressionLine = LineCartesianLayer.Line(
@@ -245,7 +280,11 @@ class StatsFragment : Fragment() {
         if (histogram.isEmpty()) return
         viewLifecycleOwner.lifecycleScope.launch {
             histogramProducer.runTransaction {
-                columnSeries { series(x = histogram.map { it.numGuesses }, y = histogram.map { it.count }) }
+                columnSeries {
+                    series(
+                        x = histogram.map { it.numGuesses },
+                        y = histogram.map { it.count })
+                }
                 extras { it[xLabelsKey] = histogram.map { e -> e.numGuesses.toString() } }
             }
         }
@@ -257,7 +296,10 @@ class StatsFragment : Fragment() {
             guessesProducer.runTransaction {
                 lineSeries {
                     series(y = records.map { it.numGuesses })
-                    if (trend != null) series(x = listOf(trend.x0, trend.x1), y = listOf(trend.y0, trend.y1))
+                    if (trend != null) series(
+                        x = listOf(trend.x0, trend.x1),
+                        y = listOf(trend.y0, trend.y1)
+                    )
                 }
                 extras { it[winFlagsKey] = records.map { r -> r.didWin } }
             }
@@ -270,7 +312,10 @@ class StatsFragment : Fragment() {
             timeProducer.runTransaction {
                 lineSeries {
                     series(y = records.map { it.numSeconds })
-                    if (trend != null) series(x = listOf(trend.x0, trend.x1), y = listOf(trend.y0, trend.y1))
+                    if (trend != null) series(
+                        x = listOf(trend.x0, trend.x1),
+                        y = listOf(trend.y0, trend.y1)
+                    )
                 }
                 extras { it[winFlagsKey] = records.map { r -> r.didWin } }
             }

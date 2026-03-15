@@ -16,12 +16,18 @@ object ScaleOnTouch : View.OnTouchListener {
                 v.scaleY = .9f
                 rect = Rect(v.left, v.top, v.right, v.bottom)
             }
+
             MotionEvent.ACTION_MOVE -> {
-                if (!(rect != null && rect!!.contains(v.left + event.x.toInt(), v.top + event.y.toInt()))) {
+                if (!(rect != null && rect!!.contains(
+                        v.left + event.x.toInt(),
+                        v.top + event.y.toInt()
+                    ))
+                ) {
                     v.scaleX = 1f
                     v.scaleY = 1f
                 }
             }
+
             MotionEvent.ACTION_UP -> {
                 v.scaleX = 1f
                 v.scaleY = 1f

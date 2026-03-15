@@ -32,7 +32,11 @@ class AcceptChallengeFragment : Fragment() {
         super.onCreate(savedInstanceState)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         binding = FragmentAcceptChallengeBinding.inflate(layoutInflater, container, false)
 
         val activity = requireActivity() as MainActivity
@@ -74,10 +78,10 @@ class AcceptChallengeFragment : Fragment() {
         }
 
         val sharingDeductions = gameState.yellowLetters.isNotEmpty()
-            || gameState.redLetters.isNotEmpty()
-            || gameState.greenLetters.isNotEmpty()
-            || gameState.blueLetters.isNotEmpty()
-            || gameState.pinkLetters.isNotEmpty()
+                || gameState.redLetters.isNotEmpty()
+                || gameState.greenLetters.isNotEmpty()
+                || gameState.blueLetters.isNotEmpty()
+                || gameState.pinkLetters.isNotEmpty()
 
         val sharingGuesses = gameState.guessedWords.isNotEmpty()
 

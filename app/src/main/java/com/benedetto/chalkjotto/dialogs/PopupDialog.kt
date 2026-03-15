@@ -9,9 +9,9 @@ import com.benedetto.chalkjotto.definitions.dpToPx
 
 class PopupDialog(private val activity: Activity, view: View) {
     var popup = PopupWindow(
-            view,
-            activity.window.decorView.width - dpToPx(32),
-            LinearLayout.LayoutParams.WRAP_CONTENT
+        view,
+        activity.window.decorView.width - dpToPx(32),
+        LinearLayout.LayoutParams.WRAP_CONTENT
     )
 
     fun setOnDismissListener(listener: () -> Unit) {

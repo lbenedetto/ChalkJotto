@@ -59,7 +59,10 @@ fun showColorPickerDialog(context: Context, key: Key, model: GameModel) {
 
     dialog.setContentView(binding.root)
     val window = dialog.window!!
-    window.setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT)
+    window.setLayout(
+        WindowManager.LayoutParams.WRAP_CONTENT,
+        WindowManager.LayoutParams.WRAP_CONTENT
+    )
     window.setBackgroundDrawableResource(android.R.color.transparent)
     window.setGravity(Gravity.CENTER or Gravity.BOTTOM)
     dialog.show()
