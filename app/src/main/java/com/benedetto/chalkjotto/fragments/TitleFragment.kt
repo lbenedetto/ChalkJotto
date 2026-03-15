@@ -8,6 +8,7 @@ import android.widget.SeekBar
 import androidx.activity.result.ActivityResultLauncher
 import androidx.appcompat.widget.SwitchCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.benedetto.chalkjotto.LearnTag
 import com.benedetto.chalkjotto.MainActivity
 import com.benedetto.chalkjotto.R
@@ -18,6 +19,8 @@ import com.benedetto.chalkjotto.databinding.FragmentTitleBinding
 import com.benedetto.chalkjotto.definitions.*
 import com.benedetto.chalkjotto.definitions.Sound.tapSound
 import com.benedetto.chalkjotto.game.GameActivity
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.util.Locale
 
 private const val MIN_WORD_LENGTH = 4
@@ -139,8 +142,17 @@ class TitleFragment : Fragment() {
     }
 
     private fun updateReadouts() {
-        binding.textViewFewestGuesses.text = DataManager.fewestGuesses?.toString() ?: "?"
-        binding.textViewFastestTime.text =
-            DataManager.fastestTimeSeconds?.let { time -> secondsToTimeDisplay(time) } ?: "?"
+        val difficulty = DataManager.difficulty
+        val wordLength = DataManager.wordLength
+        viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
+            val dao = AppDatabase.getInstance(requireContext()).gameRecordDao()
+            val fewest = dao.getFewestGuesses(difficulty, wordLength)
+            val fastest = dao.getFastestTime(difficulty, wordLength)
+            launch(Dispatchers.Main) {
+                binding.textViewFewestGuesses.text = fewest?.toString() ?: "?"
+                binding.textViewFastestTime.text =
+                    fastest?.let { secondsToTimeDisplay(it) } ?: "?"
+            }
+        }
     }
 }

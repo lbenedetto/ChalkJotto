@@ -10,7 +10,6 @@ object DataManager {
     private lateinit var prefs: SharedPreferences
     private const val PREFERRED_WORD_LENGTH = "wordLength"
     private const val PREFERRED_DIFFICULTY = "difficulty"
-    private const val WON_GAMES = "wonGames"
     private const val ACTIVE_LESSON = "activeLesson"
     private const val HAS_SEEN_TUTORIAL = "hasSeenTutorial"
     private const val HAS_SEEN_RATING_PROMPT = "hasSeenRatingPrompt"
@@ -18,8 +17,6 @@ object DataManager {
     private const val SOUND_ENABLED = "soundEnabled"
     private const val HIGH_CONTRAST_MODE_ENABLED = "highContrastModeEnabled"
     private const val ASSISTANCE_ENABLED = "assistanceEnabled"
-    private const val FEWEST_GUESSES = "fewestGuesses"
-    private const val FASTEST_TIME = "fastestTime"
     private const val GAME_STATE_GREEN_LETTERS = "gameState_greenLetters"
     private const val GAME_STATE_YELLOW_LETTERS = "gameState_yellowLetters"
     private const val GAME_STATE_BLUE_LETTERS = "gameState_blueLetters"
@@ -73,21 +70,9 @@ object DataManager {
         get() = prefs.getBoolean(ASSISTANCE_ENABLED, true)
         set(value) = put(ASSISTANCE_ENABLED, value)
 
-    var fewestGuesses: Long?
-        get() {
-            val value = prefs.getLong("${FEWEST_GUESSES}_${difficulty}_$wordLength", -1L)
-            if (value == -1L) return null
-            return value
-        }
-        set(value) = put("${FEWEST_GUESSES}_${difficulty}_$wordLength", value ?: -1L)
-
     var hasSeenRatingPrompt: Boolean
         get() = prefs.getBoolean(HAS_SEEN_RATING_PROMPT, false)
         set(value) = put(HAS_SEEN_RATING_PROMPT, value)
-
-    var wonGames: Int
-        get() = prefs.getInt(WON_GAMES, 0)
-        set(value) = put(WON_GAMES, value)
 
     var activeLesson: String?
         get() = prefs.getString(ACTIVE_LESSON, null)
@@ -100,14 +85,6 @@ object DataManager {
     fun setCompletedLesson(lesson: String) {
         put("LESSON_$lesson", true)
     }
-
-    var fastestTimeSeconds: Long?
-        get() {
-            val value = prefs.getLong("${FASTEST_TIME}_${difficulty}_$wordLength", -1L)
-            if (value == -1L) return null
-            return value
-        }
-        set(value) = put("${FASTEST_TIME}_${difficulty}_$wordLength", value ?: -1L)
 
     var isGameInProgress: Boolean
         get() {

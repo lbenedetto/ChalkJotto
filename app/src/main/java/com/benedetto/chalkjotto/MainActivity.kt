@@ -6,11 +6,15 @@ import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.lifecycleScope
 import com.benedetto.chalkjotto.databinding.ActivityMainBinding
+import com.benedetto.chalkjotto.definitions.AppDatabase
 import com.benedetto.chalkjotto.definitions.DataManager
 import com.benedetto.chalkjotto.definitions.fitToWindowInsets
 import com.benedetto.chalkjotto.fragments.*
 import com.benedetto.chalkjotto.game.GameActivity
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 //https://www.deviantart.com/mattiamc/art/ChalkBoard-Texture-MC2015-506107812
 const val TutorialTag = "Tutorial"
@@ -74,30 +78,33 @@ class MainActivity : JottoActivity() {
     }
 
     private fun getFragmentInstance(tag: String): Fragment {
-        var fragment = supportFragmentManager.findFragmentByTag(tag)
-        if (fragment == null) {
-            fragment = when (tag) {
-                TutorialTag -> TutorialFragment()
-                ShareChallengeTag -> ShareChallengeFragment()
-                AcceptChallengeTag -> AcceptChallengeFragment()
-                AboutTag -> AboutFragment()
-                LearnTag -> LearnFragment()
-                StatsTag -> StatsFragment()
-                else -> TitleFragment()
-            }
+        val fragment = supportFragmentManager.findFragmentByTag(tag)
+        if (fragment != null) return fragment
+        return when (tag) {
+            TutorialTag -> TutorialFragment()
+            ShareChallengeTag -> ShareChallengeFragment()
+            AcceptChallengeTag -> AcceptChallengeFragment()
+            AboutTag -> AboutFragment()
+            LearnTag -> LearnFragment()
+            StatsTag -> StatsFragment()
+            else -> TitleFragment()
         }
-        return fragment
     }
 
     override fun onResume() {
         super.onResume()
-        if (activeFragmentTag.value == TitleTag && !DataManager.hasSeenRatingPrompt && DataManager.wonGames >= 5) {
-            DataManager.hasSeenRatingPrompt = true
-            Toast.makeText(
-                this,
-                "You seem to be enjoying the game :) Please consider leaving a rating <3",
-                Toast.LENGTH_LONG
-            ).show()
+        if (activeFragmentTag.value != TitleTag || DataManager.hasSeenRatingPrompt) return
+        lifecycleScope.launch(Dispatchers.IO) {
+            val wins = AppDatabase.getInstance(this@MainActivity).gameRecordDao().getWinCount()
+            if (wins < 5) return@launch
+            launch(Dispatchers.Main) {
+                DataManager.hasSeenRatingPrompt = true
+                Toast.makeText(
+                    this@MainActivity,
+                    "You seem to be enjoying the game :) Please consider leaving a rating <3",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
         }
     }
 }

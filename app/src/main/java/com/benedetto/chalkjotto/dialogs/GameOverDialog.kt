@@ -7,7 +7,6 @@ import com.benedetto.chalkjotto.ShareChallengeTag
 import com.benedetto.chalkjotto.TitleTag
 import com.benedetto.chalkjotto.databinding.DialogGameOverBinding
 import com.benedetto.chalkjotto.definitions.AppDatabase
-import com.benedetto.chalkjotto.definitions.DataManager
 import com.benedetto.chalkjotto.definitions.GameRecord
 import com.benedetto.chalkjotto.definitions.Sound.tapSound
 import com.benedetto.chalkjotto.definitions.newBlankTile
@@ -38,45 +37,41 @@ class GameOverDialog(
             inputGuessWordLayout.addView(tile)
         }
 
-        // Persist game record to database (wins and losses)
+        // Persist game record and update record-breaking UI
         scope.launch(Dispatchers.IO) {
-            AppDatabase.getInstance(activity).gameRecordDao().insert(
-                GameRecord(
-                    timestamp = System.currentTimeMillis(),
-                    difficulty = gameState.wordDifficulty,
-                    wordLength = gameState.wordLength,
-                    numGuesses = gameState.numGuesses,
-                    numSeconds = gameState.numSeconds,
-                    didWin = gameState.didWin
-                )
-            )
-        }
+            val dao = AppDatabase.getInstance(activity).gameRecordDao()
+            if (gameState.didWin && gameState.allowSettingRecords) {
+                val previousFewestGuesses = dao.getFewestGuesses(gameState.wordDifficulty, gameState.wordLength)
+                val previousFastestTime = dao.getFastestTime(gameState.wordDifficulty, gameState.wordLength)
 
-        // Keeping track of best scores
-        if (gameState.didWin) {
-            DataManager.wonGames++
-            if (gameState.allowSettingRecords) {
-                val previousFewestGuesses = DataManager.fewestGuesses
-                if (previousFewestGuesses == null || previousFewestGuesses > gameState.numGuesses) {
-                    if (previousFewestGuesses != null) {
+                if (previousFewestGuesses != null && previousFewestGuesses > gameState.numGuesses) {
+                    activity.runOnUiThread {
                         binding.textViewInfo2.text = activity.getString(
                             R.string.fewest_guesses_improved,
                             previousFewestGuesses
                         )
                     }
-                    DataManager.fewestGuesses = gameState.numGuesses
                 }
-
-                val previousFastestTime = DataManager.fastestTimeSeconds
-                if (previousFastestTime == null || previousFastestTime > gameState.numSeconds) {
-                    if (previousFastestTime != null) {
+                if (previousFastestTime != null && previousFastestTime > gameState.numSeconds) {
+                    activity.runOnUiThread {
                         binding.textViewInfo3.text = activity.getString(
                             R.string.fastest_time_improved,
                             secondsToTimeDisplay(previousFastestTime)
                         )
                     }
-                    DataManager.fastestTimeSeconds = gameState.numSeconds
                 }
+            }
+            if (gameState.allowSettingRecords) {
+                dao.insert(
+                    GameRecord(
+                        timestamp = System.currentTimeMillis(),
+                        difficulty = gameState.wordDifficulty,
+                        wordLength = gameState.wordLength,
+                        numGuesses = gameState.numGuesses,
+                        numSeconds = gameState.numSeconds,
+                        didWin = gameState.didWin
+                    )
+                )
             }
         }
 

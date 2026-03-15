@@ -58,4 +58,29 @@ interface GameRecordDao {
     """
     )
     suspend fun getRecentRecords(difficulty: Int?, wordLength: Int?): List<GameRecord>
+
+    @Query(
+        """
+        SELECT MIN(numGuesses)
+        FROM game_records
+        WHERE didWin = 1
+          AND (:difficulty IS NULL OR difficulty = :difficulty)
+          AND (:wordLength IS NULL OR wordLength = :wordLength)
+    """
+    )
+    suspend fun getFewestGuesses(difficulty: Int?, wordLength: Int?): Long?
+
+    @Query(
+        """
+        SELECT MIN(numSeconds)
+        FROM game_records
+        WHERE didWin = 1
+          AND (:difficulty IS NULL OR difficulty = :difficulty)
+          AND (:wordLength IS NULL OR wordLength = :wordLength)
+    """
+    )
+    suspend fun getFastestTime(difficulty: Int?, wordLength: Int?): Long?
+
+    @Query("SELECT COUNT(*) FROM game_records WHERE didWin = 1")
+    suspend fun getWinCount(): Int
 }
