@@ -1,4 +1,4 @@
-package com.benedetto.chalkjotto.definitions
+package com.benedetto.chalkjotto.database.gamerecord
 
 import androidx.room.Dao
 import androidx.room.Insert

@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.lifecycleScope
 import com.benedetto.chalkjotto.databinding.ActivityMainBinding
-import com.benedetto.chalkjotto.definitions.AppDatabase
+import com.benedetto.chalkjotto.database.AppDatabase
 import com.benedetto.chalkjotto.definitions.DataManager
 import com.benedetto.chalkjotto.definitions.fitToWindowInsets
 import com.benedetto.chalkjotto.fragments.*
@@ -25,6 +25,7 @@ const val AboutTag = "About"
 const val LearnTag = "Learn"
 const val StatsTag = "Stats"
 const val SettingsTag = "Settings"
+const val AchievementsTag = "Achievements"
 
 class MainActivity : JottoActivity() {
 
@@ -89,6 +90,7 @@ class MainActivity : JottoActivity() {
             LearnTag -> LearnFragment()
             StatsTag -> StatsFragment()
             SettingsTag -> SettingsFragment()
+            AchievementsTag -> AchievementsFragment()
             else -> TitleFragment()
         }
     }

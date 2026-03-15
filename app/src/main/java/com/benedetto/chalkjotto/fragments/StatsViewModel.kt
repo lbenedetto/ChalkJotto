@@ -3,9 +3,9 @@ package com.benedetto.chalkjotto.fragments
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import com.benedetto.chalkjotto.definitions.AppDatabase
-import com.benedetto.chalkjotto.definitions.GameRecord
-import com.benedetto.chalkjotto.definitions.GuessHistogramEntry
+import com.benedetto.chalkjotto.database.AppDatabase
+import com.benedetto.chalkjotto.database.gamerecord.GameRecord
+import com.benedetto.chalkjotto.database.gamerecord.GuessHistogramEntry
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

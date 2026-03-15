@@ -2,12 +2,15 @@ package com.benedetto.chalkjotto.dialogs
 
 import android.app.Activity
 import android.content.Intent
+import android.widget.Toast
 import com.benedetto.chalkjotto.R
 import com.benedetto.chalkjotto.ShareChallengeTag
 import com.benedetto.chalkjotto.TitleTag
 import com.benedetto.chalkjotto.databinding.DialogGameOverBinding
-import com.benedetto.chalkjotto.definitions.AppDatabase
-import com.benedetto.chalkjotto.definitions.GameRecord
+import com.benedetto.chalkjotto.database.achievement.AchievementId
+import com.benedetto.chalkjotto.database.achievement.AchievementManager
+import com.benedetto.chalkjotto.database.AppDatabase
+import com.benedetto.chalkjotto.database.gamerecord.GameRecord
 import com.benedetto.chalkjotto.definitions.Sound.tapSound
 import com.benedetto.chalkjotto.definitions.newBlankTile
 import com.benedetto.chalkjotto.definitions.secondsToTimeDisplay
@@ -72,6 +75,14 @@ class GameOverDialog(
                         didWin = gameState.didWin
                     )
                 )
+            }
+            val db = AppDatabase.getInstance(activity)
+            val newlyUnlocked = AchievementManager.checkAndUnlock(gameState, db.achievementDao())
+            if (newlyUnlocked.isNotEmpty()) {
+                activity.runOnUiThread {
+                    val names = newlyUnlocked.joinToString(", ") { it.displayName() }
+                    Toast.makeText(activity, "Achievement unlocked: $names", Toast.LENGTH_SHORT).show()
+                }
             }
         }
 

@@ -12,8 +12,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.benedetto.chalkjotto.BuildConfig
 import com.benedetto.chalkjotto.databinding.FragmentStatsBinding
-import com.benedetto.chalkjotto.definitions.GameRecord
-import com.benedetto.chalkjotto.definitions.GuessHistogramEntry
+import com.benedetto.chalkjotto.database.gamerecord.GameRecord
+import com.benedetto.chalkjotto.database.gamerecord.GuessHistogramEntry
 import com.benedetto.chalkjotto.definitions.ScaleOnTouch
 import com.benedetto.chalkjotto.definitions.Sound.tapSound
 import com.benedetto.chalkjotto.definitions.secondsToTimeDisplay

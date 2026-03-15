@@ -4,18 +4,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ScrollView
 import android.widget.SeekBar
 import androidx.activity.result.ActivityResultLauncher
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.benedetto.chalkjotto.AboutTag
+import com.benedetto.chalkjotto.AchievementsTag
 import com.benedetto.chalkjotto.LearnTag
 import com.benedetto.chalkjotto.MainActivity
 import com.benedetto.chalkjotto.R
 import com.benedetto.chalkjotto.SettingsTag
 import com.benedetto.chalkjotto.StatsTag
 import com.benedetto.chalkjotto.TutorialTag
+import com.benedetto.chalkjotto.database.AppDatabase
 import com.benedetto.chalkjotto.databinding.FragmentTitleBinding
 import com.benedetto.chalkjotto.definitions.*
 import com.benedetto.chalkjotto.definitions.Sound.tapSound
@@ -113,6 +114,12 @@ class TitleFragment : Fragment() {
             activity.goToFragment(SettingsTag)
         }
         binding.buttonSettings.setOnTouchListener(ScaleOnTouch)
+
+        binding.buttonAchievements.setOnClickListener {
+            tapSound()
+            activity.goToFragment(AchievementsTag)
+        }
+        binding.buttonAchievements.setOnTouchListener(ScaleOnTouch)
 
         return binding.root
     }

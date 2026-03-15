@@ -7,13 +7,19 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.benedetto.chalkjotto.MainActivity
 import com.benedetto.chalkjotto.R
 import com.benedetto.chalkjotto.TitleTag
+import com.benedetto.chalkjotto.database.AppDatabase
+import com.benedetto.chalkjotto.database.achievement.AchievementId
+import com.benedetto.chalkjotto.database.achievement.AchievementManager
 import com.benedetto.chalkjotto.databinding.FragmentAcceptChallengeBinding
 import com.benedetto.chalkjotto.definitions.*
 import com.benedetto.chalkjotto.game.GameActivity
 import com.benedetto.chalkjotto.game.GameState
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 class AcceptChallengeFragment : Fragment() {
@@ -23,13 +29,35 @@ class AcceptChallengeFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         startGame = registerForActivityResult(GameActivity.Contract()) { result ->
             if (result.didWin) {
-                DataManager.activeLesson?.let { DataManager.setCompletedLesson(it) }
+                DataManager.activeLesson?.let { onLessonCompleted(it) }
             }
             DataManager.activeLesson = null
             (requireActivity() as MainActivity).goToFragment(result.destination)
         }
 
         super.onCreate(savedInstanceState)
+    }
+
+    private fun onLessonCompleted(lessonId: String) {
+        DataManager.setCompletedLesson(lessonId)
+        val achievementId = when (lessonId) {
+            "STRONG_START" -> AchievementId.COMPLETE_LESSON_1
+            "MAXIMAL_INFO" -> AchievementId.COMPLETE_LESSON_2
+            else -> null
+        }
+        if (achievementId == null) return
+        viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
+            val dao = AppDatabase.getInstance(requireContext()).achievementDao()
+            val achievement = AchievementManager.awardSimple(achievementId, dao)
+                ?: return@launch
+            launch(Dispatchers.Main) {
+                Toast.makeText(
+                    requireContext(),
+                    "Achievement unlocked: ${achievement.displayName()}",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
     }
 
     override fun onCreateView(
