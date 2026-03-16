@@ -4,7 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.compose.ui.draw.paint
+import androidx.compose.foundation.Image
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -19,7 +20,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -27,6 +27,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
@@ -93,6 +94,9 @@ private fun AchievementsScreen(unlocked: Set<Achievement>) {
                 .padding(bottom = 16.dp)
         )
 
+        SectionHeader(R.string.special)
+        SpecialRow(unlocked)
+
         listOf(
             AchievementId.WIN,
             AchievementId.EFFICIENT,
@@ -101,9 +105,6 @@ private fun AchievementsScreen(unlocked: Set<Achievement>) {
             SectionHeader(achievementId.shortDescription)
             AchievementGrid(achievementId, unlocked)
         }
-
-        SectionHeader(R.string.special)
-        SpecialRow(unlocked)
     }
 }
 
@@ -165,7 +166,10 @@ private fun AchievementGrid(tier: AchievementId, unlocked: Set<Achievement>) {
                     modifier = Modifier.width(labelWidth)
                 )
                 for (len in lengths) {
-                    TrophyCell(
+                    AchievementCell(
+                        achievementId = tier,
+                        difficulty = difficulty.ordinal,
+                        length = len,
                         isUnlocked = unlocked.contains(Achievement(tier, difficulty.ordinal, len)),
                         modifier = Modifier.weight(1f)
                     )
@@ -191,7 +195,10 @@ private fun SpecialRow(unlocked: Set<Achievement>) {
                 modifier = Modifier.weight(1f),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                TrophyCell(
+                AchievementCell(
+                    achievementId = achievement.id,
+                    difficulty = -1,
+                    length = -1,
                     isUnlocked = unlocked.contains(achievement),
                     modifier = Modifier.fillMaxWidth()
                 )
@@ -208,22 +215,75 @@ private fun SpecialRow(unlocked: Set<Achievement>) {
     }
 }
 
+// difficulty color: 0=Normal(green), 1=Hard(orange), 2=Insane(red)
+private val difficultyTierColor = mapOf(
+    0 to R.color.colorLetterYes,
+    1 to R.color.colorLetterMaybe,
+    2 to R.color.colorLetterNo,
+)
+
+// tier layers added per length: length 4=[], 5=[t1], 6=[t1,t2], 7=[t1,t2,t3]
+private val coloredTierLayers = listOf(
+    R.drawable.achievement_t1,
+    R.drawable.achievement_t2,
+    R.drawable.achievement_t3,
+)
+
 @Composable
-private fun TrophyCell(isUnlocked: Boolean, modifier: Modifier = Modifier) {
+private fun AchievementCell(
+    achievementId: AchievementId,
+    difficulty: Int,
+    length: Int,
+    isUnlocked: Boolean,
+    modifier: Modifier = Modifier,
+) {
+    val alpha = if (isUnlocked) 1f else 0.25f
     Box(
-        modifier = modifier
-            .aspectRatio(1f)
-            .paint(painterResource(R.drawable.key_white), contentScale = ContentScale.FillBounds),
+        modifier = modifier.aspectRatio(1f),
         contentAlignment = Alignment.Center
     ) {
-        Icon(
-            painter = painterResource(R.drawable.trophy_24px),
+        // Background
+        Image(
+            painter = painterResource(R.drawable.key_white),
             contentDescription = null,
-            tint = colorResource(R.color.white).copy(alpha = if (isUnlocked) 1f else 0.15f),
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(7.dp)
+            contentScale = ContentScale.FillBounds,
+            modifier = Modifier.fillMaxSize()
         )
+        // Base achievement image
+        val iconScale = Modifier.fillMaxSize(0.90f)
+        val baseIcon = if (isUnlocked) achievementId.baseDrawable else R.drawable.achievement_unknown
+        Image(
+            painter = painterResource(baseIcon),
+            contentDescription = null,
+            contentScale = ContentScale.FillBounds,
+            alpha = alpha,
+            modifier = iconScale
+        )
+
+        if (achievementId.isUnique || !isUnlocked) return@Box
+        // Colored tier layers: length 5 → t1, length 6 → t1+t2, length 7 → t1+t2+t3
+        val numColoredTiers = (length - 3).coerceIn(1, 3)
+        val tierColor = difficultyTierColor[difficulty]?.let { colorResource(it) } ?: Color.Unspecified
+        for (i in 0 until numColoredTiers) {
+            Image(
+                painter = painterResource(coloredTierLayers[i]),
+                contentDescription = null,
+                contentScale = ContentScale.FillBounds,
+                colorFilter = ColorFilter.tint(tierColor),
+                alpha = alpha,
+                modifier = iconScale
+            )
+        }
+        if (length == 7) {
+            // Top cap layer (t4)
+            Image(
+                painter = painterResource(R.drawable.achievement_t4),
+                contentDescription = null,
+                contentScale = ContentScale.FillBounds,
+                alpha = alpha,
+                modifier = iconScale
+            )
+        }
     }
 }
 

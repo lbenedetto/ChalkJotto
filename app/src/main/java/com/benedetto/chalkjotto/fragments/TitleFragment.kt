@@ -17,6 +17,9 @@ import com.benedetto.chalkjotto.SettingsTag
 import com.benedetto.chalkjotto.StatsTag
 import com.benedetto.chalkjotto.TutorialTag
 import com.benedetto.chalkjotto.database.AppDatabase
+import com.benedetto.chalkjotto.BuildConfig
+import com.benedetto.chalkjotto.database.achievement.Achievement
+import com.benedetto.chalkjotto.database.achievement.AchievementId
 import com.benedetto.chalkjotto.databinding.FragmentTitleBinding
 import com.benedetto.chalkjotto.definitions.*
 import com.benedetto.chalkjotto.definitions.Sound.tapSound
@@ -115,6 +118,12 @@ class TitleFragment : Fragment() {
             tapSound()
             activity.goToFragment(AchievementsTag)
         }
+        if (BuildConfig.DEBUG) {
+            binding.buttonAchievements.setOnLongClickListener {
+                debugUnlockRandomAchievements()
+                true
+            }
+        }
         binding.buttonAchievements.setOnTouchListener(ScaleOnTouch)
 
         return binding.root
@@ -124,6 +133,30 @@ class TitleFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         updateReadouts()
+    }
+
+    private fun debugUnlockRandomAchievements() {
+        val difficulties = listOf(0, 1, 2)
+        val lengths = listOf(4, 5, 6, 7)
+        val candidates = mutableListOf<Achievement>()
+        for (id in listOf(AchievementId.WIN, AchievementId.FAST, AchievementId.EFFICIENT)) {
+            for (d in difficulties) {
+                for (l in lengths) {
+                    candidates.add(Achievement(id, d, l))
+                }
+            }
+        }
+        for (id in AchievementId.entries.filter { it.isUnique }) {
+            candidates.add(Achievement(id))
+        }
+        val toUnlock = candidates.shuffled().take((candidates.size / 2).coerceAtLeast(1))
+        viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
+            val dao = AppDatabase.getInstance(requireContext()).achievementDao()
+            toUnlock.forEach { dao.save(it) }
+            launch(Dispatchers.Main) {
+                (requireActivity() as MainActivity).goToFragment(AchievementsTag)
+            }
+        }
     }
 
     private fun updateReadouts() {
