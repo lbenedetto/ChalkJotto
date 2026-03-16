@@ -90,5 +90,13 @@
     <string name="stats_no_data">No data yet</string>
     <string name="achievements_title">Achievements</string>
     <string name="settings">Settings</string>
+	<string name="achievement_win">Win a game</string>
+	<string name="achievement_fast">Win quickly</string>
+	<string name="achievement_efficient">Win efficiently</string>
+	<string name="achievement_lucky">Get Lucky</string>
+	<string name="achievement_tutorial">Tutorial</string>
+	<string name="achievement_lesson_1">Lesson 1</string>
+	<string name="achievement_lesson_2">Lesson 2</string>
+	<string name="special">Special</string>
 
 </resources>

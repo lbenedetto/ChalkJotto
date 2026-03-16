@@ -1,271 +1,242 @@
 package com.benedetto.chalkjotto.fragments
 
-import android.graphics.Paint
 import android.os.Bundle
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
-import androidx.appcompat.widget.AppCompatImageView
+import androidx.compose.ui.draw.paint
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.benedetto.chalkjotto.R
 import com.benedetto.chalkjotto.database.AppDatabase
 import com.benedetto.chalkjotto.database.achievement.Achievement
 import com.benedetto.chalkjotto.database.achievement.AchievementId
-import com.benedetto.chalkjotto.databinding.FragmentAchievementsBinding
+import com.benedetto.chalkjotto.definitions.Difficulty
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class AchievementsFragment : Fragment() {
-    private lateinit var binding: FragmentAchievementsBinding
+private val lengths = listOf(4, 5, 6, 7)
 
-    private val difficulties = listOf(0 to "Normal", 1 to "Hard", 2 to "Insane")
-    private val lengths = listOf(4, 5, 6, 7)
+class AchievementsFragment : Fragment() {
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentAchievementsBinding.inflate(layoutInflater, container, false)
-        return binding.root
-    }
+        val composeView = ComposeView(requireContext())
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+        var unlocked by mutableStateOf(emptySet<Achievement>())
+
         viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
-            val unlocked = AppDatabase.getInstance(requireContext())
+            val result = AppDatabase.getInstance(requireContext())
                 .achievementDao()
                 .getAll()
                 .toSet()
-            launch(Dispatchers.Main) { buildUI(unlocked) }
-        }
-    }
-
-    private fun buildUI(unlocked: Set<Achievement>) {
-        val container = binding.linearLayoutContent
-
-        container.addView(makeTitleView())
-
-        // Measure the label column width from the widest difficulty name, in the
-        // actual text size used, so it adapts to the user's font size setting.
-        val labelColWidth = measureLabelWidth(difficulties.map { it.second })
-
-        val tiers = listOf(
-            AchievementId.WIN to "Win a game",
-            AchievementId.EFFICIENT to "Win efficiently",
-            AchievementId.FAST to "Win quickly"
-        )
-        for ((tier, label) in tiers) {
-            container.addView(makeSectionHeader(label))
-            container.addView(makeGrid(tier, unlocked, labelColWidth))
+            launch(Dispatchers.Main) { unlocked = result }
         }
 
-        container.addView(makeSectionHeader("Special"))
-        val specials = listOf(
-            Achievement(AchievementId.LUCKY) to "Get Lucky",
-            Achievement(AchievementId.READ_TUTORIAL) to "Tutorial",
-            Achievement(AchievementId.COMPLETE_LESSON_1) to "Lesson 1",
-            Achievement(AchievementId.COMPLETE_LESSON_2) to "Lesson 2"
-        )
-        container.addView(makeSpecialRow(specials, unlocked))
+        composeView.setContent {
+            AchievementsScreen(unlocked)
+        }
+
+        return composeView
     }
+}
 
-    /**
-     * Grid layout (fills full width):
-     *
-     *         [  4  ][  5  ][  6  ][  7  ]
-     * Normal  [ icon][ icon][ icon][ icon]
-     * Hard    [ icon][ icon][ icon][ icon]
-     * Insane  [ icon][ icon][ icon][ icon]
-     *
-     * The label column is sized to fit the longest difficulty name.
-     * The four icon columns share the remaining width equally via weight=1.
-     * Each icon cell is made square via doOnLayout.
-     */
-    private fun makeGrid(
-        tier: AchievementId,
-        unlocked: Set<Achievement>,
-        labelColWidth: Int
-    ): LinearLayout {
-        val cellMargin = dpToPx(2)
+@Composable
+private fun AchievementsScreen(unlocked: Set<Achievement>) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+            .padding(16.dp)
+    ) {
+        Text(
+            text = stringResource(R.string.achievements_title),
+            fontSize = 24.sp,
+            color = colorResource(R.color.white),
+            textAlign = TextAlign.Center,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 16.dp)
+        )
 
-        return LinearLayout(requireContext()).apply {
-            orientation = LinearLayout.VERTICAL
-            layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-            ).apply { bottomMargin = dpToPx(16) }
+        listOf(
+            AchievementId.WIN,
+            AchievementId.EFFICIENT,
+            AchievementId.FAST
+        ).forEach { achievementId ->
+            SectionHeader(achievementId.shortDescription)
+            AchievementGrid(achievementId, unlocked)
+        }
 
-            // Header row: blank corner + one label per length
-            addView(makeRow(cellMargin) { row ->
-                row.addView(makeLabel("", labelColWidth, LinearLayout.LayoutParams.WRAP_CONTENT))
+        SectionHeader(R.string.special)
+        SpecialRow(unlocked)
+    }
+}
+
+@Composable
+private fun SectionHeader(text: Int) {
+    Text(
+        text = stringResource(text),
+        fontSize = 16.sp,
+        color = colorResource(R.color.white),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(top = 8.dp, bottom = 6.dp)
+    )
+}
+
+/**
+ * Grid layout:
+ *
+ *         [  4  ][  5  ][  6  ][  7  ]
+ * Normal  [ icon][ icon][ icon][ icon]
+ * Hard    [ icon][ icon][ icon][ icon]
+ * Insane  [ icon][ icon][ icon][ icon]
+ */
+@Composable
+private fun AchievementGrid(tier: AchievementId, unlocked: Set<Achievement>) {
+    val labelWidth = 64.dp
+
+    Column(modifier = Modifier.padding(bottom = 16.dp)) {
+        // Header row: blank corner + length labels
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Spacer(modifier = Modifier.width(labelWidth))
+            for (len in lengths) {
+                Text(
+                    text = len.toString(),
+                    fontSize = 13.sp,
+                    color = colorResource(R.color.white),
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.weight(1f)
+                )
+            }
+        }
+
+        Spacer(modifier = Modifier.height(2.dp))
+
+        Difficulty.entries.forEach { difficulty ->
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 2.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = stringResource(difficulty.displayName),
+                    fontSize = 13.sp,
+                    color = colorResource(R.color.white),
+                    modifier = Modifier.width(labelWidth)
+                )
                 for (len in lengths) {
-                    row.addView(makeLabel(len.toString(), 0, LinearLayout.LayoutParams.WRAP_CONTENT, weight = 1f, marginEnd = cellMargin))
+                    TrophyCell(
+                        isUnlocked = unlocked.contains(Achievement(tier, difficulty.ordinal, len)),
+                        modifier = Modifier.weight(1f)
+                    )
                 }
-            })
-
-            // One row per difficulty
-            for ((diff, diffName) in difficulties) {
-                addView(makeRow(cellMargin) { row ->
-                    row.addView(makeLabel(diffName, labelColWidth, LinearLayout.LayoutParams.WRAP_CONTENT))
-                    for (len in lengths) {
-                        val achievement = Achievement(tier, diff, len)
-                        row.addView(makeIconCell(unlocked.contains(achievement), cellMargin))
-                    }
-                })
             }
         }
     }
+}
 
-    private fun makeRow(cellMargin: Int, populate: (LinearLayout) -> Unit): LinearLayout {
-        return LinearLayout(requireContext()).apply {
-            orientation = LinearLayout.HORIZONTAL
-            gravity = Gravity.CENTER_VERTICAL
-            layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-            ).apply { bottomMargin = cellMargin }
-            populate(this)
-        }
-    }
+@Composable
+private fun SpecialRow(unlocked: Set<Achievement>) {
+    val achievements = AchievementId.entries.filter { it.isUnique }
+        .map { Achievement(it) }
 
-    private fun makeLabel(
-        text: String,
-        width: Int,
-        height: Int,
-        weight: Float = 0f,
-        marginEnd: Int = 0
-    ): TextView {
-        return TextView(requireContext()).apply {
-            this.text = text
-            textSize = 13f
-            setTextColor(requireContext().getColor(R.color.white))
-            gravity = Gravity.CENTER
-            layoutParams = LinearLayout.LayoutParams(width, height, weight).apply {
-                this.marginEnd = marginEnd
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(bottom = 16.dp),
+        horizontalArrangement = Arrangement.spacedBy(2.dp)
+    ) {
+        achievements.forEach { achievement ->
+            Column(
+                modifier = Modifier.weight(1f),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                TrophyCell(
+                    isUnlocked = unlocked.contains(achievement),
+                    modifier = Modifier.fillMaxWidth()
+                )
+                Spacer(modifier = Modifier.height(4.dp))
+                Text(
+                    text = stringResource(achievement.id.shortDescription),
+                    fontSize = 12.sp,
+                    color = colorResource(R.color.white),
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.fillMaxWidth()
+                )
             }
         }
     }
+}
 
-    private fun makeIconCell(isUnlocked: Boolean, margin: Int): SquareImageView {
-        val padding = dpToPx(7)
-        return SquareImageView(requireContext()).apply {
-            setImageResource(R.drawable.trophy_24px)
-            applyChalkBackground()
-            setPadding(padding, padding, padding, padding)
-            alpha = if (isUnlocked) 1.0f else 0.15f
-            scaleType = ImageView.ScaleType.FIT_CENTER
-            layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f).apply {
-                marginEnd = margin
-            }
-        }
+@Composable
+private fun TrophyCell(isUnlocked: Boolean, modifier: Modifier = Modifier) {
+    Box(
+        modifier = modifier
+            .aspectRatio(1f)
+            .paint(painterResource(R.drawable.key_white), contentScale = ContentScale.FillBounds),
+        contentAlignment = Alignment.Center
+    ) {
+        Icon(
+            painter = painterResource(R.drawable.trophy_24px),
+            contentDescription = null,
+            tint = colorResource(R.color.white).copy(alpha = if (isUnlocked) 1f else 0.15f),
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(7.dp)
+        )
     }
+}
 
-    private inner class SquareImageView(context: android.content.Context) : AppCompatImageView(context) {
-        override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-            super.onMeasure(widthMeasureSpec, widthMeasureSpec)
-        }
-    }
-
-    private fun makeSpecialRow(
-        items: List<Pair<Achievement, String>>,
-        unlocked: Set<Achievement>
-    ): LinearLayout {
-        val cellMargin = dpToPx(2)
-        return LinearLayout(requireContext()).apply {
-            orientation = LinearLayout.HORIZONTAL
-            layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-            ).apply { bottomMargin = dpToPx(16) }
-
-            for ((achievement, label) in items) {
-                val isUnlocked = unlocked.contains(achievement)
-                addView(LinearLayout(requireContext()).apply {
-                    orientation = LinearLayout.VERTICAL
-                    gravity = Gravity.CENTER_HORIZONTAL
-                    layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f).apply {
-                        marginEnd = cellMargin
-                    }
-
-                    val icon = SquareImageView(requireContext()).apply {
-                        setImageResource(R.drawable.trophy_24px)
-                        applyChalkBackground()
-                        val p = dpToPx(7)
-                        setPadding(p, p, p, p)
-                        alpha = if (isUnlocked) 1.0f else 0.15f
-                        scaleType = ImageView.ScaleType.FIT_CENTER
-                        layoutParams = LinearLayout.LayoutParams(
-                            LinearLayout.LayoutParams.MATCH_PARENT,
-                            LinearLayout.LayoutParams.WRAP_CONTENT
-                        ).apply { bottomMargin = dpToPx(4) }
-                    }
-                    addView(icon)
-
-                    addView(TextView(requireContext()).apply {
-                        text = label
-                        textSize = 12f
-                        setTextColor(requireContext().getColor(R.color.white))
-                        gravity = Gravity.CENTER
-                        layoutParams = LinearLayout.LayoutParams(
-                            LinearLayout.LayoutParams.MATCH_PARENT,
-                            LinearLayout.LayoutParams.WRAP_CONTENT
-                        )
-                    })
-                })
-            }
-        }
-    }
-
-    /** Measures the pixel width needed for the widest string in [texts] at 13sp. */
-    private fun measureLabelWidth(texts: List<String>): Int {
-        val fontScale = resources.configuration.fontScale
-        val paint = Paint().apply {
-            textSize = 13f * resources.displayMetrics.density * fontScale
-        }
-        val widest = texts.maxOf { paint.measureText(it) }
-        return widest.toInt() + dpToPx(8)  // 8dp padding buffer
-    }
-
-    private fun View.applyChalkBackground() {
-        val attrs = requireContext().theme.obtainStyledAttributes(intArrayOf(R.attr.chalkKeyWhite))
-        val bgResId = attrs.getResourceId(0, 0)
-        attrs.recycle()
-        if (bgResId != 0) setBackgroundResource(bgResId)
-    }
-
-    private fun makeTitleView(): TextView {
-        return TextView(requireContext()).apply {
-            text = getString(R.string.achievements_title)
-            textSize = 24f
-            setTextColor(requireContext().getColor(R.color.white))
-            gravity = Gravity.CENTER
-            setPadding(0, 0, 0, dpToPx(16))
-            layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-            )
-        }
-    }
-
-    private fun makeSectionHeader(text: String): TextView {
-        return TextView(requireContext()).apply {
-            this.text = text
-            textSize = 16f
-            setTextColor(requireContext().getColor(R.color.white))
-            setPadding(0, dpToPx(8), 0, dpToPx(6))
-            layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-            )
-        }
-    }
-
-    private fun dpToPx(dp: Int): Int =
-        (dp * resources.displayMetrics.density).toInt()
+@Preview(showBackground = true, backgroundColor = 0xFF212121)
+@Composable
+private fun AchievementsScreenPreview() {
+    val unlocked = setOf(
+        Achievement(AchievementId.WIN, difficulty = 0, length = 4),
+        Achievement(AchievementId.WIN, difficulty = 0, length = 5),
+        Achievement(AchievementId.EFFICIENT, difficulty = 1, length = 6),
+        Achievement(AchievementId.FAST, difficulty = 2, length = 7),
+        Achievement(AchievementId.READ_TUTORIAL),
+        Achievement(AchievementId.COMPLETE_LESSON_1)
+    )
+    AchievementsScreen(unlocked)
 }

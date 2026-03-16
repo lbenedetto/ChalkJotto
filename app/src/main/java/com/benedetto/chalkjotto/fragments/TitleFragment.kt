@@ -81,11 +81,7 @@ class TitleFragment : Fragment() {
             SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
                 DataManager.difficulty = progress
-                binding.textViewWordDifficulty.text = when (progress) {
-                    1 -> activity.getString(R.string.hard)
-                    2 -> activity.getString(R.string.insane)
-                    else -> activity.getString(R.string.normal)
-                }
+                binding.textViewWordDifficulty.text = activity.getString(Difficulty.entries[progress].displayName)
                 updateReadouts()
             }
 

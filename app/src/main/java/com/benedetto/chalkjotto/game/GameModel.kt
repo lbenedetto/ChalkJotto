@@ -2,6 +2,7 @@ package com.benedetto.chalkjotto.game
 
 import android.content.res.Resources
 import com.benedetto.chalkjotto.R
+import com.benedetto.chalkjotto.definitions.Difficulty
 import com.benedetto.chalkjotto.definitions.Key
 import com.benedetto.chalkjotto.definitions.KeyState
 import java.io.BufferedReader
@@ -52,38 +53,39 @@ class GameModel(
     }
 
     private fun pickTargetWord() : String {
+        val difficulty = Difficulty.entries[gameState.wordDifficulty]
         val wordFile = resources.openRawResource(
             when (gameState.wordLength) {
                 4 -> {
                     addValidWords(R.raw.bottom_four, R.raw.middle_four, R.raw.top_four)
-                    when (gameState.wordDifficulty) {
-                        2 -> R.raw.bottom_four
-                        1 -> R.raw.middle_four
-                        else -> R.raw.top_four
+                    when (difficulty) {
+                        Difficulty.INSANE -> R.raw.bottom_four
+                        Difficulty.HARD -> R.raw.middle_four
+                        Difficulty.NORMAL -> R.raw.top_four
                     }
                 }
                 6 -> {
                     addValidWords(R.raw.bottom_six, R.raw.middle_six, R.raw.top_six)
-                    when (gameState.wordDifficulty) {
-                        2 -> R.raw.bottom_six
-                        1 -> R.raw.middle_six
-                        else -> R.raw.top_six
+                    when (difficulty) {
+                        Difficulty.INSANE -> R.raw.bottom_six
+                        Difficulty.HARD -> R.raw.middle_six
+                        Difficulty.NORMAL -> R.raw.top_six
                     }
                 }
                 7 -> {
                     addValidWords(R.raw.bottom_seven, R.raw.middle_seven, R.raw.top_seven)
-                    when (gameState.wordDifficulty) {
-                        2 -> R.raw.bottom_seven
-                        1 -> R.raw.middle_seven
-                        else -> R.raw.top_seven
+                    when (difficulty) {
+                        Difficulty.INSANE -> R.raw.bottom_seven
+                        Difficulty.HARD -> R.raw.middle_seven
+                        Difficulty.NORMAL -> R.raw.top_seven
                     }
                 }
                 else -> {
                     addValidWords(R.raw.bottom_five, R.raw.middle_five, R.raw.top_five)
-                    when (gameState.wordDifficulty) {
-                        2 -> R.raw.bottom_five
-                        1 -> R.raw.middle_five
-                        else -> R.raw.top_five
+                    when (difficulty) {
+                        Difficulty.INSANE -> R.raw.bottom_five
+                        Difficulty.HARD -> R.raw.middle_five
+                        Difficulty.NORMAL -> R.raw.top_five
                     }
                 }
             }

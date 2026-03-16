@@ -49,14 +49,7 @@ class ShareChallengeFragment : Fragment() {
             binding.tvAllowNewGuessesToggleLabel.visibility = View.GONE
         }
 
-        binding.textViewWordDifficulty.setText(
-            when (gameState.wordDifficulty) {
-                2 -> R.string.insane
-                1 -> R.string.hard
-                else -> R.string.normal
-            }
-        )
-
+        binding.textViewWordDifficulty.setText(Difficulty.entries[gameState.wordDifficulty].displayName)
         binding.textViewWordLength.text = "${gameState.wordLength}"
 
         binding.tvShareGuessesToggleLabel.setOnClickListener {
