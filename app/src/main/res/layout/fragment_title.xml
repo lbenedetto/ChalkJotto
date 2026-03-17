@@ -215,7 +215,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <ImageView
+    <com.benedetto.chalkjotto.views.ChalkIconView
         android:id="@+id/buttonHelp"
         android:layout_width="@dimen/button_height"
         android:layout_height="@dimen/button_height"
@@ -232,7 +232,7 @@
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <ImageView
+    <com.benedetto.chalkjotto.views.ChalkIconView
         android:id="@+id/buttonLearn"
         android:layout_width="@dimen/button_height"
         android:layout_height="@dimen/button_height"
@@ -248,7 +248,7 @@
         app:layout_constraintEnd_toStartOf="@+id/buttonSettings"
         app:layout_constraintStart_toEndOf="@+id/buttonHelp" />
 
-    <ImageView
+    <com.benedetto.chalkjotto.views.ChalkIconView
         android:id="@+id/buttonSettings"
         android:layout_width="@dimen/button_height"
         android:layout_height="@dimen/button_height"
@@ -264,7 +264,7 @@
         app:layout_constraintEnd_toStartOf="@+id/buttonStats"
         app:layout_constraintStart_toEndOf="@+id/buttonLearn" />
 
-    <ImageView
+    <com.benedetto.chalkjotto.views.ChalkIconView
         android:id="@+id/buttonStats"
         android:layout_width="@dimen/button_height"
         android:layout_height="@dimen/button_height"
@@ -280,7 +280,7 @@
         app:layout_constraintEnd_toStartOf="@+id/buttonAchievements"
         app:layout_constraintStart_toEndOf="@+id/buttonSettings" />
 
-    <ImageView
+    <com.benedetto.chalkjotto.views.ChalkIconView
         android:id="@+id/buttonAchievements"
         android:layout_width="@dimen/button_height"
         android:layout_height="@dimen/button_height"

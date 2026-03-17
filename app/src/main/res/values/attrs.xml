@@ -8,4 +8,12 @@
     <attr name="chalkKeyRed" format="reference" />
     <attr name="chalkKeyWhite" format="reference" />
     <attr name="chalkKeyYellow" format="reference" />
+
+    <declare-styleable name="ChalkIconView">
+        <attr name="chalkSeed" format="integer" />
+        <attr name="chalkScale" format="float" />
+        <attr name="chalkOctaves" format="integer" />
+        <attr name="chalkPersistence" format="float" />
+        <attr name="chalkLacunarity" format="float" />
+    </declare-styleable>
 </resources>
