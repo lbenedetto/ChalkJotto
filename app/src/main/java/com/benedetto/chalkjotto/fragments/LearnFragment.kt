@@ -91,12 +91,6 @@ class LearnFragment : Fragment() {
             showTutorialDialog(activity, false)
         }
 
-        binding.buttonDone.setOnClickListener {
-            Sound.tapSound()
-            activity.goToFragment(TitleTag)
-        }
-        binding.buttonDone.setOnTouchListener(ScaleOnTouch)
-
         return binding.root
     }
 }

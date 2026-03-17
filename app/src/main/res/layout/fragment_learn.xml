@@ -14,27 +14,13 @@
         android:layout_marginTop="32dp"
         android:layout_marginBottom="32dp"
         app:layout_constrainedHeight="true"
-        app:layout_constraintBottom_toTopOf="@+id/buttonDone"
+        app:layout_constraintBottom_toTopOf="@+id/buttonShowTutorial"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvLearnExplanation"
         tools:itemCount="10"
         tools:listitem="@layout/lesson"/>
-
-    <com.benedetto.chalkjotto.views.ChalkButton
-        android:id="@+id/buttonDone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:backgroundTint="@color/colorLetterYes"
-        android:text="@string/done"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/buttonShowTutorial" />
 
     <com.benedetto.chalkjotto.views.ChalkButton
         android:id="@+id/buttonShowTutorial"
@@ -46,7 +32,7 @@
         android:backgroundTint="@color/colorLetterYes"
         android:text="@string/show_tutorial"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/buttonDone"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 

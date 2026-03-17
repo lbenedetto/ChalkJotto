@@ -54,6 +54,7 @@
 	<string name="show_tutorial">Show Tutorial</string>
 	<string name="vibration">Keyboard Vibration</string>
 	<string name="assistance">Automatic Basic Deduction</string>
+	<string name="assistance_description">This setting is intended to save you lots of clicking. It\'s not intended to make the game any easier. After each guess, letters are automatically colored when the result leaves no doubt:\nIf the number of matching letters is equal to the number of letters you have marked green, then all the other letters in that word are automatically marked red. The same logic applies in reverse for letters you have marked red. Eg, 0 letters match, all letters in word marked red.</string>
 	<string name="tutorial_hint">To make it easier to keep track of which letters you think are in the secret word, you can long press on a letter and set it\'s color.</string>
 	<string name="tutorial_objective">Guess the secret word. With every guess, you will be told how many letters your guess shares with the secret word.</string>
 	<string name="tutorial_example">If the secret word is \"GUEST\" and you guess \"SEATS\" you\'ll be told that there are 3 matching letters, since both words have an E, an S, and a T. The duplicate S does not count twice.</string>
@@ -157,4 +158,5 @@
     <string name="analytics_consent_accept">Yes, share</string>
     <string name="analytics_consent_decline">No thanks</string>
     <string name="analytics_share_data">Share Anonymous Gameplay Statistics</string>
+	<string name="analytics_share_data_description">Make anonymous statistics about your gameplay available to me, the app developer. When you complete a game, the app submits the difficulty, word length, number of guesses, and time to complete to Google\'s Firebase Firestore. I can then view the aggregated data from all app users. I intend to use this data to determine fair thresholds for some in game Achievements related to speed and efficiency.</string>
 </resources>

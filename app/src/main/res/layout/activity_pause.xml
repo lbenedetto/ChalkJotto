@@ -8,110 +8,15 @@
     android:layout_gravity="center"
     android:background="?attr/grayChalkboard">
 
-    <TextView
-        android:id="@+id/tvSoundToggleLabel"
+    <androidx.compose.ui.platform.ComposeView
+        android:id="@+id/composeToggles"
         android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="8dp"
-        android:text="@string/sound"
-        android:gravity="center_vertical"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/tvVibrationToggleLabel"
-        app:layout_constraintEnd_toStartOf="@+id/switchSound"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTitle" />
-
-    <androidx.appcompat.widget.SwitchCompat
-        android:id="@+id/switchSound"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_marginEnd="64dp"
-        android:checked="true"
-        app:layout_constraintBottom_toBottomOf="@+id/tvSoundToggleLabel"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tvSoundToggleLabel" />
-
-    <TextView
-        android:id="@+id/tvHighContrastToggleLabel"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="64dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        android:text="@string/high_contrast"
-        android:gravity="center_vertical"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/tvVibrationToggleLabel"
-        app:layout_constraintEnd_toStartOf="@+id/switchVibrate"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvSoundToggleLabel" />
-
-    <androidx.appcompat.widget.SwitchCompat
-        android:id="@+id/switchHighContrast"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_marginEnd="64dp"
-        android:checked="true"
-        app:layout_constraintBottom_toBottomOf="@+id/tvHighContrastToggleLabel"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tvHighContrastToggleLabel" />
-
-    <TextView
-        android:id="@+id/tvVibrationToggleLabel"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        android:text="@string/vibration"
-        android:gravity="center_vertical"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/tvDeductionToggleLabel"
-        app:layout_constraintEnd_toStartOf="@+id/switchVibrate"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvHighContrastToggleLabel" />
-
-    <androidx.appcompat.widget.SwitchCompat
-        android:id="@+id/switchVibrate"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_marginEnd="64dp"
-        android:checked="true"
-        app:layout_constraintBottom_toBottomOf="@+id/tvVibrationToggleLabel"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tvVibrationToggleLabel" />
-
-
-    <TextView
-        android:id="@+id/tvDeductionToggleLabel"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        android:text="@string/assistance"
-        android:textColor="@color/white"
-        android:gravity="center_vertical"
-        app:layout_constraintBottom_toTopOf="@+id/buttonReset"
-        app:layout_constraintEnd_toStartOf="@+id/switchVibrate"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvVibrationToggleLabel" />
-
-    <androidx.appcompat.widget.SwitchCompat
-        android:id="@+id/switchAssistance"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_marginEnd="64dp"
-        android:checked="true"
-        app:layout_constraintBottom_toBottomOf="@+id/tvDeductionToggleLabel"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tvDeductionToggleLabel" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewTitle"
+        app:layout_constraintBottom_toTopOf="@+id/buttonReset" />
 
     <com.benedetto.chalkjotto.views.ChalkButton
         android:id="@+id/buttonReset"
@@ -127,7 +32,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvDeductionToggleLabel" />
+        app:layout_constraintTop_toBottomOf="@+id/composeToggles" />
 
     <com.benedetto.chalkjotto.views.ChalkButton
         android:id="@+id/buttonGiveUp"
@@ -186,7 +91,7 @@
         android:text="@string/game_paused"
         android:textColor="@color/white"
         android:textSize="@dimen/large_text"
-        app:layout_constraintBottom_toTopOf="@+id/tvSoundToggleLabel"
+        app:layout_constraintBottom_toTopOf="@+id/composeToggles"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
