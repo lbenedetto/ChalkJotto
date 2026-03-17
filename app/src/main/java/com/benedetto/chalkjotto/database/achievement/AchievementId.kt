@@ -15,6 +15,7 @@ enum class AchievementId(
     val baseDrawable: Int,
     val sectionTitle: Int = 0,
     val thresholds: Array<Array<Int>> = emptyArray(),
+    val isHidden: Boolean = false,
 ) {
     READ_TUTORIAL(
         isUnique = true,
@@ -105,6 +106,7 @@ enum class AchievementId(
         ),
         baseDrawable = R.drawable.achievement_fast,
         sectionTitle = R.string.achievement_fast_title,
+        isHidden = true,
         // seconds to win, keyed by [difficulty][wordLength - 4]
         thresholds = arrayOf(
             arrayOf(15, 30, 60, 90), /* normal */
@@ -141,6 +143,7 @@ enum class AchievementId(
         ),
         baseDrawable = R.drawable.achievement_efficient,
         sectionTitle = R.string.achievement_efficient_title,
+        isHidden = true,
         // guesses to win, keyed by [difficulty][wordLength - 4]
         thresholds = arrayOf(
             arrayOf(8, 10, 14, 18), /* normal */

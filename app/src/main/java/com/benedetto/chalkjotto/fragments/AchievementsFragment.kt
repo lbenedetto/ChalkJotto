@@ -100,11 +100,7 @@ private fun AchievementsScreen(unlocked: Set<Achievement>, fontFamily: FontFamil
         SectionHeader(R.string.special, fontFamily)
         SpecialRow(unlocked, fontFamily)
 
-        listOf(
-            AchievementId.WIN,
-            AchievementId.EFFICIENT,
-            AchievementId.FAST
-        ).forEach { achievementId ->
+        AchievementId.entries.filter { !it.isUnique && !it.isHidden }.forEach { achievementId ->
             SectionHeader(achievementId.sectionTitle, fontFamily)
             AchievementGrid(achievementId, unlocked, fontFamily)
         }
