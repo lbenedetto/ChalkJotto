@@ -32,6 +32,8 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -47,6 +49,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 private val lengths = listOf(4, 5, 6, 7)
+private val architectsDaughter = FontFamily(Font(R.font.architects_daughter))
 
 class AchievementsFragment : Fragment() {
 
@@ -87,6 +90,7 @@ private fun AchievementsScreen(unlocked: Set<Achievement>) {
         Text(
             text = stringResource(R.string.achievements_title),
             fontSize = 24.sp,
+            fontFamily = architectsDaughter,
             color = colorResource(R.color.white),
             textAlign = TextAlign.Center,
             modifier = Modifier
@@ -113,6 +117,7 @@ private fun SectionHeader(text: Int) {
     Text(
         text = stringResource(text),
         fontSize = 16.sp,
+        fontFamily = architectsDaughter,
         color = colorResource(R.color.white),
         modifier = Modifier
             .fillMaxWidth()
@@ -143,6 +148,7 @@ private fun AchievementGrid(tier: AchievementId, unlocked: Set<Achievement>) {
                 Text(
                     text = len.toString(),
                     fontSize = 13.sp,
+                    fontFamily = architectsDaughter,
                     color = colorResource(R.color.white),
                     textAlign = TextAlign.Center,
                     modifier = Modifier.weight(1f)
@@ -162,6 +168,7 @@ private fun AchievementGrid(tier: AchievementId, unlocked: Set<Achievement>) {
                 Text(
                     text = stringResource(difficulty.displayName),
                     fontSize = 13.sp,
+                    fontFamily = architectsDaughter,
                     color = colorResource(R.color.white),
                     modifier = Modifier.width(labelWidth)
                 )
@@ -206,6 +213,7 @@ private fun SpecialRow(unlocked: Set<Achievement>) {
                 Text(
                     text = stringResource(achievement.id.shortDescription),
                     fontSize = 12.sp,
+                    fontFamily = architectsDaughter,
                     color = colorResource(R.color.white),
                     textAlign = TextAlign.Center,
                     modifier = Modifier.fillMaxWidth()
