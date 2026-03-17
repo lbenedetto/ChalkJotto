@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.benedetto.chalkjotto.MainActivity
@@ -12,6 +11,7 @@ import com.benedetto.chalkjotto.databinding.FragmentTutorialBinding
 import com.benedetto.chalkjotto.database.achievement.AchievementManager
 import com.benedetto.chalkjotto.database.AppDatabase
 import com.benedetto.chalkjotto.database.achievement.AchievementId
+import com.benedetto.chalkjotto.definitions.AchievementPopup
 import com.benedetto.chalkjotto.definitions.DataManager
 import com.benedetto.chalkjotto.definitions.Sound.tapSound
 import com.benedetto.chalkjotto.game.GameActivity
@@ -49,13 +49,7 @@ class TutorialFragment : Fragment() {
             val dao = AppDatabase.getInstance(requireContext()).achievementDao()
             val newlyUnlocked = AchievementManager.awardSimple(AchievementId.READ_TUTORIAL, dao) ?: return@launch
 
-            launch(Dispatchers.Main) {
-                Toast.makeText(
-                    requireContext(),
-                    "Achievement unlocked: ${newlyUnlocked.displayName()}",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
+            AchievementPopup.enqueue(listOf(newlyUnlocked))
         }
     }
 }

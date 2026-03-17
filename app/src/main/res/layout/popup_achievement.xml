@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp"
+    android:elevation="16dp"
+    app:cardCornerRadius="7dp"
+    app:cardElevation="0dp"
+    app:strokeColor="@color/white"
+    app:strokeWidth="3dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="12dp"
+        android:background="@drawable/green_chalkboard"
+        android:paddingEnd="12dp">
+
+
+        <com.benedetto.chalkjotto.views.ChalkIconView
+            android:id="@+id/buttonAchievements"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:contentDescription="@string/achievements_title"
+            android:gravity="center"
+            android:src="@drawable/trophy_24px"
+            app:layout_constraintBottom_toBottomOf="@+id/textAchievementUnlocked"
+            app:layout_constraintEnd_toStartOf="@+id/textAchievementUnlocked"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textAchievementUnlocked" />
+
+        <TextView
+            android:id="@+id/textAchievementUnlocked"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/architects_daughter"
+            android:text="@string/achievement_unlocked"
+            android:textColor="@color/white"
+            android:textSize="11sp"
+            app:layout_constraintBottom_toTopOf="@+id/composeAchievementIcon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/buttonAchievements"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <androidx.compose.ui.platform.ComposeView
+            android:id="@+id/composeAchievementIcon"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textAchievementUnlocked" />
+
+
+        <TextView
+            android:id="@+id/textAchievementTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:fontFamily="@font/architects_daughter"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/composeAchievementIcon"
+            app:layout_constraintTop_toTopOf="@+id/composeAchievementIcon"
+            tools:text="Title" />
+
+        <TextView
+            android:id="@+id/textAchievementDescription"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/architects_daughter"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/composeAchievementIcon"
+            app:layout_constraintTop_toBottomOf="@+id/textAchievementTitle"
+            app:layout_constraintVertical_bias="0.0"
+            tools:text="A long achievement description" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

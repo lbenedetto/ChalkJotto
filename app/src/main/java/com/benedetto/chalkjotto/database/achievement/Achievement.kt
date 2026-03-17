@@ -1,5 +1,6 @@
 package com.benedetto.chalkjotto.database.achievement
 
+import android.content.Context
 import androidx.room.Entity
 import com.benedetto.chalkjotto.database.achievement.AchievementId.*
 import com.benedetto.chalkjotto.game.GameState
@@ -11,14 +12,16 @@ data class Achievement(
     val length: Int = -1,
     val unlockedAt: Long = System.currentTimeMillis()
 ) {
-    fun displayName(): String = when (id) {
-        READ_TUTORIAL -> "Read the tutorial"
-        COMPLETE_LESSON_1 -> "Complete Lesson 1"
-        COMPLETE_LESSON_2 -> "Complete Lesson 2"
-        LUCKY -> "Pure Luck"
-        WIN -> "$difficulty $length-Letter"
-        FAST -> "$difficulty $length-Letter: Fast"
-        EFFICIENT -> "$difficulty $length-Letter: Efficient"
+    fun shortDescription(context: Context): String = if (id.isUnique) {
+        context.getString(id.shortDescription)
+    } else {
+        context.getString(id.shortDescriptions[difficulty][length - 4])
+    }
+
+    fun longDescription(context: Context): String = if (id.isUnique) {
+        context.getString(id.longDescription)
+    } else {
+        context.getString(id.longDescriptions[difficulty], length)
     }
 
     companion object {

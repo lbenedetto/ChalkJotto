@@ -50,13 +50,7 @@ class AcceptChallengeFragment : Fragment() {
             val dao = AppDatabase.getInstance(requireContext()).achievementDao()
             val achievement = AchievementManager.awardSimple(achievementId, dao)
                 ?: return@launch
-            launch(Dispatchers.Main) {
-                Toast.makeText(
-                    requireContext(),
-                    "Achievement unlocked: ${achievement.displayName()}",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
+            AchievementPopup.enqueue(listOf(achievement))
         }
     }
 

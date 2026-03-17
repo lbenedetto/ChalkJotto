@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+    <!-- AchievementPopup holds a nullable ViewGroup that is cleared in onPause — not a leak. -->
+    <issue id="StaticFieldLeak">
+        <ignore path="src/main/java/com/benedetto/chalkjotto/definitions/AchievementPopup.kt" />
+    </issue>
+</lint>

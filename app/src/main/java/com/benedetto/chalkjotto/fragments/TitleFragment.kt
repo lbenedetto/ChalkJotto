@@ -123,8 +123,14 @@ class TitleFragment : Fragment() {
                 debugUnlockRandomAchievements()
                 true
             }
+            binding.buttonLearn.setOnLongClickListener {
+                AchievementPopup.enqueue(listOf(Achievement(AchievementId.WIN, difficulty = 2, length = 7)))
+                AchievementPopup.enqueue(listOf(Achievement(AchievementId.LUCKY)))
+                true
+            }
         }
         binding.buttonAchievements.setOnTouchListener(ScaleOnTouch)
+
 
         return binding.root
     }

@@ -9,6 +9,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.lifecycleScope
 import com.benedetto.chalkjotto.databinding.ActivityMainBinding
 import com.benedetto.chalkjotto.database.AppDatabase
+import com.benedetto.chalkjotto.definitions.AchievementPopup
 import com.benedetto.chalkjotto.definitions.DataManager
 import com.benedetto.chalkjotto.definitions.fitToWindowInsets
 import com.benedetto.chalkjotto.fragments.*
@@ -95,8 +96,14 @@ class MainActivity : JottoActivity() {
         }
     }
 
+    override fun onPause() {
+        super.onPause()
+        AchievementPopup.setTarget(null)
+    }
+
     override fun onResume() {
         super.onResume()
+        AchievementPopup.setTarget(binding.root)
         if (activeFragmentTag.value != TitleTag || DataManager.hasSeenRatingPrompt) return
         lifecycleScope.launch(Dispatchers.IO) {
             val wins = AppDatabase.getInstance(this@MainActivity).gameRecordDao().getWinCount()

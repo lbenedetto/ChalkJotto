@@ -7,20 +7,27 @@
     android:layout_gravity="center"
     tools:ignore="SpUsage">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
+        app:cardCornerRadius="7dp"
+        app:cardElevation="0dp"
+        app:strokeColor="@color/white"
+        app:strokeWidth="3dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
         <ImageView
             android:id="@+id/imageViewBackground"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_margin="4dp"
             android:adjustViewBounds="true"
             android:scaleType="fitXY"
             android:visibility="visible"
@@ -30,18 +37,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/green_chalkboard" />
-
-        <View
-            android:id="@+id/viewBorder"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="@drawable/accent_color_outline"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
 
         <TextView
             android:id="@+id/buttonChallengeAFriend"
@@ -143,4 +138,5 @@
             app:layout_constraintTop_toBottomOf="@+id/textViewInfo2"
             tools:text="* You beat your previous best of 01:30" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

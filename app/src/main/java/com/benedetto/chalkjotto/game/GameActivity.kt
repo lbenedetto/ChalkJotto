@@ -16,6 +16,7 @@ import com.benedetto.chalkjotto.R
 import com.benedetto.chalkjotto.TitleTag
 import com.benedetto.chalkjotto.databinding.ActivityGameBinding
 import com.benedetto.chalkjotto.definitions.*
+import com.benedetto.chalkjotto.definitions.AchievementPopup
 import java.util.*
 
 
@@ -109,8 +110,14 @@ class GameActivity : JottoActivity() {
         binding.textViewTimer.text = secondsToTimeDisplay(numSeconds)
     }
 
+    override fun onResume() {
+        super.onResume()
+        AchievementPopup.setTarget(binding.root)
+    }
+
     override fun onPause() {
         super.onPause()
+        AchievementPopup.setTarget(null)
         gamePresenter.onPause()
         DataManager.gameState = gameModel.gameState
     }
