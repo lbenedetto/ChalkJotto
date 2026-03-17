@@ -8,6 +8,7 @@
     <attr name="chalkKeyRed" format="reference" />
     <attr name="chalkKeyWhite" format="reference" />
     <attr name="chalkKeyYellow" format="reference" />
+    <attr name="chalkTimerFont" format="string" />
 
     <declare-styleable name="ChalkIconView">
         <attr name="chalkSeed" format="integer" />

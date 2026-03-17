@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat
 import com.benedetto.chalkjotto.R
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -16,6 +15,7 @@ import com.benedetto.chalkjotto.database.gamerecord.GameRecord
 import com.benedetto.chalkjotto.database.gamerecord.GuessHistogramEntry
 import com.benedetto.chalkjotto.definitions.ScaleOnTouch
 import com.benedetto.chalkjotto.definitions.Sound.tapSound
+import com.benedetto.chalkjotto.definitions.getThemeFont
 import com.benedetto.chalkjotto.definitions.secondsToTimeDisplay
 import com.patrykandpatrick.vico.views.cartesian.CartesianChart
 import com.patrykandpatrick.vico.views.cartesian.ScrollHandler
@@ -152,10 +152,9 @@ class StatsFragment : Fragment() {
     }
 
     private fun axisLabel(): TextComponent {
-        val typeface = ResourcesCompat.getFont(requireContext(), R.font.architects_daughter)
         return TextComponent(
             color = chartWhite,
-            typeface = typeface ?: android.graphics.Typeface.DEFAULT
+            typeface = getThemeFont(requireContext())
         )
     }
 

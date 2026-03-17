@@ -25,7 +25,7 @@
             android:layout_marginEnd="8dp"
             android:text="00:00"
             android:textColor="@color/white"
-            android:fontFamily="monospace"
+            android:fontFamily="?attr/chalkTimerFont"
             app:layout_constraintBottom_toBottomOf="@+id/buttonPause"
             app:layout_constraintEnd_toStartOf="@+id/buttonPause"
             app:layout_constraintTop_toTopOf="@+id/buttonPause"

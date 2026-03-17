@@ -42,11 +42,11 @@ import com.benedetto.chalkjotto.database.achievement.AchievementId
 import com.benedetto.chalkjotto.definitions.AchievementCell
 import com.benedetto.chalkjotto.definitions.AchievementPopup
 import com.benedetto.chalkjotto.definitions.Difficulty
+import com.benedetto.chalkjotto.definitions.getThemeFont
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 private val lengths = listOf(4, 5, 6, 7)
-private val architectsDaughter = FontFamily(Font(R.font.architects_daughter))
 
 class AchievementsFragment : Fragment() {
 
@@ -68,8 +68,10 @@ class AchievementsFragment : Fragment() {
             launch(Dispatchers.Main) { unlocked = result }
         }
 
+        val themeFontFamily = FontFamily(getThemeFont(requireContext()))
+
         composeView.setContent {
-            AchievementsScreen(unlocked)
+            AchievementsScreen(unlocked, themeFontFamily)
         }
 
         return composeView
@@ -77,7 +79,7 @@ class AchievementsFragment : Fragment() {
 }
 
 @Composable
-private fun AchievementsScreen(unlocked: Set<Achievement>) {
+private fun AchievementsScreen(unlocked: Set<Achievement>, fontFamily: FontFamily) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -87,7 +89,7 @@ private fun AchievementsScreen(unlocked: Set<Achievement>) {
         Text(
             text = stringResource(R.string.achievements_title),
             fontSize = 24.sp,
-            fontFamily = architectsDaughter,
+            fontFamily = fontFamily,
             color = colorResource(R.color.white),
             textAlign = TextAlign.Center,
             modifier = Modifier
@@ -95,26 +97,26 @@ private fun AchievementsScreen(unlocked: Set<Achievement>) {
                 .padding(bottom = 16.dp)
         )
 
-        SectionHeader(R.string.special)
-        SpecialRow(unlocked)
+        SectionHeader(R.string.special, fontFamily)
+        SpecialRow(unlocked, fontFamily)
 
         listOf(
             AchievementId.WIN,
             AchievementId.EFFICIENT,
             AchievementId.FAST
         ).forEach { achievementId ->
-            SectionHeader(achievementId.sectionTitle)
-            AchievementGrid(achievementId, unlocked)
+            SectionHeader(achievementId.sectionTitle, fontFamily)
+            AchievementGrid(achievementId, unlocked, fontFamily)
         }
     }
 }
 
 @Composable
-private fun SectionHeader(text: Int) {
+private fun SectionHeader(text: Int, fontFamily: FontFamily) {
     Text(
         text = stringResource(text),
         fontSize = 16.sp,
-        fontFamily = architectsDaughter,
+        fontFamily = fontFamily,
         color = colorResource(R.color.white),
         modifier = Modifier
             .fillMaxWidth()
@@ -131,7 +133,7 @@ private fun SectionHeader(text: Int) {
  * Insane  [ icon][ icon][ icon][ icon]
  */
 @Composable
-private fun AchievementGrid(tier: AchievementId, unlocked: Set<Achievement>) {
+private fun AchievementGrid(tier: AchievementId, unlocked: Set<Achievement>, fontFamily: FontFamily) {
     val labelWidth = 64.dp
 
     Column(modifier = Modifier.padding(bottom = 16.dp)) {
@@ -145,7 +147,7 @@ private fun AchievementGrid(tier: AchievementId, unlocked: Set<Achievement>) {
                 Text(
                     text = len.toString(),
                     fontSize = 13.sp,
-                    fontFamily = architectsDaughter,
+                    fontFamily = fontFamily,
                     color = colorResource(R.color.white),
                     textAlign = TextAlign.Center,
                     modifier = Modifier.weight(1f)
@@ -165,7 +167,7 @@ private fun AchievementGrid(tier: AchievementId, unlocked: Set<Achievement>) {
                 Text(
                     text = stringResource(difficulty.displayName),
                     fontSize = 13.sp,
-                    fontFamily = architectsDaughter,
+                    fontFamily = fontFamily,
                     color = colorResource(R.color.white),
                     modifier = Modifier.width(labelWidth)
                 )
@@ -187,7 +189,7 @@ private fun AchievementGrid(tier: AchievementId, unlocked: Set<Achievement>) {
 }
 
 @Composable
-private fun SpecialRow(unlocked: Set<Achievement>) {
+private fun SpecialRow(unlocked: Set<Achievement>, fontFamily: FontFamily) {
     val achievements = AchievementId.entries.filter { it.isUnique }
         .map { Achievement(it) }
 
@@ -216,10 +218,10 @@ private fun SpecialRow(unlocked: Set<Achievement>) {
                 Text(
                     text = stringResource(achievement.id.shortDescription),
                     fontSize = 12.sp,
-                    fontFamily = architectsDaughter,
+                    fontFamily = fontFamily,
                     color = colorResource(R.color.white),
                     textAlign = TextAlign.Center,
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth().padding(4.dp)
                 )
             }
         }
@@ -238,5 +240,5 @@ private fun AchievementsScreenPreview() {
         Achievement(AchievementId.READ_TUTORIAL),
         Achievement(AchievementId.COMPLETE_LESSON_1)
     )
-    AchievementsScreen(unlocked)
+    AchievementsScreen(unlocked, FontFamily(Font(R.font.architects_daughter)))
 }

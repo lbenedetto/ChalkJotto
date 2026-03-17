@@ -54,10 +54,17 @@ fun getFont(context: Context, @FontRes fontId: Int): Typeface {
     }
 }
 
-fun newBlankTile(context: Context, size: Int = 34, fontSize: Float = 28f): TextView {
+fun getThemeFont(context: Context): Typeface {
+    val attrs = context.theme.obtainStyledAttributes(intArrayOf(android.R.attr.fontFamily))
+    val fontResId = attrs.getResourceId(0, 0)
+    attrs.recycle()
+    return if (fontResId != 0) getFont(context, fontResId) else Typeface.DEFAULT
+}
+
+fun newBlankTile(context: Context, size: Int = 34, fontSize: Float = 25f): TextView {
     val tile = TextView(context)
     tile.setTextColor(ContextCompat.getColor(context, android.R.color.white))
-    tile.typeface = getFont(context, R.font.architects_daughter)
+    tile.typeface = getThemeFont(context)
     tile.textSize = fontSize
     tile.setBackgroundResource(KeyState.BLANK.getBackgroundResource(context))
     val dpSize = dpToPx(size)
