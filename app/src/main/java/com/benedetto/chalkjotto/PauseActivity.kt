@@ -8,9 +8,8 @@ import androidx.activity.addCallback
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.appcompat.widget.SwitchCompat
 import com.benedetto.chalkjotto.databinding.ActivityPauseBinding
-import com.benedetto.chalkjotto.definitions.DataManager
+import com.benedetto.chalkjotto.definitions.*
 import com.benedetto.chalkjotto.definitions.Sound.tapSound
-import com.benedetto.chalkjotto.definitions.fitToWindowInsets
 import com.benedetto.chalkjotto.dialogs.showTutorialDialog
 
 
@@ -29,33 +28,38 @@ class PauseActivity : JottoActivity() {
         setContentView(binding.root)
         window.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
 
+        binding.buttonResume.setOnTouchListener(ScaleOnTouch)
         binding.buttonResume.setOnClickListener {
             tapSound()
             exit(RESUME)
         }
 
+        binding.buttonReset.setOnTouchListener(ScaleOnTouch)
         binding.buttonReset.setOnClickListener {
             tapSound()
             exit(RESET)
         }
 
+        binding.buttonGiveUp.setOnTouchListener(ScaleOnTouch + PenClickOnTouch)
         binding.buttonGiveUp.setOnClickListener {
-            tapSound()
             exit(GIVE_UP)
         }
 
+        binding.buttonShowTutorial.setOnTouchListener(ScaleOnTouch)
         binding.buttonShowTutorial.setOnClickListener {
             tapSound()
             showTutorialDialog(this, false)
         }
 
         binding.switchSound.isChecked = DataManager.soundEnabled
+        binding.switchSound.setOnTouchListener(ScaleOnTouch)
         binding.switchSound.setOnClickListener { switch ->
             tapSound()
             DataManager.soundEnabled = (switch as SwitchCompat).isChecked
         }
 
         binding.switchHighContrast.isChecked = DataManager.highContrastModeEnabled
+        binding.switchHighContrast.setOnTouchListener(ScaleOnTouch)
         binding.switchHighContrast.setOnClickListener { switch ->
             tapSound()
             themeUpdated(recreate = true)
@@ -63,12 +67,14 @@ class PauseActivity : JottoActivity() {
         }
 
         binding.switchVibrate.isChecked = DataManager.vibrationEnabled
+        binding.switchVibrate.setOnTouchListener(ScaleOnTouch)
         binding.switchVibrate.setOnClickListener { switch ->
             tapSound()
             DataManager.vibrationEnabled = (switch as SwitchCompat).isChecked
         }
 
         binding.switchAssistance.isChecked = DataManager.assistance
+        binding.switchAssistance.setOnTouchListener(ScaleOnTouch)
         binding.switchAssistance.setOnClickListener { switch ->
             tapSound()
             DataManager.assistance = (switch as SwitchCompat).isChecked

@@ -13,6 +13,7 @@ import com.benedetto.chalkjotto.database.AppDatabase
 import com.benedetto.chalkjotto.database.achievement.AchievementId
 import com.benedetto.chalkjotto.definitions.AchievementPopup
 import com.benedetto.chalkjotto.definitions.DataManager
+import com.benedetto.chalkjotto.definitions.ScaleOnTouch
 import com.benedetto.chalkjotto.definitions.Sound.tapSound
 import com.benedetto.chalkjotto.game.GameActivity
 import kotlinx.coroutines.Dispatchers
@@ -34,6 +35,7 @@ class TutorialFragment : Fragment() {
         }
 
         if (activity is MainActivity) {
+            binding.buttonContinue.setOnTouchListener(ScaleOnTouch)
             binding.buttonContinue.setOnClickListener {
                 tapSound()
                 DataManager.hasSeenTutorial = true

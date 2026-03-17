@@ -67,6 +67,7 @@ class GamePresenter(private val model: GameModel, val view: GameActivity) {
                 Sound.vibrate()
                 if (model.enteredWord.length < model.gameState.wordLength) {
                     val letter = view.binding.layoutInputGuessWord.getChildAt(model.enteredWord.length) as TextView
+                    letter.setOnTouchListener(ScaleOnTouch)
                     letter.setOnClickListener {
                         showColorPickerDialog(view, key, model)
                     }
@@ -134,6 +135,7 @@ class GamePresenter(private val model: GameModel, val view: GameActivity) {
         }
 
         if (isAnagram) {
+            guessHolder.textViewMatchCount.setOnTouchListener(ScaleOnTouch)
             guessHolder.textViewMatchCount.setOnClickListener {
                 Toast.makeText(view.baseContext, "You have guessed an anagram of the secret word", Toast.LENGTH_SHORT).show()
             }
@@ -149,6 +151,7 @@ class GamePresenter(private val model: GameModel, val view: GameActivity) {
                 val tile = newBlankTile(view)
                 tile.text = "$character"
                 val key = model.keys[character]!!
+                tile.setOnTouchListener(ScaleOnTouch)
                 tile.setOnClickListener {
                     showColorPickerDialog(view, key, model)
                 }

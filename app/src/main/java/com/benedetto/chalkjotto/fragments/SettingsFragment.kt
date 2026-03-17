@@ -26,12 +26,14 @@ class SettingsFragment : Fragment() {
         val activity = requireActivity() as MainActivity
 
         binding.switchSound.isChecked = DataManager.soundEnabled
+        binding.switchSound.setOnTouchListener(ScaleOnTouch)
         binding.switchSound.setOnClickListener { switch ->
             tapSound()
             DataManager.soundEnabled = (switch as SwitchCompat).isChecked
         }
 
         binding.switchHighContrast.isChecked = DataManager.highContrastModeEnabled
+        binding.switchHighContrast.setOnTouchListener(ScaleOnTouch)
         binding.switchHighContrast.setOnClickListener { switch ->
             tapSound()
             DataManager.highContrastModeEnabled = (switch as SwitchCompat).isChecked
@@ -39,18 +41,21 @@ class SettingsFragment : Fragment() {
         }
 
         binding.switchVibrate.isChecked = DataManager.vibrationEnabled
+        binding.switchVibrate.setOnTouchListener(ScaleOnTouch)
         binding.switchVibrate.setOnClickListener { switch ->
             tapSound()
             DataManager.vibrationEnabled = (switch as SwitchCompat).isChecked
         }
 
         binding.switchAssistance.isChecked = DataManager.assistance
+        binding.switchAssistance.setOnTouchListener(ScaleOnTouch)
         binding.switchAssistance.setOnClickListener { switch ->
             tapSound()
             DataManager.assistance = (switch as SwitchCompat).isChecked
         }
 
         binding.switchAnalytics.isChecked = DataManager.analyticsEnabled
+        binding.switchAnalytics.setOnTouchListener(ScaleOnTouch)
         binding.switchAnalytics.setOnClickListener { switch ->
             tapSound()
             DataManager.analyticsEnabled = (switch as SwitchCompat).isChecked

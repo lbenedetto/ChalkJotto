@@ -4,12 +4,14 @@ import android.app.Activity
 import androidx.core.content.ContextCompat.getColor
 import com.benedetto.chalkjotto.databinding.DialogTutorialBinding
 import com.benedetto.chalkjotto.definitions.DataManager
+import com.benedetto.chalkjotto.definitions.ScaleOnTouch
 import com.benedetto.chalkjotto.definitions.Sound.tapSound
 
 fun showTutorialDialog(activity: Activity, blockBackground: Boolean) {
     val binding = DialogTutorialBinding.inflate(activity.layoutInflater)
     val popupWindow = PopupDialog(activity, binding.root)
 
+    binding.buttonContinue.setOnTouchListener(ScaleOnTouch)
     binding.buttonContinue.setOnClickListener {
         tapSound()
         DataManager.hasSeenTutorial = true

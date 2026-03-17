@@ -12,6 +12,7 @@ import com.benedetto.chalkjotto.database.analytics.AnalyticsManager
 import com.benedetto.chalkjotto.database.AppDatabase
 import com.benedetto.chalkjotto.database.gamerecord.GameRecord
 import com.benedetto.chalkjotto.definitions.DataManager
+import com.benedetto.chalkjotto.definitions.ScaleOnTouch
 import com.benedetto.chalkjotto.definitions.Sound.tapSound
 import com.benedetto.chalkjotto.definitions.newBlankTile
 import com.benedetto.chalkjotto.definitions.secondsToTimeDisplay
@@ -117,6 +118,7 @@ class GameOverDialog(
             }
 
         var clicked = false
+        binding.buttonContinue.setOnTouchListener(ScaleOnTouch)
         binding.buttonContinue.setOnClickListener {
             clicked = true
             tapSound()
@@ -128,6 +130,7 @@ class GameOverDialog(
             onCloseAction()
         }
 
+        binding.buttonChallengeAFriend.setOnTouchListener(ScaleOnTouch)
         binding.buttonChallengeAFriend.setOnClickListener {
             clicked = true
             tapSound()
@@ -150,6 +153,7 @@ class GameOverDialog(
     private fun showConsentPanel(binding: DialogGameOverBinding, record: GameRecord) {
         binding.gameOverCard.visibility = android.view.View.GONE
         binding.analyticsConsentCard.visibility = android.view.View.VISIBLE
+        binding.buttonConsentAccept.setOnTouchListener(ScaleOnTouch)
         binding.buttonConsentAccept.setOnClickListener {
             tapSound()
             DataManager.analyticsEnabled = true
@@ -158,6 +162,7 @@ class GameOverDialog(
             binding.analyticsConsentCard.visibility = android.view.View.GONE
             binding.gameOverCard.visibility = android.view.View.VISIBLE
         }
+        binding.buttonConsentDecline.setOnTouchListener(ScaleOnTouch)
         binding.buttonConsentDecline.setOnClickListener {
             tapSound()
             DataManager.analyticsConsentShown = true

@@ -4,6 +4,7 @@ import com.benedetto.chalkjotto.AcceptChallengeTag
 import com.benedetto.chalkjotto.MainActivity
 import com.benedetto.chalkjotto.databinding.DialogLessonBinding
 import com.benedetto.chalkjotto.definitions.DataManager
+import com.benedetto.chalkjotto.definitions.ScaleOnTouch
 import com.benedetto.chalkjotto.definitions.Sound
 import com.benedetto.chalkjotto.fragments.Lesson
 
@@ -13,6 +14,7 @@ fun showLessonDialog(lesson: Lesson, activity: MainActivity) {
 
     binding.tvLesson.text = activity.getString(lesson.fullText)
 
+    binding.buttonContinue.setOnTouchListener(ScaleOnTouch)
     binding.buttonContinue.setOnClickListener {
         Sound.tapSound()
         DataManager.activeLesson = lesson.id

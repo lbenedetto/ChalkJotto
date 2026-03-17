@@ -52,18 +52,25 @@ class ShareChallengeFragment : Fragment() {
         binding.textViewWordDifficulty.setText(Difficulty.entries[gameState.wordDifficulty].displayName)
         binding.textViewWordLength.text = "${gameState.wordLength}"
 
+        binding.tvShareGuessesToggleLabel.setOnTouchListener(ScaleOnTouch)
         binding.tvShareGuessesToggleLabel.setOnClickListener {
+            Sound.tapSound()
             toast(R.string.share_your_guesses_explanation)
         }
 
+        binding.tvShareDeductionsToggleLabel.setOnTouchListener(ScaleOnTouch)
         binding.tvShareDeductionsToggleLabel.setOnClickListener {
+            Sound.tapSound()
             toast(R.string.share_your_deductions_explanation)
         }
 
+        binding.tvAllowNewGuessesToggleLabel.setOnTouchListener(ScaleOnTouch)
         binding.tvAllowNewGuessesToggleLabel.setOnClickListener {
+            Sound.tapSound()
             toast(R.string.allow_new_guesses_explanation)
         }
 
+        binding.switchShareGuesses.setOnTouchListener(ScaleOnTouch)
         binding.switchShareGuesses.setOnClickListener {
             Sound.tapSound()
             val switch = it as SwitchCompat
@@ -74,6 +81,7 @@ class ShareChallengeFragment : Fragment() {
             }
         }
 
+        binding.switchShareDeductions.setOnTouchListener(ScaleOnTouch)
         binding.switchShareDeductions.setOnClickListener {
             Sound.tapSound()
             val switch = it as SwitchCompat
@@ -85,6 +93,7 @@ class ShareChallengeFragment : Fragment() {
             }
         }
 
+        binding.switchAllowNewGuesses.setOnTouchListener(ScaleOnTouch)
         binding.switchAllowNewGuesses.setOnClickListener {
             Sound.tapSound()
             val switch = it as SwitchCompat

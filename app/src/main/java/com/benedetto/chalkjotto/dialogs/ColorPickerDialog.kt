@@ -9,6 +9,7 @@ import android.view.WindowManager
 import com.benedetto.chalkjotto.databinding.KeystateMenuBinding
 import com.benedetto.chalkjotto.definitions.Key
 import com.benedetto.chalkjotto.definitions.KeyState
+import com.benedetto.chalkjotto.definitions.ScaleOnTouch
 import com.benedetto.chalkjotto.definitions.Sound.tapSound
 import com.benedetto.chalkjotto.game.GameModel
 
@@ -26,31 +27,37 @@ fun showColorPickerDialog(context: Context, key: Key, model: GameModel) {
     binding.keyBlue.text = key.letter
     binding.keyPink.text = key.letter
 
+    binding.keyWhite.setOnTouchListener(ScaleOnTouch)
     binding.keyWhite.setOnClickListener {
         tapSound()
         model.updateState(key, KeyState.BLANK)
         dialog.dismiss()
     }
+    binding.keyGreen.setOnTouchListener(ScaleOnTouch)
     binding.keyGreen.setOnClickListener {
         tapSound()
         model.updateState(key, KeyState.YES)
         dialog.dismiss()
     }
+    binding.keyRed.setOnTouchListener(ScaleOnTouch)
     binding.keyRed.setOnClickListener {
         tapSound()
         model.updateState(key, KeyState.NO)
         dialog.dismiss()
     }
+    binding.keyYellow.setOnTouchListener(ScaleOnTouch)
     binding.keyYellow.setOnClickListener {
         tapSound()
         model.updateState(key, KeyState.MAYBE)
         dialog.dismiss()
     }
+    binding.keyBlue.setOnTouchListener(ScaleOnTouch)
     binding.keyBlue.setOnClickListener {
         tapSound()
         model.updateState(key, KeyState.MAYBE_BLUE)
         dialog.dismiss()
     }
+    binding.keyPink.setOnTouchListener(ScaleOnTouch)
     binding.keyPink.setOnClickListener {
         tapSound()
         model.updateState(key, KeyState.MAYBE_PINK)

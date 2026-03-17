@@ -85,6 +85,7 @@ class LearnFragment : Fragment() {
             ), requireActivity() as MainActivity
         )
 
+        binding.buttonShowTutorial.setOnTouchListener(ScaleOnTouch)
         binding.buttonShowTutorial.setOnClickListener {
             Sound.tapSound()
             showTutorialDialog(activity, false)

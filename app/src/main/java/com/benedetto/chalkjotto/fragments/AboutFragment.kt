@@ -29,7 +29,9 @@ class AboutFragment : Fragment() {
     ): View {
         binding = FragmentAboutBinding.inflate(layoutInflater, container, false)
 
+        binding.tvContactMe.setOnTouchListener(ScaleOnTouch)
         binding.tvContactMe.setOnClickListener {
+            Sound.tapSound()
             val sendEmailTo = "chalkjotto@gmail.com"
 
             val clipboard =
