@@ -22,6 +22,7 @@ androidx-constraintlayout = { module = "androidx.constraintlayout:constraintlayo
 androidx-recyclerview = { module = "androidx.recyclerview:recyclerview", version.ref = "recyclerview" }
 androidx-coordinatorlayout = { module = "androidx.coordinatorlayout:coordinatorlayout", version.ref = "coordinatorlayout" }
 firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics", version.ref = "firebaseCrashlytics" }
+firebase-firestore = { module = "com.google.firebase:firebase-firestore-ktx", version = "25.1.4" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
 androidx-annotation-experimental = { module = "androidx.annotation:annotation-experimental", version = "1.4.1" }
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }

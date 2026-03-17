@@ -152,4 +152,9 @@
 	<string name="special">Special</string>
 	<string name="achievement_unlocked">Achievement Unlocked</string>
 
+    <string name="analytics_consent_title">Help improve Chalk Jotto?</string>
+    <string name="analytics_consent_body">Share anonymous gameplay statistics (difficulty, word length, guess count, time).\nThis data will be used to determine fair thresholds for future gameplay achievements.\nYou can opt out at any time in Settings.</string>
+    <string name="analytics_consent_accept">Yes, share</string>
+    <string name="analytics_consent_decline">No thanks</string>
+    <string name="analytics_share_data">Share Anonymous Gameplay Statistics</string>
 </resources>

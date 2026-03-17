@@ -104,6 +104,28 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/tvDeductionToggleLabel" />
 
+        <TextView
+            android:id="@+id/tvAnalyticsToggleLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="center_vertical|end"
+            android:text="@string/analytics_share_data"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toStartOf="@+id/switchAnalytics"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvDeductionToggleLabel" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/switchAnalytics"
+            android:layout_width="52dp"
+            android:layout_height="32dp"
+            android:layout_marginEnd="8dp"
+            android:checked="false"
+            app:layout_constraintBottom_toBottomOf="@+id/tvAnalyticsToggleLabel"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvAnalyticsToggleLabel" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.benedetto.chalkjotto.views.ChalkButton

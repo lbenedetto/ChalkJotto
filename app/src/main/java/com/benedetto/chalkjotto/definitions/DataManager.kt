@@ -31,6 +31,8 @@ object DataManager {
     private const val GAME_STATE_IS_GAME_OVER = "gameState_isGameOver"
     private const val GAME_STATE_DID_WIN = "gameState_didWin"
     private const val GAME_STATE_ALLOW_NEW_GUESSES = "gameState_allowNewGuesses"
+    private const val ANALYTICS_ENABLED = "analyticsEnabled"
+    private const val ANALYTICS_CONSENT_SHOWN = "analyticsConsentShown"
 
     var initialized = false
 
@@ -73,6 +75,14 @@ object DataManager {
     var hasSeenRatingPrompt: Boolean
         get() = prefs.getBoolean(HAS_SEEN_RATING_PROMPT, false)
         set(value) = put(HAS_SEEN_RATING_PROMPT, value)
+
+    var analyticsEnabled: Boolean
+        get() = prefs.getBoolean(ANALYTICS_ENABLED, false)
+        set(value) = put(ANALYTICS_ENABLED, value)
+
+    var analyticsConsentShown: Boolean
+        get() = prefs.getBoolean(ANALYTICS_CONSENT_SHOWN, false)
+        set(value) = put(ANALYTICS_CONSENT_SHOWN, value)
 
     var activeLesson: String?
         get() = prefs.getString(ACTIVE_LESSON, null)

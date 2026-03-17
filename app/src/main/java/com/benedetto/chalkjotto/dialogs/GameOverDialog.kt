@@ -8,8 +8,10 @@ import com.benedetto.chalkjotto.ShareChallengeTag
 import com.benedetto.chalkjotto.TitleTag
 import com.benedetto.chalkjotto.databinding.DialogGameOverBinding
 import com.benedetto.chalkjotto.database.achievement.AchievementManager
+import com.benedetto.chalkjotto.database.analytics.AnalyticsManager
 import com.benedetto.chalkjotto.database.AppDatabase
 import com.benedetto.chalkjotto.database.gamerecord.GameRecord
+import com.benedetto.chalkjotto.definitions.DataManager
 import com.benedetto.chalkjotto.definitions.Sound.tapSound
 import com.benedetto.chalkjotto.definitions.newBlankTile
 import com.benedetto.chalkjotto.definitions.secondsToTimeDisplay
@@ -64,16 +66,20 @@ class GameOverDialog(
                 }
             }
             if (gameState.allowSettingRecords && gameState.numGuesses > 0) {
-                dao.insert(
-                    GameRecord(
-                        timestamp = System.currentTimeMillis(),
-                        difficulty = gameState.wordDifficulty,
-                        wordLength = gameState.wordLength,
-                        numGuesses = gameState.numGuesses,
-                        numSeconds = gameState.numSeconds,
-                        didWin = gameState.didWin
-                    )
+                val record = GameRecord(
+                    timestamp = System.currentTimeMillis(),
+                    difficulty = gameState.wordDifficulty,
+                    wordLength = gameState.wordLength,
+                    numGuesses = gameState.numGuesses,
+                    numSeconds = gameState.numSeconds,
+                    didWin = gameState.didWin
                 )
+                dao.insert(record)
+                if (!DataManager.analyticsConsentShown) {
+                    activity.runOnUiThread { showConsentPanel(binding, record) }
+                } else {
+                    AnalyticsManager.upload(record)
+                }
             }
             val db = AppDatabase.getInstance(activity)
             val newlyUnlocked = AchievementManager.checkAndUnlock(gameState, db.achievementDao())
@@ -139,6 +145,25 @@ class GameOverDialog(
             }
         }
         popupWindow.show()
+    }
+
+    private fun showConsentPanel(binding: DialogGameOverBinding, record: GameRecord) {
+        binding.gameOverCard.visibility = android.view.View.GONE
+        binding.analyticsConsentCard.visibility = android.view.View.VISIBLE
+        binding.buttonConsentAccept.setOnClickListener {
+            tapSound()
+            DataManager.analyticsEnabled = true
+            DataManager.analyticsConsentShown = true
+            AnalyticsManager.upload(record)
+            binding.analyticsConsentCard.visibility = android.view.View.GONE
+            binding.gameOverCard.visibility = android.view.View.VISIBLE
+        }
+        binding.buttonConsentDecline.setOnClickListener {
+            tapSound()
+            DataManager.analyticsConsentShown = true
+            binding.analyticsConsentCard.visibility = android.view.View.GONE
+            binding.gameOverCard.visibility = android.view.View.VISIBLE
+        }
     }
 }
 

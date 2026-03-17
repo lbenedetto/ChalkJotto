@@ -61,6 +61,7 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.coordinatorlayout)
     implementation(libs.firebase.crashlytics)
+    implementation(libs.firebase.firestore)
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.androidx.recyclerview)
 

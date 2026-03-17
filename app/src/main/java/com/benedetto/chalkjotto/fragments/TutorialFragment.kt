@@ -16,6 +16,7 @@ import com.benedetto.chalkjotto.definitions.DataManager
 import com.benedetto.chalkjotto.definitions.Sound.tapSound
 import com.benedetto.chalkjotto.game.GameActivity
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class TutorialFragment : Fragment() {
@@ -48,7 +49,7 @@ class TutorialFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
             val dao = AppDatabase.getInstance(requireContext()).achievementDao()
             val newlyUnlocked = AchievementManager.awardSimple(AchievementId.READ_TUTORIAL, dao) ?: return@launch
-
+            delay(500)
             AchievementPopup.enqueue(listOf(newlyUnlocked))
         }
     }

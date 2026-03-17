@@ -13,6 +13,7 @@ import androidx.interpolator.view.animation.FastOutSlowInInterpolator
 import com.benedetto.chalkjotto.R
 import com.benedetto.chalkjotto.database.achievement.Achievement
 import com.benedetto.chalkjotto.databinding.PopupAchievementBinding
+import com.benedetto.chalkjotto.definitions.Sound.penClickDownSound
 
 /**
  * Global achievement popup queue. Decoupled from any fragment or activity lifecycle.
@@ -78,6 +79,9 @@ object AchievementPopup {
         binding.textAchievementUnlocked.text = root.context.getString(R.string.achievement_unlocked)
 
         decor.addView(binding.root)
+
+        penClickDownSound()
+        mainHandler.postDelayed(Sound::penClickUpSound, 200)
 
         binding.root.doOnLayout {
             val statusBarY = statusBarInset.toFloat()

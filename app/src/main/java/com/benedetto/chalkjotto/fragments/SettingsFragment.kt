@@ -50,6 +50,12 @@ class SettingsFragment : Fragment() {
             DataManager.assistance = (switch as SwitchCompat).isChecked
         }
 
+        binding.switchAnalytics.isChecked = DataManager.analyticsEnabled
+        binding.switchAnalytics.setOnClickListener { switch ->
+            tapSound()
+            DataManager.analyticsEnabled = (switch as SwitchCompat).isChecked
+        }
+
         binding.buttonDone.setOnClickListener {
             tapSound()
             activity.goToFragment(TitleTag)
