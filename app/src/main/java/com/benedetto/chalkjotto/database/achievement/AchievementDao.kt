@@ -10,8 +10,14 @@ interface AchievementDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun save(achievement: Achievement)
 
-    suspend fun exists(achievement: Achievement) : Boolean {
+    suspend fun isUnlocked(achievement: Achievement) : Boolean {
         return findById(achievement.id, achievement.difficulty, achievement.length) != null
+    }
+
+    suspend fun unlock(achievement: Achievement) : Achievement? {
+        if (isUnlocked(achievement)) return null
+        save(achievement)
+        return achievement
     }
 
     @Query("SELECT * FROM achievements")

@@ -9,6 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.doOnLayout
+import androidx.interpolator.view.animation.FastOutSlowInInterpolator
 import com.benedetto.chalkjotto.R
 import com.benedetto.chalkjotto.database.achievement.Achievement
 import com.benedetto.chalkjotto.databinding.PopupAchievementBinding
@@ -80,16 +81,19 @@ object AchievementPopup {
 
         binding.root.doOnLayout {
             val statusBarY = statusBarInset.toFloat()
-            binding.root.translationY = 0f - statusBarY
+            val height = binding.root.measuredHeight
+            binding.root.translationY = 0f - statusBarY - height
             binding.root.animate()
                 .translationY(statusBarY)
                 .setDuration(400)
+                .setInterpolator(FastOutSlowInInterpolator())
                 .withEndAction {
                     binding.root.postDelayed({
                         binding.root.animate()
                             .translationX(binding.root.width.toFloat())
                             .alpha(0f)
                             .setDuration(300)
+                            .setInterpolator(FastOutSlowInInterpolator())
                             .withEndAction {
                                 decor.removeView(binding.root)
                                 onDone()

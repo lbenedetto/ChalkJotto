@@ -41,6 +41,14 @@ data class GameState(
     var allowSettingRecords: Boolean = true
 ) {
 
+    fun hasDeductions(): Boolean {
+        return greenLetters.isNotEmpty()
+                || yellowLetters.isNotEmpty()
+                || blueLetters.isNotEmpty()
+                || pinkLetters.isNotEmpty()
+                || redLetters.isNotEmpty()
+    }
+
     /**
      * Sanitize a saved game state for use as challenge
      */

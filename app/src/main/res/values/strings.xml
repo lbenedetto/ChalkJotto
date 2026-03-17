@@ -92,6 +92,8 @@
     <string name="settings">Settings</string>
 	<string name="achievement_lucky_short">Lucky Bastard</string>
 	<string name="achievement_lucky_long">You cheated to get this, didn\'t you?</string>
+	<string name="achievement_give_up_short">Mama raised a quitter</string>
+	<string name="achievement_give_up_long">90% of players give up right before they would have guessed the right answer</string>
 	<string name="achievement_tutorial_short">Read the Tutorial</string>
 	<string name="achievement_tutorial_long">You literally can\'t avoid getting this achievement</string>
 	<string name="achievement_lesson_1_short">Complete Lesson\u00A01</string>
