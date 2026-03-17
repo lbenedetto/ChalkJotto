@@ -82,6 +82,7 @@
             android:layout_marginBottom="8dp"
             android:textColor="@color/white"
             android:textSize="14sp"
+            android:fontFamily="@font/architects_daughter"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/composeAchievementIcon"

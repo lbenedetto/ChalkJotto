@@ -46,17 +46,15 @@
 
                 <include layout="@layout/tutorial_view" />
 
-                <TextView
+                <com.benedetto.chalkjotto.views.ChalkButton
                     android:id="@+id/buttonContinue"
-                    android:layout_width="120dp"
-                    android:layout_height="@dimen/button_height"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginBottom="16dp"
-                    android:background="?attr/chalkButton"
-                    android:gravity="center"
                     android:text="@string/continueToGame" />
 
             </LinearLayout>

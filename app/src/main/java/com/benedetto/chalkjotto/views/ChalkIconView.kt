@@ -58,7 +58,7 @@ class ChalkIconView @JvmOverloads constructor(
     }
 
     private fun scheduleChalkBitmap(w: Int, h: Int) {
-        if (DataManager.highContrastModeEnabled) return
+        if (isInEditMode || DataManager.highContrastModeEnabled) return
         val d = drawable ?: return
         if (w <= 0 || h <= 0 || computing) return
         val drawableCopy = d.constantState?.newDrawable(resources)?.mutate() ?: return

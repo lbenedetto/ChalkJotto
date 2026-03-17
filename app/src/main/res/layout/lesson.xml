@@ -20,14 +20,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
+    <com.benedetto.chalkjotto.views.ChalkButton
         android:id="@+id/buttonPlay"
-        android:layout_width="80dp"
-        android:layout_height="@dimen/button_height"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:background="?attr/chalkButton"
         android:backgroundTint="@color/colorLetterYes"
-        android:gravity="center"
         android:text="@string/play"
         app:layout_constraintBottom_toBottomOf="@+id/icLessonCompleted"
         app:layout_constraintEnd_toEndOf="parent"

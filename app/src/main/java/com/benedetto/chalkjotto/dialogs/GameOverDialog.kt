@@ -34,7 +34,7 @@ class GameOverDialog(
 
         val inputGuessWordLayout = binding.layoutInputGuessWord
         gameState.targetWord!!.toCharArray().forEach { character ->
-            val tile = newBlankTile(activity, size = 30, fontSize = 26f)
+            val tile = newBlankTile(activity)
             tile.text = character.toString()
             inputGuessWordLayout.addView(tile)
         }

@@ -10,6 +10,14 @@
     <attr name="chalkKeyYellow" format="reference" />
     <attr name="chalkTimerFont" format="string" />
 
+    <declare-styleable name="ChalkButton">
+        <attr name="android:text" />
+        <attr name="android:textSize" />
+        <attr name="android:textColor" />
+        <attr name="android:backgroundTint" />
+        <attr name="android:src" />
+    </declare-styleable>
+
     <declare-styleable name="ChalkIconView">
         <attr name="chalkSeed" format="integer" />
         <attr name="chalkScale" format="float" />

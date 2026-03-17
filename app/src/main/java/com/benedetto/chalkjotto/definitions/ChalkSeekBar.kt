@@ -21,7 +21,7 @@ class ChalkSeekBar @JvmOverloads constructor(
 ) : AppCompatSeekBar(context, attrs, defStyleAttr) {
 
     init {
-        if (!DataManager.highContrastModeEnabled) {
+        if (!isInEditMode && !DataManager.highContrastModeEnabled) {
             progressDrawable = android.graphics.Color.TRANSPARENT.toDrawable()
         }
     }
@@ -36,7 +36,7 @@ class ChalkSeekBar @JvmOverloads constructor(
     }
 
     override fun onDraw(canvas: Canvas) {
-        if (!DataManager.highContrastModeEnabled) {
+        if (!isInEditMode && !DataManager.highContrastModeEnabled) {
             drawTrack(canvas)
         }
         super.onDraw(canvas)

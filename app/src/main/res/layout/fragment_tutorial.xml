@@ -26,15 +26,13 @@
         </LinearLayout>
     </ScrollView>
 
-    <TextView
+    <com.benedetto.chalkjotto.views.ChalkButton
         android:id="@+id/buttonContinue"
-        android:layout_width="120dp"
-        android:layout_height="@dimen/button_height"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="32dp"
-        android:background="?attr/chalkButton"
-        android:gravity="center"
         android:text="@string/continueToGame"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
